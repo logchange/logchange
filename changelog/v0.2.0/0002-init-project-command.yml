@@ -1,0 +1,7 @@
+title: Added maven command to initialize project with changelog/unreleased directory and empty CHANGELOG.md
+authors:
+    nick: Glukasze
+    url: https://github.com/Glukasze
+type: added # [added/changed/deprecated/removed/fixed/security]
+merge_request: 3
+
