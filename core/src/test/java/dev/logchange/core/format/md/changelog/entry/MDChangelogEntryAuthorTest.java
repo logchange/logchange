@@ -1,0 +1,108 @@
+package dev.logchange.core.format.md.changelog.entry;
+
+import dev.logchange.core.model.ChangelogEntryAuthor;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class MDChangelogEntryAuthorTest {
+
+    @Test
+    void givenAuthorWithName_whenToString_thenResultMatchFormat() {
+        //given:
+        ChangelogEntryAuthor author = new ChangelogEntryAuthor("FirstName LastName", "", "");
+
+        //when:
+        String result = new MDChangelogEntryAuthor(author).toString();
+
+        //then:
+        assertEquals("(FirstName LastName)", result);
+    }
+
+    @Test
+    void givenAuthorWithNameAndNickName_whenToString_thenResultMatchFormat() {
+        //given:
+        ChangelogEntryAuthor author = new ChangelogEntryAuthor("FirstName LastName", "NickName", "");
+
+        //when:
+        String result = new MDChangelogEntryAuthor(author).toString();
+
+        //then:
+        assertEquals("(FirstName LastName @NickName)", result);
+    }
+
+    @Test
+    void givenAuthorWithNameAndNickNameAndUrl_whenToString_thenResultMatchFormat() {
+        //given:
+        ChangelogEntryAuthor author = new ChangelogEntryAuthor("FirstName LastName", "NickName", "https://google.com");
+
+        //when:
+        String result = new MDChangelogEntryAuthor(author).toString();
+
+        //then:
+        assertEquals("([FirstName LastName](https://google.com) @NickName)", result);
+    }
+
+    @Test
+    void givenAuthorWithNickNameAndUrl_whenToString_thenResultMatchFormat() {
+        //given:
+        ChangelogEntryAuthor author = new ChangelogEntryAuthor("", "NickName", "https://google.com");
+
+        //when:
+        String result = new MDChangelogEntryAuthor(author).toString();
+
+        //then:
+        assertEquals("(@NickName [LINK](https://google.com))", result);
+    }
+
+    @Test
+    void givenAuthorWithNameAndUrl_whenToString_thenResultMatchFormat() {
+        //given:
+        ChangelogEntryAuthor author = new ChangelogEntryAuthor("FirstName LastName", "", "https://google.com");
+
+        //when:
+        String result = new MDChangelogEntryAuthor(author).toString();
+
+        //then:
+        assertEquals("([FirstName LastName](https://google.com))", result);
+    }
+
+    @Test
+    void givenAuthorWithdUrl_whenToString_thenResultMatchFormat() {
+        //given:
+        ChangelogEntryAuthor author = new ChangelogEntryAuthor("", "", "https://google.com");
+
+        //when:
+        String result = new MDChangelogEntryAuthor(author).toString();
+
+        //then:
+        assertEquals("([LINK](https://google.com))", result);
+    }
+
+    @Test
+    void givenEmptyAuthor_whenToString_thenEmpty() {
+        //given:
+        ChangelogEntryAuthor author = new ChangelogEntryAuthor("", "", "");
+
+        //when:
+        String result = new MDChangelogEntryAuthor(author).toString();
+
+        //then:
+        assertEquals("", result);
+    }
+
+    @Test
+    void givenSomeAuthor_whenToString_thenResultMatchToMD() {
+        //given:
+        ChangelogEntryAuthor author = new ChangelogEntryAuthor("FirstName LastName", "NickName", "https://google.com");
+
+        //when:
+        String result1 = new MDChangelogEntryAuthor(author).toString();
+        String result2 = new MDChangelogEntryAuthor(author).toMD();
+
+        //then:
+        assertEquals(result2, result1);
+    }
+
+
+}
