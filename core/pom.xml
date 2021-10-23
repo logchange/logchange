@@ -8,9 +8,84 @@
     <artifactId>core</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>https://github.com/marwin1991/keep-changelog-maven-plugin/blob/main/LICENSE</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>marwin1991</id>
+            <name>Piotr Zmilczak</name>
+            <email>peter.zmilczak@gmail.com</email>
+        </developer>
+    </developers>
+
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <lombok.version>1.18.20</lombok.version>
+        <lombok-maven.version>1.18.20.0</lombok-maven.version>
+
+        <snakeyaml-anno.version>1.2.0</snakeyaml-anno.version>
+        <Java-Markdown-Generator.version>1.3.2</Java-Markdown-Generator.version>
+        <commons-text.version>1.9</commons-text.version>
+
+        <!-- TESTS -->
+        <junit-jupiter.version>5.7.1</junit-jupiter.version>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok-maven</artifactId>
+            <version>${lombok-maven.version}</version>
+            <type>pom</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.beosign</groupId>
+            <artifactId>snakeyaml-anno</artifactId>
+            <version>${snakeyaml-anno.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.Steppschuh</groupId>
+            <artifactId>Java-Markdown-Generator</artifactId>
+            <version>${Java-Markdown-Generator.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>${commons-text.version}</version>
+        </dependency>
+
+        <!-- TESTS -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 </project>

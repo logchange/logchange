@@ -1,16 +1,16 @@
-# keep-changelog-maven-plugin
+# logchange
 `CHANGELOG.md` is one of the most important files in a repository. It allows others to find out about 
 the most important changes in the project in short time.
 To achieve this, `CHANGELOG.md` should be created be in accordance with the rules, however there is no one
 standard agreed by community.
 
-Another big problem with `CHANGELOG.md` is a problem with merge conflicts. Probably you, as a developer also
-encounter it, when someone merged changes to `CHANGELOG.md` before you.
+Another big problem with `CHANGELOG.md` is a problem with merge conflicts. Probably you, as a developer, also
+encounter it when someone merged changes to `CHANGELOG.md` before you.
 
-**To solve these problems, this maven plugin was created. It allows to keep a changelog style and reduce merge request conflicts by keeping every change
+**To solve these problems, this project was created. It allows to keep a changelog style and reduce merge request conflicts by keeping every change
 in a separate YAML file and generate `CHANGELOG.md` during release.**
 
-This plugin is also helpful to create reliable release notes during your release process. 
+This tool is also helpful to create reliable release notes during your release process. 
 
 ### Reference
 
@@ -18,10 +18,12 @@ The convention is maintained according to the principles set out in the [Keep a 
 
 The same problem with merge conflicts with `CHANGELOG.md` was described by GitLab. [LINK](https://about.gitlab.com/blog/2018/07/03/solving-gitlabs-changelog-conflict-crisis/)
 
-### Example
+### Examples
+[TODO]
 The example project with this plugin usage you can find in `example` directory.
 
 ## Usage
+### Maven Plugin
 ### Starting
 Add a plugin to your `pom.xml`. For multi-module projects with one `CHANGELOG.md` add it in main `pom.xml`.
 
