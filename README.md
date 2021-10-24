@@ -1,4 +1,5 @@
-# logchange
+![logchange-banner](https://user-images.githubusercontent.com/25181517/138590008-f98457b3-602a-4af5-9b28-0c499fe7e378.png)
+
 `CHANGELOG.md` is one of the most important files in a repository. It allows others to find out about 
 the most important changes in the project in short time.
 To achieve this, `CHANGELOG.md` should be created be in accordance with the rules, however there is no one
