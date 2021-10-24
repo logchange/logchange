@@ -14,7 +14,7 @@ class MDChangelogEntryIssueTest {
         //when:
         String result = new MDChangelogEntryIssue(issue).toString();
 
-        // then
+        //then:
         assertEquals("#567", result);
     }
 
@@ -26,7 +26,7 @@ class MDChangelogEntryIssueTest {
         //when:
         String result = new MDChangelogEntryIssue(issue).toString();
 
-        // then
+        //then:
         assertEquals("", result);
     }
 
@@ -38,7 +38,7 @@ class MDChangelogEntryIssueTest {
         //when:
         String result = new MDChangelogEntryIssue(issue).toString();
 
-        // then
+        //then:
         assertEquals("", result);
     }
 
@@ -51,7 +51,7 @@ class MDChangelogEntryIssueTest {
         String result1 = new MDChangelogEntryIssue(issue).toString();
         String result2 = new MDChangelogEntryIssue(issue).toMD();
 
-        // then
+        //then:
         assertEquals(result1, result2);
     }
 }

@@ -11,5 +11,6 @@ public class ChangelogEntry {
     private final String title;
     private final String mergeRequest;
     private final List<String> issues;
+    private final List<ChangelogEntryLink> links;
     private final List<ChangelogEntryAuthor> authors;
 }

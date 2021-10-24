@@ -14,7 +14,7 @@ class MDChangelogEntryMergeRequestTest {
         //when:
         String result = new MDChangelogEntryMergeRequest(mr).toString();
 
-        // then
+        //then:
         assertEquals("!567", result);
     }
 
@@ -26,7 +26,7 @@ class MDChangelogEntryMergeRequestTest {
         //when:
         String result = new MDChangelogEntryMergeRequest(mr).toString();
 
-        // then
+        //then:
         assertEquals("", result);
     }
 
@@ -38,7 +38,7 @@ class MDChangelogEntryMergeRequestTest {
         //when:
         String result = new MDChangelogEntryMergeRequest(mr).toString();
 
-        // then
+        //then:
         assertEquals("", result);
     }
 
@@ -51,7 +51,7 @@ class MDChangelogEntryMergeRequestTest {
         String result1 = new MDChangelogEntryMergeRequest(mr).toString();
         String result2 = new MDChangelogEntryMergeRequest(mr).toMD();
 
-        // then
+        //then:
         assertEquals(result1, result2);
     }
 

@@ -19,7 +19,7 @@ class MDChangelogEntryIssues implements MD {
     }
 
     private String getIssues() {
-        if (issues.isEmpty()) {
+        if (issues == null || issues.isEmpty()) {
             return StringUtils.EMPTY;
         }
 

@@ -16,14 +16,14 @@ public class MDChangelogEntry implements MD {
 
     private final MDChangelogEntryMergeRequest mdMergeRequest;
     private final MDChangelogEntryIssues mdIssues;
-    //private final MarkdownChangelogEntryLinks markdownChangelogEntryLinks;
+    private final MDChangelogEntryLinks mdLinks;
     private final MDChangelogEntryAuthors mdAuthors;
 
     public MDChangelogEntry(ChangelogEntry entry) {
         this.entry = entry;
         this.mdMergeRequest = new MDChangelogEntryMergeRequest(entry.getMergeRequest());
         this.mdIssues = new MDChangelogEntryIssues(entry.getIssues());
-//        this.markdownChangelogEntryLinks = new MarkdownChangelogEntryLinks(entry);
+        this.mdLinks = new MDChangelogEntryLinks(entry.getLinks());
         this.mdAuthors = new MDChangelogEntryAuthors(entry.getAuthors());
     }
 
@@ -37,7 +37,7 @@ public class MDChangelogEntry implements MD {
         valuesMap.put("title", entry.getTitle());
         valuesMap.put("merge_request", mdMergeRequest.toMD());
         valuesMap.put("issues", mdIssues.toMD());
-//        valuesMap.put("links", markdownChangelogEntryLinks.getLinks());
+        valuesMap.put("links", mdLinks.toMD());
         valuesMap.put("authors", mdAuthors.toMD());
 
         StringSubstitutor sub = new StringSubstitutor(valuesMap);

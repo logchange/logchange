@@ -28,21 +28,24 @@ class MDChangelogEntryAuthorsTest {
     @Test
     void givenTwoAuthor_whenToString_tenResultMatchesFormat() {
         //given:
-        ChangelogEntryAuthor author = new ChangelogEntryAuthor("FirstName LastName", "NickName", "https://google.com");
-        List<ChangelogEntryAuthor> authors = Arrays.asList(author, author);
+        List<ChangelogEntryAuthor> authors = Arrays.asList(
+                new ChangelogEntryAuthor("FirstName1 LastName", "NickName", "https://google.com"),
+                new ChangelogEntryAuthor("FirstName2 LastName", "NickName", "https://google.com"));
+
 
         //when:
         String result = new MDChangelogEntryAuthors(authors).toString();
 
         //then:
-        assertEquals("([FirstName LastName](https://google.com) @NickName) ([FirstName LastName](https://google.com) @NickName)", result);
+        assertEquals("([FirstName1 LastName](https://google.com) @NickName) ([FirstName2 LastName](https://google.com) @NickName)", result);
     }
 
     @Test
     void givenSomeAuthors_whenToString_thenResultMatchToMD() {
         //given:
-        ChangelogEntryAuthor author = new ChangelogEntryAuthor("FirstName LastName", "NickName", "https://google.com");
-        List<ChangelogEntryAuthor> authors = Arrays.asList(author, author);
+        List<ChangelogEntryAuthor> authors = Arrays.asList(
+                new ChangelogEntryAuthor("FirstName1 LastName", "NickName", "https://google.com"),
+                new ChangelogEntryAuthor("FirstName2 LastName", "NickName", "https://google.com"));
 
         //when:
         String result1 = new MDChangelogEntryAuthors(authors).toString();
