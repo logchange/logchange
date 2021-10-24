@@ -80,9 +80,7 @@ links: # links to external systems, like jira or redmine
 type: fixed # [added/changed/deprecated/removed/fixed/security]
 important_notes:
   - Update style.css on server during instalation 1
-  - configuration 2
-  - configuration 3
-configuration: # information about changes in available application configuration
+configurations: # information about changes in available application configuration
   - type: database parameter
     action: add # [add/update/delete]
     key: simpleparam.name.enabled
@@ -100,7 +98,7 @@ configuration: # information about changes in available application configuratio
 | `type` | Type of the change. |
 | `links` | Any link to other project or external tool witch contains information about this change. |
 | `important_notes` | Important notes, that has to be included in release. |
-| `configurations` | Configration changes important during release. |
+| `configurations` | Configurations changes important during release. |
 
 ### Generating `CHANGELOG.md`
 
