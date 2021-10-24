@@ -13,7 +13,7 @@ class MDChangelogEntryAuthorsTest {
 
 
     @Test
-    void givenOneAuthor_whenToString_tenResultMatches() {
+    void givenOneAuthor_whenToString_tenResultMatchesFormat() {
         //given:
         ChangelogEntryAuthor author = new ChangelogEntryAuthor("FirstName LastName", "NickName", "https://google.com");
         List<ChangelogEntryAuthor> authors = Collections.singletonList(author);
@@ -26,7 +26,7 @@ class MDChangelogEntryAuthorsTest {
     }
 
     @Test
-    void givenTwoAuthor_whenToString_tenResultMatches() {
+    void givenTwoAuthor_whenToString_tenResultMatchesFormat() {
         //given:
         ChangelogEntryAuthor author = new ChangelogEntryAuthor("FirstName LastName", "NickName", "https://google.com");
         List<ChangelogEntryAuthor> authors = Arrays.asList(author, author);

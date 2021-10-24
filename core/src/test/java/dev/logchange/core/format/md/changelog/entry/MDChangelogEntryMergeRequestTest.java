@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class MDChangelogEntryMergeRequestTest {
 
     @Test
-    void givenSomeMergeRequestNumber_whenToString_thenResultMatchFormat() {
+    void givenSomeMergeRequestNumber_whenToString_thenResultMatchesFormat() {
         //given:
         String mr = "567";
 
@@ -19,7 +19,7 @@ class MDChangelogEntryMergeRequestTest {
     }
 
     @Test
-    void givenEmptyMergeRequestNumber_whenToString_thenResultMatchFormat() {
+    void givenEmptyMergeRequestNumber_whenToString_thenResultMatchesFormat() {
         //given:
         String mr = "";
 
@@ -31,7 +31,7 @@ class MDChangelogEntryMergeRequestTest {
     }
 
     @Test
-    void givenNullMergeRequestNumber_whenToString_thenResultMatchFormat() {
+    void givenNullMergeRequestNumber_whenToString_thenResultMatchesFormat() {
         //given:
         String mr = null;
 
@@ -49,7 +49,7 @@ class MDChangelogEntryMergeRequestTest {
 
         //when:
         String result1 = new MDChangelogEntryMergeRequest(mr).toString();
-        String result2 = new MDChangelogEntryMergeRequest(mr).toString();
+        String result2 = new MDChangelogEntryMergeRequest(mr).toMD();
 
         // then
         assertEquals(result1, result2);

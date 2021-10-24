@@ -5,14 +5,13 @@ import dev.logchange.core.model.ChangelogEntryAuthor;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 class MDChangelogEntryAuthors implements MD {
 
-    private final List<MDChangelogEntryAuthor> authors;
+    private final List<ChangelogEntryAuthor> authors;
 
     MDChangelogEntryAuthors(List<ChangelogEntryAuthor> authors) {
-        this.authors = authors.stream().map(MDChangelogEntryAuthor::new).collect(Collectors.toList());
+        this.authors = authors;
     }
 
     @Override
@@ -26,8 +25,8 @@ class MDChangelogEntryAuthors implements MD {
         }
 
         StringBuilder mdAuthors = new StringBuilder(StringUtils.EMPTY);
-        for (MDChangelogEntryAuthor author : authors) {
-            mdAuthors.append(author).append(" ");
+        for (ChangelogEntryAuthor author : authors) {
+            mdAuthors.append(new MDChangelogEntryAuthor(author)).append(" ");
         }
 
         return mdAuthors.toString().trim();

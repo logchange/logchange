@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class MDChangelogEntryAuthorTest {
 
     @Test
-    void givenAuthorWithName_whenToString_thenResultMatchFormat() {
+    void givenAuthorWithName_whenToString_thenResultMatchesFormat() {
         //given:
         ChangelogEntryAuthor author = new ChangelogEntryAuthor("FirstName LastName", "", "");
 
@@ -20,7 +20,7 @@ class MDChangelogEntryAuthorTest {
     }
 
     @Test
-    void givenAuthorWithNameAndNickName_whenToString_thenResultMatchFormat() {
+    void givenAuthorWithNameAndNickName_whenToString_thenResultMatchesFormat() {
         //given:
         ChangelogEntryAuthor author = new ChangelogEntryAuthor("FirstName LastName", "NickName", "");
 
@@ -32,7 +32,7 @@ class MDChangelogEntryAuthorTest {
     }
 
     @Test
-    void givenAuthorWithNameAndNickNameAndUrl_whenToString_thenResultMatchFormat() {
+    void givenAuthorWithNameAndNickNameAndUrl_whenToString_thenResultMatchesFormat() {
         //given:
         ChangelogEntryAuthor author = new ChangelogEntryAuthor("FirstName LastName", "NickName", "https://google.com");
 
@@ -44,7 +44,7 @@ class MDChangelogEntryAuthorTest {
     }
 
     @Test
-    void givenAuthorWithNickNameAndUrl_whenToString_thenResultMatchFormat() {
+    void givenAuthorWithNickNameAndUrl_whenToString_thenResultMatchesFormat() {
         //given:
         ChangelogEntryAuthor author = new ChangelogEntryAuthor("", "NickName", "https://google.com");
 
@@ -56,7 +56,7 @@ class MDChangelogEntryAuthorTest {
     }
 
     @Test
-    void givenAuthorWithNameAndUrl_whenToString_thenResultMatchFormat() {
+    void givenAuthorWithNameAndUrl_whenToString_thenResultMatchesFormat() {
         //given:
         ChangelogEntryAuthor author = new ChangelogEntryAuthor("FirstName LastName", "", "https://google.com");
 
@@ -68,7 +68,7 @@ class MDChangelogEntryAuthorTest {
     }
 
     @Test
-    void givenAuthorWithdUrl_whenToString_thenResultMatchFormat() {
+    void givenAuthorWithdUrl_whenToString_thenResultMatchesFormat() {
         //given:
         ChangelogEntryAuthor author = new ChangelogEntryAuthor("", "", "https://google.com");
 
