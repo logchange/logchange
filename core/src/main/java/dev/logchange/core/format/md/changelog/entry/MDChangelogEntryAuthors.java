@@ -20,7 +20,7 @@ class MDChangelogEntryAuthors implements MD {
         return getAuthors();
     }
 
-    public String getAuthors() {
+    private String getAuthors() {
         if (authors.isEmpty()) {
             return StringUtils.EMPTY;
         }

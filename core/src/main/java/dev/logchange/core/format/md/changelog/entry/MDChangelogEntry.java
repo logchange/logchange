@@ -14,17 +14,17 @@ class MDChangelogEntry implements MD {
 
     private final ChangelogEntry entry;
 
-    //private final MarkdownChangelogEntryMergeRequest markdownChangelogEntryMergeRequest;
+    private final MDChangelogEntryMergeRequest mdMergeRequest;
     //private final MarkdownChangelogEntryIssues markdownChangelogEntryIssues;
     //private final MarkdownChangelogEntryLinks markdownChangelogEntryLinks;
-    private final MDChangelogEntryAuthors authors;
+    private final MDChangelogEntryAuthors mdAuthors;
 
-    public MDChangelogEntry(ChangelogEntry entry) {
+    MDChangelogEntry(ChangelogEntry entry) {
         this.entry = entry;
-//        this.markdownChangelogEntryMergeRequest = new MarkdownChangelogEntryMergeRequest(entry);
+        this.mdMergeRequest = new MDChangelogEntryMergeRequest(entry.getMergeRequest());
 //        this.markdownChangelogEntryIssues = new MarkdownChangelogEntryIssues(entry);
 //        this.markdownChangelogEntryLinks = new MarkdownChangelogEntryLinks(entry);
-        this.authors = new MDChangelogEntryAuthors(entry.getAuthors());
+        this.mdAuthors = new MDChangelogEntryAuthors(entry.getAuthors());
     }
 
     @Override
@@ -35,10 +35,10 @@ class MDChangelogEntry implements MD {
     private String getEntry() {
         Map<String, String> valuesMap = new HashMap<>();
         valuesMap.put("title", entry.getTitle());
-//        valuesMap.put("merge_request_format", markdownChangelogEntryMergeRequest.getMergeRequest());
+        valuesMap.put("merge_request_format", mdMergeRequest.toMD());
 //        valuesMap.put("issues", markdownChangelogEntryIssues.getIssues());
 //        valuesMap.put("links", markdownChangelogEntryLinks.getLinks());
-        valuesMap.put("authors", authors.toMD());
+        valuesMap.put("authors", mdAuthors.toMD());
 
         StringSubstitutor sub = new StringSubstitutor(valuesMap);
         return sub.replace(entryFormat).replaceAll("\\s{2,}", " ");

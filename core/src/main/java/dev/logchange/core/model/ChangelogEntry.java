@@ -9,5 +9,6 @@ import java.util.List;
 @AllArgsConstructor
 public class ChangelogEntry {
     private final String title;
+    private final String mergeRequest;
     private final List<ChangelogEntryAuthor> authors;
 }

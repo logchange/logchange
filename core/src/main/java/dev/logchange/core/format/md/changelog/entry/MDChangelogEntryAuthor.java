@@ -17,7 +17,7 @@ class MDChangelogEntryAuthor implements MD {
 
     private final ChangelogEntryAuthor author;
 
-    public MDChangelogEntryAuthor(ChangelogEntryAuthor author) {
+    MDChangelogEntryAuthor(ChangelogEntryAuthor author) {
         this.author = author;
     }
 
@@ -26,7 +26,7 @@ class MDChangelogEntryAuthor implements MD {
         return getAuthor();
     }
 
-    public String getAuthor() {
+    private String getAuthor() {
         if (StringUtils.isNotBlank(author.getName()) || StringUtils.isNotBlank(author.getNick()) || StringUtils.isNotBlank(author.getUrl())) {
             Map<String, String> valuesMap = new HashMap<>();
             valuesMap.put("author", (getAuthorName() + " " + getAuthorNick() + " " + getLinkWhenNameEmpty()).trim());
