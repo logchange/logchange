@@ -13,4 +13,7 @@ public class ChangelogEntry {
     private final List<String> issues;
     private final List<ChangelogEntryLink> links;
     private final List<ChangelogEntryAuthor> authors;
+    private final ChangelogEntryType type;
+    private final List<String> importantNotes;
+    private final List<Configuration> configurations;
 }
