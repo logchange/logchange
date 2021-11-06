@@ -1,6 +1,7 @@
 package dev.logchange.core.format.md.changelog.entry;
 
 import dev.logchange.core.format.md.MD;
+import dev.logchange.core.model.ChangelogMergeRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringSubstitutor;
 
@@ -11,9 +12,9 @@ class MDChangelogEntryMergeRequest implements MD {
 
     private static final String mergeRequestFormat = "!${merge_request}";
 
-    private final String mergeRequest;
+    private final ChangelogMergeRequest mergeRequest;
 
-    MDChangelogEntryMergeRequest(String mergeRequest) {
+    MDChangelogEntryMergeRequest(ChangelogMergeRequest mergeRequest) {
         this.mergeRequest = mergeRequest;
     }
 
@@ -23,12 +24,12 @@ class MDChangelogEntryMergeRequest implements MD {
     }
 
     private String getMergeRequest() {
-        if (StringUtils.isBlank(mergeRequest)) {
+        if (StringUtils.isBlank(mergeRequest.getValue())) {
             return StringUtils.EMPTY;
         }
 
         Map<String, String> valuesMap = new HashMap<>();
-        valuesMap.put("merge_request", mergeRequest);
+        valuesMap.put("merge_request", mergeRequest.getValue());
         StringSubstitutor sub = new StringSubstitutor(valuesMap);
         return sub.replace(mergeRequestFormat);
     }

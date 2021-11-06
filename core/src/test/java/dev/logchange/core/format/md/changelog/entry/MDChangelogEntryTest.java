@@ -3,9 +3,8 @@ package dev.logchange.core.format.md.changelog.entry;
 import dev.logchange.core.model.ChangelogEntry;
 import dev.logchange.core.model.ChangelogEntryAuthor;
 import dev.logchange.core.model.ChangelogEntryLink;
+import dev.logchange.core.model.ChangelogEntryType;
 import org.junit.jupiter.api.Test;
-
-import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,12 +13,13 @@ class MDChangelogEntryTest {
     @Test
     void givenBasicEntry_whenToString_thenResultMatchesFormat() {
         //given:
-        ChangelogEntry entry = new ChangelogEntry(
+        ChangelogEntry entry = ChangelogEntry.of(
                 "Some Title",
                 "567",
-                Collections.singletonList("890"),
-                Collections.singletonList(new ChangelogEntryLink("Some link", "https//google.com")),
-                Collections.singletonList(new ChangelogEntryAuthor("Some Name", "Nick", "https://nick.name")));
+                "890",
+                new ChangelogEntryLink("Some link", "https//google.com"),
+                new ChangelogEntryAuthor("Some Name", "Nick", "https://nick.name"),
+                ChangelogEntryType.ADDED);
 
         //when:
         String result = new MDChangelogEntry(entry).toString();
@@ -31,12 +31,13 @@ class MDChangelogEntryTest {
     @Test
     void givenSomeEntry_whenToString_thenResultMatchesToMD() {
         //given:
-        ChangelogEntry entry = new ChangelogEntry(
+        ChangelogEntry entry = ChangelogEntry.of(
                 "Some Title",
                 "567",
-                Collections.singletonList("890"),
-                Collections.singletonList(new ChangelogEntryLink("Some link", "https//google.com")),
-                Collections.singletonList(new ChangelogEntryAuthor("Some Name", "Nick", "https://nick.name")));
+                "890",
+                new ChangelogEntryLink("Some link", "https//google.com"),
+                new ChangelogEntryAuthor("Some Name", "Nick", "https://nick.name"),
+                ChangelogEntryType.ADDED);
 
         //when:
         String result1 = new MDChangelogEntry(entry).toString();

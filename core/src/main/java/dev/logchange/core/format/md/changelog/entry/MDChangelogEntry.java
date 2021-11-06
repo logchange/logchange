@@ -34,7 +34,7 @@ public class MDChangelogEntry implements MD {
 
     private String getEntry() {
         Map<String, String> valuesMap = new HashMap<>();
-        valuesMap.put("title", entry.getTitle());
+        valuesMap.put("title", entry.getTitle().getValue());
         valuesMap.put("merge_request", mdMergeRequest.toMD());
         valuesMap.put("issues", mdIssues.toMD());
         valuesMap.put("links", mdLinks.toMD());

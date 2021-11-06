@@ -1,5 +1,6 @@
 package dev.logchange.core.format.md.changelog.entry;
 
+import dev.logchange.core.model.ChangelogMergeRequest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -9,7 +10,7 @@ class MDChangelogEntryMergeRequestTest {
     @Test
     void givenSomeMergeRequestNumber_whenToString_thenResultMatchesFormat() {
         //given:
-        String mr = "567";
+        ChangelogMergeRequest mr = ChangelogMergeRequest.of("567");
 
         //when:
         String result = new MDChangelogEntryMergeRequest(mr).toString();
@@ -19,21 +20,9 @@ class MDChangelogEntryMergeRequestTest {
     }
 
     @Test
-    void givenEmptyMergeRequestNumber_whenToString_thenResultMatchesFormat() {
-        //given:
-        String mr = "";
-
-        //when:
-        String result = new MDChangelogEntryMergeRequest(mr).toString();
-
-        //then:
-        assertEquals("", result);
-    }
-
-    @Test
     void givenNullMergeRequestNumber_whenToString_thenResultMatchesFormat() {
         //given:
-        String mr = null;
+        ChangelogMergeRequest mr = null;
 
         //when:
         String result = new MDChangelogEntryMergeRequest(mr).toString();
@@ -45,7 +34,7 @@ class MDChangelogEntryMergeRequestTest {
     @Test
     void givenSomeMergeRequestNumber_whenToString_thenResultMatchToMD() {
         //given:
-        String mr = "567";
+        ChangelogMergeRequest mr = ChangelogMergeRequest.of("567");
 
         //when:
         String result1 = new MDChangelogEntryMergeRequest(mr).toString();
