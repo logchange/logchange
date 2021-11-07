@@ -1,16 +1,16 @@
 package dev.logchange.core.format.md.changelog.entry;
 
 import dev.logchange.core.format.md.MD;
-import dev.logchange.core.model.ChangelogMergeRequest;
+import dev.logchange.core.model.entry.ChangelogEntryMergeRequest;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
 class MDChangelogEntryMergeRequests implements MD {
 
-    private final List<ChangelogMergeRequest> mergeRequests;
+    private final List<ChangelogEntryMergeRequest> mergeRequests;
 
-    MDChangelogEntryMergeRequests(List<ChangelogMergeRequest> mergeRequests) {
+    MDChangelogEntryMergeRequests(List<ChangelogEntryMergeRequest> mergeRequests) {
         this.mergeRequests = mergeRequests;
     }
 
@@ -25,7 +25,7 @@ class MDChangelogEntryMergeRequests implements MD {
         }
 
         StringBuilder md = new StringBuilder(StringUtils.EMPTY);
-        for (ChangelogMergeRequest mergeRequest : mergeRequests) {
+        for (ChangelogEntryMergeRequest mergeRequest : mergeRequests) {
             md.append(new MDChangelogEntryMergeRequest(mergeRequest)).append(" ");
         }
 

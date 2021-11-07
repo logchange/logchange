@@ -1,9 +1,9 @@
 package dev.logchange.core.format.md.changelog.entry;
 
-import dev.logchange.core.model.ChangelogEntry;
-import dev.logchange.core.model.ChangelogEntryAuthor;
-import dev.logchange.core.model.ChangelogEntryLink;
-import dev.logchange.core.model.ChangelogEntryType;
+import dev.logchange.core.model.entry.ChangelogEntry;
+import dev.logchange.core.model.entry.ChangelogEntryAuthor;
+import dev.logchange.core.model.entry.ChangelogEntryLink;
+import dev.logchange.core.model.entry.ChangelogEntryType;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

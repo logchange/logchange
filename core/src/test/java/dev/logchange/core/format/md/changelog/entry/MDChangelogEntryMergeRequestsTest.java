@@ -1,6 +1,6 @@
 package dev.logchange.core.format.md.changelog.entry;
 
-import dev.logchange.core.model.ChangelogMergeRequest;
+import dev.logchange.core.model.entry.ChangelogEntryMergeRequest;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -13,7 +13,7 @@ class MDChangelogEntryMergeRequestsTest {
     @Test
     void givenOneMergeRequest_whenToString_thenResultMatchesFormat() {
         //given:
-        List<ChangelogMergeRequest> mergeRequests = Collections.singletonList(ChangelogMergeRequest.of("567"));
+        List<ChangelogEntryMergeRequest> mergeRequests = Collections.singletonList(ChangelogEntryMergeRequest.of("567"));
 
         //when:
         String result = new MDChangelogEntryMergeRequests(mergeRequests).toString();
@@ -25,9 +25,9 @@ class MDChangelogEntryMergeRequestsTest {
     @Test
     void givenTwoMergeRequests_whenToString_thenResultMatchesFormat() {
         //given:
-        List<ChangelogMergeRequest> mergeRequests = Arrays.asList(
-                ChangelogMergeRequest.of("567"),
-                ChangelogMergeRequest.of("234"));
+        List<ChangelogEntryMergeRequest> mergeRequests = Arrays.asList(
+                ChangelogEntryMergeRequest.of("567"),
+                ChangelogEntryMergeRequest.of("234"));
 
         //when:
         String result = new MDChangelogEntryMergeRequests(mergeRequests).toString();
@@ -39,7 +39,7 @@ class MDChangelogEntryMergeRequestsTest {
     @Test
     void givenNoMergeRequests_whenToString_thenResultMatchesFormat() {
         //given:
-        List<ChangelogMergeRequest> mergeRequests = Collections.emptyList();
+        List<ChangelogEntryMergeRequest> mergeRequests = Collections.emptyList();
 
         //when:
         String result = new MDChangelogEntryMergeRequests(mergeRequests).toString();
@@ -51,9 +51,9 @@ class MDChangelogEntryMergeRequestsTest {
     @Test
     void givenTwoMergeRequests_whenToString_thenResultMatchToMD() {
         //given:
-        List<ChangelogMergeRequest> mergeRequests = Arrays.asList(
-                ChangelogMergeRequest.of("567"),
-                ChangelogMergeRequest.of("234"));
+        List<ChangelogEntryMergeRequest> mergeRequests = Arrays.asList(
+                ChangelogEntryMergeRequest.of("567"),
+                ChangelogEntryMergeRequest.of("234"));
 
         //when:
         String result1 = new MDChangelogEntryMergeRequests(mergeRequests).toString();

@@ -1,4 +1,4 @@
-package dev.logchange.core.model;
+package dev.logchange.core.model.entry;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -7,14 +7,14 @@ import org.apache.commons.lang3.StringUtils;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class ChangelogTitle {
+public class ChangelogEntryTitle {
     private final String value;
 
-    public static ChangelogTitle of(String title) {
+    public static ChangelogEntryTitle of(String title) {
         if (StringUtils.isBlank(title)) {
             throw new IllegalArgumentException("Title cannot be blank!");
         }
 
-        return new ChangelogTitle(title);
+        return new ChangelogEntryTitle(title);
     }
 }

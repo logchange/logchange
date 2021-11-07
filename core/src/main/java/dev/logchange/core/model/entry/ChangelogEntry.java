@@ -1,4 +1,4 @@
-package dev.logchange.core.model;
+package dev.logchange.core.model.entry;
 
 import lombok.*;
 
@@ -10,10 +10,10 @@ import java.util.List;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChangelogEntry {
 
-    private final ChangelogTitle title;
+    private final ChangelogEntryTitle title;
     private final ChangelogEntryType type;
     @Singular
-    private final List<ChangelogMergeRequest> mergeRequests;
+    private final List<ChangelogEntryMergeRequest> mergeRequests;
     @Singular
     private final List<String> issues;
     @Singular
@@ -23,13 +23,13 @@ public class ChangelogEntry {
     @Singular
     private final List<String> importantNotes;
     @Singular
-    private final List<Configuration> configurations;
+    private final List<ChangelogEntryConfiguration> configurations;
 
     public static ChangelogEntry of(String title, ChangelogEntryType type, String mergeRequest, String issue, ChangelogEntryLink link, ChangelogEntryAuthor author) {
         return ChangelogEntry.builder()
-                .title(ChangelogTitle.of(title))
+                .title(ChangelogEntryTitle.of(title))
                 .type(type)
-                .mergeRequest(ChangelogMergeRequest.of(mergeRequest))
+                .mergeRequest(ChangelogEntryMergeRequest.of(mergeRequest))
                 .issue(issue)
                 .link(link)
                 .author(author)

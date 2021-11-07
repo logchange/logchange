@@ -1,7 +1,7 @@
 package dev.logchange.core.format.md.changelog.entry;
 
 import dev.logchange.core.format.md.MD;
-import dev.logchange.core.model.ChangelogEntry;
+import dev.logchange.core.model.entry.ChangelogEntry;
 import net.steppschuh.markdowngenerator.list.UnorderedListItem;
 import org.apache.commons.text.StringSubstitutor;
 

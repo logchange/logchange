@@ -1,7 +1,7 @@
 package dev.logchange.core.format.md.changelog.entry;
 
 import dev.logchange.core.format.md.MD;
-import dev.logchange.core.model.ChangelogMergeRequest;
+import dev.logchange.core.model.entry.ChangelogEntryMergeRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringSubstitutor;
 
@@ -12,9 +12,9 @@ class MDChangelogEntryMergeRequest implements MD {
 
     private static final String mergeRequestFormat = "!${merge_request}";
 
-    private final ChangelogMergeRequest mergeRequest;
+    private final ChangelogEntryMergeRequest mergeRequest;
 
-    MDChangelogEntryMergeRequest(ChangelogMergeRequest mergeRequest) {
+    MDChangelogEntryMergeRequest(ChangelogEntryMergeRequest mergeRequest) {
         this.mergeRequest = mergeRequest;
     }
 

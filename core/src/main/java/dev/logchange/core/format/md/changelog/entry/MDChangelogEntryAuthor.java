@@ -1,7 +1,7 @@
 package dev.logchange.core.format.md.changelog.entry;
 
 import dev.logchange.core.format.md.MD;
-import dev.logchange.core.model.ChangelogEntryAuthor;
+import dev.logchange.core.model.entry.ChangelogEntryAuthor;
 import net.steppschuh.markdowngenerator.link.Link;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringSubstitutor;

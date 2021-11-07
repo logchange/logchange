@@ -1,11 +1,11 @@
-package dev.logchange.core.model;
+package dev.logchange.core.model.entry;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum ConfigurationAction {
+public enum ChangelogEntryConfigurationAction {
 
     ADD("add", "Added"),
     UPDATE("update", "Updated"),

@@ -1,11 +1,11 @@
-package dev.logchange.core.model;
+package dev.logchange.core.model.entry;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class ChangelogTitleTest {
+class ChangelogEntryTitleTest {
 
     @Test
     void givenGoodTitle_whenOf_thenObjectCreatedAndValueIsCorrect() {
@@ -13,10 +13,10 @@ class ChangelogTitleTest {
         String title = "some title";
 
         //when:
-        ChangelogTitle changelogTitle = ChangelogTitle.of(title);
+        ChangelogEntryTitle changelogEntryTitle = ChangelogEntryTitle.of(title);
 
         //then:
-        assertEquals(title, changelogTitle.getValue());
+        assertEquals(title, changelogEntryTitle.getValue());
     }
 
     @Test
@@ -25,7 +25,7 @@ class ChangelogTitleTest {
         String title = "";
 
         //when-then:
-        assertThrows(IllegalArgumentException.class, () -> ChangelogTitle.of(title));
+        assertThrows(IllegalArgumentException.class, () -> ChangelogEntryTitle.of(title));
     }
 
     @Test
@@ -34,7 +34,7 @@ class ChangelogTitleTest {
         String title = " ";
 
         //when-then:
-        assertThrows(IllegalArgumentException.class, () -> ChangelogTitle.of(title));
+        assertThrows(IllegalArgumentException.class, () -> ChangelogEntryTitle.of(title));
     }
 
 }

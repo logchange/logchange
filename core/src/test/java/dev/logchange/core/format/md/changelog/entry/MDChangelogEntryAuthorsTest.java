@@ -1,6 +1,6 @@
 package dev.logchange.core.format.md.changelog.entry;
 
-import dev.logchange.core.model.ChangelogEntryAuthor;
+import dev.logchange.core.model.entry.ChangelogEntryAuthor;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

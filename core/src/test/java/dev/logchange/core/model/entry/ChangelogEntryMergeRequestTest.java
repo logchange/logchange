@@ -1,21 +1,21 @@
-package dev.logchange.core.model;
+package dev.logchange.core.model.entry;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class ChangelogMergeRequestTest {
+class ChangelogEntryMergeRequestTest {
     @Test
     void givenGoodMergeRequest_whenOf_thenObjectCreatedAndValueIsCorrect() {
         //given:
         String mr = "369";
 
         //when:
-        ChangelogMergeRequest changelogMergeRequest = ChangelogMergeRequest.of(mr);
+        ChangelogEntryMergeRequest changelogEntryMergeRequest = ChangelogEntryMergeRequest.of(mr);
 
         //then:
-        assertEquals(mr, changelogMergeRequest.getValue());
+        assertEquals(mr, changelogEntryMergeRequest.getValue());
     }
 
     @Test
@@ -24,7 +24,7 @@ class ChangelogMergeRequestTest {
         String mr = "";
 
         //when-then:
-        assertThrows(IllegalArgumentException.class, () -> ChangelogMergeRequest.of(mr));
+        assertThrows(IllegalArgumentException.class, () -> ChangelogEntryMergeRequest.of(mr));
     }
 
     @Test
@@ -33,6 +33,6 @@ class ChangelogMergeRequestTest {
         String mr = " ";
 
         //when-then:
-        assertThrows(IllegalArgumentException.class, () -> ChangelogMergeRequest.of(mr));
+        assertThrows(IllegalArgumentException.class, () -> ChangelogEntryMergeRequest.of(mr));
     }
 }
