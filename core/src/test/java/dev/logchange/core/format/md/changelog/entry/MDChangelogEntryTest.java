@@ -15,11 +15,11 @@ class MDChangelogEntryTest {
         //given:
         ChangelogEntry entry = ChangelogEntry.of(
                 "Some Title",
+                ChangelogEntryType.ADDED,
                 "567",
                 "890",
                 new ChangelogEntryLink("Some link", "https//google.com"),
-                new ChangelogEntryAuthor("Some Name", "Nick", "https://nick.name"),
-                ChangelogEntryType.ADDED);
+                new ChangelogEntryAuthor("Some Name", "Nick", "https://nick.name"));
 
         //when:
         String result = new MDChangelogEntry(entry).toString();
@@ -33,11 +33,11 @@ class MDChangelogEntryTest {
         //given:
         ChangelogEntry entry = ChangelogEntry.of(
                 "Some Title",
+                ChangelogEntryType.ADDED,
                 "567",
                 "890",
                 new ChangelogEntryLink("Some link", "https//google.com"),
-                new ChangelogEntryAuthor("Some Name", "Nick", "https://nick.name"),
-                ChangelogEntryType.ADDED);
+                new ChangelogEntryAuthor("Some Name", "Nick", "https://nick.name"));
 
         //when:
         String result1 = new MDChangelogEntry(entry).toString();

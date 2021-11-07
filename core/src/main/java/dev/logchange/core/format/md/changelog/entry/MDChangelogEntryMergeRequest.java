@@ -24,7 +24,7 @@ class MDChangelogEntryMergeRequest implements MD {
     }
 
     private String getMergeRequest() {
-        if (StringUtils.isBlank(mergeRequest.getValue())) {
+        if (mergeRequest == null || StringUtils.isBlank(mergeRequest.getValue())) {
             return StringUtils.EMPTY;
         }
 

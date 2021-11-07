@@ -10,18 +10,18 @@ import java.util.Map;
 
 public class MDChangelogEntry implements MD {
 
-    private static final String entryFormat = "${title} ${merge_request} ${issues} ${links} ${authors}";
+    private static final String entryFormat = "${title} ${merge_requests} ${issues} ${links} ${authors}";
 
     private final ChangelogEntry entry;
 
-    private final MDChangelogEntryMergeRequest mdMergeRequest;
+    private final MDChangelogEntryMergeRequests mdMergeRequests;
     private final MDChangelogEntryIssues mdIssues;
     private final MDChangelogEntryLinks mdLinks;
     private final MDChangelogEntryAuthors mdAuthors;
 
     public MDChangelogEntry(ChangelogEntry entry) {
         this.entry = entry;
-        this.mdMergeRequest = new MDChangelogEntryMergeRequest(entry.getMergeRequest());
+        this.mdMergeRequests = new MDChangelogEntryMergeRequests(entry.getMergeRequests());
         this.mdIssues = new MDChangelogEntryIssues(entry.getIssues());
         this.mdLinks = new MDChangelogEntryLinks(entry.getLinks());
         this.mdAuthors = new MDChangelogEntryAuthors(entry.getAuthors());
@@ -35,7 +35,7 @@ public class MDChangelogEntry implements MD {
     private String getEntry() {
         Map<String, String> valuesMap = new HashMap<>();
         valuesMap.put("title", entry.getTitle().getValue());
-        valuesMap.put("merge_request", mdMergeRequest.toMD());
+        valuesMap.put("merge_requests", mdMergeRequests.toMD());
         valuesMap.put("issues", mdIssues.toMD());
         valuesMap.put("links", mdLinks.toMD());
         valuesMap.put("authors", mdAuthors.toMD());
