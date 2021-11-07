@@ -15,7 +15,7 @@ class MDChangelogEntryAuthorsTest {
     @Test
     void givenOneAuthor_whenToString_tenResultMatchesFormat() {
         //given:
-        ChangelogEntryAuthor author = new ChangelogEntryAuthor("FirstName LastName", "NickName", "https://google.com");
+        ChangelogEntryAuthor author = ChangelogEntryAuthor.of("FirstName LastName", "NickName", "https://google.com");
         List<ChangelogEntryAuthor> authors = Collections.singletonList(author);
 
         //when:
@@ -29,8 +29,8 @@ class MDChangelogEntryAuthorsTest {
     void givenTwoAuthor_whenToString_tenResultMatchesFormat() {
         //given:
         List<ChangelogEntryAuthor> authors = Arrays.asList(
-                new ChangelogEntryAuthor("FirstName1 LastName", "NickName", "https://google.com"),
-                new ChangelogEntryAuthor("FirstName2 LastName", "NickName", "https://google.com"));
+                ChangelogEntryAuthor.of("FirstName1 LastName", "NickName", "https://google.com"),
+                ChangelogEntryAuthor.of("FirstName2 LastName", "NickName", "https://google.com"));
 
 
         //when:
@@ -44,8 +44,8 @@ class MDChangelogEntryAuthorsTest {
     void givenSomeAuthors_whenToString_thenResultMatchToMD() {
         //given:
         List<ChangelogEntryAuthor> authors = Arrays.asList(
-                new ChangelogEntryAuthor("FirstName1 LastName", "NickName", "https://google.com"),
-                new ChangelogEntryAuthor("FirstName2 LastName", "NickName", "https://google.com"));
+                ChangelogEntryAuthor.of("FirstName1 LastName", "NickName", "https://google.com"),
+                ChangelogEntryAuthor.of("FirstName2 LastName", "NickName", "https://google.com"));
 
         //when:
         String result1 = new MDChangelogEntryAuthors(authors).toString();

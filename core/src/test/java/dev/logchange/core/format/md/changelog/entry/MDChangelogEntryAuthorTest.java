@@ -10,7 +10,7 @@ class MDChangelogEntryAuthorTest {
     @Test
     void givenAuthorWithName_whenToString_thenResultMatchesFormat() {
         //given:
-        ChangelogEntryAuthor author = new ChangelogEntryAuthor("FirstName LastName", "", "");
+        ChangelogEntryAuthor author = ChangelogEntryAuthor.of("FirstName LastName", "", "");
 
         //when:
         String result = new MDChangelogEntryAuthor(author).toString();
@@ -22,7 +22,7 @@ class MDChangelogEntryAuthorTest {
     @Test
     void givenAuthorWithNameAndNickName_whenToString_thenResultMatchesFormat() {
         //given:
-        ChangelogEntryAuthor author = new ChangelogEntryAuthor("FirstName LastName", "NickName", "");
+        ChangelogEntryAuthor author = ChangelogEntryAuthor.of("FirstName LastName", "NickName", "");
 
         //when:
         String result = new MDChangelogEntryAuthor(author).toString();
@@ -34,7 +34,7 @@ class MDChangelogEntryAuthorTest {
     @Test
     void givenAuthorWithNameAndNickNameAndUrl_whenToString_thenResultMatchesFormat() {
         //given:
-        ChangelogEntryAuthor author = new ChangelogEntryAuthor("FirstName LastName", "NickName", "https://google.com");
+        ChangelogEntryAuthor author = ChangelogEntryAuthor.of("FirstName LastName", "NickName", "https://google.com");
 
         //when:
         String result = new MDChangelogEntryAuthor(author).toString();
@@ -46,7 +46,7 @@ class MDChangelogEntryAuthorTest {
     @Test
     void givenAuthorWithNickNameAndUrl_whenToString_thenResultMatchesFormat() {
         //given:
-        ChangelogEntryAuthor author = new ChangelogEntryAuthor("", "NickName", "https://google.com");
+        ChangelogEntryAuthor author = ChangelogEntryAuthor.of("", "NickName", "https://google.com");
 
         //when:
         String result = new MDChangelogEntryAuthor(author).toString();
@@ -58,7 +58,7 @@ class MDChangelogEntryAuthorTest {
     @Test
     void givenAuthorWithNameAndUrl_whenToString_thenResultMatchesFormat() {
         //given:
-        ChangelogEntryAuthor author = new ChangelogEntryAuthor("FirstName LastName", "", "https://google.com");
+        ChangelogEntryAuthor author = ChangelogEntryAuthor.of("FirstName LastName", "", "https://google.com");
 
         //when:
         String result = new MDChangelogEntryAuthor(author).toString();
@@ -70,7 +70,7 @@ class MDChangelogEntryAuthorTest {
     @Test
     void givenAuthorWithdUrl_whenToString_thenResultMatchesFormat() {
         //given:
-        ChangelogEntryAuthor author = new ChangelogEntryAuthor("", "", "https://google.com");
+        ChangelogEntryAuthor author = ChangelogEntryAuthor.of("", "", "https://google.com");
 
         //when:
         String result = new MDChangelogEntryAuthor(author).toString();
@@ -80,21 +80,9 @@ class MDChangelogEntryAuthorTest {
     }
 
     @Test
-    void givenEmptyAuthor_whenToString_thenEmpty() {
-        //given:
-        ChangelogEntryAuthor author = new ChangelogEntryAuthor("", "", "");
-
-        //when:
-        String result = new MDChangelogEntryAuthor(author).toString();
-
-        //then:
-        assertEquals("", result);
-    }
-
-    @Test
     void givenSomeAuthor_whenToString_thenResultMatchToMD() {
         //given:
-        ChangelogEntryAuthor author = new ChangelogEntryAuthor("FirstName LastName", "NickName", "https://google.com");
+        ChangelogEntryAuthor author = ChangelogEntryAuthor.of("FirstName LastName", "NickName", "https://google.com");
 
         //when:
         String result1 = new MDChangelogEntryAuthor(author).toString();

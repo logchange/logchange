@@ -27,13 +27,10 @@ class MDChangelogEntryAuthor implements MD {
     }
 
     private String getAuthor() {
-        if (StringUtils.isNotBlank(author.getName()) || StringUtils.isNotBlank(author.getNick()) || StringUtils.isNotBlank(author.getUrl())) {
-            Map<String, String> valuesMap = new HashMap<>();
-            valuesMap.put("author", (getAuthorName() + " " + getAuthorNick() + " " + getLinkWhenNameEmpty()).trim());
-            StringSubstitutor sub = new StringSubstitutor(valuesMap);
-            return sub.replace(authorFormat);
-        }
-        return StringUtils.EMPTY;
+        Map<String, String> valuesMap = new HashMap<>();
+        valuesMap.put("author", (getAuthorName() + " " + getAuthorNick() + " " + getLinkWhenNameEmpty()).trim());
+        StringSubstitutor sub = new StringSubstitutor(valuesMap);
+        return sub.replace(authorFormat);
     }
 
     private String getAuthorName() {

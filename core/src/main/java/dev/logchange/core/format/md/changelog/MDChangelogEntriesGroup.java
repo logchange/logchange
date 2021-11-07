@@ -10,12 +10,12 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.List;
 import java.util.stream.Collectors;
 
-class MDChangelogEntries implements MD {
+class MDChangelogEntriesGroup implements MD {
 
     private final ChangelogEntryType type;
     private final List<ChangelogEntry> entries;
 
-    MDChangelogEntries(ChangelogEntryType type, List<ChangelogEntry> entries) {
+    MDChangelogEntriesGroup(ChangelogEntryType type, List<ChangelogEntry> entries) {
         this.type = type;
         this.entries = entries.stream()
                 .filter(changelogEntry -> type.equals(changelogEntry.getType()))

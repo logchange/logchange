@@ -19,7 +19,7 @@ class MDChangelogEntryTest {
                 "567",
                 "890",
                 new ChangelogEntryLink("Some link", "https//google.com"),
-                new ChangelogEntryAuthor("Some Name", "Nick", "https://nick.name"));
+                ChangelogEntryAuthor.of("Some Name", "Nick", "https://nick.name"));
 
         //when:
         String result = new MDChangelogEntry(entry).toString();
@@ -37,7 +37,7 @@ class MDChangelogEntryTest {
                 "567",
                 "890",
                 new ChangelogEntryLink("Some link", "https//google.com"),
-                new ChangelogEntryAuthor("Some Name", "Nick", "https://nick.name"));
+                ChangelogEntryAuthor.of("Some Name", "Nick", "https://nick.name"));
 
         //when:
         String result1 = new MDChangelogEntry(entry).toString();
