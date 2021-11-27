@@ -1,4 +1,4 @@
-package dev.logchange.core.format.md.changelog;
+package dev.logchange.core.format.md.changelog.version;
 
 import dev.logchange.core.format.md.MD;
 import dev.logchange.core.format.md.changelog.entry.MDChangelogEntry;
