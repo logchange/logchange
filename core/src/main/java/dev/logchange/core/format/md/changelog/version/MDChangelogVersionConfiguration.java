@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class MDChangelogVersionConfiguration implements MD {
+class MDChangelogVersionConfiguration implements MD {
 
     private final List<ChangelogEntryConfiguration> configurations;
 

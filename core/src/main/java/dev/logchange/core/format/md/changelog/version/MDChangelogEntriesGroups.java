@@ -6,7 +6,7 @@ import dev.logchange.core.model.entry.ChangelogEntryType;
 
 import java.util.List;
 
-public class MDChangelogEntriesGroups implements MD {
+class MDChangelogEntriesGroups implements MD {
 
     private final List<ChangelogEntry> entries;
 

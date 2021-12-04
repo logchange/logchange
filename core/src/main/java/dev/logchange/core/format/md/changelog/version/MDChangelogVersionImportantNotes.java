@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
-public class MDChangelogVersionImportantNotes implements MD {
+class MDChangelogVersionImportantNotes implements MD {
 
     private final List<String> importantNotes;
 

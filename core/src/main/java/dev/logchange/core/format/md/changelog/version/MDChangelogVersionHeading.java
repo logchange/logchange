@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MDChangelogVersionHeading implements MD {
+class MDChangelogVersionHeading implements MD {
 
     public static final String RELEASE_DATE_FORMAT = "yyyy-MM-dd";
 

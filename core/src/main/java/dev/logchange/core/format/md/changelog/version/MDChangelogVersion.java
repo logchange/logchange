@@ -3,7 +3,7 @@ package dev.logchange.core.format.md.changelog.version;
 import dev.logchange.core.format.md.MD;
 import dev.logchange.core.model.version.ChangelogVersion;
 
-public class MDChangelogVersion implements MD {
+class MDChangelogVersion implements MD {
 
     private final MDChangelogVersionHeading heading;
     private final MDChangelogVersionImportantNotes importantNotes;
