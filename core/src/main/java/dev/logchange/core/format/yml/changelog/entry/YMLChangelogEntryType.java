@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum YMLChangelogEntryType {
+enum YMLChangelogEntryType {
 
     ADDED("added"),
     CHANGED("changed"),

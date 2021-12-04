@@ -10,10 +10,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-class YMLChangelogEntryAuthor {
+class YMLChangelogEntryLink {
 
     private String name;
-    private String nick;
     private String url;
 
     @YamlAnySetter
