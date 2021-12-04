@@ -3,13 +3,12 @@ package dev.logchange.core.format.md.changelog.version;
 import dev.logchange.core.format.md.MD;
 import dev.logchange.core.model.version.ChangelogVersion;
 
-class MDChangelogVersion implements MD {
+public class MDChangelogVersion implements MD {
 
     private final MDChangelogVersionHeading heading;
     private final MDChangelogVersionImportantNotes importantNotes;
     private final MDChangelogEntriesGroups entriesGroups;
     private final MDChangelogVersionConfiguration configuration;
-
 
     public MDChangelogVersion(ChangelogVersion changelogVersion) {
         this.heading = new MDChangelogVersionHeading(changelogVersion.getVersion(), changelogVersion.getReleaseDateTime());

@@ -1,6 +1,7 @@
-package dev.logchange.core.format.md.changelog.version;
+package dev.logchange.core.format.md.changelog;
 
 import dev.logchange.core.format.md.MD;
+import dev.logchange.core.format.md.changelog.version.MDChangelogVersion;
 import dev.logchange.core.model.ChangelogVersions;
 import dev.logchange.core.model.version.ChangelogVersion;
 
