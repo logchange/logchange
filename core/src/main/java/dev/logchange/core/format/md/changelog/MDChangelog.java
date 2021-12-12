@@ -21,7 +21,7 @@ public class MDChangelog implements MD {
         return getChangelog();
     }
 
-    public String getChangelog() {
+    private String getChangelog() {
         return String.valueOf(meta) +
                 heading +
                 versions;

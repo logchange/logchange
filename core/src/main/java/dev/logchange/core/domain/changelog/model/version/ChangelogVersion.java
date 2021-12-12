@@ -2,21 +2,23 @@ package dev.logchange.core.domain.changelog.model.version;
 
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryConfiguration;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Singular;
 
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChangelogVersion implements Comparable<ChangelogVersion> {
 
-    private Version version;
-    private OffsetDateTime releaseDateTime;
-    @Singular
-    private List<ChangelogEntry> entries;
-
+    private final Version version;
+    private final OffsetDateTime releaseDateTime;
+    private final List<ChangelogEntry> entries;
 
     @Override
     public int compareTo(ChangelogVersion o) {
