@@ -1,8 +1,8 @@
 package dev.logchange.core.format.md.changelog.version;
 
+import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
+import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType;
 import dev.logchange.core.format.md.MD;
-import dev.logchange.core.model.entry.ChangelogEntry;
-import dev.logchange.core.model.entry.ChangelogEntryType;
 
 import java.util.List;
 

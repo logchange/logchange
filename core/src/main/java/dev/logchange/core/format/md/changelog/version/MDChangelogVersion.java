@@ -1,7 +1,7 @@
 package dev.logchange.core.format.md.changelog.version;
 
+import dev.logchange.core.domain.changelog.model.version.ChangelogVersion;
 import dev.logchange.core.format.md.MD;
-import dev.logchange.core.model.version.ChangelogVersion;
 
 public class MDChangelogVersion implements MD {
 

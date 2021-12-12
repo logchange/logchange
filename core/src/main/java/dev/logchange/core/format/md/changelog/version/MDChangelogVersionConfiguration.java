@@ -1,8 +1,8 @@
 package dev.logchange.core.format.md.changelog.version;
 
+import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryConfiguration;
 import dev.logchange.core.format.md.MD;
 import dev.logchange.core.format.md.MDList;
-import dev.logchange.core.model.entry.ChangelogEntryConfiguration;
 import net.steppschuh.markdowngenerator.table.Table;
 import net.steppschuh.markdowngenerator.text.code.Code;
 import net.steppschuh.markdowngenerator.text.heading.Heading;

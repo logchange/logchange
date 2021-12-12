@@ -1,8 +1,8 @@
 package dev.logchange.core.format.md.changelog;
 
+import dev.logchange.core.domain.changelog.model.Changelog;
 import dev.logchange.core.format.md.MD;
 import dev.logchange.core.format.md.MDMeta;
-import dev.logchange.core.model.Changelog;
 
 public class MDChangelog implements MD {
 

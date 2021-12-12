@@ -1,7 +1,7 @@
 package dev.logchange.core.format.md.changelog.entry;
 
+import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryMergeRequest;
 import dev.logchange.core.format.md.MD;
-import dev.logchange.core.model.entry.ChangelogEntryMergeRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringSubstitutor;
 

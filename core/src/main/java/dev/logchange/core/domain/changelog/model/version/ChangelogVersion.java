@@ -1,7 +1,7 @@
-package dev.logchange.core.model.version;
+package dev.logchange.core.domain.changelog.model.version;
 
-import dev.logchange.core.model.entry.ChangelogEntry;
-import dev.logchange.core.model.entry.ChangelogEntryConfiguration;
+import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
+import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryConfiguration;
 import lombok.Getter;
 import lombok.Singular;
 

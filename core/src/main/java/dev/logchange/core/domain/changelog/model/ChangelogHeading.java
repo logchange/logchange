@@ -1,4 +1,4 @@
-package dev.logchange.core.model;
+package dev.logchange.core.domain.changelog.model;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

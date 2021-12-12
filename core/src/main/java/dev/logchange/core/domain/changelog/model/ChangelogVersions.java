@@ -1,6 +1,6 @@
-package dev.logchange.core.model;
+package dev.logchange.core.domain.changelog.model;
 
-import dev.logchange.core.model.version.ChangelogVersion;
+import dev.logchange.core.domain.changelog.model.version.ChangelogVersion;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

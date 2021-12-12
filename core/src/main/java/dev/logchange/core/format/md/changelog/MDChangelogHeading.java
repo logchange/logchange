@@ -1,7 +1,7 @@
 package dev.logchange.core.format.md.changelog;
 
+import dev.logchange.core.domain.changelog.model.ChangelogHeading;
 import dev.logchange.core.format.md.MD;
-import dev.logchange.core.model.ChangelogHeading;
 import net.steppschuh.markdowngenerator.text.Text;
 import org.apache.commons.lang3.StringUtils;
 

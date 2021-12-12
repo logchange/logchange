@@ -1,7 +1,7 @@
 package dev.logchange.core.format.md.changelog.version;
 
+import dev.logchange.core.domain.changelog.model.version.Version;
 import dev.logchange.core.format.md.MD;
-import dev.logchange.core.model.version.Version;
 import net.steppschuh.markdowngenerator.text.heading.Heading;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringSubstitutor;

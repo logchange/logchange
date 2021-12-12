@@ -1,6 +1,6 @@
 package dev.logchange.core.format.md.changelog.entry;
 
-import dev.logchange.core.model.entry.ChangelogEntryMergeRequest;
+import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryMergeRequest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
