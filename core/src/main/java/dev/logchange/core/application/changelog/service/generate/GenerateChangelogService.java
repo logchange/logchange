@@ -1,4 +1,4 @@
-package dev.logchange.core.application.changelog.generate;
+package dev.logchange.core.application.changelog.service.generate;
 
 import dev.logchange.core.domain.changelog.command.GenerateChangelogUseCase;
 import dev.logchange.core.format.md.changelog.MDChangelog;

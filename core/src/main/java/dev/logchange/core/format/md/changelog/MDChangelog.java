@@ -9,11 +9,13 @@ public class MDChangelog implements MD {
     private final MDMeta meta;
     private final MDChangelogHeading heading;
     private final MDChangelogVersions versions;
+    private final MDChangelogArchives archives;
 
     public MDChangelog(Changelog changelog) {
         this.meta = new MDMeta();
         this.heading = new MDChangelogHeading(changelog.getHeading());
         this.versions = new MDChangelogVersions(changelog.getVersions());
+        this.archives = new MDChangelogArchives(changelog.getArchives());
     }
 
     @Override
@@ -24,7 +26,8 @@ public class MDChangelog implements MD {
     private String getChangelog() {
         return String.valueOf(meta) +
                 heading +
-                versions;
+                versions +
+                archives;
     }
 
 }
