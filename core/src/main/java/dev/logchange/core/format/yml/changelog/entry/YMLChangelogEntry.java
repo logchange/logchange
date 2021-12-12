@@ -9,9 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.List;
 
 
@@ -30,9 +28,9 @@ public class YMLChangelogEntry {
     private List<String> importantNotes;
     private List<YMLChangelogEntryConfiguration> configurations;
 
-    public static YMLChangelogEntry of(File file) throws FileNotFoundException {
+    public static YMLChangelogEntry of(InputStream input) {
         Yaml yaml = new Yaml(new AnnotationAwareConstructor(YMLChangelogEntry.class));
-        return yaml.load(new FileInputStream(file));
+        return yaml.load(input);
     }
 
     @YamlProperty(key = "merge_request")
