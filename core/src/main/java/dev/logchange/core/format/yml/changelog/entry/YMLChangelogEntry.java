@@ -3,6 +3,7 @@ package dev.logchange.core.format.yml.changelog.entry;
 import de.beosign.snakeyamlanno.constructor.AnnotationAwareConstructor;
 import de.beosign.snakeyamlanno.property.YamlAnySetter;
 import de.beosign.snakeyamlanno.property.YamlProperty;
+import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -51,5 +52,9 @@ public class YMLChangelogEntry {
     @YamlAnySetter
     public void anySetter(String key, Object value) {
         //TODO Logger.getLogger().warn("Unknown property: " + key + " with value " + value);
+    }
+
+    public ChangelogEntry to() {
+        return null;
     }
 }
