@@ -4,7 +4,7 @@ public class MDMeta implements MD {
 
     private static final String FORMATTER_OFF = "<!-- @formatter:off -->";
     private static final String NOINSPECTION = "<!-- noinspection -->";
-    private static final String COMMENT = "<!-- Prevents auto format, for JetBrains IDE File > Editor > Code Style > Enable formatter markers in comments  -->";
+    private static final String COMMENT = "<!-- Prevents auto format, for JetBrains IDE File > Settings > Editor > Code Style (Formatter Tab) > Turn formatter on/off with markers in code comments  -->";
 
     @Override
     public String toString() {
