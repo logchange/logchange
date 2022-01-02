@@ -31,7 +31,7 @@ public class GenerateChangelogIntegrationTest {
     }
 
     @Test
-    void test() throws IOException {
+    void shouldMatchExpectedChangelog() throws IOException {
         //given:
         File changelogInputDir = new File(PATH + "changelog");
         File changelogOutputFile = new File(PATH + "CHANGELOG.md");
