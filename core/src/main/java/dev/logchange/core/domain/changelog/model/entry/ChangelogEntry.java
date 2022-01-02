@@ -25,7 +25,13 @@ public class ChangelogEntry {
     @Singular
     private final List<ChangelogEntryConfiguration> configurations;
 
-    public static ChangelogEntry of(String title, ChangelogEntryType type, String mergeRequest, String issue, ChangelogEntryLink link, ChangelogEntryAuthor author) {
+    public static ChangelogEntry of(
+            String title,
+            ChangelogEntryType type,
+            String mergeRequest,
+            String issue,
+            ChangelogEntryLink link,
+            ChangelogEntryAuthor author) {
         return ChangelogEntry.builder()
                 .title(ChangelogEntryTitle.of(title))
                 .type(type)
@@ -37,4 +43,27 @@ public class ChangelogEntry {
                 .configurations(Collections.emptyList())
                 .build();
     }
+
+    public static ChangelogEntry of(
+            String title,
+            ChangelogEntryType type,
+            String mergeRequest,
+            List<String> issues,
+            List<ChangelogEntryLink> links,
+            List<ChangelogEntryAuthor> authors,
+            List<String> importantNotes,
+            List<ChangelogEntryConfiguration> configurations
+    ) {
+        return ChangelogEntry.builder()
+                .title(ChangelogEntryTitle.of(title))
+                .type(type)
+                .mergeRequest(ChangelogEntryMergeRequest.of(mergeRequest))
+                .issues(issues)
+                .links(links)
+                .authors(authors)
+                .importantNotes(importantNotes)
+                .configurations(configurations)
+                .build();
+    }
+
 }

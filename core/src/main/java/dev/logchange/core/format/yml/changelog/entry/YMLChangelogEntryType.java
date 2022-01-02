@@ -1,11 +1,12 @@
 package dev.logchange.core.format.yml.changelog.entry;
 
+import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-enum YMLChangelogEntryType {
+public enum YMLChangelogEntryType {
 
     ADDED("added"),
     CHANGED("changed"),
@@ -15,5 +16,24 @@ enum YMLChangelogEntryType {
     SECURITY("security");
 
     private final String type;
+
+    ChangelogEntryType to() {
+        switch (this) {
+            case ADDED:
+                return ChangelogEntryType.ADDED;
+            case CHANGED:
+                return ChangelogEntryType.CHANGED;
+            case DEPRECATED:
+                return ChangelogEntryType.DEPRECATED;
+            case REMOVED:
+                return ChangelogEntryType.REMOVED;
+            case FIXED:
+                return ChangelogEntryType.FIXED;
+            case SECURITY:
+                return ChangelogEntryType.SECURITY;
+            default:
+                throw new IllegalArgumentException("Converting ChangelogEntryType failed");
+        }
+    }
 
 }

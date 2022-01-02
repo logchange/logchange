@@ -1,12 +1,13 @@
 package dev.logchange.core.domain.changelog.model.entry;
 
-import lombok.AllArgsConstructor;
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.util.Comparator;
 
 @Getter
-@AllArgsConstructor
+@Builder(access = AccessLevel.PRIVATE)
 public class ChangelogEntryConfiguration implements Comparable<ChangelogEntryConfiguration> {
 
     private final String type;
@@ -22,5 +23,22 @@ public class ChangelogEntryConfiguration implements Comparable<ChangelogEntryCon
                 .thenComparing(ChangelogEntryConfiguration::getAction)
                 .thenComparing(ChangelogEntryConfiguration::getKey)
                 .compare(this, o);
+    }
+
+    public static ChangelogEntryConfiguration of(
+            String type,
+            ChangelogEntryConfigurationAction action,
+            String key,
+            String defaultValue,
+            String description,
+            String moreInfo) {
+        return ChangelogEntryConfiguration.builder()
+                .type(type)
+                .action(action)
+                .key(key)
+                .defaultValue(defaultValue)
+                .description(description)
+                .moreInfo(moreInfo)
+                .build();
     }
 }

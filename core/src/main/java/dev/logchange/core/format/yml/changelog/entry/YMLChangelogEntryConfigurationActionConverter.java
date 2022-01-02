@@ -2,7 +2,7 @@ package dev.logchange.core.format.yml.changelog.entry;
 
 import de.beosign.snakeyamlanno.convert.Converter;
 
-class YMLChangelogEntryConfigurationActionConverter implements Converter<YMLChangelogEntryConfigurationAction> {
+public class YMLChangelogEntryConfigurationActionConverter implements Converter<YMLChangelogEntryConfigurationAction> {
 
     @Override
     public String convertToYaml(YMLChangelogEntryConfigurationAction configurationAction) {

@@ -2,6 +2,7 @@ package dev.logchange.core.format.yml.changelog.entry;
 
 import de.beosign.snakeyamlanno.property.YamlAnySetter;
 import de.beosign.snakeyamlanno.property.YamlProperty;
+import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryConfiguration;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +14,7 @@ import java.util.Comparator;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-class YMLChangelogEntryConfiguration implements Comparable<YMLChangelogEntryConfiguration> {
+public class YMLChangelogEntryConfiguration implements Comparable<YMLChangelogEntryConfiguration> {
 
     private String type;
     private YMLChangelogEntryConfigurationAction action;
@@ -48,5 +49,16 @@ class YMLChangelogEntryConfiguration implements Comparable<YMLChangelogEntryConf
                 .thenComparing(YMLChangelogEntryConfiguration::getAction)
                 .thenComparing(YMLChangelogEntryConfiguration::getKey)
                 .compare(this, o);
+    }
+
+    ChangelogEntryConfiguration to() {
+        return ChangelogEntryConfiguration.of(
+                type,
+                action.to(),
+                key,
+                defaultValue,
+                description,
+                moreInfo
+        );
     }
 }

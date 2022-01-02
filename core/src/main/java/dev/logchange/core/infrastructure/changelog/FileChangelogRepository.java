@@ -2,6 +2,7 @@ package dev.logchange.core.infrastructure.changelog;
 
 import dev.logchange.core.application.changelog.repository.ChangelogRepository;
 import dev.logchange.core.domain.changelog.model.Changelog;
+import dev.logchange.core.domain.changelog.model.archive.ChangelogArchive;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.domain.changelog.model.version.ChangelogVersion;
 import dev.logchange.core.domain.changelog.model.version.Version;
@@ -9,6 +10,8 @@ import dev.logchange.core.format.md.changelog.MDChangelog;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.Collections;
@@ -33,15 +36,19 @@ public class FileChangelogRepository implements ChangelogRepository {
     public Changelog find() {
         List<File> inputFiles = getInputFiles();
 
-        List<ChangelogVersion> changelogVersions = new LinkedList<>();
+        List<ChangelogVersion> versions = new LinkedList<>();
+        List<ChangelogArchive> archives = new LinkedList<>();
 
         for (File file : inputFiles) {
             if (isVersionDirectory(file)) {
-                changelogVersions.add(getChangelogVersion(file));
+                versions.add(getChangelogVersion(file));
+            }
+            if (isArchive(file)) {
+                archives.add(getChangelogArchive(file));
             }
         }
-
-        return null;
+        versions.sort(Collections.reverseOrder());
+        return Changelog.of(heading, versions, archives);
     }
 
     @Override
@@ -51,7 +58,7 @@ public class FileChangelogRepository implements ChangelogRepository {
         try (PrintWriter out = new PrintWriter(outputFile)) {
             out.println(md);
         } catch (FileNotFoundException e) {
-            throw new IllegalArgumentException("Could not save changelog to file: " + outputFile);
+            throw new IllegalArgumentException("Could not save changelog to file: " + outputFile + " because: " + e.getMessage());
         }
     }
 
@@ -68,6 +75,10 @@ public class FileChangelogRepository implements ChangelogRepository {
         return file.isDirectory();
     }
 
+    private boolean isArchive(File file) {
+        return file.getName().startsWith("archive");
+    }
+
     private ChangelogVersion getChangelogVersion(File versionDirectory) {
         return ChangelogVersion.builder()
                 .version(getVersion(versionDirectory))
@@ -77,6 +88,15 @@ public class FileChangelogRepository implements ChangelogRepository {
                 .entries(getEntries(versionDirectory))
                 .releaseDateTime(getReleaseDateTime(versionDirectory))
                 .build();
+    }
+
+    private ChangelogArchive getChangelogArchive(File file) {
+        try {
+            return ChangelogArchive.of(Files.readAllLines(file.toPath(), StandardCharsets.UTF_8));
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new IllegalStateException(e.getMessage());
+        }
     }
 
     private Version getVersion(File versionDirectory) {
@@ -91,6 +111,10 @@ public class FileChangelogRepository implements ChangelogRepository {
     }
 
     private OffsetDateTime getReleaseDateTime(File versionDirectory) {
+//        return Arrays.stream(versionDirectory.listFiles())
+//                .filter(file -> file.getName().equals(RELEASE_DATE))
+//                .map(ReleaseDateFileParser::getReleaseDateFromFile)
+//                .findFirst().orElse(null);
         return null;
     }
 

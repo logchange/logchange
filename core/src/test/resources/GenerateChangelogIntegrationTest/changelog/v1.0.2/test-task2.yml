@@ -1,0 +1,20 @@
+title: Test title
+authors:
+  - name: Piotr
+    nick: marwin1991
+    url: https://github.com/marwin1991
+merge_request: 1
+issues:
+  - 1
+links: # links to external systems, like redmine something else
+  - name: TASK_NUMBER
+    url: https://www.google.pl
+type: added # [added/changed/deprecated/removed/fixed/security]
+important_notes: Update style.css on server during instalation
+configurations: # information about changes in available application configuration
+  - action: add # [add/update/delete]
+    key: simpleparam.name.enabled
+    default_value: "true" #always string
+    description: Enables displying feature name
+    type: database parameter
+

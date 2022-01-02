@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.Collections;
 import java.util.List;
 
 @Getter
@@ -16,6 +17,6 @@ public class ChangelogArchive {
             throw new IllegalArgumentException("Archive cannot be null");
         }
 
-        return new ChangelogArchive(archiveLines);
+        return new ChangelogArchive(Collections.unmodifiableList(archiveLines));
     }
 }
