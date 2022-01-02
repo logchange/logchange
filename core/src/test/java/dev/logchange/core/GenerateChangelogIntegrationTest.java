@@ -27,7 +27,7 @@ public class GenerateChangelogIntegrationTest {
 
     @AfterEach
     void cleanup() {
-        //new File(PATH + "CHANGELOG.md").delete();
+        new File(PATH + "CHANGELOG.md").delete();
     }
 
     @Test
@@ -46,6 +46,8 @@ public class GenerateChangelogIntegrationTest {
         generateChangelogUseCase.handle(command);
 
         //then:
-        assertEquals(FileUtils.fileRead(expectedChangelogOutputFile), FileUtils.fileRead(changelogOutputFile));
+        String expectedContent = FileUtils.fileRead(expectedChangelogOutputFile);
+        String actualContent = FileUtils.fileRead(changelogOutputFile);
+        assertEquals(expectedContent, actualContent);
     }
 }
