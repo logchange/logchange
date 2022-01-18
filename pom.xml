@@ -11,12 +11,19 @@
 
     <modules>
         <module>core</module>
+        <module>logchange-maven-plugin</module>
     </modules>
+
+    <description>
+        Tool to manage and generate CHANGELOG.md based on YAML files,
+        which are representing single entry in changelog.
+    </description>
+    <url>https://github.com/logchange/logchange</url>
 
     <licenses>
         <license>
             <name>Apache License 2.0</name>
-            <url>https://github.com/marwin1991/keep-changelog-maven-plugin/blob/main/LICENSE</url>
+            <url>https://github.com/logchange/logchange/blob/main/LICENSE</url>
         </license>
     </licenses>
     <developers>
