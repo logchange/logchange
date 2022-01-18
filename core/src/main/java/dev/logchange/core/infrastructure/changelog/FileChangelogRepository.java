@@ -22,12 +22,10 @@ import java.util.stream.Stream;
 
 public class FileChangelogRepository implements ChangelogRepository {
 
-    private final String heading;
     private final File inputDirectory;
     private final File outputFile;
 
-    public FileChangelogRepository(String heading, File inputDirectory, File outputFile) {
-        this.heading = heading;
+    public FileChangelogRepository(File inputDirectory, File outputFile) {
         this.inputDirectory = inputDirectory;
         this.outputFile = outputFile;
     }
@@ -48,7 +46,7 @@ public class FileChangelogRepository implements ChangelogRepository {
             }
         }
         versions.sort(Collections.reverseOrder());
-        return Changelog.of(heading, versions, archives);
+        return Changelog.of(versions, archives);
     }
 
     @Override

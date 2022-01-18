@@ -38,9 +38,9 @@ public class GenerateChangelogIntegrationTest {
         File expectedChangelogOutputFile = new File(PATH + "EXPECTED_CHANGELOG.md");
         String heading = "";
 
-        ChangelogRepository repository = new FileChangelogRepository(heading, changelogInputDir, changelogOutputFile);
+        ChangelogRepository repository = new FileChangelogRepository(changelogInputDir, changelogOutputFile);
         GenerateChangelogUseCase generateChangelogUseCase = new GenerateChangelogService(repository);
-        GenerateChangelogCommand command = GenerateChangelogCommand.of();
+        GenerateChangelogCommand command = GenerateChangelogCommand.of(heading);
 
         //when:
         generateChangelogUseCase.handle(command);

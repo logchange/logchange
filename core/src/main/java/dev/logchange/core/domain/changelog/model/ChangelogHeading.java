@@ -10,15 +10,17 @@ import org.apache.commons.lang3.StringUtils;
 public class ChangelogHeading {
     private final String value;
 
-    static ChangelogHeading of(String heading) {
+    public static ChangelogHeading EMPTY = ChangelogHeading.of(StringUtils.EMPTY);
+
+    public boolean isEmpty() {
+        return StringUtils.EMPTY.equals(value);
+    }
+
+    public static ChangelogHeading of(String heading) {
         if (StringUtils.isBlank(heading)) {
             heading = StringUtils.EMPTY;
         }
 
         return new ChangelogHeading(heading);
-    }
-
-    public boolean isEmpty() {
-        return StringUtils.EMPTY.equals(value);
     }
 }
