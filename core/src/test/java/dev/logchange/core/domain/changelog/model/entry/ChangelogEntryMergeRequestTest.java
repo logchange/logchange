@@ -17,22 +17,4 @@ class ChangelogEntryMergeRequestTest {
         //then:
         assertEquals(mr, changelogEntryMergeRequest.getValue());
     }
-
-    @Test
-    void givenEmptyMergeRequest_whenOf_thenExceptionIsThrown() {
-        //given:
-        String mr = "";
-
-        //when-then:
-        assertThrows(IllegalArgumentException.class, () -> ChangelogEntryMergeRequest.of(mr));
-    }
-
-    @Test
-    void givenBlankTitle_whenOf_thenExceptionIsThrown() {
-        //given:
-        String mr = " ";
-
-        //when-then:
-        assertThrows(IllegalArgumentException.class, () -> ChangelogEntryMergeRequest.of(mr));
-    }
 }

@@ -12,7 +12,7 @@ public class ChangelogEntryMergeRequest {
 
     public static ChangelogEntryMergeRequest of(String mergeRequest) {
         if (StringUtils.isBlank(mergeRequest)) {
-            throw new IllegalArgumentException("Merge request cannot be blank!");
+            new ChangelogEntryMergeRequest(StringUtils.EMPTY);
         }
 
         return new ChangelogEntryMergeRequest(mergeRequest);

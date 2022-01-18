@@ -61,6 +61,9 @@ public class YMLChangelogEntry {
     }
 
     public ChangelogEntry to() {
+        if(issues == null){
+            issues = Collections.emptyList();
+        }
         return ChangelogEntry.of(
                 title,
                 type.to(),

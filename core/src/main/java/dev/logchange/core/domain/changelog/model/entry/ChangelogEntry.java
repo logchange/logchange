@@ -32,6 +32,8 @@ public class ChangelogEntry {
             String issue,
             ChangelogEntryLink link,
             ChangelogEntryAuthor author) {
+
+
         return ChangelogEntry.builder()
                 .title(ChangelogEntryTitle.of(title))
                 .type(type)
