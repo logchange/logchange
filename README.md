@@ -34,9 +34,9 @@ You can choose between two options:
     <build>
         <plugins>
             <plugin>
-                <groupId>io.github.marwin1991</groupId>
-                <artifactId>keep-changelog-maven-plugin</artifactId>
-                <version>0.3.0</version>
+                <groupId>dev.logchange</groupId>
+                <artifactId>logchange-maven-plugin</artifactId>
+                <version>1.0.0</version>
             </plugin>
         </plugins>
     </build>
