@@ -26,7 +26,9 @@ The example project with this plugin usage you can find in `example` directory.
 ## Usage
 ### Maven Plugin
 ### Starting
-Add a plugin to your `pom.xml`. For multi-module projects with one `CHANGELOG.md` add it in main `pom.xml`.
+You can choose between two options:
+
+1. Add a plugin to your `pom.xml`. For multi-module projects with one `CHANGELOG.md` add it in main `pom.xml`.
 
 ```xml
     <build>
@@ -40,9 +42,15 @@ Add a plugin to your `pom.xml`. For multi-module projects with one `CHANGELOG.md
     </build>
 ```
 
+2. You don't have to add anything to your `pom.xml`, just use all commands with `groupId` like here:
+```shell
+mvn dev.logchange:logchange:init
+```
+
+After choosing one of the options.
 Use this command from your terminal to create important directories and empty CHANGELOG.md
 ```shell
-mvn keep-changelog:init
+mvn logchange:init
 ```
 
 If you already had a `CHANGELOG.md` file you can move it to `changelog/archive.md` file. The name of the archive file have to start from `archive` phrase (f.e. `archive-1.0.0.md`).
@@ -62,7 +70,7 @@ presented below. You can also use command to generate this file:
 [TODO] - functionality not done yet
 
 ```shell
-mvn keep-changelog:add
+mvn logchange:add
 ```
 
 ### YAML format
@@ -106,7 +114,7 @@ configurations: # information about changes in available application configurati
 Everytime you want to generate `CHANGELOG.md` you can use command:
 
 ```shell
-mvn keep-changelog:generate
+mvn logchange:generate
 ```
 
 To prevent merge conflicts (it is idea of this project) generation should be done with use of CI/CD Tool on a main
@@ -119,7 +127,7 @@ it.
 ### Creating release (from unreleased)
 
 ```shell
-mvn keep-changelog:release
+mvn logchange:release
 ```
 
 ### `CHANGELOG.md` structure overview
