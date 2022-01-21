@@ -1,5 +1,6 @@
 package dev.logchange.maven_plugin.mojo;
 
+import dev.logchange.maven_plugin.util.GitKeep;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -8,30 +9,29 @@ import org.apache.maven.plugins.annotations.Parameter;
 import java.io.File;
 import java.io.IOException;
 
-@Mojo(name = "init", defaultPhase = LifecyclePhase.NONE)
+import static dev.logchange.maven_plugin.Constants.*;
+
+@Mojo(name = INIT_COMMAND, defaultPhase = LifecyclePhase.NONE)
 public class InitProjectMojo extends AbstractMojo {
 
-    public static final String GIT_KEEP = ".gitkeep";
+    @Parameter(defaultValue = DEFAULT_INPUT_DIR, property = INPUT_DIR_MVN_PROPERTY)
+    private String inputDir;
 
-    @Parameter(defaultValue = "CHANGELOG.md", property = "finalChangelogName")
-    private String finalChangelogName;
+    @Parameter(defaultValue = DEFAULT_UNRELEASED_VERSION_DIR, property = UNRELEASED_VERSION_DIR_MVN_PROPERTY)
+    private String unreleasedVersionDir;
 
-    @Parameter(defaultValue = "changelog", property = "yamlFilesDirectory")
-    private String yamlFilesDirectory;
-
-    @Parameter(defaultValue = "unreleased", property = "unreleasedVersionDirectory")
-    private String unreleasedVersionDirectory;
+    @Parameter(defaultValue = DEFAULT_OUTPUT_FILE, property = OUTPUT_FILE_MVN_PROPERTY)
+    private String outputFile;
 
     @Override
     public void execute() {
         getLog().info("Initialize project for keep-changelog maven plugin");
-        generateChangelog(finalChangelogName);
-        generateChangelogDirUnreleasedDirGitKeep(yamlFilesDirectory + "/" + unreleasedVersionDirectory + "/");
+        createEmptyChangelogFile(outputFile);
+        createInputDir(inputDir + "/" + unreleasedVersionDir + "/");
         getLog().info("Initialize project successful");
     }
 
-    public void generateChangelog(String path) {
-
+    public void createEmptyChangelogFile(String path) {
         try {
             File changelog = new File(path);
             if (changelog.createNewFile()) {
@@ -44,30 +44,21 @@ public class InitProjectMojo extends AbstractMojo {
         }
     }
 
-    public void generateChangelogDirUnreleasedDirGitKeep(String path) {
-
-        try {
-            File yamlFilesDirectory = new File(path);
-            if (!yamlFilesDirectory.exists()) {
-                if (yamlFilesDirectory.mkdir()) {
-                    getLog().info("Created: " + yamlFilesDirectory.getName());
-                } else {
-                    getLog().warn(yamlFilesDirectory.getName() + " cannot be created.");
-                }
+    public void createInputDir(String path) {
+        File newInputDir = new File(path);
+        if (!newInputDir.exists()) {
+            if (newInputDir.mkdir()) {
+                getLog().info("Created: " + newInputDir.getName());
             } else {
-                getLog().warn(yamlFilesDirectory.getName() + " already exists.");
+                getLog().warn(newInputDir.getName() + " cannot be created.");
             }
-
-            File gitKeep = new File(path + GIT_KEEP);
-            if (gitKeep.createNewFile()) {
-                getLog().info("Created: " + gitKeep.getName());
-            } else {
-                getLog().warn(gitKeep.getName() + " already exists.");
-            }
-        } catch (IOException e) {
-            getLog().error("An error occurred while creating empty .gitkeep.", e);
+        } else {
+            getLog().warn(newInputDir.getName() + " already exists.");
         }
+        GitKeep.of(getLog(), path).create();
     }
+
+
 
 
 }

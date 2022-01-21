@@ -11,21 +11,23 @@ import org.apache.maven.plugins.annotations.Parameter;
 
 import java.io.File;
 
-@Mojo(name = "generate", defaultPhase = LifecyclePhase.NONE)
+import static dev.logchange.maven_plugin.Constants.*;
+
+@Mojo(name = GENERATE_COMMAND, defaultPhase = LifecyclePhase.NONE)
 public class GenerateChangelogMojo extends AbstractMojo {
 
-    @Parameter(defaultValue = "", property = "heading")
+    @Parameter(defaultValue = "", property = HEADING_MVN_PROPERTY)
     private String heading;
 
-    @Parameter(defaultValue = "changelog", property = "yamlFilesDirectory")
-    private String yamlFilesDirectory;
+    @Parameter(defaultValue = DEFAULT_INPUT_DIR, property = INPUT_DIR_MVN_PROPERTY)
+    private String inputDir;
 
-    @Parameter(defaultValue = "CHANGELOG.md", property = "finalChangelogName")
-    private String finalChangelogName;
+    @Parameter(defaultValue = DEFAULT_OUTPUT_FILE, property = OUTPUT_FILE_MVN_PROPERTY)
+    private String outputFile;
 
     @Override
     public void execute() {
-        executeGenerate(finalChangelogName, yamlFilesDirectory);
+        executeGenerate(outputFile, inputDir);
     }
 
     public void executeGenerate(String finalChangelogName, String yamlFilesDirectory) {
