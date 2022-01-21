@@ -20,8 +20,6 @@
         <maven-artifact.version>3.8.4</maven-artifact.version>
 
         <!-- TESTS -->
-        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-        <junit-jupiter.version>5.7.1</junit-jupiter.version>
         <mockito-junit-jupiter.version>4.0.0</mockito-junit-jupiter.version>
     </properties>
 
@@ -58,13 +56,6 @@
         </dependency>
 
         <!-- TESTS -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>${junit-jupiter.version}</version>
-            <scope>test</scope>
-        </dependency>
-
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>

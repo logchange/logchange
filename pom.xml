@@ -42,6 +42,10 @@
 
         <lombok.version>1.18.20</lombok.version>
         <lombok-maven.version>1.18.20.0</lombok-maven.version>
+
+        <!-- TESTS -->
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <junit-jupiter.version>5.7.1</junit-jupiter.version>
     </properties>
 
     <dependencies>
@@ -50,6 +54,14 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- TESTS -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit-jupiter.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

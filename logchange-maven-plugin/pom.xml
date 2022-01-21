@@ -19,6 +19,9 @@
         <maven-plugin-annotations.version>3.6.0</maven-plugin-annotations.version>
         <maven-plugin-plugin.version>3.6.0</maven-plugin-plugin.version>
         <maven-site-plugin.version>3.8.2</maven-site-plugin.version>
+
+        <!-- TESTS -->
+        <maven-verifier.version>1.7.2</maven-verifier.version>
     </properties>
 
     <dependencies>
@@ -46,6 +49,14 @@
             <artifactId>maven-plugin-annotations</artifactId>
             <version>${maven-plugin-annotations.version}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- TESTS -->
+        <dependency>
+            <groupId>org.apache.maven.shared</groupId>
+            <artifactId>maven-verifier</artifactId>
+            <version>${maven-verifier.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
