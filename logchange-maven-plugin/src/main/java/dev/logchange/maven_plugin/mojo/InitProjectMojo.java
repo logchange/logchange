@@ -57,8 +57,4 @@ public class InitProjectMojo extends AbstractMojo {
         }
         GitKeep.of(getLog(), path).create();
     }
-
-
-
-
 }
