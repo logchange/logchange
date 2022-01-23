@@ -1,5 +1,6 @@
 package dev.logchange.maven_plugin.mojo;
 
+import dev.logchange.maven_plugin.util.Dir;
 import dev.logchange.maven_plugin.util.GitKeep;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
@@ -25,9 +26,11 @@ public class InitProjectMojo extends AbstractMojo {
 
     @Override
     public void execute() {
-        getLog().info("Initialize project for keep-changelog maven plugin");
+        getLog().info("Initialize project for logchange-maven-plugin");
         createEmptyChangelogFile(outputFile);
-        createInputDir(inputDir + "/" + unreleasedVersionDir + "/");
+        Dir.of(getLog(), inputDir).create();
+        Dir.of(getLog(), inputDir + "/" + unreleasedVersionDir).create();
+        GitKeep.of(getLog(), inputDir + "/" + unreleasedVersionDir + "/").create();
         getLog().info("Initialize project successful");
     }
 
@@ -42,19 +45,5 @@ public class InitProjectMojo extends AbstractMojo {
         } catch (IOException e) {
             getLog().error("An error occurred while creating empty changelog.");
         }
-    }
-
-    public void createInputDir(String path) {
-        File newInputDir = new File(path);
-        if (!newInputDir.exists()) {
-            if (newInputDir.mkdir()) {
-                getLog().info("Created: " + newInputDir.getName());
-            } else {
-                getLog().warn(newInputDir.getName() + " cannot be created.");
-            }
-        } else {
-            getLog().warn(newInputDir.getName() + " already exists.");
-        }
-        GitKeep.of(getLog(), path).create();
     }
 }

@@ -152,3 +152,8 @@ TODO
 - add tests
 - add javadocs
 - support  `unreleased*` directories names like `unreleased-1.1`
+
+## Development
+
+1. Java installed.
+2. `mvn` as a command in your terminal(needed for integration tests).
