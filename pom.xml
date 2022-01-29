@@ -12,6 +12,7 @@
     <modules>
         <module>core</module>
         <module>logchange-maven-plugin</module>
+        <module>test-reports</module>
     </modules>
 
     <description>
@@ -65,5 +66,39 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.pitest</groupId>
+                    <artifactId>pitest-maven</artifactId>
+                    <version>1.7.3</version>
+                    <configuration>
+                        <threads>4</threads>
+                        <failWhenNoMutations>false</failWhenNoMutations>
+                        <exportLineCoverage>true</exportLineCoverage>
+                        <outputFormats><value>XML</value></outputFormats>
+                    </configuration>
+                    <!-- https://github.com/hcoles/pitest/issues/284 -->
+                    <!-- Need this to support JUnit 5 -->
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.pitest</groupId>
+                            <artifactId>pitest-junit5-plugin</artifactId>
+                            <version>0.15</version>
+                        </dependency>
+                    </dependencies>
+                    <executions>
+                        <execution>
+                            <id>run-mutation-tests</id>
+                            <goals>
+                                <goal>mutationCoverage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
 </project>
