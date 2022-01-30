@@ -5,8 +5,6 @@
 [unreleased]
 ------------
 
-
-
 ### Added (2 changes)
 
 - At the begging of `CHANGELOG.md` added comment which disables auto format in JetBrains IDEs. ([Piotr](https://github.com/marwin1991) @marwin1991)
@@ -20,8 +18,6 @@
 [0.3.0]
 -------
 
-
-
 ### Added (1 change)
 
 - Added generation of version-summary.md in every version's directory during CHANGELOG.md (@marwin1991 [LINK](https://github.com/marwin1991))
@@ -29,8 +25,6 @@
 
 [0.2.0]
 -------
-
-
 
 ### Added (3 changes)
 
@@ -41,8 +35,6 @@
 
 [0.1.0]
 -------
-
-
 
 ### Added (1 change)
 

@@ -23,10 +23,8 @@ public class MDChangelogVersion implements MD {
     }
 
     private String getVersion() {
-        return heading +
-                "\n\n" +
+        return heading.toString() +
                 importantNotes +
-                "\n\n" +
                 entriesGroups +
                 configuration;
     }

@@ -28,7 +28,7 @@ class MDChangelogVersionHeading implements MD {
 
     @Override
     public String toString() {
-        return getVersionHeading().toString();
+        return getVersionHeading().toString() + "\n\n";
     }
 
     private Heading getVersionHeading() {

@@ -24,7 +24,8 @@ class MDChangelogVersionImportantNotes implements MD {
         if (importantNotes.size() != 0) {
             return new Heading("Important notes", 3)
                     + "\n\n"
-                    + new UnorderedList<>(importantNotes);
+                    + new UnorderedList<>(importantNotes)
+                    + "\n\n";
         } else {
             return StringUtils.EMPTY;
         }
