@@ -12,8 +12,8 @@ public class ChangelogHeading {
 
     public static ChangelogHeading EMPTY = ChangelogHeading.of(StringUtils.EMPTY);
 
-    public boolean isEmpty() {
-        return StringUtils.EMPTY.equals(value);
+    public boolean isBlank() {
+        return StringUtils.isBlank(value);
     }
 
     public static ChangelogHeading of(String heading) {

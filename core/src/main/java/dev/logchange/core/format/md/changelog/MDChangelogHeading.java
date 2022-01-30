@@ -19,7 +19,7 @@ public class MDChangelogHeading implements MD {
     }
 
     private String getChangelogHeading() {
-        if (heading.isEmpty()) {
+        if (heading.isBlank()) {
             return StringUtils.EMPTY;
         }
 

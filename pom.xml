@@ -66,39 +66,46 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.pitest</groupId>
-                    <artifactId>pitest-maven</artifactId>
-                    <version>1.7.3</version>
-                    <configuration>
-                        <threads>4</threads>
-                        <failWhenNoMutations>false</failWhenNoMutations>
-                        <exportLineCoverage>true</exportLineCoverage>
-                        <outputFormats><value>XML</value></outputFormats>
-                    </configuration>
-                    <!-- https://github.com/hcoles/pitest/issues/284 -->
-                    <!-- Need this to support JUnit 5 -->
-                    <dependencies>
-                        <dependency>
+    <profiles>
+        <profile>
+            <id>pitest</id>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
                             <groupId>org.pitest</groupId>
-                            <artifactId>pitest-junit5-plugin</artifactId>
-                            <version>0.15</version>
-                        </dependency>
-                    </dependencies>
-                    <executions>
-                        <execution>
-                            <id>run-mutation-tests</id>
-                            <goals>
-                                <goal>mutationCoverage</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
+                            <artifactId>pitest-maven</artifactId>
+                            <version>1.7.3</version>
+                            <configuration>
+                                <verbose>true</verbose>
+                                <threads>4</threads>
+                                <failWhenNoMutations>false</failWhenNoMutations>
+                                <exportLineCoverage>true</exportLineCoverage>
+                                <outputFormats><value>XML</value></outputFormats>
+                                <timestampedReports>false</timestampedReports>
+                            </configuration>
+                            <!-- https://github.com/hcoles/pitest/issues/284 -->
+                            <!-- Need this to support JUnit 5 -->
+                            <dependencies>
+                                <dependency>
+                                    <groupId>org.pitest</groupId>
+                                    <artifactId>pitest-junit5-plugin</artifactId>
+                                    <version>0.15</version>
+                                </dependency>
+                            </dependencies>
+                            <executions>
+                                <execution>
+                                    <id>run-mutation-tests</id>
+                                    <goals>
+                                        <goal>mutationCoverage</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
