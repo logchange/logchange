@@ -3,6 +3,7 @@ package dev.logchange.core.format.yml.changelog.entry;
 import de.beosign.snakeyamlanno.constructor.AnnotationAwareConstructor;
 import de.beosign.snakeyamlanno.property.YamlAnySetter;
 import de.beosign.snakeyamlanno.property.YamlProperty;
+import de.beosign.snakeyamlanno.representer.AnnotationAwareRepresenter;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryAuthor;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryConfiguration;
@@ -14,6 +15,7 @@ import lombok.NoArgsConstructor;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,6 +41,11 @@ public class YMLChangelogEntry {
         return yaml.load(input);
     }
 
+    public String toYMLString(){
+        Yaml yaml = new Yaml(new AnnotationAwareRepresenter());
+        return yaml.dump(this);
+    }
+
     @YamlProperty(key = "merge_request")
     public void setMergeRequest(String mergeRequest) {
         this.mergeRequest = mergeRequest;
@@ -61,19 +68,24 @@ public class YMLChangelogEntry {
     }
 
     public ChangelogEntry to() {
-        if(issues == null){
-            issues = Collections.emptyList();
-        }
         return ChangelogEntry.of(
                 title,
                 type.to(),
                 mergeRequest,
-                issues,
+                issues(),
                 links(),
                 authors(),
                 importantNotes(),
                 changelogEntryConfiguration()
         );
+    }
+
+    private List<String> issues() {
+        if (issues == null) {
+            return Collections.emptyList();
+        } else {
+            return issues;
+        }
     }
 
     private List<ChangelogEntryLink> links() {
