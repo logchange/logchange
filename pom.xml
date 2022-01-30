@@ -10,9 +10,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>core</module>
+        <module>logchange-core</module>
         <module>logchange-maven-plugin</module>
-        <module>test-reports</module>
+        <module>logchange-test-reports</module>
     </modules>
 
     <description>
