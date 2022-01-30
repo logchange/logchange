@@ -25,5 +25,12 @@ public class YMLChangelogEntryLink {
         return ChangelogEntryLink.of(name, url);
     }
 
+    static YMLChangelogEntryLink of(ChangelogEntryLink link){
+        return YMLChangelogEntryLink.builder()
+                .name(link.getName())
+                .url(link.getUrl())
+                .build();
+    }
+
 
 }

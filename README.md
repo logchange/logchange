@@ -80,7 +80,8 @@ title: Test title
 authors:
   - nick: marwin1991
     url: https://github.com/marwin1991
-merge_request: 1
+merge_requests: 
+  - 1
 issues:
   - 1
 links: # links to external systems, like jira or redmine
@@ -102,7 +103,7 @@ configurations: # information about changes in available application configurati
 | :------------: | ------------- |
 | `title`  | Description of change that has been made.  |
 | `authors`  | List of change's authors.  |
-| `merge_request`  | The merge request's number which is adding this change.  |
+| `merge_requests`  | The merge requests' numbers which are adding this change.  |
 | `issues` | List of issues associated with this change. |
 | `type` | Type of the change. |
 | `links` | Any link to other project or external tool witch contains information about this change. |

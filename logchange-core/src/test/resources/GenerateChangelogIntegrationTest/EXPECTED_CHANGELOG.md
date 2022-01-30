@@ -25,7 +25,7 @@
 
 ### Fixed (1 change)
 
-- Test title !1 #1 [TASK_NUMBER](https://www.google.pl) (@marwin1991 [LINK](https://github.com/marwin1991))
+- Test title !1 !2 #1 [TASK_NUMBER](https://www.google.pl) (@marwin1991 [LINK](https://github.com/marwin1991))
 
 ### Configuration changes
 

@@ -27,4 +27,17 @@ public enum YMLChangelogEntryConfigurationAction {
         }
     }
 
+    static YMLChangelogEntryConfigurationAction of(ChangelogEntryConfigurationAction action){
+        switch (action) {
+            case ADD:
+                return YMLChangelogEntryConfigurationAction.ADD;
+            case UPDATE:
+                return YMLChangelogEntryConfigurationAction.UPDATE;
+            case DELETE:
+                return YMLChangelogEntryConfigurationAction.DELETE;
+            default:
+                throw new IllegalArgumentException("Converting ChangelogEntryConfigurationAction failed");
+        }
+    }
+
 }

@@ -61,4 +61,15 @@ public class YMLChangelogEntryConfiguration implements Comparable<YMLChangelogEn
                 moreInfo
         );
     }
+
+    static YMLChangelogEntryConfiguration of(ChangelogEntryConfiguration configuration) {
+        return YMLChangelogEntryConfiguration.builder()
+                .type(configuration.getType())
+                .action(YMLChangelogEntryConfigurationAction.of(configuration.getAction()))
+                .key(configuration.getKey())
+                .defaultValue(configuration.getDefaultValue())
+                .description(configuration.getDescription())
+                .moreInfo(configuration.getMoreInfo())
+                .build();
+    }
 }

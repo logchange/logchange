@@ -1,0 +1,7 @@
+title: Changed the `merge_request` to  `merge_requests` to allow using list of numbers instead of just a one number.
+authors:
+  - name: Piotr
+    nick: marwin1991
+    url: https://github.com/marwin1991
+type: changed # [added/changed/deprecated/removed/fixed/security]
+

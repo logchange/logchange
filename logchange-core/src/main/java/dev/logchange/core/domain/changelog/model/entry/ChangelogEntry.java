@@ -4,6 +4,7 @@ import lombok.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Builder(access = AccessLevel.PRIVATE)
@@ -49,7 +50,7 @@ public class ChangelogEntry {
     public static ChangelogEntry of(
             String title,
             ChangelogEntryType type,
-            String mergeRequest,
+            List<ChangelogEntryMergeRequest> mergeRequests,
             List<String> issues,
             List<ChangelogEntryLink> links,
             List<ChangelogEntryAuthor> authors,
@@ -59,7 +60,7 @@ public class ChangelogEntry {
         return ChangelogEntry.builder()
                 .title(ChangelogEntryTitle.of(title))
                 .type(type)
-                .mergeRequest(ChangelogEntryMergeRequest.of(mergeRequest))
+                .mergeRequests(mergeRequests)
                 .issues(issues)
                 .links(links)
                 .authors(authors)

@@ -47,7 +47,13 @@ public class GenerateChangelogIntegrationTest {
 
         //then:
         String expectedContent = FileUtils.fileRead(expectedChangelogOutputFile);
+        expectedContent = expectedContent
+                .replace("\r", "")
+                .replace("\n", "");
         String actualContent = FileUtils.fileRead(changelogOutputFile);
+        actualContent = actualContent
+                .replace("\r", "")
+                .replace("\n", "");
         assertEquals(expectedContent, actualContent);
     }
 }

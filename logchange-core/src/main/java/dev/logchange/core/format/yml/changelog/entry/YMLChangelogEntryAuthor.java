@@ -26,4 +26,12 @@ public class YMLChangelogEntryAuthor {
         return ChangelogEntryAuthor.of(name, nick, url);
     }
 
+    static YMLChangelogEntryAuthor of(ChangelogEntryAuthor author){
+        return YMLChangelogEntryAuthor.builder()
+                .name(author.getName())
+                .nick(author.getNick())
+                .url(author.getUrl())
+                .build();
+    }
+
 }

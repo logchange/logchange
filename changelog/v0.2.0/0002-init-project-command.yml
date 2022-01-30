@@ -3,5 +3,6 @@ authors:
     nick: Glukasze
     url: https://github.com/Glukasze
 type: added # [added/changed/deprecated/removed/fixed/security]
-merge_request: 3
+merge_requests:
+    - 3
 

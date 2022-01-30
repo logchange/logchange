@@ -36,4 +36,23 @@ public enum YMLChangelogEntryType {
         }
     }
 
+    static YMLChangelogEntryType of(ChangelogEntryType type){
+        switch (type){
+            case ADDED:
+                return YMLChangelogEntryType.ADDED;
+            case CHANGED:
+                return YMLChangelogEntryType.CHANGED;
+            case DEPRECATED:
+                return YMLChangelogEntryType.DEPRECATED;
+            case REMOVED:
+                return YMLChangelogEntryType.REMOVED;
+            case FIXED:
+                return YMLChangelogEntryType.FIXED;
+            case SECURITY:
+                return YMLChangelogEntryType.SECURITY;
+            default:
+                throw new IllegalArgumentException("Converting ChangelogEntryType failed");
+        }
+    }
+
 }
