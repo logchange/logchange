@@ -8,6 +8,9 @@ standard agreed by community.
 Another big problem with `CHANGELOG.md` is a problem with merge conflicts. Probably you, as a developer, also
 encounter it when someone merged changes to `CHANGELOG.md` before you.
 
+When you create new merge/pull request and in the mean time you will release version, with old-fasioned `CHANGELOG.md` you have to remember,
+to move new changelog's entry up, to the new version section. With this tool you don't have to! 
+
 **To solve these problems, this project was created. It allows to keep a changelog style and reduce merge request conflicts by keeping every change
 in a separate YAML file and generate `CHANGELOG.md` during release.**
 
