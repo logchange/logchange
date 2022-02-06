@@ -43,7 +43,9 @@ public class InitProjectMojo extends AbstractMojo {
                 getLog().warn(changelog.getName() + " already exists.");
             }
         } catch (IOException e) {
-            getLog().error("An error occurred while creating empty changelog.");
+            String msg = "An error occurred while creating empty changelog.";
+            getLog().error(msg, e);
+            throw new RuntimeException(msg);
         }
     }
 }

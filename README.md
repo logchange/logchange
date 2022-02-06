@@ -42,13 +42,14 @@ You can choose between two options:
     </build>
 ```
 
-2. You don't have to add anything to your `pom.xml`, just use all commands with `groupId` like here:
+2. You don't have to add anything to your `pom.xml`, just use all commands with `groupId` and full plugin name, like
+   here:
 ```shell
-mvn dev.logchange:logchange:init
+mvn dev.logchange:logchange-maven-plugin:init
 ```
 
-After choosing one of the options.
-Use this command from your terminal to create important directories and empty CHANGELOG.md
+After choosing one of the options, you can start using plugin as follows. Use this command from your terminal to create
+important directories and empty CHANGELOG.md
 ```shell
 mvn logchange:init
 ```
