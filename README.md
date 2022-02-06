@@ -5,16 +5,17 @@ the most important changes in the project in short time.
 To achieve this, `CHANGELOG.md` should be created be in accordance with the rules, however there is no one
 standard agreed by community.
 
-Another big problem with `CHANGELOG.md` is a problem with merge conflicts. Probably you, as a developer, also
-encounter it when someone merged changes to `CHANGELOG.md` before you.
+Another big problem with `CHANGELOG.md` is a problem with merge conflicts. Probably you, as a developer, also encounter
+it when someone merged changes to `CHANGELOG.md` before you.
 
-When you create new merge/pull request and in the mean time you will release version, with old-fashioned `CHANGELOG.md` you have to remember,
-to move new changelog's entry up, to the new version section. With this tool you don't have to! 
+When you create new merge/pull request and in the meantime you will release version, with old-fashioned `CHANGELOG.md`
+you have to remember, to move new changelog's entry up, to the new version section. With this tool you don't have to!
 
-If your PO is against you to use this tool in your projects, don't worry... just ask him to do `CHANGELOG.md` by his own and he will be the first one, who will ask you to use this tool. 🔥
+If your PO is against you to use this tool in your projects, don't worry... just ask him to do `CHANGELOG.md` by his
+own, and he will be the first one, who will ask you to use this tool. 🔥
 
-**To solve these problems, this project was created. It allows to keep a changelog style and reduce merge request conflicts by keeping every change
-in a separate YAML file and generate `CHANGELOG.md` during release.**
+**To solve these problems, this project was created. It allows to keep a changelog style and reduce merge request
+conflicts by keeping every change in a separate YAML file and generate `CHANGELOG.md` during release.**
 
 This tool is also helpful to create reliable release notes during your release process. 
 
