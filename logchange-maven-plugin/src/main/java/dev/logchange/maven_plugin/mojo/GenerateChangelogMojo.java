@@ -3,7 +3,7 @@ package dev.logchange.maven_plugin.mojo;
 import dev.logchange.core.application.changelog.repository.ChangelogRepository;
 import dev.logchange.core.application.changelog.service.generate.GenerateChangelogService;
 import dev.logchange.core.domain.changelog.command.GenerateChangelogUseCase;
-import dev.logchange.core.infrastructure.changelog.FileChangelogRepository;
+import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogRepository;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;

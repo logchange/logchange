@@ -74,8 +74,6 @@ _In future there is a plan to support `unreleased*` directories names like `unre
 Adding new change is really simple, you can just add new YAML file to `changelog/unreleased` directory and keep format
 presented below. You can also use command to generate this file:
 
-[TODO] - functionality not done yet
-
 ```shell
 mvn logchange:add
 ```

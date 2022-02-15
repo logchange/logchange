@@ -4,7 +4,7 @@ import dev.logchange.core.application.changelog.repository.ChangelogRepository;
 import dev.logchange.core.application.changelog.service.generate.GenerateChangelogService;
 import dev.logchange.core.domain.changelog.command.GenerateChangelogUseCase;
 import dev.logchange.core.domain.changelog.command.GenerateChangelogUseCase.GenerateChangelogCommand;
-import dev.logchange.core.infrastructure.changelog.FileChangelogRepository;
+import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogRepository;
 import org.codehaus.plexus.util.FileUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

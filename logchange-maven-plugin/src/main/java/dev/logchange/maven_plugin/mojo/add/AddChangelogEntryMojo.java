@@ -1,16 +1,21 @@
-package dev.logchange.maven_plugin.mojo;
+package dev.logchange.maven_plugin.mojo.add;
 
 import dev.logchange.core.application.changelog.repository.ChangelogEntryRepository;
 import dev.logchange.core.application.changelog.service.add.AddChangelogEntryService;
 import dev.logchange.core.domain.changelog.command.AddChangelogEntryUseCase;
 import dev.logchange.core.domain.changelog.command.AddChangelogEntryUseCase.AddChangelogEntryCommand;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
-import dev.logchange.core.infrastructure.changelog.FileChangelogEntryRepository;
+import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryTitle;
+import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogEntryRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.codehaus.plexus.components.interactivity.Prompter;
+import org.codehaus.plexus.components.interactivity.PrompterException;
 
+import javax.inject.Inject;
 import java.io.File;
 import java.io.IOException;
 
@@ -25,11 +30,18 @@ public class AddChangelogEntryMojo extends AbstractMojo {
     @Parameter(defaultValue = DEFAULT_UNRELEASED_VERSION_DIR, property = UNRELEASED_VERSION_DIR_MVN_PROPERTY)
     private String unreleasedVersionDir;
 
+    @Inject
+    private Prompter prompter;
+
     @Override
     public void execute() {
-        String outputFile = getOutputFileName();
-        ChangelogEntry entry = getChangelogEntry();
-        executeAdd(inputDir, unreleasedVersionDir, outputFile, entry);
+        try {
+            String outputFile = getOutputFileName();
+            ChangelogEntry entry = getChangelogEntry();
+            executeAdd(inputDir, unreleasedVersionDir, outputFile, entry);
+        } catch (PrompterException e) {
+            getLog().error("Error during getting information from user!", e);
+        }
     }
 
     public void executeAdd(String inputDir, String unreleasedVersionDir, String outputFile, ChangelogEntry entry) {
@@ -61,11 +73,34 @@ public class AddChangelogEntryMojo extends AbstractMojo {
         }
     }
 
-    private String getOutputFileName() {
-        return "0000-aaa.yml";
+    private String getOutputFileName() throws PrompterException {
+        while (true) {
+            String name = prompter.prompt("What is the filename?");
+            if (StringUtils.isBlank(name)) {
+                prompter.showMessage("Filename cannot be empty nor blank!!!");
+                continue;
+            }
+            if (StringUtils.isWhitespace(name)) {
+                prompter.showMessage("Filename cannot contain whitespace!!!");
+                continue;
+            }
+            name = name.replace(".yml", "").replace(".yaml", "");
+            return name + ".yml";
+        }
     }
 
-    private ChangelogEntry getChangelogEntry() {
+    private ChangelogEntry getChangelogEntry() throws PrompterException {
+        ChangelogEntryTitle title = getTitle();
         return null;
+    }
+
+    private ChangelogEntryTitle getTitle() throws PrompterException {
+        while (true) {
+            try {
+                return ChangelogEntryTitle.of(prompter.prompt("What is changelog's entry title?:"));
+            } catch (IllegalArgumentException e) {
+                prompter.showMessage(e.getMessage());
+            }
+        }
     }
 }

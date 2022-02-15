@@ -1,4 +1,4 @@
-package dev.logchange.core.infrastructure.changelog;
+package dev.logchange.core.infrastructure.persistance.changelog;
 
 import dev.logchange.core.application.changelog.repository.ChangelogRepository;
 import dev.logchange.core.domain.changelog.model.Changelog;
