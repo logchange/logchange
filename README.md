@@ -5,6 +5,8 @@ the most important changes in the project in short time.
 To achieve this, `CHANGELOG.md` should be created be in accordance with the rules, however there is no one
 standard agreed by community.
 
+aa
+
 Another big problem with `CHANGELOG.md` is a problem with merge conflicts. Probably you, as a developer, also encounter
 it when someone merged changes to `CHANGELOG.md` before you.
 
