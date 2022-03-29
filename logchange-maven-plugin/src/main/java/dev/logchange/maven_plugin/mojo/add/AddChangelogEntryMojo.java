@@ -6,6 +6,7 @@ import dev.logchange.core.domain.changelog.command.AddChangelogEntryUseCase;
 import dev.logchange.core.domain.changelog.command.AddChangelogEntryUseCase.AddChangelogEntryCommand;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryTitle;
+import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType;
 import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogEntryRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.AbstractMojo;
@@ -18,6 +19,8 @@ import org.codehaus.plexus.components.interactivity.PrompterException;
 import javax.inject.Inject;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import static dev.logchange.maven_plugin.Constants.*;
 
@@ -75,7 +78,7 @@ public class AddChangelogEntryMojo extends AbstractMojo {
 
     private String getOutputFileName() throws PrompterException {
         while (true) {
-            String name = prompter.prompt("What is the filename?");
+            String name = prompter.prompt("What is the filename(e.g. 000231-adding-new-product)");
             if (StringUtils.isBlank(name)) {
                 prompter.showMessage("Filename cannot be empty nor blank!!!");
                 continue;
@@ -90,14 +93,38 @@ public class AddChangelogEntryMojo extends AbstractMojo {
     }
 
     private ChangelogEntry getChangelogEntry() throws PrompterException {
-        ChangelogEntryTitle title = getTitle();
-        return null;
+        return ChangelogEntry.builder()
+                .title(getTitle())
+                .type(getType())
+                .mergeRequests(null)
+                .issues(null)
+                .links(null)
+                .authors(null)
+                .importantNotes(null)
+                .configurations(null)
+                .build();
     }
 
     private ChangelogEntryTitle getTitle() throws PrompterException {
         while (true) {
             try {
-                return ChangelogEntryTitle.of(prompter.prompt("What is changelog's entry title?:"));
+                return ChangelogEntryTitle.of(prompter.prompt("What is changelog's entry title(e.g. Adding new awesome product to order list)"));
+            } catch (IllegalArgumentException e) {
+                prompter.showMessage(e.getMessage());
+            }
+        }
+    }
+
+    private ChangelogEntryType getType() throws PrompterException {
+        String prompt = Arrays.stream(ChangelogEntryType.values())
+                .map(ChangelogEntryType::toString)
+                .collect(Collectors.joining(System.lineSeparator())) +
+                System.lineSeparator() +
+                "What is changelog's entry type (choose number from above) ?";
+
+        while (true) {
+            try {
+                return ChangelogEntryType.from(prompter.prompt(prompt));
             } catch (IllegalArgumentException e) {
                 prompter.showMessage(e.getMessage());
             }

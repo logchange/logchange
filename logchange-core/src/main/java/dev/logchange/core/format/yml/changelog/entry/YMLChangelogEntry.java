@@ -59,21 +59,21 @@ public class YMLChangelogEntry {
 
     @YamlAnySetter
     public void anySetter(String key, Object value) {
-        System.out.println("A");
+        System.out.println("Unknown property: " + key + " with value " + value);
         //TODO Logger.getLogger().warn("Unknown property: " + key + " with value " + value);
     }
 
     public ChangelogEntry to() {
-        return ChangelogEntry.of(
-                title,
-                type.to(),
-                mergeRequests(),
-                issues(),
-                links(),
-                authors(),
-                importantNotes(),
-                changelogEntryConfiguration()
-        );
+        return ChangelogEntry.builder()
+                .title(ChangelogEntryTitle.of(title))
+                .type(type.to())
+                .mergeRequests(mergeRequests())
+                .issues(issues())
+                .links(links())
+                .authors(authors())
+                .importantNotes(importantNotes())
+                .configurations(changelogEntryConfiguration())
+                .build();
     }
 
     private List<ChangelogEntryMergeRequest> mergeRequests() {

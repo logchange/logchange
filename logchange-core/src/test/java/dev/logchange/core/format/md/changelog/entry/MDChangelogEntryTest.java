@@ -1,10 +1,9 @@
 package dev.logchange.core.format.md.changelog.entry;
 
-import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
-import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryAuthor;
-import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryLink;
-import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType;
+import dev.logchange.core.domain.changelog.model.entry.*;
 import org.junit.jupiter.api.Test;
+
+import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -13,13 +12,7 @@ class MDChangelogEntryTest {
     @Test
     void givenBasicEntry_whenToString_thenResultMatchesFormat() {
         //given:
-        ChangelogEntry entry = ChangelogEntry.of(
-                "Some Title",
-                ChangelogEntryType.ADDED,
-                "567",
-                "890",
-                new ChangelogEntryLink("Some link", "https//google.com"),
-                ChangelogEntryAuthor.of("Some Name", "Nick", "https://nick.name"));
+        ChangelogEntry entry = getSomeEntry();
 
         //when:
         String result = new MDChangelogEntry(entry).toString();
@@ -31,13 +24,7 @@ class MDChangelogEntryTest {
     @Test
     void givenSomeEntry_whenToString_thenResultMatchesToMD() {
         //given:
-        ChangelogEntry entry = ChangelogEntry.of(
-                "Some Title",
-                ChangelogEntryType.ADDED,
-                "567",
-                "890",
-                new ChangelogEntryLink("Some link", "https//google.com"),
-                ChangelogEntryAuthor.of("Some Name", "Nick", "https://nick.name"));
+        ChangelogEntry entry = getSomeEntry();
 
         //when:
         String result1 = new MDChangelogEntry(entry).toString();
@@ -45,6 +32,19 @@ class MDChangelogEntryTest {
 
         //then:
         assertEquals(result1, result2);
+    }
+
+    private ChangelogEntry getSomeEntry() {
+        return ChangelogEntry.builder()
+                .title(ChangelogEntryTitle.of("Some Title"))
+                .type(ChangelogEntryType.ADDED)
+                .mergeRequest(ChangelogEntryMergeRequest.of("567"))
+                .issue("890")
+                .link(new ChangelogEntryLink("Some link", "https//google.com"))
+                .author(ChangelogEntryAuthor.of("Some Name", "Nick", "https://nick.name"))
+                .importantNotes(Collections.emptyList())
+                .configurations(Collections.emptyList())
+                .build();
     }
 
 }

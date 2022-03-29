@@ -67,7 +67,8 @@ adding new changelog entries by creating YAML files.
 
 **IMPORTANT:** If you develop on two main branches like f.e 1.1.X and 1.2.X **do not** merge 1.1.X branch to 1.2.X
 before release otherwise YAML files will merge in one big version.
-_In future there is a plan to support `unreleased*` directories names like `unreleased-1.1`_
+_In the future, if there will be a need, there is a plan to support `unreleased*` directories names
+like `unreleased-1.1`_
 
 ### Adding new change
 

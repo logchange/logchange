@@ -1,9 +1,6 @@
 package dev.logchange.core.format.md.changelog.version;
 
-import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
-import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryAuthor;
-import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryLink;
-import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType;
+import dev.logchange.core.domain.changelog.model.entry.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -62,13 +59,16 @@ class MDChangelogEntriesGroupTest {
 
 
     private ChangelogEntry getSomeEntry(ChangelogEntryType type) {
-        return ChangelogEntry.of(
-                "Some Title",
-                type,
-                "567",
-                "890",
-                new ChangelogEntryLink("Some link", "https//google.com"),
-                ChangelogEntryAuthor.of("Some Name", "Nick", "https://nick.name"));
+        return ChangelogEntry.builder()
+                .title(ChangelogEntryTitle.of("Some Title"))
+                .type(type)
+                .mergeRequest(ChangelogEntryMergeRequest.of("567"))
+                .issue("890")
+                .link(new ChangelogEntryLink("Some link", "https//google.com"))
+                .author(ChangelogEntryAuthor.of("Some Name", "Nick", "https://nick.name"))
+                .importantNotes(Collections.emptyList())
+                .configurations(Collections.emptyList())
+                .build();
     }
 
 }
