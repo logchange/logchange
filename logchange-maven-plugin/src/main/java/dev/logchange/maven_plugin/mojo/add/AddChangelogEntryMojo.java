@@ -4,9 +4,7 @@ import dev.logchange.core.application.changelog.repository.ChangelogEntryReposit
 import dev.logchange.core.application.changelog.service.add.AddChangelogEntryService;
 import dev.logchange.core.domain.changelog.command.AddChangelogEntryUseCase;
 import dev.logchange.core.domain.changelog.command.AddChangelogEntryUseCase.AddChangelogEntryCommand;
-import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
-import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryTitle;
-import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType;
+import dev.logchange.core.domain.changelog.model.entry.*;
 import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogEntryRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.AbstractMojo;
@@ -20,6 +18,8 @@ import javax.inject.Inject;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static dev.logchange.maven_plugin.Constants.*;
@@ -96,8 +96,8 @@ public class AddChangelogEntryMojo extends AbstractMojo {
         return ChangelogEntry.builder()
                 .title(getTitle())
                 .type(getType())
-                .mergeRequests(null)
-                .issues(null)
+                .mergeRequests(getMergeRequests())
+                .issues(getIssues())
                 .links(null)
                 .authors(null)
                 .importantNotes(null)
@@ -126,6 +126,52 @@ public class AddChangelogEntryMojo extends AbstractMojo {
             try {
                 return ChangelogEntryType.from(prompter.prompt(prompt));
             } catch (IllegalArgumentException e) {
+                prompter.showMessage(e.getMessage());
+            }
+        }
+    }
+
+    private List<ChangelogEntryMergeRequest> getMergeRequests() throws PrompterException {
+        String prompt = "What is the MR's number? (numbers, seperated with comma) [press ENTER to skip] ";
+
+        while (true) {
+            try {
+                String response = prompter.prompt(prompt);
+                return Arrays.stream(response.replaceAll("\\s+", "").split(","))
+                        .map(ChangelogEntryMergeRequest::of)
+                        .collect(Collectors.toList());
+            } catch (Exception e) {
+                prompter.showMessage(e.getMessage());
+            }
+        }
+    }
+
+    private List<String> getIssues() throws PrompterException {
+        String prompt = "What is the issue's number?(numbers, seperated with comma) [press ENTER to skip] ";
+
+        while (true) {
+            try {
+                String response = prompter.prompt(prompt);
+                return Arrays.asList(response.replaceAll("\\s+", "").split(","));
+            } catch (Exception e) {
+                prompter.showMessage(e.getMessage());
+            }
+        }
+    }
+
+    private List<ChangelogEntryLink> getLinks() throws PrompterException {
+        String prompt = "Is there any links you want to include? [Y/y - YES] [N/n - NO] [press ENTER to skip] ";
+
+        while (true) {
+            try {
+                String response = prompter.prompt(prompt);
+                if (response.trim().equalsIgnoreCase("Y")) {
+                    String name = prompter.prompt("Give a link caption or press ENTER to skip");
+                    //TODO
+                } else {
+                    return Collections.emptyList();
+                }
+            } catch (Exception e) {
                 prompter.showMessage(e.getMessage());
             }
         }
