@@ -42,25 +42,36 @@ You can choose between two options:
             <plugin>
                 <groupId>dev.logchange</groupId>
                 <artifactId>logchange-maven-plugin</artifactId>
-                <version>1.0.0</version>
+               <version>1.0.0</version>
+               <inherited>false</inherited> <!-- For multi module project -->
             </plugin>
         </plugins>
-    </build>
+</build>
 ```
 
 2. You don't have to add anything to your `pom.xml`, just use all commands with `groupId` and full plugin name, like
    here:
+
 ```shell
-mvn dev.logchange:logchange-maven-plugin:init
+mvn dev.logchange:logchange-maven-plugin:init 
+```
+
+**IMPORTANT** If you don't want to add plugin to pom.xml and use above syntax, add `--non-recursive` for multi-module
+projects! f.e.
+
+```shell
+mvn dev.logchange:logchange-maven-plugin:init --non-recursive
 ```
 
 After choosing one of the options, you can start using plugin as follows. Use this command from your terminal to create
 important directories and empty CHANGELOG.md
+
 ```shell
 mvn logchange:init
 ```
 
-If you already had a `CHANGELOG.md` file you can move it to `changelog/archive.md` file. The name of the archive file have to start from `archive` phrase (f.e. `archive-1.0.0.md`).
+If you already had a `CHANGELOG.md` file you can move it to `changelog/archive.md` file. The name of the archive file
+have to start from `archive` phrase (f.e. `archive-1.0.0.md`).
 
 After using `init` command or just creating `changelog/unreleased` directory your project is ready, and you can start
 adding new changelog entries by creating YAML files.
@@ -92,15 +103,16 @@ mvn logchange:add -Dempty
 ```yml
 title: Test title
 authors:
-  - nick: marwin1991
-    url: https://github.com/marwin1991
-merge_requests: 
-  - 1
+   - name: Peter
+     nick: marwin1991
+     url: https://github.com/marwin1991
+merge_requests:
+   - 1
 issues:
-  - 1
+   - 1
 links: # links to external systems, like jira or redmine
-  - name: TASK_NUMBER
-    url: https://www.google.pl
+   - name: TASK_NUMBER
+     url: https://www.google.pl
 type: fixed # [added/changed/deprecated/removed/fixed/security]
 important_notes:
   - Update style.css on server during instalation 1

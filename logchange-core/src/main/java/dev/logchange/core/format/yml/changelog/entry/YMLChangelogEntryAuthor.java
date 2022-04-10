@@ -1,6 +1,7 @@
 package dev.logchange.core.format.yml.changelog.entry;
 
 import de.beosign.snakeyamlanno.property.YamlAnySetter;
+import de.beosign.snakeyamlanno.property.YamlProperty;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryAuthor;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,8 +14,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class YMLChangelogEntryAuthor {
 
-    private String name;
+    @YamlProperty(key = "name", order = 0)
+    public String name;
+    @YamlProperty(key = "nick", order = -1)
     private String nick;
+    @YamlProperty(key = "url", order = -2)
     private String url;
 
     @YamlAnySetter

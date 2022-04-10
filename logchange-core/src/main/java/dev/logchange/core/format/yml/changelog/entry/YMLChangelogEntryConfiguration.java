@@ -16,27 +16,18 @@ import java.util.Comparator;
 @AllArgsConstructor
 public class YMLChangelogEntryConfiguration implements Comparable<YMLChangelogEntryConfiguration> {
 
-    private String type;
-    private YMLChangelogEntryConfigurationAction action;
-    private String key;
-    private String defaultValue;
-    private String description;
-    private String moreInfo;
-
-    @YamlProperty(key = "action", converter = YMLChangelogEntryConfigurationActionConverter.class)
-    public void setAction(YMLChangelogEntryConfigurationAction action) {
-        this.action = action;
-    }
-
-    @YamlProperty(key = "default_value")
-    public void setDefaultValue(String defaultValue) {
-        this.defaultValue = defaultValue;
-    }
-
-    @YamlProperty(key = "more_info")
-    public void setMoreInfo(String moreInfo) {
-        this.moreInfo = moreInfo;
-    }
+    @YamlProperty(key = "type", order = 0)
+    public String type;
+    @YamlProperty(key = "action", order = -1, converter = YMLChangelogEntryConfigurationActionConverter.class)
+    public YMLChangelogEntryConfigurationAction action;
+    @YamlProperty(key = "key", order = -2)
+    public String key;
+    @YamlProperty(key = "default_value", order = -3)
+    public String defaultValue;
+    @YamlProperty(key = "description", order = -4)
+    public String description;
+    @YamlProperty(key = "more_info", order = -5)
+    public String moreInfo;
 
     @YamlAnySetter
     public void anySetter(String key, Object value) {

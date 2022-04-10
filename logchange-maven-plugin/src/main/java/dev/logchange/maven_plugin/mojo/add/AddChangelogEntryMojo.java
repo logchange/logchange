@@ -233,7 +233,7 @@ public class AddChangelogEntryMojo extends AbstractMojo {
         while (true) {
             try {
                 String response = prompter.prompt(prompt);
-                if (response.trim().length() > 0) {
+                if (response.trim().trim().equalsIgnoreCase("Y")) {
                     return getNotesRecur(notes);
                 } else {
                     return Collections.emptyList();

@@ -1,6 +1,7 @@
 package dev.logchange.core.format.yml.changelog.entry;
 
 import de.beosign.snakeyamlanno.property.YamlAnySetter;
+import de.beosign.snakeyamlanno.property.YamlProperty;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryLink;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,8 +14,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class YMLChangelogEntryLink {
 
-    private String name;
-    private String url;
+    @YamlProperty(key = "name", order = 0)
+    public String name;
+    @YamlProperty(key = "url", order = -1)
+    public String url;
 
     @YamlAnySetter
     public void anySetter(String key, Object value) {

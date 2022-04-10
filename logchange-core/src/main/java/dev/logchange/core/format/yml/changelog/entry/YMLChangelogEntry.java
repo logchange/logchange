@@ -5,11 +5,10 @@ import de.beosign.snakeyamlanno.property.YamlAnySetter;
 import de.beosign.snakeyamlanno.property.YamlProperty;
 import de.beosign.snakeyamlanno.representer.AnnotationAwareRepresenter;
 import dev.logchange.core.domain.changelog.model.entry.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.nodes.Tag;
 
 import java.io.InputStream;
 import java.util.Collections;
@@ -23,38 +22,41 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class YMLChangelogEntry {
 
-    private String title;
-    private List<YMLChangelogEntryAuthor> authors;
-    private List<String> mergeRequests;
-    private List<String> issues;
-    private List<YMLChangelogEntryLink> links;
-    private YMLChangelogEntryType type;
-    private List<String> importantNotes;
-    private List<YMLChangelogEntryConfiguration> configurations;
+    @YamlProperty(key = "title", order = 0)
+    public String title;
+    @Singular
+    @YamlProperty(key = "authors", order = -1)
+    public List<YMLChangelogEntryAuthor> authors;
+    @Singular
+    @YamlProperty(key = "merge_requests", order = -2)
+    public List<String> mergeRequests;
+    @Singular
+    @YamlProperty(key = "issues", order = -3)
+    public List<String> issues;
+    @Singular
+    @YamlProperty(key = "links", order = -4)
+    public List<YMLChangelogEntryLink> links;
+    @YamlProperty(key = "type", order = -5, converter = YMLChangelogEntryTypeConverter.class)
+    public YMLChangelogEntryType type;
+    @Singular
+    @YamlProperty(key = "important_notes", order = -6)
+    public List<String> importantNotes;
+    @Singular
+    @YamlProperty(key = "configurations", order = -7)
+    public List<YMLChangelogEntryConfiguration> configurations;
 
     public static YMLChangelogEntry of(InputStream input) {
         Yaml yaml = new Yaml(new AnnotationAwareConstructor(YMLChangelogEntry.class));
         return yaml.load(input);
     }
 
-    public String toYMLString(){
-        Yaml yaml = new Yaml(new AnnotationAwareRepresenter());
-        return yaml.dump(this);
-    }
+    public String toYMLString() {
+        DumperOptions dumperOptions = new DumperOptions();
+        dumperOptions.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+        dumperOptions.setPrettyFlow(true);
 
-    @YamlProperty(key = "merge_requests")
-    public void setMergeRequests(List<String> mergeRequests) {
-        this.mergeRequests = mergeRequests;
-    }
-
-    @YamlProperty(key = "type", converter = YMLChangelogEntryTypeConverter.class)
-    public void setType(YMLChangelogEntryType type) {
-        this.type = type;
-    }
-
-    @YamlProperty(key = "important_notes")
-    public void setImportantNotes(List<String> importantNotes) {
-        this.importantNotes = importantNotes;
+        Yaml yaml = new Yaml(new AnnotationAwareRepresenter(), dumperOptions);
+        return yaml.dumpAs(this, Tag.MAP, DumperOptions.FlowStyle.BLOCK);
     }
 
     @YamlAnySetter
