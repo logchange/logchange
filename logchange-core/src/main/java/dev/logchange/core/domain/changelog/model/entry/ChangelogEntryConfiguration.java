@@ -3,10 +3,12 @@ package dev.logchange.core.domain.changelog.model.entry;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.Comparator;
 
 @Getter
+@ToString
 @Builder(access = AccessLevel.PRIVATE)
 public class ChangelogEntryConfiguration implements Comparable<ChangelogEntryConfiguration> {
 

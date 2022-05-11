@@ -34,15 +34,18 @@ public class AddChangelogEntryMojo extends AbstractMojo {
     @Parameter(defaultValue = DEFAULT_UNRELEASED_VERSION_DIR, property = UNRELEASED_VERSION_DIR_MVN_PROPERTY)
     private String unreleasedVersionDir;
 
+    @Parameter(property = FILENAME_MVN_PROPERTY)
+    private String outputFileName;
+
     @Inject
     private Prompter prompter;
 
     @Override
     public void execute() {
         try {
-            String outputFile = getOutputFileName();
+            outputFileName = new OutputFileNameProvider(prompter, outputFileName).get();
             ChangelogEntry entry = getChangelogEntry();
-            executeAdd(inputDir, unreleasedVersionDir, outputFile, entry);
+            executeAdd(inputDir, unreleasedVersionDir, outputFileName, entry);
         } catch (PrompterException e) {
             getLog().error("Error during getting information from user!", e);
         }
@@ -51,6 +54,8 @@ public class AddChangelogEntryMojo extends AbstractMojo {
     public void executeAdd(String inputDir, String unreleasedVersionDir, String outputFile, ChangelogEntry entry) {
         String path = "./" + inputDir + "/" + unreleasedVersionDir + "/" + outputFile;
         File entryFile = createFile(path);
+
+        getLog().debug(entry.toString());
 
         ChangelogEntryRepository repository = new FileChangelogEntryRepository(entryFile);
         AddChangelogEntryUseCase addChangelogEntry = new AddChangelogEntryService(repository);
@@ -74,22 +79,6 @@ public class AddChangelogEntryMojo extends AbstractMojo {
             String msg = "An error occurred while creating empty changelog entry file with path: " + path;
             getLog().error(msg, e);
             throw new RuntimeException(msg);
-        }
-    }
-
-    private String getOutputFileName() throws PrompterException {
-        while (true) {
-            String name = prompter.prompt("What is the filename(e.g. 000231-adding-new-product)");
-            if (StringUtils.isBlank(name)) {
-                prompter.showMessage("Filename cannot be empty nor blank!!!");
-                continue;
-            }
-            if (StringUtils.isWhitespace(name)) {
-                prompter.showMessage("Filename cannot contain whitespace!!!");
-                continue;
-            }
-            name = name.replace(".yml", "").replace(".yaml", "");
-            return name + ".yml";
         }
     }
 
@@ -139,6 +128,7 @@ public class AddChangelogEntryMojo extends AbstractMojo {
             try {
                 String response = prompter.prompt(prompt);
                 return Arrays.stream(response.replaceAll("\\s+", "").split(","))
+                        .filter(StringUtils::isNotBlank)
                         .map(ChangelogEntryMergeRequest::of)
                         .collect(Collectors.toList());
             } catch (Exception e) {
@@ -153,7 +143,9 @@ public class AddChangelogEntryMojo extends AbstractMojo {
         while (true) {
             try {
                 String response = prompter.prompt(prompt);
-                return Arrays.asList(response.replaceAll("\\s+", "").split(","));
+                return Arrays.stream(response.replaceAll("\\s+", "").split(",")).
+                        filter(StringUtils::isNotBlank)
+                        .collect(Collectors.toList());
             } catch (Exception e) {
                 prompter.showMessage(e.getMessage());
             }

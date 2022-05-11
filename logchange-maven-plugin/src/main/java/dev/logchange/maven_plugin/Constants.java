@@ -16,5 +16,6 @@ public class Constants {
     public static final String OUTPUT_FILE_MVN_PROPERTY = "outputFile";
     public static final String HEADING_MVN_PROPERTY = "heading";
     public static final String UNRELEASED_VERSION_DIR_MVN_PROPERTY = "unreleasedVersionDir";
+    public static final String FILENAME_MVN_PROPERTY = "fileName";
 
 }

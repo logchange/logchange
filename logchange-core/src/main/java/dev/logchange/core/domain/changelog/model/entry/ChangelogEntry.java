@@ -6,6 +6,7 @@ import java.util.List;
 
 @Getter
 @Builder
+@ToString
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChangelogEntry {
 
