@@ -57,7 +57,7 @@ mvn dev.logchange:logchange-maven-plugin:init
 ```
 
 **IMPORTANT** If you don't want to add plugin to pom.xml and use above syntax, add `--non-recursive` for multi-module
-projects! f.e.
+projects to all executed commands! f.e.
 
 ```shell
 mvn dev.logchange:logchange-maven-plugin:init --non-recursive
