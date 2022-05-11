@@ -94,7 +94,7 @@ mvn logchange:add
 
 [TODO] In other hand, if you would like to just generate an empty file, with some default strings, you can use:
 ```shell
-mvn logchange:add -Dempty
+mvn logchange:add -Dempty -DfileName=000001-some-name.yml
 ```
 
 
