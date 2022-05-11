@@ -3,9 +3,11 @@ package dev.logchange.core.domain.changelog.model.entry;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 import org.apache.commons.lang3.StringUtils;
 
 @Getter
+@ToString
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChangelogEntryTitle {
     private final String value;
