@@ -5,15 +5,23 @@ import org.apache.commons.lang3.StringUtils;
 import org.codehaus.plexus.components.interactivity.Prompter;
 import org.codehaus.plexus.components.interactivity.PrompterException;
 
+import static dev.logchange.maven_plugin.Constants.EMPTY_MVN_PROPERTY;
+import static dev.logchange.maven_plugin.Constants.FILENAME_MVN_PROPERTY;
+
 @RequiredArgsConstructor
 public class OutputFileNameProvider {
 
+    private final boolean empty;
     private final Prompter prompter;
     private final String commandLineOutputFileName;
 
     public String get() {
         if (StringUtils.isNotBlank(commandLineOutputFileName)) {
             return commandLineOutputFileName;
+        }
+
+        if (empty) {
+            throw new IllegalArgumentException("When using -D" + EMPTY_MVN_PROPERTY + " option, you have to also use -D" + FILENAME_MVN_PROPERTY + "=0001-some-change.yml");
         }
 
         try {
