@@ -6,13 +6,12 @@ import dev.logchange.core.domain.changelog.command.AddChangelogEntryUseCase;
 import dev.logchange.core.domain.changelog.command.AddChangelogEntryUseCase.AddChangelogEntryCommand;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogEntryRepository;
-import dev.logchange.maven_plugin.mojo.add.entry.ChangelogEntryProvider;
+import dev.logchange.maven_plugin.mojo.add.entry.ChangelogEntryProviderFactory;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.plexus.components.interactivity.Prompter;
-import org.codehaus.plexus.components.interactivity.PrompterException;
 
 import javax.inject.Inject;
 import java.io.File;
@@ -40,13 +39,9 @@ public class AddChangelogEntryMojo extends AbstractMojo {
 
     @Override
     public void execute() {
-        try {
-            outputFileName = new OutputFileNameProvider(empty, prompter, outputFileName).get();
-            ChangelogEntry entry = new ChangelogEntryProvider(empty, prompter).get();
-            executeAdd(inputDir, unreleasedVersionDir, outputFileName, entry);
-        } catch (PrompterException e) {
-            getLog().error("Error during getting information from user!", e);
-        }
+        outputFileName = new OutputFileNameProvider(empty, prompter, outputFileName).get();
+        ChangelogEntry entry = new ChangelogEntryProviderFactory(empty, prompter).create().get();
+        executeAdd(inputDir, unreleasedVersionDir, outputFileName, entry);
     }
 
     public void executeAdd(String inputDir, String unreleasedVersionDir, String outputFile, ChangelogEntry entry) {

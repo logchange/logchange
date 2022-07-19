@@ -11,9 +11,9 @@ class MDChangelogEntryIssue implements MD {
 
     private static final String issueFormat = "#${issue}";
 
-    private final String issue;
+    private final Long issue;
 
-    MDChangelogEntryIssue(String issue) {
+    MDChangelogEntryIssue(Long issue) {
         this.issue = issue;
     }
 
@@ -23,11 +23,11 @@ class MDChangelogEntryIssue implements MD {
     }
 
     private String getIssue() {
-        if (StringUtils.isBlank(issue)) {
+        if (issue == null) {
             return StringUtils.EMPTY;
         }
 
-        Map<String, String> valuesMap = new HashMap<>();
+        Map<String, Long> valuesMap = new HashMap<>();
         valuesMap.put("issue", issue);
         StringSubstitutor sub = new StringSubstitutor(valuesMap);
         return sub.replace(issueFormat);

@@ -7,9 +7,9 @@ import java.util.List;
 
 class MDChangelogEntryIssues implements MD {
 
-    private final List<String> issues;
+    private final List<Long> issues;
 
-    MDChangelogEntryIssues(List<String> issues) {
+    MDChangelogEntryIssues(List<Long> issues) {
         this.issues = issues;
     }
 
@@ -24,7 +24,7 @@ class MDChangelogEntryIssues implements MD {
         }
 
         StringBuilder mdIssues = new StringBuilder(StringUtils.EMPTY);
-        for (String issue : issues) {
+        for (Long issue : issues) {
             mdIssues.append(new MDChangelogEntryIssue(issue)).append(" ");
         }
 

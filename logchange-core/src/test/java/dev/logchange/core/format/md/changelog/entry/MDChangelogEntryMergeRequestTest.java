@@ -10,7 +10,7 @@ class MDChangelogEntryMergeRequestTest {
     @Test
     void givenSomeMergeRequestNumber_whenToString_thenResultMatchesFormat() {
         //given:
-        ChangelogEntryMergeRequest mr = ChangelogEntryMergeRequest.of("567");
+        ChangelogEntryMergeRequest mr = ChangelogEntryMergeRequest.of(567L);
 
         //when:
         String result = new MDChangelogEntryMergeRequest(mr).toString();
@@ -34,7 +34,7 @@ class MDChangelogEntryMergeRequestTest {
     @Test
     void givenSomeMergeRequestNumber_whenToString_thenResultMatchToMD() {
         //given:
-        ChangelogEntryMergeRequest mr = ChangelogEntryMergeRequest.of("567");
+        ChangelogEntryMergeRequest mr = ChangelogEntryMergeRequest.of(567L);
 
         //when:
         String result1 = new MDChangelogEntryMergeRequest(mr).toString();

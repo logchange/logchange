@@ -8,7 +8,6 @@ import dev.logchange.core.domain.changelog.model.entry.*;
 import lombok.*;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.nodes.Tag;
 
 import java.io.InputStream;
 import java.util.Collections;
@@ -29,10 +28,10 @@ public class YMLChangelogEntry {
     public List<YMLChangelogEntryAuthor> authors;
     @Singular
     @YamlProperty(key = "merge_requests", order = -2)
-    public List<String> mergeRequests;
+    public List<Long> mergeRequests;
     @Singular
     @YamlProperty(key = "issues", order = -3)
-    public List<String> issues;
+    public List<Long> issues;
     @Singular
     @YamlProperty(key = "links", order = -4)
     public List<YMLChangelogEntryLink> links;
@@ -54,9 +53,11 @@ public class YMLChangelogEntry {
         DumperOptions dumperOptions = new DumperOptions();
         dumperOptions.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
         dumperOptions.setPrettyFlow(true);
+        dumperOptions.setIndent(4);
+        dumperOptions.setIndicatorIndent(2);
 
         Yaml yaml = new Yaml(new AnnotationAwareRepresenter(), dumperOptions);
-        return yaml.dumpAs(this, Tag.MAP, DumperOptions.FlowStyle.BLOCK);
+        return yaml.dumpAsMap(this);
     }
 
     @YamlAnySetter
@@ -88,7 +89,7 @@ public class YMLChangelogEntry {
         }
     }
 
-    private List<String> issues() {
+    private List<Long> issues() {
         if (issues == null) {
             return Collections.emptyList();
         } else {

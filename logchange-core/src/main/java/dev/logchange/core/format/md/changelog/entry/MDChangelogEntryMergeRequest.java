@@ -24,11 +24,11 @@ class MDChangelogEntryMergeRequest implements MD {
     }
 
     private String getMergeRequest() {
-        if (mergeRequest == null || StringUtils.isBlank(mergeRequest.getValue())) {
+        if (mergeRequest == null) {
             return StringUtils.EMPTY;
         }
 
-        Map<String, String> valuesMap = new HashMap<>();
+        Map<String, Long> valuesMap = new HashMap<>();
         valuesMap.put("merge_request", mergeRequest.getValue());
         StringSubstitutor sub = new StringSubstitutor(valuesMap);
         return sub.replace(mergeRequestFormat);

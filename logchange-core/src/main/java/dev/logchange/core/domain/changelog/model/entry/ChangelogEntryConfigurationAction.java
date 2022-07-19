@@ -7,10 +7,21 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ChangelogEntryConfigurationAction {
 
-    ADD("add", "Added"),
-    UPDATE("update", "Updated"),
-    DELETE("delete", "Deleted");
+    ADD("add", "Added", 1),
+    UPDATE("update", "Updated", 2),
+    DELETE("delete", "Deleted", 3);
 
     private final String action;
     private final String displayText;
+    private final Integer order;
+
+
+    public static ChangelogEntryConfigurationAction from(String orderNumber) {
+        for (ChangelogEntryConfigurationAction type : values()) {
+            if (type.getOrder().toString().equals(orderNumber)) {
+                return type;
+            }
+        }
+        throw new IllegalArgumentException("Incorrect type!");
+    }
 }

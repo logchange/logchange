@@ -13,7 +13,7 @@ class MDChangelogEntryMergeRequestsTest {
     @Test
     void givenOneMergeRequest_whenToString_thenResultMatchesFormat() {
         //given:
-        List<ChangelogEntryMergeRequest> mergeRequests = Collections.singletonList(ChangelogEntryMergeRequest.of("567"));
+        List<ChangelogEntryMergeRequest> mergeRequests = Collections.singletonList(ChangelogEntryMergeRequest.of(567L));
 
         //when:
         String result = new MDChangelogEntryMergeRequests(mergeRequests).toString();
@@ -26,8 +26,8 @@ class MDChangelogEntryMergeRequestsTest {
     void givenTwoMergeRequests_whenToString_thenResultMatchesFormat() {
         //given:
         List<ChangelogEntryMergeRequest> mergeRequests = Arrays.asList(
-                ChangelogEntryMergeRequest.of("567"),
-                ChangelogEntryMergeRequest.of("234"));
+                ChangelogEntryMergeRequest.of(567L),
+                ChangelogEntryMergeRequest.of(234L));
 
         //when:
         String result = new MDChangelogEntryMergeRequests(mergeRequests).toString();
@@ -52,8 +52,8 @@ class MDChangelogEntryMergeRequestsTest {
     void givenTwoMergeRequests_whenToString_thenResultMatchToMD() {
         //given:
         List<ChangelogEntryMergeRequest> mergeRequests = Arrays.asList(
-                ChangelogEntryMergeRequest.of("567"),
-                ChangelogEntryMergeRequest.of("234"));
+                ChangelogEntryMergeRequest.of(567L),
+                ChangelogEntryMergeRequest.of(234L));
 
         //when:
         String result1 = new MDChangelogEntryMergeRequests(mergeRequests).toString();

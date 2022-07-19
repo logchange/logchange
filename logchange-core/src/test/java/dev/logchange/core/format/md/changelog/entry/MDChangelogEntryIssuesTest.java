@@ -13,7 +13,7 @@ class MDChangelogEntryIssuesTest {
     @Test
     void givenOneIssue_whenToString_thenResultMatchesFormat() {
         //given:
-        List<String> issues = Collections.singletonList("567");
+        List<Long> issues = Collections.singletonList(567L);
 
         //when:
         String result = new MDChangelogEntryIssues(issues).toString();
@@ -25,7 +25,7 @@ class MDChangelogEntryIssuesTest {
     @Test
     void givenTwoIssue_whenToString_thenResultMatchesFormat() {
         //given:
-        List<String> issues = Arrays.asList("567", "789");
+        List<Long> issues = Arrays.asList(567L, 789L);
 
         //when:
         String result = new MDChangelogEntryIssues(issues).toString();
@@ -37,7 +37,7 @@ class MDChangelogEntryIssuesTest {
     @Test
     void givenNoIssue_whenToString_thenResultEmpty() {
         //given:
-        List<String> issues = Collections.emptyList();
+        List<Long> issues = Collections.emptyList();
 
         //when:
         String result = new MDChangelogEntryIssues(issues).toString();
@@ -49,7 +49,7 @@ class MDChangelogEntryIssuesTest {
     @Test
     void givenTwoIssue_whenToString_thenResultMatchToMD() {
         //given:
-        List<String> issues = Arrays.asList("567", "789");
+        List<Long> issues = Arrays.asList(567L, 789L);
 
         //when:
         String result1 = new MDChangelogEntryIssues(issues).toString();

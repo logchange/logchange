@@ -25,10 +25,6 @@ The convention is maintained according to the principles set out in the [Keep a 
 
 The same problem with merge conflicts with `CHANGELOG.md` was described by GitLab. [LINK](https://about.gitlab.com/blog/2018/07/03/solving-gitlabs-changelog-conflict-crisis/)
 
-### Examples
-[TODO]
-The example project with this plugin usage you can find in `example` directory.
-
 ## Usage
 ### Maven Plugin
 ### Starting
@@ -63,8 +59,8 @@ projects to all executed commands! f.e.
 mvn dev.logchange:logchange-maven-plugin:init --non-recursive
 ```
 
-After choosing one of the options, you can start using plugin as follows. Use this command from your terminal to create
-important directories and empty CHANGELOG.md
+After choosing one of the options, how you prefer run this plugin, you can start using plugin as follows. Use this
+command from your terminal to create important directories and empty CHANGELOG.md
 
 ```shell
 mvn logchange:init
@@ -73,7 +69,7 @@ mvn logchange:init
 If you already had a `CHANGELOG.md` file you can move it to `changelog/archive.md` file. The name of the archive file
 have to start from `archive` phrase (f.e. `archive-1.0.0.md`).
 
-After using `init` command or just creating `changelog/unreleased` directory your project is ready, and you can start
+After using `init` command (or just creating `changelog/unreleased` directory) your project is ready, and you can start
 adding new changelog entries by creating YAML files.
 
 **IMPORTANT:** If you develop on two main branches like f.e 1.1.X and 1.2.X **do not** merge 1.1.X branch to 1.2.X
@@ -85,9 +81,7 @@ like `unreleased-1.1`_
 ### Adding new change
 
 Adding new change is really simple, you can just add new YAML file to `changelog/unreleased` directory and keep format
-presented below. 
-
-You can also use command to generate this file, this one will guide you through whole process:
+presented below, or you can use command to generate this file, this one will guide you through whole process:
 
 ```shell
 mvn logchange:add

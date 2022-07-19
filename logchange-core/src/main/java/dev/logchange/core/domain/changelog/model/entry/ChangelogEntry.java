@@ -15,7 +15,7 @@ public class ChangelogEntry {
     @Singular
     private final List<ChangelogEntryMergeRequest> mergeRequests;
     @Singular
-    private final List<String> issues;
+    private final List<Long> issues;
     @Singular
     private final List<ChangelogEntryLink> links;
     @Singular
