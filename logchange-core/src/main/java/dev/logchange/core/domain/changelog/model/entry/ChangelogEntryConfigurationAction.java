@@ -24,4 +24,9 @@ public enum ChangelogEntryConfigurationAction {
         }
         throw new IllegalArgumentException("Incorrect type!");
     }
+
+    @Override
+    public String toString() {
+        return order + ". " + action;
+    }
 }

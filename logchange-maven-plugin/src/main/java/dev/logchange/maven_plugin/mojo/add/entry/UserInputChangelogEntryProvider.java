@@ -220,7 +220,7 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
             return getConfigurationsRecur(configurations);
         }
 
-        if (prompter.prompt("Is there any other note you want to include? [Y/y - YES] [N/n - NO]").trim().equalsIgnoreCase("Y")) {
+        if (prompter.prompt("Is there any other configuration change you want to include? [Y/y - YES] [N/n - NO]").trim().equalsIgnoreCase("Y")) {
             return getConfigurationsRecur(configurations);
         } else {
             return configurations;
