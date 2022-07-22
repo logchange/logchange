@@ -11,6 +11,7 @@ public class Constants {
     public static final String INIT_COMMAND = "init";
     public static final String GENERATE_COMMAND = "generate";
     public static final String ADD_COMMAND = "add";
+    public static final String RELEASE_COMMAND = "release";
 
     public static final String INPUT_DIR_MVN_PROPERTY = "inputDir";
     public static final String OUTPUT_FILE_MVN_PROPERTY = "outputFile";
@@ -18,5 +19,7 @@ public class Constants {
     public static final String UNRELEASED_VERSION_DIR_MVN_PROPERTY = "unreleasedVersionDir";
     public static final String FILENAME_MVN_PROPERTY = "fileName";
     public static final String EMPTY_MVN_PROPERTY = "empty";
+
+    public static final String RELEASE_DATE_FORMAT = "yyyy-MM-dd";
 
 }

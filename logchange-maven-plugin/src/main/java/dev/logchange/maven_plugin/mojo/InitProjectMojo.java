@@ -28,10 +28,14 @@ public class InitProjectMojo extends AbstractMojo {
     public void execute() {
         getLog().info("Initialize project for logchange-maven-plugin");
         createEmptyChangelogFile(outputFile);
+        executeInit(inputDir, unreleasedVersionDir);
+        getLog().info("Initialize project successful");
+    }
+
+    public void executeInit(String inputDir, String unreleasedVersionDir) {
         Dir.of(getLog(), inputDir).create();
         Dir.of(getLog(), inputDir + "/" + unreleasedVersionDir).create();
         GitKeep.of(getLog(), inputDir + "/" + unreleasedVersionDir + "/").create();
-        getLog().info("Initialize project successful");
     }
 
     public void createEmptyChangelogFile(String path) {

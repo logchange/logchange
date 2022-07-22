@@ -7,12 +7,12 @@ import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.domain.changelog.model.version.ChangelogVersion;
 import dev.logchange.core.domain.changelog.model.version.Version;
 import dev.logchange.core.format.md.changelog.MDChangelog;
+import dev.logchange.core.format.release_date.ReleaseDate;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -84,7 +84,7 @@ public class FileChangelogRepository implements ChangelogRepository {
                 // we can use "(?!\.)(\d+(\.\d+)+)([-.][A-Z]+)?(?![\d.])$" to get version and skipp all letters before version number
                 // but we have to make exception for "unreleased" string as it is not matching this regexp
                 .entries(getEntries(versionDirectory))
-                .releaseDateTime(getReleaseDateTime(versionDirectory))
+                .releaseDateTime(ReleaseDate.getFromDir(versionDirectory))
                 .build();
     }
 
@@ -106,14 +106,6 @@ public class FileChangelogRepository implements ChangelogRepository {
                 .map(file -> YMLChangelogEntry.of(getEntryInputStream(file)))
                 .map(YMLChangelogEntry::to)
                 .collect(Collectors.toList());
-    }
-
-    private OffsetDateTime getReleaseDateTime(File versionDirectory) {
-//        return Arrays.stream(versionDirectory.listFiles())
-//                .filter(file -> file.getName().equals(RELEASE_DATE))
-//                .map(ReleaseDateFileParser::getReleaseDateFromFile)
-//                .findFirst().orElse(null);
-        return null;
     }
 
     private Stream<File> getEntriesFiles(File versionDirectory) {
