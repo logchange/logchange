@@ -35,7 +35,7 @@ public class ReleaseVersionMojo extends AbstractMojo {
         getLog().info("Begin preparation from new changelog release");
 
         String unreleasedDir = inputDir + "/" + unreleasedVersionDir;
-        String newDirName = inputDir + "/" + "v" + project.getVersion().replace("-SNAPSHOT", "");
+        String newDirName = inputDir + "/" + "v" + getVersion();
 
         ReleaseDate.addToDir(unreleasedDir);
         removeGitKeep(unreleasedDir);
@@ -47,6 +47,12 @@ public class ReleaseVersionMojo extends AbstractMojo {
 
         new InitProjectMojo().executeInit(inputDir, unreleasedVersionDir);
         getLog().info("New changelog release successful");
+    }
+
+    private String getVersion() {
+        String version = project.getVersion();
+
+        return version.substring(0, version.indexOf("-"));
     }
 
     private void renameUnreleasedDir(String unreleasedDirName, String newDirName) {
