@@ -35,6 +35,12 @@
         </developer>
     </developers>
 
+    <scm>
+        <connection>scm:git:git://github.com/logchange/logchange.git</connection>
+        <developerConnection>scm:git:ssh://github.com:logchange/logchange.git</developerConnection>
+        <url>http://github.com/logchange/logchange/tree/main</url>
+    </scm>
+
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
