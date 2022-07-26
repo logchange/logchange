@@ -42,6 +42,7 @@ jobs:
           release-branch-name: "release"
           version-minor: true
           skip-perform: true
+          git-skip-sanity-check: true
         env:
           JAVA_HOME: /usr/lib/jvm/java-1.8-openjdk/
 
