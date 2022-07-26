@@ -20,7 +20,7 @@ class InitProjectMojoIT {
         assertThat(result).isSuccessful()
                 .project()
                 .has("changelog")
-                .has("changelog\\unreleased");
+                .has("changelog/unreleased");
 
 
         File gitKeep = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog\\unreleased\\.gitkeep");
