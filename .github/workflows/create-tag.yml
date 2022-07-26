@@ -30,8 +30,8 @@ jobs:
       - name: Push generated CHANGELOG
         run: git push
 
-      - name: Checkout code again
-        uses: actions/checkout@v2
+      - name: Git status
+        run: git status
 
       # Worth reading regarding GITHUB TOKEN
       # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow
