@@ -28,16 +28,6 @@ class InitProjectMojoIT {
 
        assertThat(gitKeep).exists();
        assertThat(changelog).exists();
-
-        assertThat(result)
-                .out()
-                .plain()
-                .contains("[INFO] Initialize project for logchange-maven-plugin",
-                        "[INFO] Created: CHANGELOG.md",
-                        "[INFO] Created: changelog",
-                        "[INFO] Created: unreleased",
-                        "[INFO] Created: .gitkeep",
-                        "[INFO] Initialize project successful");
     }
 
 }
