@@ -28,7 +28,7 @@ jobs:
         run: git status && git add ./changelog/ &&  git commit -am "Generated CHANGELOG.md and prepare version for next release" || echo "Nothing to commit"
 
       - name: Push generated CHANGELOG
-        run: git push origin release
+        run: git push
 
       - name: Checkout code again
         uses: actions/checkout@v2
