@@ -36,9 +36,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/logchange/logchange.git</connection>
-        <developerConnection>scm:git:ssh://github.com/logchange/logchange.git</developerConnection>
-        <url>https://github.com/logchange/logchange/tree/main</url>
+        <connection>scm:git:${project.scm.url}</connection>
+        <developerConnection>scm:git:${project.scm.url}</developerConnection>
+        <url>https://github.com/logchange/logchange.git</url>
         <tag>HEAD</tag>
     </scm>
 
