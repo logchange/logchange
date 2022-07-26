@@ -30,6 +30,9 @@ jobs:
       - name: Push generated CHANGELOG
         run: git push origin release
 
+      - name: Checkout code again
+        uses: actions/checkout@v2
+
       # Worth reading regarding GITHUB TOKEN
       # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow
       - name: Java Maven release
