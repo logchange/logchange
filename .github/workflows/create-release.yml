@@ -1,0 +1,20 @@
+name: Create release
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          #  when tag has 'v' in name no need of adding it before ${GITHUB_REF/refs\/tags\//
+          body_path: ./changelog/v${GITHUB_REF/refs\/tags\//}/version-summary.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_PAT }}
