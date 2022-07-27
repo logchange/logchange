@@ -2,7 +2,11 @@ name: Prepare version for next release and create tag
 
 on:
   push:
-    branches: [ release ]
+    branches:
+      - 'release'
+  pull_request:
+    branches-ignore:
+      - 'release'
 
 jobs:
   release:
