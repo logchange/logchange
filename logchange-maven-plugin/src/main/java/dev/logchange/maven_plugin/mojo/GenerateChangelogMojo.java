@@ -1,9 +1,11 @@
 package dev.logchange.maven_plugin.mojo;
 
 import dev.logchange.core.application.changelog.repository.ChangelogRepository;
+import dev.logchange.core.application.changelog.repository.VersionSummaryRepository;
 import dev.logchange.core.application.changelog.service.generate.GenerateChangelogService;
 import dev.logchange.core.domain.changelog.command.GenerateChangelogUseCase;
 import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogRepository;
+import dev.logchange.core.infrastructure.persistance.changelog.FileVersionSummaryRepository;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -35,7 +37,8 @@ public class GenerateChangelogMojo extends AbstractMojo {
         File changelogDirectory = findChangelogDirectory("./" + yamlFilesDirectory);
 
         ChangelogRepository repository = new FileChangelogRepository(changelogDirectory, new File(finalChangelogName));
-        GenerateChangelogUseCase generateChangelog = new GenerateChangelogService(repository);
+        VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogDirectory);
+        GenerateChangelogUseCase generateChangelog = new GenerateChangelogService(repository, versionSummaryRepository);
         GenerateChangelogUseCase.GenerateChangelogCommand command = GenerateChangelogUseCase.GenerateChangelogCommand.of(heading);
 
         generateChangelog.handle(command);

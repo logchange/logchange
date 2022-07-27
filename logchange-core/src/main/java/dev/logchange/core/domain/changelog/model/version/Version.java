@@ -45,4 +45,12 @@ public class Version implements Comparable<Version> {
     private ComparableVersion getComparableVersion() {
         return new ComparableVersion(value);
     }
+
+    public String getDirName() {
+        if (UNRELEASED.equals(value)) {
+            return value;
+        } else {
+            return "v" + value;
+        }
+    }
 }
