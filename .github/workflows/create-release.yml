@@ -11,6 +11,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        run: "ls -l && ls -l ./changelog && echo v${GITHUB_REF/refs\/tags\//}"
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
