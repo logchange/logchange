@@ -28,7 +28,7 @@ jobs:
         run: git config --global user.name logchange-bot &&  git config --global user.email logchange-bot@logchange.dev
 
       - name: Commit generated CHANGELOG
-        run: git status && git add ./changelog/ &&  git commit -am "Generated CHANGELOG.md and prepare version for next release" || echo "Nothing to commit"
+        run: git status && git add ./changelog/ &&  git commit -am "[ci skip] Generated CHANGELOG.md and prepare version for next release" || echo "Nothing to commit"
 
       - name: Push generated CHANGELOG
         run: git push
