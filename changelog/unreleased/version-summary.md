@@ -1,10 +1,13 @@
+<!-- @formatter:off -->
+<!-- noinspection -->
+<!-- Prevents auto format, for JetBrains IDE File > Settings > Editor > Code Style (Formatter Tab) > Turn formatter on/off with markers in code comments  -->
+
 [unreleased]
 ------------
 
 ### Added (1 change)
 
-- Readded generation of version-summary.md in every version's directory during CHANGELOG.md (
-  @marwin1991 [LINK](https://github.com/marwin1991))
+- Readded generation of version-summary.md in every version's directory during CHANGELOG.md (@marwin1991 [LINK](https://github.com/marwin1991))
 
 ### Fixed (1 change)
 

@@ -1,3 +1,7 @@
+<!-- @formatter:off -->
+<!-- noinspection -->
+<!-- Prevents auto format, for JetBrains IDE File > Settings > Editor > Code Style (Formatter Tab) > Turn formatter on/off with markers in code comments  -->
+
 [1.0.10] - 2021-01-24
 ---------------------
 
