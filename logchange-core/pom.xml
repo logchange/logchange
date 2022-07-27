@@ -5,11 +5,11 @@
     <parent>
         <groupId>dev.logchange</groupId>
         <artifactId>logchange</artifactId>
-        <version>0.10.0</version>
+        <version>0.11.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>logchange-core</artifactId>
-    <version>0.10.0</version>
+    <version>0.11.0-SNAPSHOT</version>
 
     <properties>
         <snakeyaml-anno.version>1.3.0</snakeyaml-anno.version>
