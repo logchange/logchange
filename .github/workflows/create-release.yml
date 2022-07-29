@@ -14,13 +14,12 @@ jobs:
       - name: Test files
         run: ls -l && ls -l ./changelog && echo "v${GITHUB_REF/refs\/tags\//}" && ls -l ./changelog/v${GITHUB_REF/refs\/tags\//}
       - name: Check if file exissts
-        run: echo $PWD && cat ./changelog/v${GITHUB_REF/refs\/tags\//}/version-summary.md
+        run: echo $PWD && echo $GITHUB_WORKSPACE && cat ./changelog/v${GITHUB_REF/refs\/tags\//}/version-summary.md
       - name: Release
         uses: softprops/action-gh-release@v1
-        run: echo $PWD
         with:
           #  when tag has 'v' in name no need of adding it before ${GITHUB_REF/refs\/tags\//
-          body_path: ./changelog/v${GITHUB_REF/refs\/tags\//}/version-summary.md
+          body_path: $GITHUB_WORKSPACE/changelog/v${GITHUB_REF/refs\/tags\//}/version-summary.md
         env:
           # Cannot use GITHUB_TOKEN because of:
           # https://github.com/orgs/community/discussions/27028
