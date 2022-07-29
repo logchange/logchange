@@ -13,6 +13,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Test files
         run: ls -l && ls -l ./changelog && echo "v${GITHUB_REF/refs\/tags\//}" && ls -l ./changelog/v${GITHUB_REF/refs\/tags\//}
+      - name: Check if file exissts
+        run: cat ./changelog/v${GITHUB_REF/refs\/tags\//}/version-summary.md
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
