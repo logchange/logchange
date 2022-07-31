@@ -33,15 +33,15 @@ You can choose between two options:
 1. Add a plugin to your `pom.xml`. For multi-module projects with one `CHANGELOG.md` add it in main `pom.xml`.
 
 ```xml
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>dev.logchange</groupId>
-                <artifactId>logchange-maven-plugin</artifactId>
-                <version>0.5.0</version>
-                <inherited>false</inherited> <!-- For multi module project -->
-            </plugin>
-        </plugins>
+<build>
+  <plugins>
+     <plugin>
+         <groupId>dev.logchange</groupId>
+         <artifactId>logchange-maven-plugin</artifactId>
+         <version>0.5.0</version>
+         <inherited>false</inherited> <!-- For multi module project -->
+      </plugin>
+   </plugins>
 </build>
 ```
 
