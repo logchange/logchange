@@ -13,6 +13,7 @@
         <module>logchange-test-reports</module>
     </modules>
 
+    <name>logchange</name>
     <description>
         Tool to manage and generate CHANGELOG.md based on YAML files,
         which are representing single entry in changelog.
@@ -91,6 +92,19 @@
                     <scmCommentPrefix>[Releasing new version]</scmCommentPrefix>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
@@ -157,6 +171,19 @@
                                         <arg>loopback</arg>
                                     </gpgArguments>
                                 </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.4.0</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
                             </execution>
                         </executions>
                     </plugin>
