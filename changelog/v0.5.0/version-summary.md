@@ -2,8 +2,8 @@
 <!-- noinspection -->
 <!-- Prevents auto format, for JetBrains IDE File > Settings > Editor > Code Style (Formatter Tab) > Turn formatter on/off with markers in code comments  -->
 
-[unreleased]
-------------
+[0.5.0] - 2022-07-31
+--------------------
 
 ### Added (1 change)
 
