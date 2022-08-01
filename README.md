@@ -144,9 +144,9 @@ branch of a project during release.
 
 ### Creating release (from unreleased directory)
 
-This command is the prefered to create realase and generates `CHANGELOG.md` (One of this command steps is to call the generate command).
+This command is the prefered to create release and generates `CHANGELOG.md` (One of these command steps is to call the generate command).
 During release all files from `unreleased` directory are moved to `v.X.X.X` where X.X.X is the version from `pom.xml`.
-After moving files, coammand create file `release-date.txt` with current date, then generation of `CHANGELOG.md` and versions summaries is done.
+After moving files, command create file `release-date.txt` with current date, then generation of `CHANGELOG.md` and versions summaries is done.
 
 ```shell
 mvn logchange:release
@@ -158,12 +158,14 @@ TODO
 
 ### Versions summaries
 
-During release `version-summary.md` is created, it is a file that caontaines current version changelog entries. 
+During release `version-summary.md` is created, it is a file that contains current version changelog entries. 
 You can see example [**here**](https://github.com/logchange/logchange/blob/main/changelog/v0.4.0/version-summary.md).
+
+This feature is really useful during creating releases on GitHub or GitLab, you can just attach the content of this file as release notes.
 
 ### Archives
 
-If your project already containes some `CHANGELOG.md` you don't have to rewrite it to `yml`. Only what have to do is to move it to `changelog` directory and rename it to `archive.md` or `archiveXXXX.md` where XXXX is anything you want f.e. -2.0.0
+If your project already contains some `CHANGELOG.md` you don't have to rewrite it to `yml`. Only what have to do is to move it to `changelog` directory and rename it to `archive.md` or `archiveXXXX.md` where XXXX is anything you want f.e. -2.0.0
 
 ## TODO:
 
