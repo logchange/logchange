@@ -139,14 +139,14 @@ Everytime you want to generate `CHANGELOG.md` you can use command:
 mvn logchange:generate
 ```
 
-To prevent merge conflicts (it is idea of this project) generation should be done with use of CI/CD Tool on a main
-branch of a project.
+To prevent merge conflicts (it is idea of this project) generation of `CHANGELOG.md` should be done with use of CI/CD Tool on a main
+branch of a project during release.
 
-[TODO]
-Create Docker image with this tool, that will be use in CI/CD Tool, so that not only java projects will be able to use
-it.
+### Creating release (from unreleased directory)
 
-### Creating release (from unreleased)
+This command is the prefered to create realase and generates `CHANGELOG.md` (One of this command steps is to call the generate command).
+During release all files from `unreleased` directory are moved to `v.X.X.X` where X.X.X is the version from `pom.xml`.
+After moving files, coammand create file `release-date.txt` with current date, then generation of `CHANGELOG.md` and versions summaries is done.
 
 ```shell
 mvn logchange:release
@@ -158,22 +158,20 @@ TODO
 
 ### Versions summaries
 
-TODO
-
-### Releasing the version
-
-TODO
+During release `version-summary.md` is created, it is a file that caontaines current version changelog entries. 
+You can see example [**here**](https://github.com/logchange/logchange/blob/main/changelog/v0.4.0/version-summary.md).
 
 ### Archives
 
-TODO
+If your project already containes some `CHANGELOG.md` you don't have to rewrite it to `yml`. Only what have to do is to move it to `changelog` directory and rename it to `archive.md` or `archiveXXXX.md` where XXXX is anything you want f.e. -2.0.0
 
 ## TODO:
 
 - add command to create archive-X.md from selected directory
-- add tests
 - add javadocs
 - support  `unreleased*` directories names like `unreleased-1.1`
+- Create Docker image with this tool, that will be use in CI/CD Tool, so that not only java projects will be able to use
+it.
 
 ## Development
 
