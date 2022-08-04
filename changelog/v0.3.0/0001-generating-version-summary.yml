@@ -2,5 +2,5 @@ title: Added generation of version-summary.md in every version's directory durin
 authors:
   - nick: marwin1991
     url: https://github.com/marwin1991
-type: added # [added/changed/deprecated/removed/fixed/security]
+type: added # [added/changed/deprecated/removed/fixed/security/other]
 

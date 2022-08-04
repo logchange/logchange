@@ -12,7 +12,9 @@ public enum ChangelogEntryType {
     DEPRECATED("deprecated", 3),
     REMOVED("removed", 4),
     FIXED("fixed", 5),
-    SECURITY("security", 6);
+    SECURITY("security", 6),
+    OTHER("other", 7);
+
 
     private final String type;
     private final Integer order;

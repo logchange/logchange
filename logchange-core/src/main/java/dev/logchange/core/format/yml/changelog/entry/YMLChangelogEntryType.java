@@ -13,9 +13,32 @@ public enum YMLChangelogEntryType {
     DEPRECATED("deprecated"),
     REMOVED("removed"),
     FIXED("fixed"),
-    SECURITY("security");
+    SECURITY("security"),
+
+    OTHER("other");
 
     private final String type;
+
+    static YMLChangelogEntryType of(ChangelogEntryType type) {
+        switch (type) {
+            case ADDED:
+                return YMLChangelogEntryType.ADDED;
+            case CHANGED:
+                return YMLChangelogEntryType.CHANGED;
+            case DEPRECATED:
+                return YMLChangelogEntryType.DEPRECATED;
+            case REMOVED:
+                return YMLChangelogEntryType.REMOVED;
+            case FIXED:
+                return YMLChangelogEntryType.FIXED;
+            case SECURITY:
+                return YMLChangelogEntryType.SECURITY;
+            case OTHER:
+                return YMLChangelogEntryType.OTHER;
+            default:
+                throw new IllegalArgumentException("Converting ChangelogEntryType failed");
+        }
+    }
 
     ChangelogEntryType to() {
         switch (this) {
@@ -31,25 +54,8 @@ public enum YMLChangelogEntryType {
                 return ChangelogEntryType.FIXED;
             case SECURITY:
                 return ChangelogEntryType.SECURITY;
-            default:
-                throw new IllegalArgumentException("Converting ChangelogEntryType failed");
-        }
-    }
-
-    static YMLChangelogEntryType of(ChangelogEntryType type){
-        switch (type){
-            case ADDED:
-                return YMLChangelogEntryType.ADDED;
-            case CHANGED:
-                return YMLChangelogEntryType.CHANGED;
-            case DEPRECATED:
-                return YMLChangelogEntryType.DEPRECATED;
-            case REMOVED:
-                return YMLChangelogEntryType.REMOVED;
-            case FIXED:
-                return YMLChangelogEntryType.FIXED;
-            case SECURITY:
-                return YMLChangelogEntryType.SECURITY;
+            case OTHER:
+                return ChangelogEntryType.OTHER;
             default:
                 throw new IllegalArgumentException("Converting ChangelogEntryType failed");
         }

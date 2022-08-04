@@ -108,7 +108,7 @@ issues:
 links: # links to external systems, like jira or redmine
    - name: TASK_NUMBER
      url: https://www.google.pl
-type: fixed # [added/changed/deprecated/removed/fixed/security]
+type: fixed # [added/changed/deprecated/removed/fixed/security/other]
 important_notes:
   - Update style.css on server during instalation 1
 configurations: # information about changes in available application configuration
