@@ -51,7 +51,7 @@ class MDChangelogVersionConfiguration implements MD {
 
         for (ChangelogEntryConfiguration configuration : configurations) {
             MDList configDetails = new MDList();
-            configDetails.add(configuration.getAction().getDisplayText() + new Code(configuration.getKey()) + " with default value: " + new Code(configuration.getDefaultValue()));
+            configDetails.add(configuration.getAction().getDisplayText() + " " + new Code(configuration.getKey()) + " with default value: " + new Code(configuration.getDefaultValue()));
             configDetails.add("Description: " + configuration.getDescription());
             configDetails.add(configuration.getMoreInfo());
 
