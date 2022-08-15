@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class GenerateChangelogIntegrationTest {
 
@@ -50,13 +50,7 @@ public class GenerateChangelogIntegrationTest {
 
         //then:
         String expectedContent = FileUtils.fileRead(expectedChangelogOutputFile);
-        expectedContent = expectedContent
-                .replace("\r", "")
-                .replace("\n", "");
         String actualContent = FileUtils.fileRead(changelogOutputFile);
-        actualContent = actualContent
-                .replace("\r", "")
-                .replace("\n", "");
-        assertEquals(expectedContent, actualContent);
+        assertThat(actualContent).isEqualToIgnoringNewLines(expectedContent);
     }
 }
