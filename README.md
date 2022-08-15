@@ -52,8 +52,7 @@ You can choose between two options:
 mvn dev.logchange:logchange-maven-plugin:init 
 ```
 
-**IMPORTANT** If you don't want to add plugin to pom.xml and use above syntax, add `--non-recursive` for multi-module
-projects to all executed commands! f.e.
+**⚠️⚠️ IMPORTANT ⚠️⚠️** For multi-module projects add `--non-recursive` to all executed commands! f.e.
 
 ```shell
 mvn dev.logchange:logchange-maven-plugin:init --non-recursive
@@ -63,7 +62,7 @@ After choosing one of the options, how you prefer run this plugin, you can start
 command from your terminal to create important directories and empty CHANGELOG.md
 
 ```shell
-mvn logchange:init
+mvn logchange:init 
 ```
 
 If you already had a `CHANGELOG.md` file you can move it to `changelog/archive.md` file. The name of the archive file
