@@ -1,4 +1,15 @@
-![logchange-banner](https://user-images.githubusercontent.com/25181517/138590008-f98457b3-602a-4af5-9b28-0c499fe7e378.png)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/25181517/138590008-f98457b3-602a-4af5-9b28-0c499fe7e378.png" />
+</p>
+
+<p align="center">
+    <a href="https://github.com/logchange/logchange/graphs/contributors" alt="Contributors">
+        <img src="https://img.shields.io/github/contributors/logchange/logchange" /></a>
+    <a href="https://github.com/logchange/logchange/pulse" alt="Activity">
+        <img src="https://img.shields.io/github/commit-activity/m/logchange/logchange" /></a>
+    <a href="https://search.maven.org/search?q=g:%22dev.logchange%22%20AND%20a:%22logchange-maven-plugin%22" alt="Maven Central">
+        <img src="https://img.shields.io/maven-central/v/dev.logchange/logchange-maven-plugin.svg?label=Maven%20Central" /></a>
+</p>
 
 🌳 `CHANGELOG.md` is one of the most important files in a repository. It allows others to find out about 
 the most important changes in the project in short time.
