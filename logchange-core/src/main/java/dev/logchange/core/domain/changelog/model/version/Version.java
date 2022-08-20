@@ -53,4 +53,8 @@ public class Version implements Comparable<Version> {
             return "v" + value;
         }
     }
+
+    public boolean isUnreleased() {
+        return UNRELEASED.equals(value);
+    }
 }

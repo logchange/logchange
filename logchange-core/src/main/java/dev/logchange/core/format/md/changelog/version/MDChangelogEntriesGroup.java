@@ -2,7 +2,9 @@ package dev.logchange.core.format.md.changelog.version;
 
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType;
+import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.format.md.MD;
+import dev.logchange.core.format.md.changelog.Configurable;
 import dev.logchange.core.format.md.changelog.entry.MDChangelogEntry;
 import net.steppschuh.markdowngenerator.text.heading.Heading;
 import org.apache.commons.lang3.StringUtils;
@@ -10,12 +12,13 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.List;
 import java.util.stream.Collectors;
 
-class MDChangelogEntriesGroup implements MD {
+class MDChangelogEntriesGroup extends Configurable implements MD {
 
     private final ChangelogEntryType type;
     private final List<ChangelogEntry> entries;
 
-    MDChangelogEntriesGroup(ChangelogEntryType type, List<ChangelogEntry> entries) {
+    MDChangelogEntriesGroup(ChangelogEntryType type, List<ChangelogEntry> entries, Config config) {
+        super(config);
         this.type = type;
         this.entries = entries.stream()
                 .filter(changelogEntry -> type.equals(changelogEntry.getType()))
@@ -44,7 +47,7 @@ class MDChangelogEntriesGroup implements MD {
     }
 
     private Heading getTypeHeading() {
-        return new Heading(StringUtils.capitalize(type.getType()) + " " + getChangesNumber(entries), 3);
+        return new Heading(getConfig().getLabels().getTypes().getType(type) + " " + getChangesNumber(entries), 3);
     }
 
     private String getChangesNumber(List<ChangelogEntry> entriesByType) {

@@ -10,31 +10,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class YMLLabels {
 
-    @YamlProperty(key = "important_notes", order = 0)
+    @YamlProperty(key = "unreleased", order = 0)
+    public String unreleased;
+
+    @YamlProperty(key = "important_notes", order = -1)
     public String importantNotes;
 
-    @YamlProperty(key = "added", order = -1)
-    public String added;
+    @YamlProperty(key = "types", order = -2)
+    public YMLTypesLabels types;
 
-    @YamlProperty(key = "changed", order = -2)
-    public String changed;
-
-    @YamlProperty(key = "deprecated", order = -3)
-    public String deprecated;
-
-    @YamlProperty(key = "removed", order = -4)
-    public String removed;
-
-    @YamlProperty(key = "fixed", order = -5)
-    public String fixed;
-
-    @YamlProperty(key = "security", order = -6)
-    public String security;
-
-    @YamlProperty(key = "other", order = -7)
-    public String other;
-
-    @YamlProperty(key = "configuration", order = -8)
+    @YamlProperty(key = "configuration", order = -3)
     public YMLConfigurationLabels configuration;
 
     @YamlAnySetter
@@ -45,14 +30,9 @@ public class YMLLabels {
 
     public Labels to() {
         return Labels.builder()
+                .unreleased(unreleased)
                 .importantNotes(importantNotes)
-                .added(added)
-                .changed(changed)
-                .deprecated(deprecated)
-                .removed(removed)
-                .fixed(fixed)
-                .security(security)
-                .other(other)
+                .types(types.to())
                 .configuration(configuration.to())
                 .build();
     }

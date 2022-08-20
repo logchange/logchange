@@ -1,6 +1,7 @@
 package dev.logchange.core.format.md.changelog.version;
 
 import dev.logchange.core.domain.changelog.model.entry.*;
+import dev.logchange.core.domain.config.model.Config;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,7 @@ class MDChangelogEntriesGroupTest {
         List<ChangelogEntry> entries = Collections.singletonList(getSomeEntry(type));
 
         //when:
-        String result = new MDChangelogEntriesGroup(type, entries).toString();
+        String result = new MDChangelogEntriesGroup(type, entries, Config.EMPTY).toString();
 
         //then:
         Assertions.assertEquals("### Added (1 change)\n" +
@@ -33,7 +34,7 @@ class MDChangelogEntriesGroupTest {
         List<ChangelogEntry> entries = Arrays.asList(getSomeEntry(type), getSomeEntry(type));
 
         //when:
-        String result = new MDChangelogEntriesGroup(type, entries).toString();
+        String result = new MDChangelogEntriesGroup(type, entries, Config.EMPTY).toString();
 
         //then:
         Assertions.assertEquals("### Added (2 changes)\n" +
@@ -50,8 +51,8 @@ class MDChangelogEntriesGroupTest {
         List<ChangelogEntry> entries = Arrays.asList(getSomeEntry(type), getSomeEntry(type));
 
         //when:
-        String result1 = new MDChangelogEntriesGroup(type, entries).toString();
-        String result2 = new MDChangelogEntriesGroup(type, entries).toMD();
+        String result1 = new MDChangelogEntriesGroup(type, entries, Config.EMPTY).toString();
+        String result2 = new MDChangelogEntriesGroup(type, entries, Config.EMPTY).toMD();
 
         //then:
         Assertions.assertEquals(result1, result2);

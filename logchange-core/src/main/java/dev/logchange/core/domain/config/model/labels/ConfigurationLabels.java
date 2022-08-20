@@ -7,6 +7,8 @@ import lombok.Builder;
 @AllArgsConstructor
 public class ConfigurationLabels {
 
+    public static final ConfigurationLabels EMPTY = ConfigurationLabels.builder().build();
+
     private String changes;
     private String type;
     private ConfigurationActionLabels action;

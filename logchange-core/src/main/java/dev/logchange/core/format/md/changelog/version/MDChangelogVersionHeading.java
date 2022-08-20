@@ -1,7 +1,9 @@
 package dev.logchange.core.format.md.changelog.version;
 
 import dev.logchange.core.domain.changelog.model.version.Version;
+import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.format.md.MD;
+import dev.logchange.core.format.md.changelog.Configurable;
 import net.steppschuh.markdowngenerator.text.heading.Heading;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringSubstitutor;
@@ -11,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
-class MDChangelogVersionHeading implements MD {
+class MDChangelogVersionHeading extends Configurable implements MD {
 
     public static final String RELEASE_DATE_FORMAT = "yyyy-MM-dd";
 
@@ -21,19 +23,24 @@ class MDChangelogVersionHeading implements MD {
     private final Version version;
     private final OffsetDateTime releaseDateTime;
 
-    public MDChangelogVersionHeading(Version version, OffsetDateTime releaseDateTime) {
+    public MDChangelogVersionHeading(Version version, OffsetDateTime releaseDateTime, Config config) {
+        super(config);
         this.version = version;
         this.releaseDateTime = releaseDateTime;
     }
 
     @Override
     public String toString() {
-        return getVersionHeading().toString() + "\n\n";
+        return getVersionHeading() + "\n\n";
     }
 
     private Heading getVersionHeading() {
         Map<String, String> valuesMap = new HashMap<>();
-        valuesMap.put("version", version.getValue());
+        if (version.isUnreleased()) {
+            valuesMap.put("version", getConfig().getLabels().getUnreleased());
+        } else {
+            valuesMap.put("version", version.getValue());
+        }
         valuesMap.put("releaseData", getVersionDate());
 
         StringSubstitutor sub = new StringSubstitutor(valuesMap);
