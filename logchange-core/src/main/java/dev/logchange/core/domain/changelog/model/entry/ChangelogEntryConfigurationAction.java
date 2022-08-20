@@ -12,6 +12,8 @@ public enum ChangelogEntryConfigurationAction {
     DELETE("delete", "Deleted", 3);
 
     private final String action;
+
+    @Deprecated
     private final String displayText;
     private final Integer order;
 

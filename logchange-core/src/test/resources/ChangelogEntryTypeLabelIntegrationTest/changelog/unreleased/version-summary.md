@@ -40,4 +40,3 @@
 | <ul><li>Dodano `simpleparam.name.enabled` z domyślną wartością: `true`</li><li>Opis: Enables displying feature name</li></ul>                                                                                                     |
 
 
-

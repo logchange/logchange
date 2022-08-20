@@ -10,14 +10,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class YMLConfigurationLabels {
 
-    @YamlProperty(key = "changes", order = 0)
-    public String changes;
+    @YamlProperty(key = "heading", order = 0)
+    public String heading;
 
     @YamlProperty(key = "type", order = -1)
     public String type;
 
-    @YamlProperty(key = "action", order = -2)
-    public YMLConfigurationActionLabels action;
+    @YamlProperty(key = "actions", order = -2)
+    public YMLConfigurationActionLabels actions;
 
     @YamlProperty(key = "with_default_value", order = -3)
     public String withDefaultValue;
@@ -33,9 +33,9 @@ public class YMLConfigurationLabels {
 
     public ConfigurationLabels to() {
         return ConfigurationLabels.builder()
-                .changes(changes)
+                .heading(heading)
                 .type(type)
-                .action(action.to())
+                .actions(actions.to())
                 .withDefaultValue(withDefaultValue)
                 .description(description)
                 .build();

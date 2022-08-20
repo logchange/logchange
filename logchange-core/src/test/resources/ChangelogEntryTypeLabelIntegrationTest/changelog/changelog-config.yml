@@ -11,9 +11,9 @@ changelog:
       security: 'Bezpieczeństwo'
       other: 'Inne'
     configuration:
-      changes: "Zmiany konfiguracji"
+      heading: "Zmiany konfiguracji"
       type: "Typ"
-      action:
+      actions:
         add: "Dodano"
         update: "Zaktualizowano"
         delete: "Usunięto"
