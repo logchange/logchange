@@ -3,11 +3,12 @@ package dev.logchange.core;
 import dev.logchange.core.application.changelog.repository.ChangelogRepository;
 import dev.logchange.core.application.changelog.repository.VersionSummaryRepository;
 import dev.logchange.core.application.changelog.service.generate.GenerateChangelogService;
+import dev.logchange.core.application.config.ConfigRepository;
 import dev.logchange.core.domain.changelog.command.GenerateChangelogUseCase;
-import dev.logchange.core.domain.changelog.command.GenerateChangelogUseCase.GenerateChangelogCommand;
 import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogRepository;
 import dev.logchange.core.infrastructure.persistance.changelog.FileVersionSummaryRepository;
+import dev.logchange.core.infrastructure.persistance.config.FileConfigRepository;
 import org.codehaus.plexus.util.FileUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,9 +19,9 @@ import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class GenerateChangelogIntegrationTest {
+public class ChangelogEntryTypeLabelIntegrationTest {
 
-    private static final String PATH = "src/test/resources/GenerateChangelogIntegrationTest/";
+    private static final String PATH = "src/test/resources/ChangelogEntryTypeLabelIntegrationTest/";
 
     @BeforeEach
     void init() throws IOException {
@@ -38,13 +39,17 @@ public class GenerateChangelogIntegrationTest {
         //given:
         File changelogInputDir = new File(PATH + "changelog");
         File changelogOutputFile = new File(PATH + "CHANGELOG.md");
+        File configFile = new File(PATH + "changelog/changelog-config.yml");
         File expectedChangelogOutputFile = new File(PATH + "EXPECTED_CHANGELOG.md");
         String heading = "";
 
-        ChangelogRepository repository = new FileChangelogRepository(changelogInputDir, changelogOutputFile, Config.EMPTY);
-        VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogInputDir, Config.EMPTY);
+        ConfigRepository configRepository = new FileConfigRepository(configFile);
+        Config config = configRepository.find();
+
+        ChangelogRepository repository = new FileChangelogRepository(changelogInputDir, changelogOutputFile, config);
+        VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogInputDir, config);
         GenerateChangelogUseCase generateChangelogUseCase = new GenerateChangelogService(repository, versionSummaryRepository);
-        GenerateChangelogCommand command = GenerateChangelogCommand.of(heading);
+        GenerateChangelogUseCase.GenerateChangelogCommand command = GenerateChangelogUseCase.GenerateChangelogCommand.of(heading);
 
         //when:
         generateChangelogUseCase.handle(command);

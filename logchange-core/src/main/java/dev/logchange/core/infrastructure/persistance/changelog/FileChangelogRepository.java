@@ -6,6 +6,7 @@ import dev.logchange.core.domain.changelog.model.archive.ChangelogArchive;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.domain.changelog.model.version.ChangelogVersion;
 import dev.logchange.core.domain.changelog.model.version.Version;
+import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.format.md.changelog.MDChangelog;
 import dev.logchange.core.format.release_date.ReleaseDate;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
@@ -25,9 +26,12 @@ public class FileChangelogRepository implements ChangelogRepository {
     private final File inputDirectory;
     private final File outputFile;
 
-    public FileChangelogRepository(File inputDirectory, File outputFile) {
+    private final Config config;
+
+    public FileChangelogRepository(File inputDirectory, File outputFile, Config config) {
         this.inputDirectory = inputDirectory;
         this.outputFile = outputFile;
+        this.config = config;
     }
 
     @Override
@@ -51,7 +55,7 @@ public class FileChangelogRepository implements ChangelogRepository {
 
     @Override
     public void save(Changelog changelog) {
-        String md = new MDChangelog(changelog).toMD();
+        String md = new MDChangelog(config, changelog).toMD();
 
         try (PrintWriter out = new PrintWriter(outputFile)) {
             out.println(md);
