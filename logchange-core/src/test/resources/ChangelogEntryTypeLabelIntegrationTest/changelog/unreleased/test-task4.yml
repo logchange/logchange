@@ -1,4 +1,4 @@
-title: Test title
+title: Test title 4
 authors:
   - nick: marwin1991
   - name: Piotr
@@ -15,11 +15,11 @@ links: # links to external systems, like redmine something else
   - name: other link
     url: https://www.google.pl
 type: removed # [added/changed/deprecated/removed/fixed/security/other]
-important_notes: some realy important recomendation
+important_notes: some realy important recomendation 4
 configurations: # information about changes in available application configuration
   - action: add # [add/update/delete]
     key: simpleparam.name.enabled
     default_value: true
-    description: Enables displying feature name
+    description: Enables displying feature name 4
     type: database parameter
 

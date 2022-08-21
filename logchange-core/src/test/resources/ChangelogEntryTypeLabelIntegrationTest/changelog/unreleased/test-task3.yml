@@ -1,4 +1,4 @@
-title: Test title
+title: Test title 3
 authors:
   - name: Piotr
 merge_requests:
@@ -9,11 +9,11 @@ links: # links to external systems, like redmine something else
   - name: TASK_NUMBER
     url: https://www.google.pl
 type: other # [added/changed/deprecated/removed/fixed/security/other]
-important_notes: Update style.css on server during instalation
+important_notes: Update style.css on server during instalation 3
 configurations: # information about changes in available application configurations
   - action: add # [add/update/delete]
     key: simpleparam.name.enabled
     default_value: "true" #always string
-    description: Enables displying feature name
+    description: Enables displying feature name 3
     type: database parameter
 
