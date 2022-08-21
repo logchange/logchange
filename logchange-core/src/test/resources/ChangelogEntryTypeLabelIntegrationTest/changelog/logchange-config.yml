@@ -1,15 +1,15 @@
 changelog:
   labels:
-    unreleased: 'niewydane'
-    important_notes: 'Ważne'
+    unreleased: "niewydane"
+    important_notes: "Ważne"
     types:
-      added: 'Dodano'
-      changed: 'Zmieniono'
-      deprecated: 'Przestarzałe'
-      removed: 'Usunięto'
-      fixed: 'Naprawiono'
-      security: 'Bezpieczeństwo'
-      other: 'Inne'
+      added: "Dodano"
+      changed: "Zmieniono"
+      deprecated: "Przestarzałe"
+      removed: "Usunięto"
+      fixed: "Naprawiono"
+      security: "Bezpieczeństwo"
+      other: "Inne"
     configuration:
       heading: "Zmiany konfiguracji"
       type: "Typ"
