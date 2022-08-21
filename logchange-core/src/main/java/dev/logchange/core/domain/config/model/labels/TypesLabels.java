@@ -3,6 +3,7 @@ package dev.logchange.core.domain.config.model.labels;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 
 import static org.apache.commons.lang3.StringUtils.defaultIfBlank;
 
@@ -18,7 +19,9 @@ public class TypesLabels {
     public static final String DEFAULT_SECURITY_LABEL = "Security";
     public static final String DEFAULT_OTHER_LABEL = "Other";
 
-    public static final TypesLabels EMPTY = TypesLabels.builder().build();
+    public static final TypesLabels EMPTY = TypesLabels.builder()
+            .numberOfChanges(NumberOfChangesLabels.EMPTY)
+            .build();
 
     private String added;
     private String changed;
@@ -27,6 +30,9 @@ public class TypesLabels {
     private String fixed;
     private String security;
     private String other;
+
+    @Getter
+    private NumberOfChangesLabels numberOfChanges;
 
     public String getType(ChangelogEntryType type) {
         switch (type) {

@@ -3,6 +3,7 @@ package dev.logchange.core.format.md.changelog.version;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType;
 import dev.logchange.core.domain.config.model.Config;
+import dev.logchange.core.domain.config.model.labels.NumberOfChangesLabels;
 import dev.logchange.core.format.md.MD;
 import dev.logchange.core.format.md.changelog.Configurable;
 import dev.logchange.core.format.md.changelog.entry.MDChangelogEntry;
@@ -51,7 +52,8 @@ class MDChangelogEntriesGroup extends Configurable implements MD {
     }
 
     private String getChangesNumber(List<ChangelogEntry> entriesByType) {
-        return "(" + entriesByType.size() + " change" + (entriesByType.size() > 1 ? "s" : "") + ")";
+        NumberOfChangesLabels changes = getConfig().getLabels().getTypes().getNumberOfChanges();
+        return "(" + entriesByType.size() + " " + (entriesByType.size() > 1 ? changes.getPlural() : changes.getSingular()) + ")";
     }
 
 }

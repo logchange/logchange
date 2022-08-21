@@ -10,6 +10,9 @@ changelog:
       fixed: "Naprawiono"
       security: "Bezpieczeństwo"
       other: "Inne"
+      number_of_changes:
+        singular: "zmiana"
+        plural: "zmian/y"
     configuration:
       heading: "Zmiany konfiguracji"
       type: "Typ"

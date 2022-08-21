@@ -14,21 +14,22 @@
 - Update style.css on server during instalation 3
 - some realy important recomendation 4
 
-### Dodano (1 change)
+### Dodano (1 zmiana)
 
 - Test title 2 !1 #1 [TASK_NUMBER](https://www.google.pl) ([Piotr](https://github.com/marwin1991) @marwin1991)
 
-### Usuniêto (1 change)
+### Usuniêto (1 zmiana)
 
 - Test title 4 !1 #1 #2 [TASK_NUMBER](https://www.google.pl) [other link](https://www.google.pl) (@marwin1991) ([Piotr](https://github.com/marwin1991) @marwin1991)
 
-### Naprawiono (1 change)
+### Naprawiono (1 zmiana)
 
 - Test title 1 !1 !2 #1 [TASK_NUMBER](https://www.google.pl) (@marwin1991 [LINK](https://github.com/marwin1991))
 
-### Inne (1 change)
+### Inne (2 zmian/y)
 
 - Test title 3 !1 #1 [TASK_NUMBER](https://www.google.pl) (Piotr)
+- Test title 5 (@marwin1991) ([Piotr](https://github.com/marwin1991) @marwin1991)
 
 ### Zmiany konfiguracji
 

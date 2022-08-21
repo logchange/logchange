@@ -177,6 +177,9 @@ changelog:
       fixed: "Fixed"
       security: "Security"
       other: "Other"
+      number_of_changes:
+        singular: "change"
+        plural: "changes"
     configuration:
       heading: "Configuration changes"
       type: "Type"
@@ -202,7 +205,7 @@ branch of a project during release.
 
 ### Creating release (from unreleased directory)
 
-This command is the prefered to create release and generates `CHANGELOG.md` (One of these command steps is to call the
+This command is the preferred to create release and generates `CHANGELOG.md` (One of these command steps is to call the
 generate command).
 During release all files from `unreleased` directory are moved to `v.X.X.X` where X.X.X is the version from `pom.xml`.
 After moving files, command create file `release-date.txt` with current date, then generation of `CHANGELOG.md` and

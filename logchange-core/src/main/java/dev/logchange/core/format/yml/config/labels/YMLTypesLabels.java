@@ -30,6 +30,9 @@ public class YMLTypesLabels {
     @YamlProperty(key = "other", order = -7)
     public String other;
 
+    @YamlProperty(key = "number_of_changes", order = -7)
+    public YMLNumberOfChangesLabels numberOfChanges;
+
     @YamlAnySetter
     public void anySetter(String key, Object value) {
         System.out.println("Unknown property: " + key + " with value " + value);
@@ -45,6 +48,7 @@ public class YMLTypesLabels {
                 .fixed(fixed)
                 .security(security)
                 .other(other)
+                .numberOfChanges(numberOfChanges.to())
                 .build();
     }
 }
