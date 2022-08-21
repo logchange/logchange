@@ -57,9 +57,11 @@ public class FileChangelogRepository implements ChangelogRepository {
     public void save(Changelog changelog) {
         String md = new MDChangelog(config, changelog).toMD();
 
-        try (PrintWriter out = new PrintWriter(outputFile)) {
+
+        try (OutputStream os = Files.newOutputStream(outputFile.toPath());
+             PrintWriter out = new PrintWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8))) {
             out.println(md);
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             throw new IllegalArgumentException("Could not save changelog to file: " + outputFile + " because: " + e.getMessage());
         }
     }

@@ -55,8 +55,8 @@ public class ChangelogEntryTypeLabelIntegrationTest {
         generateChangelogUseCase.handle(command);
 
         //then:
-        String expectedContent = FileUtils.fileRead(expectedChangelogOutputFile);
-        String actualContent = FileUtils.fileRead(changelogOutputFile);
+        String expectedContent = FileUtils.fileRead(expectedChangelogOutputFile, "UTF-8");
+        String actualContent = FileUtils.fileRead(changelogOutputFile, "UTF-8");
         assertThat(actualContent).isEqualToIgnoringNewLines(expectedContent);
     }
 }

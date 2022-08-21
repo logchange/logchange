@@ -15,8 +15,8 @@ public class TypesLabels {
     public static final String DEFAULT_DEPRECATED_LABEL = "Deprecated";
     public static final String DEFAULT_REMOVED_LABEL = "Removed";
     public static final String DEFAULT_FIXED_LABEL = "Fixed";
-    public static final String DEFAULT_SECURITY_LABEL = "security";
-    public static final String DEFAULT_OTHER_LABEL = "other";
+    public static final String DEFAULT_SECURITY_LABEL = "Security";
+    public static final String DEFAULT_OTHER_LABEL = "Other";
 
     public static final TypesLabels EMPTY = TypesLabels.builder().build();
 
