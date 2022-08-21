@@ -109,6 +109,7 @@ public class FileChangelogRepository implements ChangelogRepository {
 
     private List<ChangelogEntry> getEntries(File versionDirectory) {
         return getEntriesFiles(versionDirectory)
+                .sequential()
                 .map(file -> YMLChangelogEntry.of(getEntryInputStream(file)))
                 .map(YMLChangelogEntry::to)
                 .collect(Collectors.toList());

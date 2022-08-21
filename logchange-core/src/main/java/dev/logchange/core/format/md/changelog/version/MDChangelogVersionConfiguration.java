@@ -45,6 +45,7 @@ class MDChangelogVersionConfiguration extends Configurable implements MD {
 
     private Set<String> getConfigurationsTypes() {
         return configurations.stream()
+                .sequential()
                 .map(ChangelogEntryConfiguration::getType)
                 .collect(Collectors.toSet());
     }

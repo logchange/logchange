@@ -27,6 +27,7 @@ public class ChangelogVersion implements Comparable<ChangelogVersion> {
 
     public List<String> getImportantNotes() {
         return entries.stream()
+                .sequential()
                 .map(ChangelogEntry::getImportantNotes)
                 .flatMap(List::stream)
                 .collect(Collectors.toList());
