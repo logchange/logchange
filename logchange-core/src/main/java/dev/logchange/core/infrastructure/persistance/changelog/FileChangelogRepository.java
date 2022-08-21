@@ -14,10 +14,7 @@ import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -66,6 +63,9 @@ public class FileChangelogRepository implements ChangelogRepository {
         }
     }
 
+    /**
+     * Returns: The returning list of files is not sorted.
+     */
     private List<File> getInputFiles() {
         File[] files = inputDirectory.listFiles();
 
@@ -123,7 +123,9 @@ public class FileChangelogRepository implements ChangelogRepository {
         }
 
         return Arrays.stream(entriesFiles)
-                .filter(file -> file.getName().contains(".yml") || file.getName().contains(".yaml"));
+                .filter(file -> file.getName().contains(".yml") || file.getName().contains(".yaml"))
+                .sorted((f1, f2) -> Comparator.comparing(File::getName)
+                        .compare(f1, f2));
     }
 
     private InputStream getEntryInputStream(File entryFile) {
