@@ -6,6 +6,7 @@ import dev.logchange.core.domain.changelog.model.archive.ChangelogArchive;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.domain.changelog.model.version.ChangelogVersion;
 import dev.logchange.core.domain.changelog.model.version.Version;
+import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.format.md.changelog.MDChangelog;
 import dev.logchange.core.format.release_date.ReleaseDate;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
@@ -13,10 +14,7 @@ import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -25,9 +23,12 @@ public class FileChangelogRepository implements ChangelogRepository {
     private final File inputDirectory;
     private final File outputFile;
 
-    public FileChangelogRepository(File inputDirectory, File outputFile) {
+    private final Config config;
+
+    public FileChangelogRepository(File inputDirectory, File outputFile, Config config) {
         this.inputDirectory = inputDirectory;
         this.outputFile = outputFile;
+        this.config = config;
     }
 
     @Override
@@ -51,15 +52,20 @@ public class FileChangelogRepository implements ChangelogRepository {
 
     @Override
     public void save(Changelog changelog) {
-        String md = new MDChangelog(changelog).toMD();
+        String md = new MDChangelog(config, changelog).toMD();
 
-        try (PrintWriter out = new PrintWriter(outputFile)) {
+
+        try (OutputStream os = Files.newOutputStream(outputFile.toPath());
+             PrintWriter out = new PrintWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8))) {
             out.println(md);
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             throw new IllegalArgumentException("Could not save changelog to file: " + outputFile + " because: " + e.getMessage());
         }
     }
 
+    /**
+     * Returns: The returning list of files is not sorted.
+     */
     private List<File> getInputFiles() {
         File[] files = inputDirectory.listFiles();
 
@@ -103,6 +109,7 @@ public class FileChangelogRepository implements ChangelogRepository {
 
     private List<ChangelogEntry> getEntries(File versionDirectory) {
         return getEntriesFiles(versionDirectory)
+                .sequential()
                 .map(file -> YMLChangelogEntry.of(getEntryInputStream(file)))
                 .map(YMLChangelogEntry::to)
                 .collect(Collectors.toList());
@@ -116,7 +123,9 @@ public class FileChangelogRepository implements ChangelogRepository {
         }
 
         return Arrays.stream(entriesFiles)
-                .filter(file -> file.getName().contains(".yml") || file.getName().contains(".yaml"));
+                .filter(file -> file.getName().contains(".yml") || file.getName().contains(".yaml"))
+                .sorted((f1, f2) -> Comparator.comparing(File::getName)
+                        .compare(f1, f2));
     }
 
     private InputStream getEntryInputStream(File entryFile) {

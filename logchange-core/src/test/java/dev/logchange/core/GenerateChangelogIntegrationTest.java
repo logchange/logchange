@@ -5,6 +5,7 @@ import dev.logchange.core.application.changelog.repository.VersionSummaryReposit
 import dev.logchange.core.application.changelog.service.generate.GenerateChangelogService;
 import dev.logchange.core.domain.changelog.command.GenerateChangelogUseCase;
 import dev.logchange.core.domain.changelog.command.GenerateChangelogUseCase.GenerateChangelogCommand;
+import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogRepository;
 import dev.logchange.core.infrastructure.persistance.changelog.FileVersionSummaryRepository;
 import org.codehaus.plexus.util.FileUtils;
@@ -40,8 +41,8 @@ public class GenerateChangelogIntegrationTest {
         File expectedChangelogOutputFile = new File(PATH + "EXPECTED_CHANGELOG.md");
         String heading = "";
 
-        ChangelogRepository repository = new FileChangelogRepository(changelogInputDir, changelogOutputFile);
-        VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogInputDir);
+        ChangelogRepository repository = new FileChangelogRepository(changelogInputDir, changelogOutputFile, Config.EMPTY);
+        VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogInputDir, Config.EMPTY);
         GenerateChangelogUseCase generateChangelogUseCase = new GenerateChangelogService(repository, versionSummaryRepository);
         GenerateChangelogCommand command = GenerateChangelogCommand.of(heading);
 

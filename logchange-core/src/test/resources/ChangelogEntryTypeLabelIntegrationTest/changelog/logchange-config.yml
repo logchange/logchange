@@ -1,0 +1,24 @@
+changelog:
+  labels:
+    unreleased: "niewydane"
+    important_notes: "Ważne"
+    types:
+      added: "Dodano"
+      changed: "Zmieniono"
+      deprecated: "Przestarzałe"
+      removed: "Usunięto"
+      fixed: "Naprawiono"
+      security: "Bezpieczeństwo"
+      other: "Inne"
+      number_of_changes:
+        singular: "zmiana"
+        plural: "zmian/y"
+    configuration:
+      heading: "Zmiany konfiguracji"
+      type: "Typ"
+      actions:
+        add: "Dodano"
+        update: "Zaktualizowano"
+        delete: "Usunięto"
+      with_default_value: "z domyślną wartością"
+      description: "Opis"

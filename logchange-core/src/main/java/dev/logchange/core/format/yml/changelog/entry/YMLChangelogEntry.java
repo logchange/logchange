@@ -67,6 +67,9 @@ public class YMLChangelogEntry {
     }
 
     public ChangelogEntry to() {
+        System.out.println(title);
+
+
         return ChangelogEntry.builder()
                 .title(ChangelogEntryTitle.of(title))
                 .type(type.to())

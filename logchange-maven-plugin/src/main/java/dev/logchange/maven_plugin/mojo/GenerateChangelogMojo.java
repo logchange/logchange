@@ -3,9 +3,12 @@ package dev.logchange.maven_plugin.mojo;
 import dev.logchange.core.application.changelog.repository.ChangelogRepository;
 import dev.logchange.core.application.changelog.repository.VersionSummaryRepository;
 import dev.logchange.core.application.changelog.service.generate.GenerateChangelogService;
+import dev.logchange.core.application.config.ConfigRepository;
 import dev.logchange.core.domain.changelog.command.GenerateChangelogUseCase;
+import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogRepository;
 import dev.logchange.core.infrastructure.persistance.changelog.FileVersionSummaryRepository;
+import dev.logchange.core.infrastructure.persistance.config.FileConfigRepository;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -35,9 +38,13 @@ public class GenerateChangelogMojo extends AbstractMojo {
     public void executeGenerate(String finalChangelogName, String yamlFilesDirectory) {
         getLog().info("Started generating " + finalChangelogName);
         File changelogDirectory = findChangelogDirectory("./" + yamlFilesDirectory);
+        File configFile = findChangelogConfig("./" + yamlFilesDirectory + "/logchange-config.yml");
 
-        ChangelogRepository repository = new FileChangelogRepository(changelogDirectory, new File(finalChangelogName));
-        VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogDirectory);
+        ConfigRepository configRepository = new FileConfigRepository(configFile);
+        Config config = configRepository.find();
+
+        ChangelogRepository repository = new FileChangelogRepository(changelogDirectory, new File(finalChangelogName), config);
+        VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogDirectory, config);
         GenerateChangelogUseCase generateChangelog = new GenerateChangelogService(repository, versionSummaryRepository);
         GenerateChangelogUseCase.GenerateChangelogCommand command = GenerateChangelogUseCase.GenerateChangelogCommand.of(heading);
 
@@ -59,5 +66,19 @@ public class GenerateChangelogMojo extends AbstractMojo {
         }
 
         return changelogDir;
+    }
+
+    private File findChangelogConfig(String path) {
+        File configFile = new File(path);
+        if (!configFile.exists()) {
+            getLog().info("There is no " + path + " for this project, using defaults");
+        }
+
+        if (configFile.isDirectory()) {
+            getLog().error("File " + path + " is a directory !!!");
+            throw new RuntimeException("File " + path + " is not a directory");
+        }
+
+        return configFile;
     }
 }

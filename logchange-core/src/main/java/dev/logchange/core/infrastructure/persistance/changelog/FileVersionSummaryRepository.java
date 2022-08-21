@@ -2,6 +2,7 @@ package dev.logchange.core.infrastructure.persistance.changelog;
 
 import dev.logchange.core.application.changelog.repository.VersionSummaryRepository;
 import dev.logchange.core.domain.changelog.model.version.ChangelogVersion;
+import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.format.md.MDMeta;
 import dev.logchange.core.format.md.changelog.version.MDChangelogVersion;
 import lombok.AllArgsConstructor;
@@ -14,11 +15,12 @@ import java.io.PrintWriter;
 public class FileVersionSummaryRepository implements VersionSummaryRepository {
 
     private final File inputDirectory;
+    private final Config config;
 
     @Override
     public void save(ChangelogVersion version) {
         String meta = new MDMeta().toMD();
-        String md = new MDChangelogVersion(version).toMD();
+        String md = new MDChangelogVersion(config, version).toMD();
 
         String outputFile = inputDirectory.getAbsolutePath() + "/" + version.getVersion().getDirName() + "/version-summary.md";
 

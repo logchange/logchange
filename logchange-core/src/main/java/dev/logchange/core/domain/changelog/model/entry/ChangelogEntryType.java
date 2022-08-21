@@ -16,6 +16,7 @@ public enum ChangelogEntryType {
     OTHER("other", 7);
 
 
+    @Deprecated
     private final String type;
     private final Integer order;
 
