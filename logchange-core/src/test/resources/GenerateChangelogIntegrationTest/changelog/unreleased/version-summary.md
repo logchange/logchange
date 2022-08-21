@@ -26,7 +26,7 @@
 
 - Test title !1 !2 #1 [TASK_NUMBER](https://www.google.pl) (@marwin1991 [LINK](https://github.com/marwin1991))
 
-### Other (1 change)
+### other (1 change)
 
 - Test title !1 #1 [TASK_NUMBER](https://www.google.pl) (Piotr)
 

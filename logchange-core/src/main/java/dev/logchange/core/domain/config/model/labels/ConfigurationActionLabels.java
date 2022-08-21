@@ -13,6 +13,8 @@ public class ConfigurationActionLabels {
     public static final String DEFAULT_UPDATE_LABEL = "Updated";
     public static final String DEFAULT_DELETE_LABEL = "Deleted";
 
+    public static final ConfigurationActionLabels EMPTY = ConfigurationActionLabels.builder().build();
+
     private String add;
     private String update;
     private String delete;
@@ -22,7 +24,7 @@ public class ConfigurationActionLabels {
             case ADD:
                 return StringUtils.defaultIfBlank(add, DEFAULT_ADD_LABEL);
             case UPDATE:
-                return StringUtils.defaultIfBlank(update, DEFAULT_ADD_LABEL);
+                return StringUtils.defaultIfBlank(update, DEFAULT_UPDATE_LABEL);
             case DELETE:
                 return StringUtils.defaultIfBlank(delete, DEFAULT_DELETE_LABEL);
             default:

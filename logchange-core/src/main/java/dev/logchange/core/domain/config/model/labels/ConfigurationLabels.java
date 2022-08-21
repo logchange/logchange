@@ -15,7 +15,9 @@ public class ConfigurationLabels {
     public static final String DEFAULT_WITH_DEFAULT_VALUE_LABEL = "with default value";
     public static final String DEFAULT_DESCRIPTION_LABEL = "Description";
 
-    public static final ConfigurationLabels EMPTY = ConfigurationLabels.builder().build();
+    public static final ConfigurationLabels EMPTY = ConfigurationLabels.builder()
+            .actions(ConfigurationActionLabels.EMPTY)
+            .build();
 
     private String heading;
     private String type;
