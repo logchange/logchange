@@ -38,7 +38,7 @@ public class GenerateChangelogMojo extends AbstractMojo {
     public void executeGenerate(String finalChangelogName, String yamlFilesDirectory) {
         getLog().info("Started generating " + finalChangelogName);
         File changelogDirectory = findChangelogDirectory("./" + yamlFilesDirectory);
-        File configFile = findChangelogConfig("./" + yamlFilesDirectory + "/changelog-config.yml");
+        File configFile = findChangelogConfig("./" + yamlFilesDirectory + "/logchange-config.yml");
 
         ConfigRepository configRepository = new FileConfigRepository(configFile);
         Config config = configRepository.find();

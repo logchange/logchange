@@ -39,7 +39,7 @@ public class ChangelogEntryTypeLabelIntegrationTest {
         //given:
         File changelogInputDir = new File(PATH + "changelog");
         File changelogOutputFile = new File(PATH + "CHANGELOG.md");
-        File configFile = new File(PATH + "changelog/changelog-config.yml");
+        File configFile = new File(PATH + "changelog/logchange-config.yml");
         File expectedChangelogOutputFile = new File(PATH + "EXPECTED_CHANGELOG.md");
         String heading = "";
 
