@@ -7,9 +7,9 @@ import dev.logchange.core.format.md.MDMeta;
 import dev.logchange.core.format.md.changelog.version.MDChangelogVersion;
 import lombok.AllArgsConstructor;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
 @AllArgsConstructor
 public class FileVersionSummaryRepository implements VersionSummaryRepository {
@@ -22,12 +22,16 @@ public class FileVersionSummaryRepository implements VersionSummaryRepository {
         String meta = new MDMeta().toMD();
         String md = new MDChangelogVersion(config, version).toMD();
 
-        String outputFile = inputDirectory.getAbsolutePath() + "/" + version.getVersion().getDirName() + "/version-summary.md";
+        String outputFilePath = inputDirectory.getAbsolutePath() + "/" + version.getVersion().getDirName() + "/version-summary.md";
+        File outputFile = new File(outputFilePath);
 
-        try (PrintWriter out = new PrintWriter(outputFile)) {
+        try (OutputStream os = Files.newOutputStream(outputFile.toPath());
+             PrintWriter out = new PrintWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8))) {
+
             out.println(meta + md);
-        } catch (FileNotFoundException e) {
-            throw new IllegalArgumentException("Could not save changelog to file: " + outputFile + " because: " + e.getMessage());
+
+        } catch (IOException e) {
+            throw new IllegalArgumentException("Could not save changelog to file: " + outputFilePath + " because: " + e.getMessage());
         }
     }
 }

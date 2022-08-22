@@ -4,9 +4,9 @@ import dev.logchange.core.application.changelog.repository.ChangelogEntryReposit
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
 public class FileChangelogEntryRepository implements ChangelogEntryRepository {
 
@@ -19,9 +19,13 @@ public class FileChangelogEntryRepository implements ChangelogEntryRepository {
     @Override
     public void save(ChangelogEntry entry) {
         String content = YMLChangelogEntry.of(entry).toYMLString();
-        try (PrintWriter out = new PrintWriter(outputFile)) {
+
+        try (OutputStream os = Files.newOutputStream(outputFile.toPath());
+             PrintWriter out = new PrintWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8))) {
+
             out.println(content);
-        } catch (FileNotFoundException e) {
+
+        } catch (IOException e) {
             throw new IllegalArgumentException("Could not save changelog entry to file: " + outputFile + " because: " + e.getMessage());
         }
     }
