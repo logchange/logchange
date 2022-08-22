@@ -5,7 +5,7 @@
 [niewydane]
 -----------
 
-### WaÅ¼ne
+### Wa¿ne
 
 - Update style.css on server during instalation 1
 - configuration
@@ -18,7 +18,7 @@
 
 - Test title 2 !1 #1 [TASK_NUMBER](https://www.google.pl) ([Piotr](https://github.com/marwin1991) @marwin1991)
 
-### UsuniÄ™to (1 zmiana)
+### Usuniêto (1 zmiana)
 
 - Test title 4 !1 #1 #2 [TASK_NUMBER](https://www.google.pl) [other link](https://www.google.pl) (@marwin1991) ([Piotr](https://github.com/marwin1991) @marwin1991)
 
@@ -35,9 +35,9 @@
 
 | Typ: database parameter                                                                                                                                                                                                             |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <ul><li>Dodano `simpleparam.name.enabled` z domyÅ›lnÄ… wartoÅ›ciÄ…: `true`</li><li>Opis: Enables displying feature name 1</li><li>You can put more information here, any text f.e !1 #1, even [link test](https://google.com)</li></ul> |
-| <ul><li>Dodano `simpleparam.name.enabled` z domyÅ›lnÄ… wartoÅ›ciÄ…: `true`</li><li>Opis: Enables displying feature name 2</li></ul>                                                                                                     |
-| <ul><li>Dodano `simpleparam.name.enabled` z domyÅ›lnÄ… wartoÅ›ciÄ…: `true`</li><li>Opis: Enables displying feature name 3</li></ul>                                                                                                     |
-| <ul><li>Dodano `simpleparam.name.enabled` z domyÅ›lnÄ… wartoÅ›ciÄ…: `true`</li><li>Opis: Enables displying feature name 4</li></ul>                                                                                                     |
+| <ul><li>Dodano `simpleparam.name.enabled` z domyœln¹ wartoœci¹: `true`</li><li>Opis: Enables displying feature name 1</li><li>You can put more information here, any text f.e !1 #1, even [link test](https://google.com)</li></ul> |
+| <ul><li>Dodano `simpleparam.name.enabled` z domyœln¹ wartoœci¹: `true`</li><li>Opis: Enables displying feature name 2</li></ul>                                                                                                     |
+| <ul><li>Dodano `simpleparam.name.enabled` z domyœln¹ wartoœci¹: `true`</li><li>Opis: Enables displying feature name 3</li></ul>                                                                                                     |
+| <ul><li>Dodano `simpleparam.name.enabled` z domyœln¹ wartoœci¹: `true`</li><li>Opis: Enables displying feature name 4</li></ul>                                                                                                     |
 
 

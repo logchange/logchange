@@ -30,6 +30,9 @@ public class GenerateChangelogMojo extends AbstractMojo {
     @Parameter(defaultValue = DEFAULT_OUTPUT_FILE, property = OUTPUT_FILE_MVN_PROPERTY)
     private String outputFile;
 
+    @Parameter(defaultValue = DEFAULT_CONFIG_FILE, property = CONFIG_FILE_MVN_PROPERTY)
+    private String configFile;
+
     @Override
     public void execute() {
         executeGenerate(outputFile, inputDir);
@@ -38,10 +41,8 @@ public class GenerateChangelogMojo extends AbstractMojo {
     public void executeGenerate(String finalChangelogName, String yamlFilesDirectory) {
         getLog().info("Started generating " + finalChangelogName);
         File changelogDirectory = findChangelogDirectory("./" + yamlFilesDirectory);
-        File configFile = findChangelogConfig("./" + yamlFilesDirectory + "/logchange-config.yml");
 
-        ConfigRepository configRepository = new FileConfigRepository(configFile);
-        Config config = configRepository.find();
+        Config config =  findConfig("./" + yamlFilesDirectory + "/" + configFile);
 
         ChangelogRepository repository = new FileChangelogRepository(changelogDirectory, new File(finalChangelogName), config);
         VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogDirectory, config);
@@ -68,17 +69,20 @@ public class GenerateChangelogMojo extends AbstractMojo {
         return changelogDir;
     }
 
-    private File findChangelogConfig(String path) {
+    private Config findConfig(String path) {
         File configFile = new File(path);
+
         if (!configFile.exists()) {
-            getLog().info("There is no " + path + " for this project, using defaults");
+            getLog().info("There is no config file:  " + path + " for this project, using defaults");
+            return Config.EMPTY;
         }
 
         if (configFile.isDirectory()) {
             getLog().error("File " + path + " is a directory !!!");
-            throw new RuntimeException("File " + path + " is not a directory");
+            throw new RuntimeException("File " + path + " is a directory !!!");
         }
 
-        return configFile;
+        ConfigRepository configRepository = new FileConfigRepository(configFile);
+        return configRepository.find();
     }
 }
