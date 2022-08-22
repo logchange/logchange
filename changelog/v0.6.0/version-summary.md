@@ -11,8 +11,8 @@
 
 ### Fixed (3 changes)
 
-- Fixed problem with encoding f.e. Polish charset, set save encoding to UTF-8. ([Piotr](https://github.com/marwin1991) @marwin1991)
 - Added other changelog entry type. ([Piotr](https://github.com/marwin1991) @marwin1991)
 - Added space between configuration type and key. ([Piotr](https://github.com/marwin1991) @marwin1991)
+- Fixed problem with encoding f.e. Polish charset, set save encoding to UTF-8. ([Piotr](https://github.com/marwin1991) @marwin1991)
 
 
