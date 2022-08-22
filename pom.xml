@@ -4,7 +4,7 @@
 
     <groupId>dev.logchange</groupId>
     <artifactId>logchange</artifactId>
-    <version>0.7.0-SNAPSHOT</version>
+    <version>0.6.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>

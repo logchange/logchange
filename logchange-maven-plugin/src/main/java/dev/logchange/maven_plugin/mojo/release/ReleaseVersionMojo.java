@@ -61,7 +61,7 @@ public class ReleaseVersionMojo extends AbstractMojo {
         if (unreleasedDir.renameTo(newDir)) {
             getLog().info("Renamed " + unreleasedDirName + " to " + newDirName + " successful");
         } else {
-            //TODO throw exception
+            // TODO: throw exception
         }
     }
 
