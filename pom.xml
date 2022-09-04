@@ -10,6 +10,7 @@
     <modules>
         <module>logchange-core</module>
         <module>logchange-maven-plugin</module>
+        <module>logchange-cli</module>
         <module>logchange-test-reports</module>
     </modules>
 
