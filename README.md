@@ -56,7 +56,7 @@ You can choose between two options:
         <plugin>
             <groupId>dev.logchange</groupId>
             <artifactId>logchange-maven-plugin</artifactId>
-            <version>0.6.0</version>
+            <version>0.6.1</version>
             <inherited>false</inherited> <!-- For multi module project -->
         </plugin>
     </plugins>
@@ -230,8 +230,9 @@ as release notes.
 ### Archives
 
 If your project already contains some `CHANGELOG.md` you don't have to rewrite it to `yml`. Only what have to do is to
-move it to `changelog` directory and rename it to `archive.md` or `archiveXXXX.md` where XXXX is anything you want f.e.
--2.0.0
+move it to `changelog` directory and rename it to `archive.md` or `archiveXXXX.md` where XXXX is anything you want f.e. `-2.0.0`.
+
+**⚠️⚠️ IMPORTANT ⚠️⚠️** `archive-XXX.md` **has to be** in `changelog` directory (`changelog/archive-1.3.6.md`) do not add any sub directories.
 
 ## TODO:
 
