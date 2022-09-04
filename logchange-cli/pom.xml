@@ -16,6 +16,7 @@
     <artifactId>logchange-cli</artifactId>
     <packaging>jar</packaging>
 
+
     <properties>
         <jdk.version>1.8</jdk.version>
         <!-- If you are building with JDK 9 or higher, you can uncomment the lines below to set the release version -->
