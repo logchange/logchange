@@ -122,7 +122,7 @@ merge_requests:
   - 1
 issues:
   - 1
-links: # links to external systems, like jira or redmine
+links: # links to different project's issue or external systems, like jira or redmine
   - name: TASK_NUMBER
     url: https://www.google.pl
 type: fixed # [added/changed/deprecated/removed/fixed/security/other]
