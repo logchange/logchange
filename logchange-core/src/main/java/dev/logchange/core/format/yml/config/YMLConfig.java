@@ -5,13 +5,17 @@ import de.beosign.snakeyamlanno.property.YamlAnySetter;
 import de.beosign.snakeyamlanno.property.YamlProperty;
 import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.domain.config.model.labels.Labels;
+import dev.logchange.core.format.yml.YamlProvider;
+import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.InputStream;
 
 
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class YMLConfig {
@@ -22,6 +26,16 @@ public class YMLConfig {
     public static YMLConfig of(InputStream input) {
         Yaml yaml = new Yaml(new AnnotationAwareConstructor(YMLConfig.class));
         return yaml.load(input);
+    }
+
+    public static YMLConfig of(Config config) {
+        return YMLConfig.builder()
+                .changelog(YMLChangelog.of(config))
+                .build();
+    }
+
+    public String toYMLString() {
+        return YamlProvider.get().dumpAsMap(this);
     }
 
     @YamlAnySetter

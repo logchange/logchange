@@ -4,8 +4,10 @@ import de.beosign.snakeyamlanno.property.YamlAnySetter;
 import de.beosign.snakeyamlanno.property.YamlProperty;
 import dev.logchange.core.domain.config.model.labels.Labels;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class YMLLabels {
@@ -21,6 +23,15 @@ public class YMLLabels {
 
     @YamlProperty(key = "configuration", order = -3)
     public YMLConfigurationLabels configuration;
+
+    public static YMLLabels of(Labels labels) {
+        return YMLLabels.builder()
+                .unreleased(labels.getUnreleased())
+                .importantNotes(labels.getImportantNotes())
+                .types(YMLTypesLabels.of(labels.getTypes()))
+                .configuration(YMLConfigurationLabels.of(labels.getConfiguration()))
+                .build();
+    }
 
     @YamlAnySetter
     public void anySetter(String key, Object value) {

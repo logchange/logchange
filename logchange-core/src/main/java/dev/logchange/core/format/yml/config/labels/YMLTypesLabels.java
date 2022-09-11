@@ -2,13 +2,17 @@ package dev.logchange.core.format.yml.config.labels;
 
 import de.beosign.snakeyamlanno.property.YamlAnySetter;
 import de.beosign.snakeyamlanno.property.YamlProperty;
+import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType;
 import dev.logchange.core.domain.config.model.labels.TypesLabels;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class YMLTypesLabels {
+
     @YamlProperty(key = "added", order = -1)
     public String added;
 
@@ -30,8 +34,21 @@ public class YMLTypesLabels {
     @YamlProperty(key = "other", order = -7)
     public String other;
 
-    @YamlProperty(key = "number_of_changes", order = -7)
+    @YamlProperty(key = "number_of_changes", order = -8)
     public YMLNumberOfChangesLabels numberOfChanges;
+
+    public static YMLTypesLabels of(TypesLabels types) {
+        return YMLTypesLabels.builder()
+                .added(types.getType(ChangelogEntryType.ADDED))
+                .changed(types.getType(ChangelogEntryType.CHANGED))
+                .deprecated(types.getType(ChangelogEntryType.DEPRECATED))
+                .removed(types.getType(ChangelogEntryType.REMOVED))
+                .fixed(types.getType(ChangelogEntryType.FIXED))
+                .security(types.getType(ChangelogEntryType.SECURITY))
+                .other(types.getType(ChangelogEntryType.SECURITY))
+                .numberOfChanges(YMLNumberOfChangesLabels.of(types.getNumberOfChanges()))
+                .build();
+    }
 
     @YamlAnySetter
     public void anySetter(String key, Object value) {

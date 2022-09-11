@@ -1,4 +1,4 @@
-package dev.logchange.maven_plugin.mojo;
+package dev.logchange.maven_plugin.mojo.init;
 
 import com.soebes.itf.jupiter.extension.MavenGoal;
 import com.soebes.itf.jupiter.extension.MavenJupiterExtension;
