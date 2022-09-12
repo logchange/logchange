@@ -1,4 +1,4 @@
-package dev.logchange.maven_plugin.mojo.init;
+package dev.logchange.maven_plugin.util;
 
 import org.apache.maven.plugin.logging.Log;
 

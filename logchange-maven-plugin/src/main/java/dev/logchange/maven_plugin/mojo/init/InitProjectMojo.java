@@ -3,6 +3,7 @@ package dev.logchange.maven_plugin.mojo.init;
 import dev.logchange.core.application.config.ConfigRepository;
 import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.infrastructure.persistance.config.FileConfigRepository;
+import dev.logchange.maven_plugin.util.ConfigFile;
 import dev.logchange.maven_plugin.util.Dir;
 import dev.logchange.maven_plugin.util.GitKeep;
 import org.apache.maven.plugin.AbstractMojo;
