@@ -26,10 +26,12 @@ public class ConfigFile {
         try {
             if (changelogConfig.createNewFile()) {
                 log.info("Created: " + changelogConfig.getName());
+                return changelogConfig;
             } else {
+                String msg = changelogConfig.getName() + " already exists.";
                 log.warn(changelogConfig.getName() + " already exists.");
+                throw new RuntimeException(msg);
             }
-            return changelogConfig;
         } catch (IOException e) {
             String msg = "An error occurred while creating " + DEFAULT_CONFIG_FILE + " in path: " + path;
             log.error(msg, e);
