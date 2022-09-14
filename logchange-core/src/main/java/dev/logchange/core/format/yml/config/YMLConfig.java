@@ -20,6 +20,10 @@ import java.io.InputStream;
 @AllArgsConstructor
 public class YMLConfig {
 
+    private static final String YML_HEADING = "# This file configures logchange tool \uD83C\uDF33 \uD83E\uDE93 => \uD83E\uDEB5 \n" +
+            "# Visit https://github.com/logchange/logchange and leave a star \uD83C\uDF1F \n" +
+            "# More info about configuration you can find https://github.com/logchange/logchange#configuration \n";
+
     @YamlProperty(key = "changelog", order = 0)
     public YMLChangelog changelog;
 
@@ -35,7 +39,7 @@ public class YMLConfig {
     }
 
     public String toYMLString() {
-        return YamlProvider.get().dumpAsMap(this);
+        return YML_HEADING + YamlProvider.get().dumpAsMap(this);
     }
 
     @YamlAnySetter
