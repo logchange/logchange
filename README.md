@@ -164,31 +164,36 @@ configurations: # information about changes in available application configurati
 
 You can configure this plugin via `logchange-config.yml` file in `changelog` directory.
 
+Copy following section as default config.
+
 ```yml
+# This file configures logchange tool 🌳 🪓 => 🪵 
+# Visit https://github.com/logchange/logchange and leave a star 🌟 
+# More info about configuration you can find https://github.com/logchange/logchange#configuration 
 changelog:
-  labels:
-    unreleased: unreleased
-    important_notes: Important notes
-    types:
-      added: Added
-      changed: Changed
-      deprecated: Deprecated
-      removed: Removed
-      fixed: Fixed
-      security: Security
-      other: Security
-      number_of_changes:
-        singular: change
-        plural: changes
-    configuration:
-      heading: Configuration changes
-      type: Type
-      actions:
-        add: Added
-        delete: Deleted
-        update: Updated
-      with_default_value: with default value
-      description: Description
+    labels:
+        unreleased: unreleased
+        important_notes: Important notes
+        types:
+            added: Added
+            changed: Changed
+            deprecated: Deprecated
+            removed: Removed
+            fixed: Fixed
+            security: Security
+            other: Security
+            number_of_changes:
+                singular: change
+                plural: changes
+        configuration:
+            heading: Configuration changes
+            type: Type
+            actions:
+                add: Added
+                delete: Deleted
+                update: Updated
+            with_default_value: with default value
+            description: Description
 ```
 
 ### Generating `CHANGELOG.md`
