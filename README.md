@@ -194,7 +194,6 @@ changelog:
                 update: Updated
             with_default_value: with default value
             description: Description
-
 ```
 
 ### Generating `CHANGELOG.md`
@@ -239,6 +238,14 @@ If your project already contains some `CHANGELOG.md` you don't have to rewrite i
 move it to `changelog` directory and rename it to `archive.md` or `archiveXXXX.md` where XXXX is anything you want f.e. `-2.0.0`.
 
 **⚠️⚠️ IMPORTANT ⚠️⚠️** `archive-XXX.md` **has to be** in `changelog` directory (`changelog/archive-1.3.6.md`) do not add any sub directories.
+
+### Quote or not to quote ?
+
+According to the official YAML specification one should:
+
+- Whenever applicable use the unquoted style since it is the most readable.
+- Use the single-quoted style (') if characters such as " and \ are being used inside the string to avoid escaping them and therefore improve readability.
+- Use the double-quoted style (") when the first two options aren't sufficient, i.e. in scenarios where more complex line breaks are required or non-printable characters are needed.
 
 ## TODO:
 

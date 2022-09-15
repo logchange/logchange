@@ -1,5 +1,9 @@
-package dev.logchange.maven_plugin.mojo;
+package dev.logchange.maven_plugin.mojo.init;
 
+import dev.logchange.core.application.config.ConfigRepository;
+import dev.logchange.core.domain.config.model.Config;
+import dev.logchange.core.infrastructure.persistance.config.FileConfigRepository;
+import dev.logchange.maven_plugin.util.ConfigFile;
 import dev.logchange.maven_plugin.util.Dir;
 import dev.logchange.maven_plugin.util.GitKeep;
 import org.apache.maven.plugin.AbstractMojo;
@@ -28,11 +32,19 @@ public class InitProjectMojo extends AbstractMojo {
     public void execute() {
         getLog().info("Initialize project for logchange-maven-plugin");
         createEmptyChangelogFile(outputFile);
-        executeInit(inputDir, unreleasedVersionDir);
+        createUnreleased(inputDir, unreleasedVersionDir);
+        createConfig(inputDir);
         getLog().info("Initialize project successful");
     }
 
-    public void executeInit(String inputDir, String unreleasedVersionDir) {
+    private void createConfig(String inputDir) {
+        File config = ConfigFile.of(getLog(), inputDir).create();
+        ConfigRepository configRepository = new FileConfigRepository(config);
+
+        configRepository.save(Config.EMPTY);
+    }
+
+    public void createUnreleased(String inputDir, String unreleasedVersionDir) {
         Dir.of(getLog(), inputDir).create();
         Dir.of(getLog(), inputDir + "/" + unreleasedVersionDir).create();
         GitKeep.of(getLog(), inputDir + "/" + unreleasedVersionDir + "/").create();

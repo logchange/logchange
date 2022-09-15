@@ -4,8 +4,10 @@ import de.beosign.snakeyamlanno.property.YamlAnySetter;
 import de.beosign.snakeyamlanno.property.YamlProperty;
 import dev.logchange.core.domain.config.model.labels.NumberOfChangesLabels;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class YMLNumberOfChangesLabels {
@@ -15,6 +17,13 @@ public class YMLNumberOfChangesLabels {
 
     @YamlProperty(key = "plural", order = -1)
     public String plural;
+
+    public static YMLNumberOfChangesLabels of(NumberOfChangesLabels numberOfChanges) {
+        return YMLNumberOfChangesLabels.builder()
+                .singular(numberOfChanges.getSingular())
+                .plural(numberOfChanges.getPlural())
+                .build();
+    }
 
     @YamlAnySetter
     public void anySetter(String key, Object value) {

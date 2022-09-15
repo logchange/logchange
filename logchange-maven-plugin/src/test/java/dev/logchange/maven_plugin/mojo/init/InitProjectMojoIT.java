@@ -1,4 +1,4 @@
-package dev.logchange.maven_plugin.mojo;
+package dev.logchange.maven_plugin.mojo.init;
 
 import com.soebes.itf.jupiter.extension.MavenGoal;
 import com.soebes.itf.jupiter.extension.MavenJupiterExtension;
@@ -24,10 +24,12 @@ class InitProjectMojoIT {
 
 
         File gitKeep = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/unreleased/.gitkeep");
+        File config = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/logchange-config.yml");
         File changelog = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "CHANGELOG.md");
 
-       assertThat(gitKeep).exists();
-       assertThat(changelog).exists();
+        assertThat(gitKeep).exists();
+        assertThat(config).exists();
+        assertThat(changelog).exists();
     }
 
 }

@@ -2,7 +2,7 @@ package dev.logchange.maven_plugin.mojo.release;
 
 import dev.logchange.core.format.release_date.ReleaseDate;
 import dev.logchange.maven_plugin.mojo.GenerateChangelogMojo;
-import dev.logchange.maven_plugin.mojo.InitProjectMojo;
+import dev.logchange.maven_plugin.mojo.init.InitProjectMojo;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -45,7 +45,7 @@ public class ReleaseVersionMojo extends AbstractMojo {
         generateChangelogMojo.setLog(getLog());
         generateChangelogMojo.executeGenerate(outputFile, inputDir);
 
-        new InitProjectMojo().executeInit(inputDir, unreleasedVersionDir);
+        new InitProjectMojo().createUnreleased(inputDir, unreleasedVersionDir);
         getLog().info("New changelog release successful");
     }
 

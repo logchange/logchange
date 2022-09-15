@@ -5,6 +5,7 @@ import de.beosign.snakeyamlanno.property.YamlAnySetter;
 import de.beosign.snakeyamlanno.property.YamlProperty;
 import de.beosign.snakeyamlanno.representer.AnnotationAwareRepresenter;
 import dev.logchange.core.domain.changelog.model.entry.*;
+import dev.logchange.core.format.yml.YamlProvider;
 import lombok.*;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
@@ -23,23 +24,30 @@ public class YMLChangelogEntry {
 
     @YamlProperty(key = "title", order = 0)
     public String title;
+
     @Singular
     @YamlProperty(key = "authors", order = -1)
     public List<YMLChangelogEntryAuthor> authors;
+
     @Singular
     @YamlProperty(key = "merge_requests", order = -2)
     public List<Long> mergeRequests;
+
     @Singular
     @YamlProperty(key = "issues", order = -3)
     public List<Long> issues;
+
     @Singular
     @YamlProperty(key = "links", order = -4)
     public List<YMLChangelogEntryLink> links;
+
     @YamlProperty(key = "type", order = -5, converter = YMLChangelogEntryTypeConverter.class)
     public YMLChangelogEntryType type;
+
     @Singular
     @YamlProperty(key = "important_notes", order = -6)
     public List<String> importantNotes;
+
     @Singular
     @YamlProperty(key = "configurations", order = -7)
     public List<YMLChangelogEntryConfiguration> configurations;
@@ -50,14 +58,7 @@ public class YMLChangelogEntry {
     }
 
     public String toYMLString() {
-        DumperOptions dumperOptions = new DumperOptions();
-        dumperOptions.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
-        dumperOptions.setPrettyFlow(true);
-        dumperOptions.setIndent(4);
-        dumperOptions.setIndicatorIndent(2);
-
-        Yaml yaml = new Yaml(new AnnotationAwareRepresenter(), dumperOptions);
-        return yaml.dumpAsMap(this);
+        return YamlProvider.get().dumpAsMap(this);
     }
 
     @YamlAnySetter
