@@ -3,11 +3,9 @@ package dev.logchange.core.format.yml.changelog.entry;
 import de.beosign.snakeyamlanno.constructor.AnnotationAwareConstructor;
 import de.beosign.snakeyamlanno.property.YamlAnySetter;
 import de.beosign.snakeyamlanno.property.YamlProperty;
-import de.beosign.snakeyamlanno.representer.AnnotationAwareRepresenter;
 import dev.logchange.core.domain.changelog.model.entry.*;
 import dev.logchange.core.format.yml.YamlProvider;
 import lombok.*;
-import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.InputStream;
@@ -68,8 +66,6 @@ public class YMLChangelogEntry {
     }
 
     public ChangelogEntry to() {
-        System.out.println(title);
-
 
         return ChangelogEntry.builder()
                 .title(ChangelogEntryTitle.of(title))

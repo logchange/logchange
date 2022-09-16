@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class YMLConfigurationActionLabels {
 
+    public static final YMLConfigurationActionLabels EMPTY = YMLConfigurationActionLabels.builder().build();
     @YamlProperty(key = "add", order = 0)
     public String add;
 

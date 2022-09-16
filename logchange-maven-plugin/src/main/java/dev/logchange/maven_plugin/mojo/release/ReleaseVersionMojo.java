@@ -30,6 +30,10 @@ public class ReleaseVersionMojo extends AbstractMojo {
     @Parameter(defaultValue = DEFAULT_OUTPUT_FILE, property = OUTPUT_FILE_MVN_PROPERTY)
     private String outputFile;
 
+    @Parameter(defaultValue = DEFAULT_CONFIG_FILE, property = CONFIG_FILE_MVN_PROPERTY)
+    private String configFile;
+
+
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         getLog().info("Begin preparation from new changelog release");
@@ -43,7 +47,7 @@ public class ReleaseVersionMojo extends AbstractMojo {
 
         GenerateChangelogMojo generateChangelogMojo = new GenerateChangelogMojo();
         generateChangelogMojo.setLog(getLog());
-        generateChangelogMojo.executeGenerate(outputFile, inputDir);
+        generateChangelogMojo.executeGenerate(outputFile, inputDir, configFile);
 
         new InitProjectMojo().createUnreleased(inputDir, unreleasedVersionDir);
         getLog().info("New changelog release successful");

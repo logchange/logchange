@@ -35,14 +35,14 @@ public class GenerateChangelogMojo extends AbstractMojo {
 
     @Override
     public void execute() {
-        executeGenerate(outputFile, inputDir);
+        executeGenerate(outputFile, inputDir, configFile);
     }
 
-    public void executeGenerate(String finalChangelogName, String yamlFilesDirectory) {
+    public void executeGenerate(String finalChangelogName, String yamlFilesDirectory, String configFile) {
         getLog().info("Started generating " + finalChangelogName);
         File changelogDirectory = findChangelogDirectory("./" + yamlFilesDirectory);
 
-        Config config =  findConfig("./" + yamlFilesDirectory + "/" + configFile);
+        Config config = findConfig("./" + yamlFilesDirectory + "/" + configFile);
 
         ChangelogRepository repository = new FileChangelogRepository(changelogDirectory, new File(finalChangelogName), config);
         VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogDirectory, config);

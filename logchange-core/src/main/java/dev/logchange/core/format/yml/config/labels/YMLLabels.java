@@ -43,8 +43,24 @@ public class YMLLabels {
         return Labels.builder()
                 .unreleased(unreleased)
                 .importantNotes(importantNotes)
-                .types(types.to())
-                .configuration(configuration.to())
+                .types(getTypes().to())
+                .configuration(getConfiguration().to())
                 .build();
+    }
+
+    public YMLTypesLabels getTypes() {
+        if (types != null) {
+            return types;
+        } else {
+            return YMLTypesLabels.EMPTY;
+        }
+    }
+
+    public YMLConfigurationLabels getConfiguration() {
+        if (configuration != null) {
+            return configuration;
+        } else {
+            return YMLConfigurationLabels.EMPTY;
+        }
     }
 }

@@ -1,6 +1,6 @@
 title: Fixed problem with encoding f.e. Polish charset, set save encoding to UTF-8.
 authors:
-  - name: Piotr
+  - name: Peter
     nick: marwin1991
     url: https://github.com/marwin1991
 type: fixed # [added/changed/deprecated/removed/fixed/security/other]
