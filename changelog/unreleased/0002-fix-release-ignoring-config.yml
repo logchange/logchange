@@ -7,4 +7,4 @@ type: fixed # [added/changed/deprecated/removed/fixed/security/other]
 issues:
   - 36
 merge_requests:
-  - 35
+  - 37
