@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class YMLNumberOfChangesLabels {
 
+    public static final YMLNumberOfChangesLabels EMPTY = YMLNumberOfChangesLabels.builder().build();
     @YamlProperty(key = "singular", order = 0)
     public String singular;
 

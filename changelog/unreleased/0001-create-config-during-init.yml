@@ -1,6 +1,6 @@
 title: When initialize project, create default `logchange-config.yml` to encourage usage.
 authors:
-  - name: Piotr
+  - name: Peter
     nick: marwin1991
     url: https://github.com/marwin1991
 type: changed # [added/changed/deprecated/removed/fixed/security/other]

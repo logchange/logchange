@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class YMLTypesLabels {
 
+    public static final YMLTypesLabels EMPTY = YMLTypesLabels.builder().build();
+
     @YamlProperty(key = "added", order = -1)
     public String added;
 
@@ -65,7 +67,15 @@ public class YMLTypesLabels {
                 .fixed(fixed)
                 .security(security)
                 .other(other)
-                .numberOfChanges(numberOfChanges.to())
+                .numberOfChanges(getNumberOfChanges().to())
                 .build();
+    }
+
+    public YMLNumberOfChangesLabels getNumberOfChanges() {
+        if (numberOfChanges != null) {
+            return numberOfChanges;
+        } else {
+            return YMLNumberOfChangesLabels.EMPTY;
+        }
     }
 }

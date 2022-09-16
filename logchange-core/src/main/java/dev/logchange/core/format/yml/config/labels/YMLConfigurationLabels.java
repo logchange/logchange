@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class YMLConfigurationLabels {
 
+    public static final YMLConfigurationLabels EMPTY = YMLConfigurationLabels.builder().build();
+
     @YamlProperty(key = "heading", order = 0)
     public String heading;
 
@@ -47,9 +49,17 @@ public class YMLConfigurationLabels {
         return ConfigurationLabels.builder()
                 .heading(heading)
                 .type(type)
-                .actions(actions.to())
+                .actions(getActions().to())
                 .withDefaultValue(withDefaultValue)
                 .description(description)
                 .build();
+    }
+
+    public YMLConfigurationActionLabels getActions() {
+        if (actions != null) {
+            return actions;
+        } else {
+            return YMLConfigurationActionLabels.EMPTY;
+        }
     }
 }
