@@ -68,4 +68,28 @@ class ReleaseVersionMojoIT {
         assertThat(versionSummary).exists();
     }
 
+    @MavenGoal("${project.groupId}:${project.artifactId}:${project.version}:release")
+    @MavenTest
+    @DisplayName("Project with pom.xml with version set to 1.3.7")
+    void releaseWithVersionInPomXmlWithoutSnapshotOrRc(MavenExecutionResult result) {
+        assertThat(result).isSuccessful()
+                .project()
+                .has("changelog")
+                .has("changelog/unreleased")
+                .has("changelog/v1.3.7");
+
+
+        File gitKeep = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/unreleased/.gitkeep");
+        File changelog = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "CHANGELOG.md");
+        File taskMovedToRelease = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/v1.3.7/task.yml");
+        File releaseDateFile = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/v1.3.7/release-date.txt");
+        File versionSummary = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/v1.3.7/version-summary.md");
+
+        assertThat(gitKeep).exists();
+        assertThat(changelog).exists();
+        assertThat(taskMovedToRelease).exists();
+        assertThat(releaseDateFile).exists();
+        assertThat(versionSummary).exists();
+    }
+
 }

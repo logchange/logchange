@@ -1,0 +1,10 @@
+title: Fixed error when version name without SNAPSHOT or RC and releasing version.
+authors:
+  - name: Peter
+    nick: marwin1991
+    url: https://github.com/marwin1991
+type: fixed # [added/changed/deprecated/removed/fixed/security/other]
+issues:
+  - 35
+merge_requests:
+  - 38
