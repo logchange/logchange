@@ -11,6 +11,6 @@
 
 ### Fixed (1 change)
 
-- Fixed releasing new version of this project. ([Piotr](https://github.com/marwin1991) @marwin1991)
+- Fixed releasing new version of this project. ([Peter](https://github.com/marwin1991) @marwin1991)
 
 
