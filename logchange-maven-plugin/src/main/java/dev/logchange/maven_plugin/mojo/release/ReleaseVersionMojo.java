@@ -56,7 +56,11 @@ public class ReleaseVersionMojo extends AbstractMojo {
     private String getVersion() {
         String version = project.getVersion();
 
-        return version.substring(0, version.indexOf("-"));
+        if (version.contains("-")) {
+            return version.substring(0, version.indexOf("-"));
+        } else {
+            return version;
+        }
     }
 
     private void renameUnreleasedDir(String unreleasedDirName, String newDirName) {
