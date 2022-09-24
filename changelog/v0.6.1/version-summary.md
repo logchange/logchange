@@ -7,6 +7,6 @@
 
 ### Fixed (1 change)
 
-- Fixed problem with 'release' maven command that was failing when `logchange-config.yml` missing. !29 #28 ([Piotr](https://github.com/marwin1991) @marwin1991)
+- Fixed problem with 'release' maven command that was failing when `logchange-config.yml` missing. !29 #28 ([Peter](https://github.com/marwin1991) @marwin1991)
 
 

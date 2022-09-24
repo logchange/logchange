@@ -7,6 +7,6 @@
 
 ### Added (1 change)
 
-- Added 'generate' maven command that generates `CHANGELOG.md` from YAML files ([Piotr](https://github.com/marwin1991) @marwin1991)
+- Added 'generate' maven command that generates `CHANGELOG.md` from YAML files ([Peter](https://github.com/marwin1991) @marwin1991)
 
 
