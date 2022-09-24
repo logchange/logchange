@@ -56,7 +56,7 @@ You can choose between two options:
         <plugin>
             <groupId>dev.logchange</groupId>
             <artifactId>logchange-maven-plugin</artifactId>
-            <version>0.6.1</version>
+            <version>0.7.0</version>
             <inherited>false</inherited> <!-- For multi module project -->
         </plugin>
     </plugins>
