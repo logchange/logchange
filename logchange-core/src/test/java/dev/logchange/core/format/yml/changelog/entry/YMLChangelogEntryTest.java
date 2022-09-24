@@ -15,7 +15,10 @@ class YMLChangelogEntryTest {
         String result = entry.toYMLString();
 
         //then:
-        assertEquals("title: Some title\n" +
+        assertEquals("# This file is ued by logchange tool to generate CHANGELOG.md \uD83C\uDF33 \uD83E\uDE93 => \uD83E\uDEB5 \n" +
+                "# Visit https://github.com/logchange/logchange and leave a star \uD83C\uDF1F \n" +
+                "# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️\n" +
+                "title: Some title\n" +
                 "authors:\n" +
                 "  - name: Ala\n" +
                 "    nick: Ma\n" +

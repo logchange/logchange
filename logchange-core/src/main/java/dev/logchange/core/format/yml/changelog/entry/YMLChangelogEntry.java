@@ -20,6 +20,11 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class YMLChangelogEntry {
 
+    private static final String YML_HEADING = "# This file is ued by logchange tool to generate CHANGELOG.md \uD83C\uDF33 \uD83E\uDE93 => \uD83E\uDEB5 \n" +
+            "# Visit https://github.com/logchange/logchange and leave a star \uD83C\uDF1F \n" +
+            "# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️\n";
+
+
     @YamlProperty(key = "title", order = 0)
     public String title;
 
@@ -56,7 +61,7 @@ public class YMLChangelogEntry {
     }
 
     public String toYMLString() {
-        return YamlProvider.get().dumpAsMap(this);
+        return YML_HEADING + YamlProvider.get().dumpAsMap(this);
     }
 
     @YamlAnySetter
