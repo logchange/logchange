@@ -113,6 +113,9 @@ mvn logchange:add -Dempty -DfileName=000001-some-name.yml
 ### YAML format
 
 ```yml
+# This file is ued by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵
+# Visit https://github.com/logchange/logchange and leave a star 🌟
+# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️
 title: Test title
 authors:
   - name: Peter
