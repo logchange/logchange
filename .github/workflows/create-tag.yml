@@ -44,7 +44,7 @@ jobs:
       # Worth reading regarding GITHUB TOKEN
       # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow
       - name: Java Maven release
-        uses: qcastel/github-actions-maven-release@v1.12.34
+        uses: qcastel/github-actions-maven-release@v1.12.37
         if: "!contains(github.event.head_commit.message, 'Releasing new version')"
         with:
           # Cannot use GITHUB_TOKEN because of:
