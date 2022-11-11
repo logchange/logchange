@@ -1,0 +1,10 @@
+title: Fixed typo ued to used in entry yml heading comment
+authors:
+  - name: Peter
+    nick: marwin1991
+    url: https://github.com/marwin1991
+type: fixed # [added/changed/deprecated/removed/fixed/security/other]
+issues:
+  - 54
+merge_requests:
+  - 68

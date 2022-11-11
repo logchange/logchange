@@ -1,4 +1,4 @@
-# This file is ued by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵
+# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵
 # Visit https://github.com/logchange/logchange and leave a star 🌟
 # More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅️
 title: Added info to generated CHANGELOG.md to not modify it.
