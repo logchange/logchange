@@ -30,19 +30,13 @@
 | Type: database parameter                                                                                                          |
 | --------------------------------------------------------------------------------------------------------------------------------- |
 | <ul><li>Added `aaa.some.value` with default value: `true`</li><li>Description: Enables displying feature name</li></ul>           |
-| <ul><li>Added `aaa.some.value` with default value: `true`</li><li>Description: Enables displying feature name</li></ul>           |
 | <ul><li>Added `simpleparam.name.enabled` with default value: `true`</li><li>Description: Enables displying feature name</li></ul> |
 | <ul><li>Added `simpleparam.name.enabled` with default value: `true`</li><li>Description: Enables displying feature name</li></ul> |
 | <ul><li>Updated `aaa.some.value` with default value: `true`</li><li>Description: Enables displying feature name</li></ul>         |
 | <ul><li>Deleted `aaa.some.value` with default value: `true`</li><li>Description: Enables displying feature name</li></ul>         |
 
-| Type: a docker-compose                                                                                                            |
-| --------------------------------------------------------------------------------------------------------------------------------- |
-| <ul><li>Added `aaa.some.value` with default value: `true`</li><li>Description: Enables displying feature name</li></ul>           |
-| <ul><li>Added `aaa.some.value` with default value: `true`</li><li>Description: Enables displying feature name</li></ul>           |
-| <ul><li>Added `simpleparam.name.enabled` with default value: `true`</li><li>Description: Enables displying feature name</li></ul> |
-| <ul><li>Added `simpleparam.name.enabled` with default value: `true`</li><li>Description: Enables displying feature name</li></ul> |
-| <ul><li>Updated `aaa.some.value` with default value: `true`</li><li>Description: Enables displying feature name</li></ul>         |
-| <ul><li>Deleted `aaa.some.value` with default value: `true`</li><li>Description: Enables displying feature name</li></ul>         |
+| Type: a docker-compose                                                                                                  |
+| ----------------------------------------------------------------------------------------------------------------------- |
+| <ul><li>Added `aaa.some.value` with default value: `true`</li><li>Description: Enables displying feature name</li></ul> |
 
 
