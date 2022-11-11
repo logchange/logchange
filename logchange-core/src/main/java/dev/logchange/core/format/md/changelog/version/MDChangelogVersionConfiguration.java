@@ -54,15 +54,17 @@ class MDChangelogVersionConfiguration extends Configurable implements MD {
         Table.Builder tableBuilder = new Table.Builder().addRow(getConfig().getLabels().getConfiguration().getType() + ": " + type);
 
         for (ChangelogEntryConfiguration configuration : configurations) {
-            MDList configDetails = new MDList();
-            configDetails.add(getConfig().getLabels().getConfiguration().getActions().getAction(configuration.getAction()) + " "
-                    + new Code(configuration.getKey()) + " "
-                    + getConfig().getLabels().getConfiguration().getWithDefaultValue() + ": "
-                    + new Code(configuration.getDefaultValue()));
-            configDetails.add(getConfig().getLabels().getConfiguration().getDescription() + ": " + configuration.getDescription());
-            configDetails.add(configuration.getMoreInfo());
+            if (type.equals(configuration.getType())) {
+                MDList configDetails = new MDList();
+                configDetails.add(getConfig().getLabels().getConfiguration().getActions().getAction(configuration.getAction()) + " "
+                        + new Code(configuration.getKey()) + " "
+                        + getConfig().getLabels().getConfiguration().getWithDefaultValue() + ": "
+                        + new Code(configuration.getDefaultValue()));
+                configDetails.add(getConfig().getLabels().getConfiguration().getDescription() + ": " + configuration.getDescription());
+                configDetails.add(configuration.getMoreInfo());
 
-            tableBuilder.addRow(configDetails);
+                tableBuilder.addRow(configDetails);
+            }
         }
 
         return tableBuilder.build();
