@@ -1,7 +1,7 @@
 name: Renovate
 on:
   schedule:
-    - cron: '0/5 * * * *'
+    - cron: '0/15 * * * *'
 jobs:
   renovate:
     runs-on: ubuntu-latest
@@ -13,5 +13,3 @@ jobs:
         with:
           token: ${{ secrets.LOGCHANGE_PAT_TOKEN }}
           configurationFile: .github/renovate-config.js
-          onboarding: false,
-          requireConfig: false
