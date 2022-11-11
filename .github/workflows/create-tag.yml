@@ -20,6 +20,7 @@ jobs:
         with:
           java-version: 1.8
           distribution: 'temurin'
+          cache: 'maven'
           token: ${{ secrets.LOGCHANGE_PAT_TOKEN }}
 
       - name: Release and Generate CHANGELOG
