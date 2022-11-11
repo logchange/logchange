@@ -31,9 +31,9 @@
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | <ul><li>Added `simpleparam.name.enabled` with default value: `true`</li><li>Description: Enables displying feature name 1</li><li>You can put more information here, any text f.e !1 #1, even [link test](https://google.com)</li></ul> |
 
-| Type: environment variable                                                                                                                                                                                                              |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <ul><li>Added `simpleparam.name.enabled` with default value: `true`</li><li>Description: Enables displying feature name 2</li></ul>                                                                                                     |
+| Type: environment variable                                                                                                          |
+| ----------------------------------------------------------------------------------------------------------------------------------- |
+| <ul><li>Added `simpleparam.name.enabled` with default value: `true`</li><li>Description: Enables displying feature name 2</li></ul> |
 
 
 
