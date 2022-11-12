@@ -1,0 +1,8 @@
+title: Changelog heading from logchange-config.yml instead of maven properties.
+authors:
+  - name: Peter
+    nick: marwin1991
+    url: https://github.com/marwin1991
+type: changed # [added/changed/deprecated/removed/fixed/security/other]
+merge_requests:
+  - 73

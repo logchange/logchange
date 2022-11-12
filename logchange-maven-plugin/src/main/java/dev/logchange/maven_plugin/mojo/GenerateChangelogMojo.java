@@ -21,9 +21,6 @@ import static dev.logchange.maven_plugin.Constants.*;
 @Mojo(name = GENERATE_COMMAND, defaultPhase = LifecyclePhase.NONE)
 public class GenerateChangelogMojo extends AbstractMojo {
 
-    @Parameter(defaultValue = "", property = HEADING_MVN_PROPERTY)
-    private String heading;
-
     @Parameter(defaultValue = DEFAULT_INPUT_DIR, property = INPUT_DIR_MVN_PROPERTY)
     private String inputDir;
 
@@ -47,7 +44,7 @@ public class GenerateChangelogMojo extends AbstractMojo {
         ChangelogRepository repository = new FileChangelogRepository(changelogDirectory, new File(finalChangelogName), config);
         VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogDirectory, config);
         GenerateChangelogUseCase generateChangelog = new GenerateChangelogService(repository, versionSummaryRepository);
-        GenerateChangelogUseCase.GenerateChangelogCommand command = GenerateChangelogUseCase.GenerateChangelogCommand.of(heading);
+        GenerateChangelogUseCase.GenerateChangelogCommand command = GenerateChangelogUseCase.GenerateChangelogCommand.of();
 
         generateChangelog.handle(command);
 

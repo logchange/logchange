@@ -12,8 +12,10 @@ import lombok.Getter;
 public class Config {
 
     public static final Config EMPTY = Config.builder()
+            .heading(Heading.EMPTY)
             .labels(Labels.EMPTY)
             .build();
 
+    private Heading heading;
     private Labels labels;
 }
