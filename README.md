@@ -56,7 +56,7 @@ You can choose between two options:
         <plugin>
             <groupId>dev.logchange</groupId>
             <artifactId>logchange-maven-plugin</artifactId>
-            <version>0.7.0</version>
+            <version>0.8.0</version>
             <inherited>false</inherited> <!-- For multi module project -->
         </plugin>
     </plugins>
@@ -174,6 +174,7 @@ Copy following section as default config.
 # Visit https://github.com/logchange/logchange and leave a star 🌟 
 # More info about configuration you can find https://github.com/logchange/logchange#configuration 
 changelog:
+    heading: Some information that will be display in the top of CHANGELOG.md
     labels:
         unreleased: unreleased
         important_notes: Important notes
