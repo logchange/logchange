@@ -41,7 +41,6 @@ public class ChangelogEntryTypeLabelIntegrationTest {
         File changelogOutputFile = new File(PATH + "CHANGELOG.md");
         File configFile = new File(PATH + "changelog/logchange-config.yml");
         File expectedChangelogOutputFile = new File(PATH + "EXPECTED_CHANGELOG.md");
-        String heading = "";
 
         ConfigRepository configRepository = new FileConfigRepository(configFile);
         Config config = configRepository.find();
@@ -49,7 +48,7 @@ public class ChangelogEntryTypeLabelIntegrationTest {
         ChangelogRepository repository = new FileChangelogRepository(changelogInputDir, changelogOutputFile, config);
         VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogInputDir, config);
         GenerateChangelogUseCase generateChangelogUseCase = new GenerateChangelogService(repository, versionSummaryRepository);
-        GenerateChangelogUseCase.GenerateChangelogCommand command = GenerateChangelogUseCase.GenerateChangelogCommand.of(heading);
+        GenerateChangelogUseCase.GenerateChangelogCommand command = GenerateChangelogUseCase.GenerateChangelogCommand.of();
 
         //when:
         generateChangelogUseCase.handle(command);

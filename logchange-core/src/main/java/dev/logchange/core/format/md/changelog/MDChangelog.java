@@ -15,7 +15,7 @@ public class MDChangelog extends Configurable implements MD {
     public MDChangelog(Config config, Changelog changelog) {
         super(config);
         this.meta = new MDMeta();
-        this.heading = new MDChangelogHeading(changelog.getHeading());
+        this.heading = new MDChangelogHeading(config.getHeading());
         this.versions = new MDChangelogVersions(getConfig(), changelog.getVersions());
         this.archives = new MDChangelogArchives(changelog.getArchives());
     }

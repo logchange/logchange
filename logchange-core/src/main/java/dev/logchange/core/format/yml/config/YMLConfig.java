@@ -4,9 +4,9 @@ import de.beosign.snakeyamlanno.constructor.AnnotationAwareConstructor;
 import de.beosign.snakeyamlanno.property.YamlAnySetter;
 import de.beosign.snakeyamlanno.property.YamlProperty;
 import dev.logchange.core.domain.config.model.Config;
+import dev.logchange.core.domain.config.model.Heading;
 import dev.logchange.core.domain.config.model.labels.Labels;
 import dev.logchange.core.format.yml.YamlProvider;
-import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -50,6 +50,7 @@ public class YMLConfig {
 
     public Config to() {
         return Config.builder()
+                .heading(getHeading())
                 .labels(getLabels())
                 .build();
     }
@@ -59,6 +60,15 @@ public class YMLConfig {
             return Labels.EMPTY;
         } else {
             return changelog.getLabels();
+        }
+    }
+
+
+    private Heading getHeading() {
+        if (changelog == null) {
+            return Heading.EMPTY;
+        } else {
+            return changelog.getHeading();
         }
     }
 }

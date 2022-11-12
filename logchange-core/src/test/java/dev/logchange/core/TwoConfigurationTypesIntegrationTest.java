@@ -29,7 +29,7 @@ public class TwoConfigurationTypesIntegrationTest {
 
     @AfterEach
     void cleanup() {
-//        new File(PATH + "CHANGELOG.md").delete();
+        new File(PATH + "CHANGELOG.md").delete();
     }
 
     @Test
@@ -38,13 +38,12 @@ public class TwoConfigurationTypesIntegrationTest {
         File changelogInputDir = new File(PATH + "changelog");
         File changelogOutputFile = new File(PATH + "CHANGELOG.md");
         File expectedChangelogOutputFile = new File(PATH + "EXPECTED_CHANGELOG.md");
-        String heading = "";
 
 
         ChangelogRepository repository = new FileChangelogRepository(changelogInputDir, changelogOutputFile, Config.EMPTY);
         VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogInputDir, Config.EMPTY);
         GenerateChangelogUseCase generateChangelogUseCase = new GenerateChangelogService(repository, versionSummaryRepository);
-        GenerateChangelogUseCase.GenerateChangelogCommand command = GenerateChangelogUseCase.GenerateChangelogCommand.of(heading);
+        GenerateChangelogUseCase.GenerateChangelogCommand command = GenerateChangelogUseCase.GenerateChangelogCommand.of();
 
         //when:
         generateChangelogUseCase.handle(command);

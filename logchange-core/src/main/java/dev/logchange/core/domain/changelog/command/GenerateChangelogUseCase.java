@@ -7,6 +7,5 @@ public interface GenerateChangelogUseCase {
 
     @Value(staticConstructor = "of")
     class GenerateChangelogCommand {
-        String heading;
     }
 }
