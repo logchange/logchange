@@ -7,15 +7,16 @@
 <!-- !!! ⚠️ DO NOT MODIFY THIS FILE, YOUR CHANGES WILL BE LOST ⚠️ !!! -->
 
 
-[0.5.0] - 2022-07-31
+[0.8.0] - 2022-11-12
 --------------------
 
-### Added (1 change)
+### Changed (1 change)
 
-- Readded generation of version-summary.md in every version's directory during CHANGELOG.md (@marwin1991 [LINK](https://github.com/marwin1991))
+- Changelog heading from logchange-config.yml instead of maven properties. !73 ([Peter](https://github.com/marwin1991) @marwin1991)
 
-### Fixed (1 change)
+### Fixed (2 changes)
 
-- Fixed releasing new version of this project. ([Peter](https://github.com/marwin1991) @marwin1991)
+- Fixed typo ued to used in entry yml heading comment !70 #54 ([Peter](https://github.com/marwin1991) @marwin1991)
+- Fixed duplicated config entries, when more than one type specified, special thanks to @Riserax !68 #64 ([Peter](https://github.com/marwin1991) @marwin1991)
 
 
