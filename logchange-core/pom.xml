@@ -18,7 +18,7 @@
         <maven-artifact.version>3.8.6</maven-artifact.version>
 
         <!-- TESTS -->
-        <mockito-junit-jupiter.version>4.9.0</mockito-junit-jupiter.version>
+        <mockito-junit-jupiter.version>4.11.0</mockito-junit-jupiter.version>
     </properties>
 
     <repositories>
