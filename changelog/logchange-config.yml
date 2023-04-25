@@ -12,6 +12,7 @@ changelog:
       removed: Removed
       fixed: Fixed
       security: Security
+      dependency_update: Dependency updates
       other: Security
       number_of_changes:
         singular: change

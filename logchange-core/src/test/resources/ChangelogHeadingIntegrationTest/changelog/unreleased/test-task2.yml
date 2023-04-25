@@ -10,7 +10,7 @@ issues:
 links: # links to external systems, like redmine something else
   - name: TASK_NUMBER
     url: https://www.google.pl
-type: added # [added/changed/deprecated/removed/fixed/security/other]
+type: added # [added/changed/deprecated/removed/fixed/security/dependency_update/other]
 important_notes: Update style.css on server during instalation 2
 configurations: # information about changes in available application configurations
   - action: add # [add/update/delete]

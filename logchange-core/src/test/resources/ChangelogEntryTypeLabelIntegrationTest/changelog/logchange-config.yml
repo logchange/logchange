@@ -9,6 +9,7 @@ changelog:
       removed: "Usunięto"
       fixed: "Naprawiono"
       security: "Bezpieczeństwo"
+      dependency_update: "Aktualizacje zależności"
       other: "Inne"
       number_of_changes:
         singular: "zmiana"

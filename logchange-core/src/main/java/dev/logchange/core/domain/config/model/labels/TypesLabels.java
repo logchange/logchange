@@ -17,6 +17,8 @@ public class TypesLabels {
     public static final String DEFAULT_REMOVED_LABEL = "Removed";
     public static final String DEFAULT_FIXED_LABEL = "Fixed";
     public static final String DEFAULT_SECURITY_LABEL = "Security";
+
+    public static final String DEFAULT_DEPENDENCY_UPDATE_LABEL = "Dependency updates";
     public static final String DEFAULT_OTHER_LABEL = "Other";
 
     public static final TypesLabels EMPTY = TypesLabels.builder()
@@ -29,6 +31,7 @@ public class TypesLabels {
     private String removed;
     private String fixed;
     private String security;
+    private String dependencyUpdate;
     private String other;
 
     @Getter
@@ -48,6 +51,8 @@ public class TypesLabels {
                 return defaultIfBlank(fixed, DEFAULT_FIXED_LABEL);
             case SECURITY:
                 return defaultIfBlank(security, DEFAULT_SECURITY_LABEL);
+            case DEPENDENCY_UPDATE:
+                return defaultIfBlank(dependencyUpdate, DEFAULT_DEPENDENCY_UPDATE_LABEL);
             case OTHER:
                 return defaultIfBlank(other, DEFAULT_OTHER_LABEL);
             default:
