@@ -56,7 +56,7 @@ You can choose between two options:
         <plugin>
             <groupId>dev.logchange</groupId>
             <artifactId>logchange-maven-plugin</artifactId>
-            <version>0.8.0</version>
+            <version>1.0.0</version>
             <inherited>false</inherited> <!-- For multi module project -->
         </plugin>
     </plugins>
@@ -128,7 +128,7 @@ issues:
 links: # links to different project's issue or external systems, like jira or redmine
   - name: TASK_NUMBER
     url: https://www.google.pl
-type: fixed # [added/changed/deprecated/removed/fixed/security/other]
+type: fixed # [added/changed/deprecated/removed/fixed/security/dependency_update/other]
 important_notes:
   - Update style.css on server during instalation 1
 configurations: # information about changes in available application configuration
@@ -174,28 +174,29 @@ Copy following section as default config.
 # Visit https://github.com/logchange/logchange and leave a star 🌟 
 # More info about configuration you can find https://github.com/logchange/logchange#configuration 
 changelog:
-    heading: Some information that will be display in the top of CHANGELOG.md
-    labels:
-        unreleased: unreleased
-        important_notes: Important notes
-        types:
-            added: Added
-            changed: Changed
-            deprecated: Deprecated
-            removed: Removed
-            fixed: Fixed
-            security: Security
-            other: Security
-            number_of_changes:
-                singular: change
-                plural: changes
-        configuration:
-            heading: Configuration changes
-            type: Type
-            actions:
-                add: Added
-                delete: Deleted
-                update: Updated
+  heading: Some information that will be display in the top of CHANGELOG.md
+  labels:
+    unreleased: unreleased
+    important_notes: Important notes
+    types:
+      added: Added
+      changed: Changed
+      deprecated: Deprecated
+      removed: Removed
+      fixed: Fixed
+      security: Security
+      dependency_update: Dependency update
+      other: Other
+      number_of_changes:
+        singular: change
+        plural: changes
+    configuration:
+      heading: Configuration changes
+      type: Type
+      actions:
+        add: Added
+        delete: Deleted
+        update: Updated
             with_default_value: with default value
             description: Description
 ```

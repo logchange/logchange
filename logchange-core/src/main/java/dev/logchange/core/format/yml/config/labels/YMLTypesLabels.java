@@ -33,7 +33,10 @@ public class YMLTypesLabels {
     @YamlProperty(key = "security", order = -6)
     public String security;
 
-    @YamlProperty(key = "other", order = -7)
+    @YamlProperty(key = "dependency_update", order = -7)
+    public String dependencyUpdate;
+
+    @YamlProperty(key = "other", order = -8)
     public String other;
 
     @YamlProperty(key = "number_of_changes", order = -8)
@@ -47,6 +50,7 @@ public class YMLTypesLabels {
                 .removed(types.getType(ChangelogEntryType.REMOVED))
                 .fixed(types.getType(ChangelogEntryType.FIXED))
                 .security(types.getType(ChangelogEntryType.SECURITY))
+                .dependencyUpdate(types.getType(ChangelogEntryType.DEPENDENCY_UPDATE))
                 .other(types.getType(ChangelogEntryType.SECURITY))
                 .numberOfChanges(YMLNumberOfChangesLabels.of(types.getNumberOfChanges()))
                 .build();
@@ -66,6 +70,7 @@ public class YMLTypesLabels {
                 .removed(removed)
                 .fixed(fixed)
                 .security(security)
+                .dependencyUpdate(dependencyUpdate)
                 .other(other)
                 .numberOfChanges(getNumberOfChanges().to())
                 .build();

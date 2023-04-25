@@ -14,7 +14,7 @@ public enum YMLChangelogEntryType {
     REMOVED("removed"),
     FIXED("fixed"),
     SECURITY("security"),
-
+    DEPENDENCY_UPDATE("dependency_update"),
     OTHER("other");
 
     private final String type;
@@ -33,6 +33,8 @@ public enum YMLChangelogEntryType {
                 return YMLChangelogEntryType.FIXED;
             case SECURITY:
                 return YMLChangelogEntryType.SECURITY;
+            case DEPENDENCY_UPDATE:
+                return YMLChangelogEntryType.DEPENDENCY_UPDATE;
             case OTHER:
                 return YMLChangelogEntryType.OTHER;
             default:
@@ -54,6 +56,8 @@ public enum YMLChangelogEntryType {
                 return ChangelogEntryType.FIXED;
             case SECURITY:
                 return ChangelogEntryType.SECURITY;
+            case DEPENDENCY_UPDATE:
+                return ChangelogEntryType.DEPENDENCY_UPDATE;
             case OTHER:
                 return ChangelogEntryType.OTHER;
             default:

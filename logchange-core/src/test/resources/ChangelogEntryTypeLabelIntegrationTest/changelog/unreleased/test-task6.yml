@@ -1,0 +1,6 @@
+title: Test title 6
+authors:
+  - nick: marwin1991
+    name: Piotr
+    url: https://github.com/marwin1991
+type: dependency_update # [added/changed/deprecated/removed/fixed/security/dependency_update/other]

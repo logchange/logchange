@@ -13,7 +13,9 @@ public enum ChangelogEntryType {
     REMOVED("removed", 4),
     FIXED("fixed", 5),
     SECURITY("security", 6),
-    OTHER("other", 7);
+    DEPENDENCY_UPDATE("dependency_update", 7),
+
+    OTHER("other", 8);
 
 
     @Deprecated

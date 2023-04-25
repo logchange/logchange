@@ -1,4 +1,4 @@
-title: Added ability to configure CHANGELOG labels via `logchange-config.yml`.
+title: Added `dependency_update` changelog entry type.
 authors:
   - name: Peter
     nick: marwin1991
