@@ -14,7 +14,6 @@ public enum ChangelogEntryType {
     FIXED("fixed", 5),
     SECURITY("security", 6),
     DEPENDENCY_UPDATE("dependency_update", 7),
-
     OTHER("other", 8);
 
 
