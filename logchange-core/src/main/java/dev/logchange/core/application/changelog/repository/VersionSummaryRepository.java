@@ -6,4 +6,6 @@ public interface VersionSummaryRepository {
 
     void save(ChangelogVersion version);
 
+    alaMaKota;
+
 }
