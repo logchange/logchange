@@ -51,7 +51,7 @@
         <lombok-maven.version>1.18.22.0</lombok-maven.version>
 
         <!-- TESTS -->
-        <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.1.0</maven-surefire-plugin.version>
         <junit-jupiter.version>5.7.1</junit-jupiter.version>
         <assertj.version>3.24.2</assertj.version>
     </properties>
