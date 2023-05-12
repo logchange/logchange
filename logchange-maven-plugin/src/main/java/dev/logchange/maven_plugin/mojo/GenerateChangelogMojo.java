@@ -3,6 +3,7 @@ package dev.logchange.maven_plugin.mojo;
 import dev.logchange.core.application.changelog.repository.ChangelogRepository;
 import dev.logchange.core.application.changelog.repository.VersionSummaryRepository;
 import dev.logchange.core.application.changelog.service.generate.GenerateChangelogService;
+import dev.logchange.core.application.changelog.service.generate.GenerateChangelogXMLService;
 import dev.logchange.core.application.config.ConfigRepository;
 import dev.logchange.core.domain.changelog.command.GenerateChangelogUseCase;
 import dev.logchange.core.domain.config.model.Config;
@@ -32,10 +33,10 @@ public class GenerateChangelogMojo extends AbstractMojo {
 
     @Override
     public void execute() {
-        executeGenerate(outputFile, inputDir, configFile);
+        executeGenerate(outputFile, inputDir, configFile, false);
     }
 
-    public void executeGenerate(String finalChangelogName, String yamlFilesDirectory, String configFile) {
+    public void executeGenerate(String finalChangelogName, String yamlFilesDirectory, String configFile, Boolean isXml) {
         getLog().info("Started generating " + finalChangelogName);
         File changelogDirectory = findChangelogDirectory("./" + yamlFilesDirectory);
 
@@ -49,6 +50,18 @@ public class GenerateChangelogMojo extends AbstractMojo {
         generateChangelog.handle(command);
 
         getLog().info("Generating " + finalChangelogName + " successful");
+
+        if (!isXml) {
+            return;
+        }
+
+        String xmlChangelogName = "changes.xml";
+
+        repository = new FileChangelogRepository(changelogDirectory, new File(xmlChangelogName), config);
+        GenerateChangelogUseCase generateChangelogXml = new GenerateChangelogXMLService(repository);
+
+        generateChangelogXml.handle(command);
+        getLog().info("Generating " + xmlChangelogName + " successful");
     }
 
     private File findChangelogDirectory(String directoryPath) {

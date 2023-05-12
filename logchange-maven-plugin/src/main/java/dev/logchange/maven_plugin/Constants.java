@@ -20,6 +20,7 @@ public class Constants {
     public static final String FILENAME_MVN_PROPERTY = "fileName";
     public static final String EMPTY_MVN_PROPERTY = "empty";
     public static final String CONFIG_FILE_MVN_PROPERTY = "configFile";
+    public static final String GENERATE_CHANGES_XML = "changesXml";
 
     public static final String RELEASE_DATE_FORMAT = "yyyy-MM-dd";
 

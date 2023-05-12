@@ -33,6 +33,8 @@ public class ReleaseVersionMojo extends AbstractMojo {
     @Parameter(defaultValue = DEFAULT_CONFIG_FILE, property = CONFIG_FILE_MVN_PROPERTY)
     private String configFile;
 
+    @Parameter(defaultValue = "false", property = GENERATE_CHANGES_XML)
+    private boolean isGenerateChangesXml;
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
@@ -47,7 +49,7 @@ public class ReleaseVersionMojo extends AbstractMojo {
 
         GenerateChangelogMojo generateChangelogMojo = new GenerateChangelogMojo();
         generateChangelogMojo.setLog(getLog());
-        generateChangelogMojo.executeGenerate(outputFile, inputDir, configFile);
+        generateChangelogMojo.executeGenerate(outputFile, inputDir, configFile, isGenerateChangesXml);
 
         new InitProjectMojo().createUnreleased(inputDir, unreleasedVersionDir);
         getLog().info("New changelog release successful");
