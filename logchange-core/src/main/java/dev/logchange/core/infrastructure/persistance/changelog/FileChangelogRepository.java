@@ -10,6 +10,8 @@ import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.format.md.changelog.MDChangelog;
 import dev.logchange.core.format.release_date.ReleaseDate;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
+import org.apache.maven.plugins.changes.model.ChangesDocument;
+import org.apache.maven.plugins.changes.model.io.xpp3.ChangesXpp3Writer;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -59,6 +61,17 @@ public class FileChangelogRepository implements ChangelogRepository {
 
             out.println(md);
 
+        } catch (IOException e) {
+            throw new IllegalArgumentException("Could not save changelog to file: " + outputFile + " because: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void saveXML(ChangesDocument changesDocument) {
+        ChangesXpp3Writer changesXmlWriter = new ChangesXpp3Writer();
+
+        try (Writer writer = new FileWriter(outputFile)) {
+            changesXmlWriter.write(writer, changesDocument);
         } catch (IOException e) {
             throw new IllegalArgumentException("Could not save changelog to file: " + outputFile + " because: " + e.getMessage());
         }
