@@ -34,7 +34,7 @@ public class FileChangelogRepository implements ChangelogRepository {
     }
 
     @Override
-    public Changelog find() {
+    public Changelog findMarkdown() {
         List<File> inputFiles = getInputFiles();
 
         List<ChangelogVersion> versions = new LinkedList<>();
@@ -45,6 +45,25 @@ public class FileChangelogRepository implements ChangelogRepository {
                 versions.add(getChangelogVersion(file));
             }
             if (isArchive(file)) {
+                archives.add(getChangelogArchive(file));
+            }
+        }
+        versions.sort(Collections.reverseOrder());
+        return Changelog.of(versions, archives);
+    }
+
+    @Override
+    public Changelog findXML() {
+        List<File> inputFiles = getInputFiles();
+
+        List<ChangelogVersion> versions = new LinkedList<>();
+        List<ChangelogArchive> archives = new LinkedList<>();
+
+        for (File file : inputFiles) {
+            if (isVersionDirectory(file)) {
+                versions.add(getChangelogVersion(file));
+            }
+            if (isXmlArchive(file)) {
                 archives.add(getChangelogArchive(file));
             }
         }
@@ -95,6 +114,10 @@ public class FileChangelogRepository implements ChangelogRepository {
 
     private boolean isArchive(File file) {
         return file.getName().startsWith("archive");
+    }
+
+    private boolean isXmlArchive(File file) {
+        return file.getName().startsWith("archive") && file.getName().endsWith(".xml");
     }
 
     private ChangelogVersion getChangelogVersion(File versionDirectory) {

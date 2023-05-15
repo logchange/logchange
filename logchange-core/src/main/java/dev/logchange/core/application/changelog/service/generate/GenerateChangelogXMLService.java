@@ -24,7 +24,7 @@ public class GenerateChangelogXMLService implements GenerateChangelogUseCase {
 
     @Override
     public void handle(GenerateChangelogCommand command) {
-        Changelog changelog = changelogRepository.find();
+        Changelog changelog = changelogRepository.findXML();
         ChangesDocument changesDocument = mapChangelogToChangesDocument(changelog);
         changelogRepository.saveXML(changesDocument);
     }
