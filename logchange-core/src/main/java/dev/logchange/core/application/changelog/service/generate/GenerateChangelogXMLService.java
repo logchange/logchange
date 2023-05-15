@@ -4,6 +4,7 @@ import dev.logchange.core.application.changelog.repository.ChangelogRepository;
 import dev.logchange.core.domain.changelog.command.GenerateChangelogUseCase;
 import dev.logchange.core.domain.changelog.model.Changelog;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryAuthor;
+import dev.logchange.core.domain.changelog.model.entry.ChangesXMLEntryType;
 import dev.logchange.core.domain.changelog.model.version.ChangelogVersion;
 import org.apache.maven.plugins.changes.model.Action;
 import org.apache.maven.plugins.changes.model.Body;
@@ -67,7 +68,8 @@ public class GenerateChangelogXMLService implements GenerateChangelogUseCase {
             version.getEntries().forEach(changelogEntry -> {
                 Action action = new Action();
                 action.setDev(authorsToString(changelogEntry.getAuthors()));
-                action.setType(changelogEntry.getType().getType()); // TODO map changelogentrytype to changes xml type
+                String type = ChangesXMLEntryType.getXmlTypeFromMarkdownEntryType(changelogEntry.getType()).getType();
+                action.setType(type);
                 action.setAction(changelogEntry.getTitle().getValue());
                 actions.add(action);
             });
@@ -82,7 +84,19 @@ public class GenerateChangelogXMLService implements GenerateChangelogUseCase {
 
         Iterator<ChangelogEntryAuthor> iterator = authors.iterator();
         while (iterator.hasNext()) {
-            builder.append(iterator.next().getName());
+            ChangelogEntryAuthor author = iterator.next();
+            String authorName = "";
+
+            // prefer Nick, then Name, leave empty if both are missing
+            if (author.getNick() != null && !author.getNick().isEmpty()) {
+                authorName = author.getNick();
+            }
+            else if (author.getName() != null && !author.getName().isEmpty()) {
+                authorName = author.getName();
+            }
+
+
+            builder.append(authorName);
             if (iterator.hasNext()) {
                 builder.append(",");
             }
