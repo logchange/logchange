@@ -26,7 +26,6 @@ public class GenerateChangelogXMLService implements GenerateChangelogUseCase {
     public void handle(GenerateChangelogCommand command) {
         Changelog changelog = changelogRepository.find();
         ChangesDocument changesDocument = mapChangelogToChangesDocument(changelog);
-
         changelogRepository.saveXML(changesDocument);
     }
 
@@ -39,7 +38,7 @@ public class GenerateChangelogXMLService implements GenerateChangelogUseCase {
         ChangesDocument changesDocument = new ChangesDocument();
         List<Release> changelogReleases = mapVersionsToReleases(changelog.getVersions().getVersions());
 
-        // TODO parse archive
+
 
         Body changesBody = new Body();
         changelogReleases.forEach(changesBody::addRelease);
@@ -49,14 +48,17 @@ public class GenerateChangelogXMLService implements GenerateChangelogUseCase {
     }
 
     /**
-     * Maps data from logchange model to maven changes model.
-     * @param versions list of versions to map
+     * Maps a list of {@link ChangelogVersion} from logchange model to maven changes {@link Release}.
+     * @param versions list of versions
      * @return {@link List} of {@link Release}
      */
     private List<Release> mapVersionsToReleases(List<ChangelogVersion> versions) {
         List<Release> releases = new ArrayList<>();
         for (ChangelogVersion version : versions) {
-            if (version.getReleaseDateTime() == null || version.getEntries().isEmpty()) continue;
+            // if releaseDateTime or list of entries are empty, assume the version directory is empty
+            if (version.getReleaseDateTime() == null || version.getEntries().isEmpty()) {
+                continue;
+            }
             Release release = new Release();
             release.setVersion(version.getVersion().getValue());
             release.setDateRelease(version.getReleaseDateTime().toLocalDate().toString());
@@ -70,7 +72,6 @@ public class GenerateChangelogXMLService implements GenerateChangelogUseCase {
                 actions.add(action);
             });
             release.setActions(actions);
-
             releases.add(release);
         }
         return releases;
@@ -82,7 +83,9 @@ public class GenerateChangelogXMLService implements GenerateChangelogUseCase {
         Iterator<ChangelogEntryAuthor> iterator = authors.iterator();
         while (iterator.hasNext()) {
             builder.append(iterator.next().getName());
-            if (iterator.hasNext()) builder.append(",");
+            if (iterator.hasNext()) {
+                builder.append(",");
+            }
         }
         return builder.toString();
     }
