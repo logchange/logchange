@@ -33,10 +33,10 @@ public class GenerateChangelogMojo extends AbstractMojo {
 
     @Override
     public void execute() {
-        executeGenerate(outputFile, inputDir, configFile, false);
+        executeGenerate(outputFile, inputDir, configFile, false, "");
     }
 
-    public void executeGenerate(String finalChangelogName, String yamlFilesDirectory, String configFile, Boolean isXml) {
+    public void executeGenerate(String finalChangelogName, String yamlFilesDirectory, String configFile, Boolean isXml, String xmlOutputFile) {
         getLog().info("Started generating " + finalChangelogName);
         File changelogDirectory = findChangelogDirectory("./" + yamlFilesDirectory);
 
@@ -55,13 +55,11 @@ public class GenerateChangelogMojo extends AbstractMojo {
             return;
         }
 
-        String xmlChangelogName = "changes.xml";
-
-        repository = new FileChangelogRepository(changelogDirectory, new File(xmlChangelogName), config);
+        repository = new FileChangelogRepository(changelogDirectory, new File(xmlOutputFile), config);
         GenerateChangelogUseCase generateChangelogXml = new GenerateChangelogXMLService(repository);
 
         generateChangelogXml.handle(command);
-        getLog().info("Generating " + xmlChangelogName + " successful");
+        getLog().info("Generating " + xmlOutputFile + " successful");
     }
 
     private File findChangelogDirectory(String directoryPath) {

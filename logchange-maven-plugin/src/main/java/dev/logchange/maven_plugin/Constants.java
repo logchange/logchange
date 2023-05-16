@@ -6,6 +6,7 @@ public class Constants {
     public static final String DEFAULT_INPUT_DIR = "changelog";
     public static final String DEFAULT_UNRELEASED_VERSION_DIR = "unreleased";
     public static final String DEFAULT_CONFIG_FILE = "logchange-config.yml";
+    public static final String DEFAULT_XML_OUTPUT_FILE = "Changes.xml";
 
     public static final String GIT_KEEP = ".gitkeep";
 
@@ -20,7 +21,8 @@ public class Constants {
     public static final String FILENAME_MVN_PROPERTY = "fileName";
     public static final String EMPTY_MVN_PROPERTY = "empty";
     public static final String CONFIG_FILE_MVN_PROPERTY = "configFile";
-    public static final String GENERATE_CHANGES_XML = "changesXml";
+    public static final String GENERATE_CHANGES_XML_PROPERTY = "changesXml";
+    public static final String XML_OUTPUT_FILE_PROPERTY = "outputFileXml";
 
     public static final String RELEASE_DATE_FORMAT = "yyyy-MM-dd";
 
