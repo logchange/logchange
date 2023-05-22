@@ -50,6 +50,8 @@
         <lombok.version>1.18.26</lombok.version>
         <lombok-maven.version>1.18.22.0</lombok-maven.version>
 
+        <maven-changes.version>2.12.1</maven-changes.version>
+
         <!-- TESTS -->
         <maven-surefire-plugin.version>3.1.0</maven-surefire-plugin.version>
         <junit-jupiter.version>5.7.1</junit-jupiter.version>
@@ -74,6 +76,13 @@
             <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-changes-plugin</artifactId>
+            <version>${maven-changes.version}</version>
+        </dependency>
+
+
 
         <!-- TESTS -->
         <dependency>

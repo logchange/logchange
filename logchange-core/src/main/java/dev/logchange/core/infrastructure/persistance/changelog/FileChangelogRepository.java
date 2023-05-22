@@ -10,6 +10,8 @@ import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.format.md.changelog.MDChangelog;
 import dev.logchange.core.format.release_date.ReleaseDate;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
+import org.apache.maven.plugins.changes.model.ChangesDocument;
+import org.apache.maven.plugins.changes.model.io.xpp3.ChangesXpp3Writer;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -32,7 +34,7 @@ public class FileChangelogRepository implements ChangelogRepository {
     }
 
     @Override
-    public Changelog find() {
+    public Changelog findMarkdown() {
         List<File> inputFiles = getInputFiles();
 
         List<ChangelogVersion> versions = new LinkedList<>();
@@ -51,6 +53,25 @@ public class FileChangelogRepository implements ChangelogRepository {
     }
 
     @Override
+    public Changelog findXML() {
+        List<File> inputFiles = getInputFiles();
+
+        List<ChangelogVersion> versions = new LinkedList<>();
+        List<ChangelogArchive> archives = new LinkedList<>();
+
+        for (File file : inputFiles) {
+            if (isVersionDirectory(file)) {
+                versions.add(getChangelogVersion(file));
+            }
+            if (isXmlArchive(file)) {
+                archives.add(getChangelogArchive(file));
+            }
+        }
+        versions.sort(Collections.reverseOrder());
+        return Changelog.of(versions, archives);
+    }
+
+    @Override
     public void save(Changelog changelog) {
         String md = new MDChangelog(config, changelog).toMD();
 
@@ -59,6 +80,17 @@ public class FileChangelogRepository implements ChangelogRepository {
 
             out.println(md);
 
+        } catch (IOException e) {
+            throw new IllegalArgumentException("Could not save changelog to file: " + outputFile + " because: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void saveXML(ChangesDocument changesDocument) {
+        ChangesXpp3Writer changesXmlWriter = new ChangesXpp3Writer();
+
+        try (Writer writer = new FileWriter(outputFile)) {
+            changesXmlWriter.write(writer, changesDocument);
         } catch (IOException e) {
             throw new IllegalArgumentException("Could not save changelog to file: " + outputFile + " because: " + e.getMessage());
         }
@@ -82,6 +114,10 @@ public class FileChangelogRepository implements ChangelogRepository {
 
     private boolean isArchive(File file) {
         return file.getName().startsWith("archive");
+    }
+
+    private boolean isXmlArchive(File file) {
+        return file.getName().startsWith("archive") && file.getName().endsWith(".xml");
     }
 
     private ChangelogVersion getChangelogVersion(File versionDirectory) {
