@@ -45,6 +45,7 @@ class ReleaseVersionMojoIT {
         assertThat(FileUtils.readFileToString(versionSummary, StandardCharsets.UTF_8)).contains("Dodano");
     }
 
+
     @MavenGoal("${project.groupId}:${project.artifactId}:${project.version}:release")
     @MavenTest
     @DisplayName("Project with pom.xml and task.yml in changelog dir after release task.yml is moved to version dir and CHANGELOG.md is generated")
