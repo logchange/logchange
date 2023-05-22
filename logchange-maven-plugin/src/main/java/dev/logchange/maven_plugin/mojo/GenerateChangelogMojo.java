@@ -51,10 +51,13 @@ public class GenerateChangelogMojo extends AbstractMojo {
 
         getLog().info("Generating " + finalChangelogName + " successful");
 
-        if (!isXml) {
-            return;
+        if (isXml) {
+            generateChangesXml(xmlOutputFile, changelogDirectory, config, command);
         }
+    }
 
+    private void generateChangesXml(String xmlOutputFile, File changelogDirectory, Config config, GenerateChangelogUseCase.GenerateChangelogCommand command) {
+        ChangelogRepository repository;
         repository = new FileChangelogRepository(changelogDirectory, new File(xmlOutputFile), config);
         GenerateChangelogUseCase generateChangelogXml = new GenerateChangelogXMLService(repository);
 
