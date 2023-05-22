@@ -108,7 +108,7 @@ class ReleaseVersionMojoIT {
         File taskMovedToRelease = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/v1.3.7/task.yml");
         File releaseDateFile = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/v1.3.7/release-date.txt");
         File versionSummary = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/v1.3.7/version-summary.md");
-        File changesXmlFIle = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/v1.3.7/version-summary.md");
+        File changesXmlFIle = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "TestChanges.xml");
 
         assertThat(gitKeep).exists();
         assertThat(changelog).exists();
