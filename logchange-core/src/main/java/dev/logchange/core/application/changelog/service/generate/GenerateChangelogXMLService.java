@@ -39,8 +39,6 @@ public class GenerateChangelogXMLService implements GenerateChangelogUseCase {
         ChangesDocument changesDocument = new ChangesDocument();
         List<Release> changelogReleases = mapVersionsToReleases(changelog.getVersions().getVersions());
 
-
-
         Body changesBody = new Body();
         changelogReleases.forEach(changesBody::addRelease);
         changesDocument.setBody(changesBody);
@@ -56,13 +54,13 @@ public class GenerateChangelogXMLService implements GenerateChangelogUseCase {
     private List<Release> mapVersionsToReleases(List<ChangelogVersion> versions) {
         List<Release> releases = new ArrayList<>();
         for (ChangelogVersion version : versions) {
-            // if releaseDateTime or list of entries are empty, assume the version directory is empty
-            if (version.getReleaseDateTime() == null || version.getEntries().isEmpty()) {
+            // if list of entries are empty, assume the version directory is empty
+            if (version.getEntries().isEmpty()) {
                 continue;
             }
             Release release = new Release();
             release.setVersion(version.getVersion().getValue());
-            release.setDateRelease(version.getReleaseDateTime().toLocalDate().toString());
+            release.setDateRelease(getReleasedDate(version));
 
             List<Action> actions = new ArrayList<>();
             version.getEntries().forEach(changelogEntry -> {
@@ -77,6 +75,14 @@ public class GenerateChangelogXMLService implements GenerateChangelogUseCase {
             releases.add(release);
         }
         return releases;
+    }
+
+    private String getReleasedDate(ChangelogVersion version) {
+        if (version.getReleaseDateTime() == null) {
+            return "unreleased";
+        }
+
+        return version.getReleaseDateTime().toLocalDate().toString();
     }
 
     private String authorsToString(List<ChangelogEntryAuthor> authors) {
