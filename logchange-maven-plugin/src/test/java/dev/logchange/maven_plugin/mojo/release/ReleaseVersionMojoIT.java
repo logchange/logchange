@@ -106,6 +106,14 @@ class ReleaseVersionMojoIT {
                 .has("changelog/unreleased")
                 .has("changelog/v1.8.9");
 
+
+        File f = result.getMavenProjectResult().getTargetProjectDirectory();
+
+        String[] pathnames = f.list();
+        for (String pathname : pathnames) {
+            System.out.println(pathname);
+        }
+
         File changesXmlFIle = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "TestChanges.xml");
         File gitKeep = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/unreleased/.gitkeep");
         File changelog = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "CHANGELOG.md");
