@@ -98,7 +98,7 @@ class ReleaseVersionMojoIT {
     @MavenOption("-DchangesXml")
     @MavenOption("-DoutputFileXml=\"TestChanges.xml\"")
     @MavenTest
-    @DisplayName("Project with pom.xml with version set to 1.8.9, generating Changes.xml with custom name")
+    @DisplayName("Project with pom.xml with version set to 1.8.9, generating changes.xml with custom name set to TestChanges.xml")
     void releaseWithVersionInPomXmlGeneratingChangesXml(MavenExecutionResult result) {
         assertThat(result).isSuccessful()
                 .project()
@@ -106,20 +106,19 @@ class ReleaseVersionMojoIT {
                 .has("changelog/unreleased")
                 .has("changelog/v1.8.9");
 
-
+        File changesXmlFIle = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "TestChanges.xml");
         File gitKeep = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/unreleased/.gitkeep");
         File changelog = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "CHANGELOG.md");
         File taskMovedToRelease = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/v1.8.9/task.yml");
         File releaseDateFile = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/v1.8.9/release-date.txt");
         File versionSummary = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/v1.8.9/version-summary.md");
-        File changesXmlFIle = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "TestChanges.xml");
 
+        assertThat(changesXmlFIle).exists();
         assertThat(gitKeep).exists();
         assertThat(changelog).exists();
         assertThat(taskMovedToRelease).exists();
         assertThat(releaseDateFile).exists();
         assertThat(versionSummary).exists();
-        assertThat(changesXmlFIle).exists();
     }
 
 
