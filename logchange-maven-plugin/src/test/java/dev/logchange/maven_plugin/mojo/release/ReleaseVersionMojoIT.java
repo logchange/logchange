@@ -96,7 +96,7 @@ class ReleaseVersionMojoIT {
 
     @MavenGoal({"${project.groupId}:${project.artifactId}:${project.version}:release"})
     @MavenOption("-DchangesXml")
-    @MavenOption("-DoutputFileXml=\"TestChanges.xml\"")
+    @MavenOption("-DoutputFileXml=TestChanges.xml")
     @MavenTest
     @DisplayName("Project with pom.xml with version set to 1.8.9, generating changes.xml with custom name set to TestChanges.xml")
     void releaseWithVersionInPomXmlGeneratingChangesXml(MavenExecutionResult result) {
@@ -106,13 +106,6 @@ class ReleaseVersionMojoIT {
                 .has("changelog/unreleased")
                 .has("changelog/v1.8.9");
 
-
-        File f = result.getMavenProjectResult().getTargetProjectDirectory();
-
-        String[] pathnames = f.list();
-        for (String pathname : pathnames) {
-            System.out.println(pathname);
-        }
 
         File changesXmlFIle = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "TestChanges.xml");
         File gitKeep = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/unreleased/.gitkeep");

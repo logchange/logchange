@@ -236,10 +236,10 @@ At the moment archives are not supported, rather `changes.xml` will only contain
 mvn logchange:release -DchangesXml
 ```
 
-For custom file name, add `-DoutputFileXml="CustomName.xml"`
+For custom file name, add `-DoutputFileXml=CustomName.xml`
 
 ```shell
-mvn logchange:release -DchangesXml -DoutputFileXml="CustomName.xml
+mvn logchange:release -DchangesXml -DoutputFileXml=CustomName.xml
 ```
 
 ### `CHANGELOG.md` structure overview
