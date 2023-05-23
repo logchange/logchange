@@ -6,7 +6,7 @@ public class Constants {
     public static final String DEFAULT_INPUT_DIR = "changelog";
     public static final String DEFAULT_UNRELEASED_VERSION_DIR = "unreleased";
     public static final String DEFAULT_CONFIG_FILE = "logchange-config.yml";
-    public static final String DEFAULT_XML_OUTPUT_FILE = "Changes.xml";
+    public static final String DEFAULT_XML_OUTPUT_FILE = "changes.xml";
 
     public static final String GIT_KEEP = ".gitkeep";
 
