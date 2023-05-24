@@ -32,12 +32,7 @@ jobs:
           # Verify gpg secret key
           gpg --list-secret-keys --keyid-format LONG
       - name: Deploy with Maven
-        run: |
-          mvn \
-            --no-transfer-progress \
-            --batch-mode \
-            -Dgpg.passphrase=${{ secrets.MAVEN_GPG_PASSPHRASE }} \ 
-            clean deploy -Pci-cd
+        run: mvn -B clean deploy -Pci-cd
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
