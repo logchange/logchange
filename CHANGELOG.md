@@ -7,6 +7,15 @@
 <!-- !!! ⚠️ DO NOT MODIFY THIS FILE, YOUR CHANGES WILL BE LOST ⚠️ !!! -->
 
 
+[1.0.0] - 2023-05-24
+--------------------
+
+### Added (2 changes)
+
+- Added `dependency_update` changelog entry type. ([Peter](https://github.com/marwin1991) @marwin1991)
+- Added support for generating Maven's Changes.xml !126 #103 (@mzaninovic555 [LINK](https://github.com/mzaninovic555))
+
+
 [0.8.0] - 2022-11-12
 --------------------
 
