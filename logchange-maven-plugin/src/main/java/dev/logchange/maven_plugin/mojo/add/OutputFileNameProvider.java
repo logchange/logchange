@@ -17,11 +17,11 @@ public class OutputFileNameProvider {
 
     public String get() {
         if (StringUtils.isNotBlank(commandLineOutputFileName)) {
-            return commandLineOutputFileName;
+            return adjust(commandLineOutputFileName);
         }
 
         if (empty) {
-            throw new IllegalArgumentException("When using -D" + EMPTY_MVN_PROPERTY + " option, you have to also use -D" + FILENAME_MVN_PROPERTY + "=0001-some-change.yml");
+            throw new IllegalArgumentException("When using -D" + EMPTY_MVN_PROPERTY + " or -DbatchMode option, you have to also use -D" + FILENAME_MVN_PROPERTY + "=0001-some-change.yml");
         }
 
         try {
@@ -29,6 +29,15 @@ public class OutputFileNameProvider {
         } catch (PrompterException e) {
             throw new IllegalArgumentException("Couldn't get file name", e);
         }
+    }
+
+    private String adjust(String commandLineOutputFileName) {
+        return commandLineOutputFileName
+                .replaceAll("\\.yml", "")
+                .replaceAll("\\.yaml", "")
+                .replaceAll("/", "_")
+                .replaceAll("\\.", "_")
+                + ".yml";
     }
 
     private String getOutputFileName() throws PrompterException {

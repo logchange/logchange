@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>dev.logchange</groupId>
@@ -83,7 +84,6 @@
         </dependency>
 
 
-
         <!-- TESTS -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -101,6 +101,17 @@
 
     <build>
         <plugins>
+            <!--
+            Cannot build project if there is circular dependency.
+            But sometimes we want test this plugin so to do that build and uncomment
+            then you can use snapshot version during local testing.
+            -->
+            <!--            <plugin>-->
+            <!--                <groupId>dev.logchange</groupId>-->
+            <!--                <artifactId>logchange-maven-plugin</artifactId>-->
+            <!--                <version>1.1.0-SNAPSHOT</version>-->
+            <!--                <inherited>false</inherited> &lt;!&ndash; For multi module project &ndash;&gt;-->
+            <!--            </plugin>-->
             <plugin>
                 <artifactId>maven-release-plugin</artifactId>
                 <configuration>
@@ -139,7 +150,9 @@
                                 <threads>4</threads>
                                 <failWhenNoMutations>false</failWhenNoMutations>
                                 <exportLineCoverage>true</exportLineCoverage>
-                                <outputFormats><value>XML</value></outputFormats>
+                                <outputFormats>
+                                    <value>XML</value>
+                                </outputFormats>
                                 <timestampedReports>false</timestampedReports>
                             </configuration>
                             <!-- https://github.com/hcoles/pitest/issues/284 -->

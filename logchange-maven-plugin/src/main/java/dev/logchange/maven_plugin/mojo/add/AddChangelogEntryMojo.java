@@ -7,6 +7,7 @@ import dev.logchange.core.domain.changelog.command.AddChangelogEntryUseCase.AddC
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogEntryRepository;
 import dev.logchange.maven_plugin.mojo.add.entry.ChangelogEntryProviderFactory;
+import lombok.Value;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -31,16 +32,35 @@ public class AddChangelogEntryMojo extends AbstractMojo {
     @Parameter(property = FILENAME_MVN_PROPERTY)
     private String outputFileName;
 
+    @Parameter(defaultValue = "false", property = BATCH_MODE_MVN_PROPERTY)
+    private boolean batchMode;
+
     @Parameter(defaultValue = "false", property = EMPTY_MVN_PROPERTY)
     private boolean empty;
+
+    @Parameter(property = "title")
+    private String title;
+
+    @Parameter(property = "author")
+    private String author;
+
+    @Parameter(property = "type")
+    private String type;
+
+    @Parameter(property = "link.name")
+    private String linkName;
+
+    @Parameter(property = "link.url")
+    private String linkUrl;
 
     @Inject
     private Prompter prompter;
 
     @Override
     public void execute() {
+        checkIfCanAdd(inputDir, unreleasedVersionDir);
         outputFileName = new OutputFileNameProvider(empty, prompter, outputFileName).get();
-        ChangelogEntry entry = new ChangelogEntryProviderFactory(empty, prompter).create().get();
+        ChangelogEntry entry = new ChangelogEntryProviderFactory(empty, batchMode, getParams(), prompter).create().get();
         executeAdd(inputDir, unreleasedVersionDir, outputFileName, entry);
     }
 
@@ -55,6 +75,17 @@ public class AddChangelogEntryMojo extends AbstractMojo {
         AddChangelogEntryCommand command = AddChangelogEntryCommand.of(entry);
 
         addChangelogEntry.handle(command);
+    }
+
+    private void checkIfCanAdd(String inputDir, String unreleasedVersionDir) {
+        String path = "./" + inputDir + "/" + unreleasedVersionDir;
+        File unreleasedDir = new File(path);
+
+        if (!unreleasedDir.exists() || !unreleasedDir.isDirectory()) {
+            String msg = "Cannot add new entry if " + path + " not exists nor is directory";
+            getLog().error(msg);
+            throw new RuntimeException(msg);
+        }
     }
 
     private File createFile(String path) {
@@ -73,5 +104,24 @@ public class AddChangelogEntryMojo extends AbstractMojo {
             getLog().error(msg, e);
             throw new RuntimeException(msg);
         }
+    }
+
+    private AddChangelogEntryBatchModeParams getParams() {
+        return AddChangelogEntryBatchModeParams.of(
+                title,
+                author,
+                type,
+                linkName,
+                linkUrl
+        );
+    }
+
+    @Value(staticConstructor = "of")
+    public static class AddChangelogEntryBatchModeParams {
+        String title;
+        String author;
+        String type;
+        String linkName;
+        String linkUrl;
     }
 }

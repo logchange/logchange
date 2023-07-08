@@ -30,6 +30,15 @@ public enum ChangelogEntryType {
         throw new IllegalArgumentException("Incorrect type!");
     }
 
+    public static ChangelogEntryType fromNameIgnoreCase(String name) {
+        for (ChangelogEntryType type : values()) {
+            if (type.name().equalsIgnoreCase(name)) {
+                return type;
+            }
+        }
+        throw new IllegalArgumentException("Incorrect type!");
+    }
+
     @Override
     public String toString() {
         return order + ". " + type;

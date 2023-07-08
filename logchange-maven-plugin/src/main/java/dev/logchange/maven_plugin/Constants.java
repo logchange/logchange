@@ -20,6 +20,8 @@ public class Constants {
     public static final String UNRELEASED_VERSION_DIR_MVN_PROPERTY = "unreleasedVersionDir";
     public static final String FILENAME_MVN_PROPERTY = "fileName";
     public static final String EMPTY_MVN_PROPERTY = "empty";
+
+    public static final String BATCH_MODE_MVN_PROPERTY = "batchMode";
     public static final String CONFIG_FILE_MVN_PROPERTY = "configFile";
     public static final String GENERATE_CHANGES_XML_PROPERTY = "changesXml";
     public static final String XML_OUTPUT_FILE_PROPERTY = "outputFileXml";
