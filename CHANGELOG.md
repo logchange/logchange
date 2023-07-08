@@ -7,6 +7,14 @@
 <!-- !!! ⚠️ DO NOT MODIFY THIS FILE, YOUR CHANGES WILL BE LOST ⚠️ !!! -->
 
 
+[1.1.0] - 2023-07-08
+--------------------
+
+### Added (1 change)
+
+- Added -DbatchMode to add command to allow using this command as one line instead of prompt ([Peter](https://github.com/marwin1991) @marwin1991)
+
+
 [1.0.0] - 2023-05-24
 --------------------
 
