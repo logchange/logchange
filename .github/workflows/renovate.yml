@@ -16,6 +16,7 @@ jobs:
         with:
           token: ${{ secrets.LOGCHANGE_PAT_TOKEN }}
           configurationFile: .github/renovate-config.js
+          renovate-version: 36.5.2-full
           useSlim: false
         env:
           RENOVATE_ALLOWED_POST_UPGRADE_COMMANDS: ".*"
