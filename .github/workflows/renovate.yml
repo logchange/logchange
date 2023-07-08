@@ -13,6 +13,7 @@ jobs:
         with:
           token: ${{ secrets.LOGCHANGE_PAT_TOKEN }}
           configurationFile: .github/renovate-config.js
+          useSlim: false
         env:
           RENOVATE_ALLOWED_POST_UPGRADE_COMMANDS: ".*"
           LOG_LEVEL: debug
