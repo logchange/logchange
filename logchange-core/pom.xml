@@ -14,7 +14,7 @@
         <snakeyaml-anno.version>1.3.0</snakeyaml-anno.version>
         <snakeyaml.version>1.33</snakeyaml.version>
         <Java-Markdown-Generator.version>1.3.2</Java-Markdown-Generator.version>
-        <commons-text.version>1.9</commons-text.version>
+        <commons-text.version>1.10.0</commons-text.version>
         <maven-artifact.version>3.9.2</maven-artifact.version>
 
         <!-- TESTS -->
