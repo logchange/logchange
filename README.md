@@ -197,8 +197,8 @@ changelog:
         add: Added
         delete: Deleted
         update: Updated
-            with_default_value: with default value
-            description: Description
+      with_default_value: with default value
+      description: Description
 ```
 
 ### Generating `CHANGELOG.md`
