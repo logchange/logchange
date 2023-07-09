@@ -37,6 +37,7 @@ public class OutputFileNameProvider {
                 .replaceAll("\\.yaml", "")
                 .replaceAll("/", "_")
                 .replaceAll("\\.", "_")
+                .replaceAll(":", "_")
                 + ".yml";
     }
 

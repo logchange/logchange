@@ -49,10 +49,11 @@ validate_arguments() {
 
 # Function to replace dots with underscores and slashes with pipes in the file name
 sanitize_file_name() {
-  fileName="${fileName//./_}"
-  fileName="${fileName//\//_}"
   fileName="${fileName//.yml/}"
   fileName="${fileName//.yaml/}"
+  fileName="${fileName//:/_}"
+  fileName="${fileName//./_}"
+  fileName="${fileName//\//_}"
   fileName="changelog/unreleased/${fileName}.yml"
 }
 
