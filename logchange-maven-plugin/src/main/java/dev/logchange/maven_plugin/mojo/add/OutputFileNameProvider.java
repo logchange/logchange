@@ -31,7 +31,7 @@ public class OutputFileNameProvider {
         }
     }
 
-    private String adjust(String commandLineOutputFileName) {
+    String adjust(String commandLineOutputFileName) {
         return commandLineOutputFileName
                 .replaceAll("\\.yml", "")
                 .replaceAll("\\.yaml", "")
