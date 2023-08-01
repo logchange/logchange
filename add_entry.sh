@@ -60,7 +60,7 @@ sanitize_file_name() {
 # Function to create the entry file
 create_entry_file() {
   echo $fileName
-  if [ -n "$fileName" ]; then
+  if [ -d "changelog/unreleased" ]; then
     touch "$fileName"
     echo "# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵" >> "$fileName"
     echo "# Visit https://github.com/logchange/logchange and leave a star 🌟" >> "$fileName"
@@ -75,6 +75,8 @@ create_entry_file() {
       echo "  - name: $linkName" >> "$fileName"
       echo "    url: $linkUrl" >> "$fileName"
     fi
+  else
+    echo "changelog/unreleased does not exists, skipping"
   fi
 }
 
