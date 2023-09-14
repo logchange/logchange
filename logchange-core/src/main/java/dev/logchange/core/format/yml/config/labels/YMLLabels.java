@@ -1,7 +1,7 @@
 package dev.logchange.core.format.yml.config.labels;
 
-import de.beosign.snakeyamlanno.property.YamlAnySetter;
-import de.beosign.snakeyamlanno.property.YamlProperty;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.logchange.core.domain.config.model.labels.Labels;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,16 +12,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class YMLLabels {
 
-    @YamlProperty(key = "unreleased", order = 0)
+    @JsonProperty(index = 0)
     public String unreleased;
 
-    @YamlProperty(key = "important_notes", order = -1)
+    @JsonProperty(value = "important_notes", index = 1)
     public String importantNotes;
 
-    @YamlProperty(key = "types", order = -2)
+    @JsonProperty(index = 2)
     public YMLTypesLabels types;
 
-    @YamlProperty(key = "configuration", order = -3)
+    @JsonProperty(index = 3)
     public YMLConfigurationLabels configuration;
 
     public static YMLLabels of(Labels labels) {
@@ -33,7 +33,7 @@ public class YMLLabels {
                 .build();
     }
 
-    @YamlAnySetter
+    @JsonAnySetter
     public void anySetter(String key, Object value) {
         System.out.println("Unknown property: " + key + " with value " + value);
         //TODO Logger.getLogger().warn("Unknown property: " + key + " with value " + value);
