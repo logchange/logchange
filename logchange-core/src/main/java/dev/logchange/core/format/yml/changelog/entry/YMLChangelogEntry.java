@@ -1,12 +1,11 @@
 package dev.logchange.core.format.yml.changelog.entry;
 
-import de.beosign.snakeyamlanno.constructor.AnnotationAwareConstructor;
-import de.beosign.snakeyamlanno.property.YamlAnySetter;
-import de.beosign.snakeyamlanno.property.YamlProperty;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.logchange.core.domain.changelog.model.entry.*;
-import dev.logchange.core.format.yml.YamlProvider;
+import dev.logchange.core.format.yml.ObjectMapperProvider;
 import lombok.*;
-import org.yaml.snakeyaml.Yaml;
 
 import java.io.InputStream;
 import java.util.Collections;
@@ -25,46 +24,52 @@ public class YMLChangelogEntry {
             "# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️\n";
 
 
-    @YamlProperty(key = "title", order = 0)
+    @JsonProperty(index = 0)
     public String title;
 
     @Singular
-    @YamlProperty(key = "authors", order = -1)
+    @JsonProperty(index = 1)
     public List<YMLChangelogEntryAuthor> authors;
 
     @Singular
-    @YamlProperty(key = "merge_requests", order = -2)
+    @JsonProperty(value = "merge_requests", index = 2)
     public List<Long> mergeRequests;
 
     @Singular
-    @YamlProperty(key = "issues", order = -3)
+    @JsonProperty(index = 3)
     public List<Long> issues;
 
     @Singular
-    @YamlProperty(key = "links", order = -4)
+    @JsonProperty(index = 4)
     public List<YMLChangelogEntryLink> links;
 
-    @YamlProperty(key = "type", order = -5, converter = YMLChangelogEntryTypeConverter.class)
+    @JsonProperty(index = 5)
     public YMLChangelogEntryType type;
 
     @Singular
-    @YamlProperty(key = "important_notes", order = -6)
+    @JsonProperty(value = "important_notes", index = 6)
     public List<String> importantNotes;
 
     @Singular
-    @YamlProperty(key = "configurations", order = -7)
+    @JsonProperty(index = 7)
     public List<YMLChangelogEntryConfiguration> configurations;
 
+    @SneakyThrows
     public static YMLChangelogEntry of(InputStream input) {
-        Yaml yaml = new Yaml(new AnnotationAwareConstructor(YMLChangelogEntry.class));
-        return yaml.load(input);
+//        Yaml yaml = new Yaml(new AnnotationAwareConstructor(YMLChangelogEntry.class));
+//        return yaml.load(input);
+
+        ObjectMapper mapper = ObjectMapperProvider.get();
+        return mapper.readValue(input, YMLChangelogEntry.class);
     }
 
+    @SneakyThrows
     public String toYMLString() {
-        return YML_HEADING + YamlProvider.get().dumpAsMap(this);
+        return YML_HEADING + ObjectMapperProvider.get()
+                .writeValueAsString(this);
     }
 
-    @YamlAnySetter
+    @JsonAnySetter
     public void anySetter(String key, Object value) {
         System.out.println("Unknown property: " + key + " with value " + value);
         //TODO Logger.getLogger().warn("Unknown property: " + key + " with value " + value);

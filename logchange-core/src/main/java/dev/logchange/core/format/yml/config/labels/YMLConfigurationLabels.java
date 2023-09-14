@@ -1,7 +1,8 @@
 package dev.logchange.core.format.yml.config.labels;
 
-import de.beosign.snakeyamlanno.property.YamlAnySetter;
-import de.beosign.snakeyamlanno.property.YamlProperty;
+
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.logchange.core.domain.config.model.labels.ConfigurationLabels;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,19 +15,19 @@ public class YMLConfigurationLabels {
 
     public static final YMLConfigurationLabels EMPTY = YMLConfigurationLabels.builder().build();
 
-    @YamlProperty(key = "heading", order = 0)
+    @JsonProperty(index = 0)
     public String heading;
 
-    @YamlProperty(key = "type", order = -1)
+    @JsonProperty(index = 1)
     public String type;
 
-    @YamlProperty(key = "actions", order = -2)
+    @JsonProperty(index = 2)
     public YMLConfigurationActionLabels actions;
 
-    @YamlProperty(key = "with_default_value", order = -3)
+    @JsonProperty(value = "with_default_value", index = 3)
     public String withDefaultValue;
 
-    @YamlProperty(key = "description", order = -4)
+    @JsonProperty(index = 4)
     public String description;
 
     public static YMLConfigurationLabels of(ConfigurationLabels configuration) {
@@ -39,7 +40,7 @@ public class YMLConfigurationLabels {
                 .build();
     }
 
-    @YamlAnySetter
+    @JsonAnySetter
     public void anySetter(String key, Object value) {
         System.out.println("Unknown property: " + key + " with value " + value);
         //TODO Logger.getLogger().warn("Unknown property: " + key + " with value " + value);

@@ -1,10 +1,12 @@
 package dev.logchange.core.format.yml.changelog.entry;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 
-@Getter
+import java.util.Arrays;
+
 @AllArgsConstructor
 public enum YMLChangelogEntryType {
 
@@ -65,4 +67,16 @@ public enum YMLChangelogEntryType {
         }
     }
 
+    @JsonCreator
+    public static YMLChangelogEntryType of(String name) {
+        return Arrays.stream(values())
+                .filter(value -> value.getType().equals(name))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Cannot match YMLChangelogEntryType for string: " + name));
+    }
+
+    @JsonValue
+    public String getType() {
+        return type;
+    }
 }

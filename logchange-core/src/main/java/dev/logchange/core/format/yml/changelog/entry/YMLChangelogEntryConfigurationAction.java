@@ -1,10 +1,12 @@
 package dev.logchange.core.format.yml.changelog.entry;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryConfigurationAction;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 
-@Getter
+import java.util.Arrays;
+
 @AllArgsConstructor
 public enum YMLChangelogEntryConfigurationAction {
 
@@ -40,4 +42,17 @@ public enum YMLChangelogEntryConfigurationAction {
         }
     }
 
+    @JsonCreator
+    public static YMLChangelogEntryConfigurationAction of(String name) {
+        return Arrays.stream(values())
+                .filter(value -> value.getAction().equals(name))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Cannot match YMLChangelogEntryConfigurationAction for string: " + name));
+    }
+
+
+    @JsonValue
+    public String getAction() {
+        return action;
+    }
 }

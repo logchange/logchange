@@ -11,8 +11,7 @@
     <artifactId>logchange-core</artifactId>
 
     <properties>
-        <snakeyaml-anno.version>1.3.0</snakeyaml-anno.version>
-        <snakeyaml.version>2.2</snakeyaml.version>
+        <jackson.version>2.15.2</jackson.version>
         <Java-Markdown-Generator.version>1.3.2</Java-Markdown-Generator.version>
         <commons-text.version>1.10.0</commons-text.version>
         <maven-artifact.version>3.9.4</maven-artifact.version>
@@ -29,16 +28,17 @@
     </repositories>
 
     <dependencies>
+
         <dependency>
-            <groupId>com.github.beosign</groupId>
-            <artifactId>snakeyaml-anno</artifactId>
-            <version>${snakeyaml-anno.version}</version>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
-            <version>${snakeyaml.version}</version>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
 
         <dependency>

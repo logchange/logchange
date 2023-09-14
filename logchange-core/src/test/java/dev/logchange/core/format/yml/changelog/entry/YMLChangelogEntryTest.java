@@ -37,6 +37,7 @@ class YMLChangelogEntryTest {
                 "  - type: DB\n" +
                 "    action: add\n" +
                 "    key: aaa.bbb\n" +
+                "    default_value: \"\"\n" +
                 "    description: Some desc\n" +
                 "    more_info: some more info\n", result);
     }
