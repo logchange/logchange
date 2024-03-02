@@ -24,7 +24,7 @@ public class YMLConfigurationActionLabels {
     @JsonProperty(index = 1)
     public String update;
 
-    @JsonProperty(index = 1)
+    @JsonProperty(index = 2)
     public String delete;
 
     public static YMLConfigurationActionLabels of(ConfigurationActionLabels actions) {
