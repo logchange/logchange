@@ -1,21 +1,7 @@
 # This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵 
 # Visit https://github.com/logchange/logchange and leave a star 🌟 
 # More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
-title: Upgraded com.fasterxml.jackson.dataformat:jackson-dataformat-yaml from 2.15.3
-    to 2.16.0
+title: Upgraded com.fasterxml.jackson.dataformat:jackson-dataformat-yaml from 2.15.3 to 2.16.0
 authors:
-  - name: ""
-    nick: marwin1991
-    url: ""
-merge_requests: [
-    ]
-issues: [
-    ]
-links: [
-    ]
+  - nick: marwin1991
 type: dependency_update
-important_notes: [
-    ]
-configurations: [
-    ]
-

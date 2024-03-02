@@ -4,6 +4,7 @@ package dev.logchange.core.format.yml.changelog.entry;
 //import de.beosign.snakeyamlanno.property.YamlProperty;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryLink;
 import lombok.AllArgsConstructor;
@@ -18,7 +19,9 @@ import lombok.NoArgsConstructor;
 public class YMLChangelogEntryLink {
 
     @JsonProperty(index = 0)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public String name;
+
     @JsonProperty(index = 1)
     public String url;
 

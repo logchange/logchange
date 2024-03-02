@@ -41,6 +41,13 @@
         <tag>HEAD</tag>
     </scm>
 
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -54,8 +61,11 @@
 
         <!-- TESTS -->
         <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
-        <junit-jupiter.version>5.7.1</junit-jupiter.version>
+        <junit-jupiter.version>5.10.2</junit-jupiter.version>
+        <mockito-junit-jupiter.version>5.11.0</mockito-junit-jupiter.version>
         <assertj.version>3.24.2</assertj.version>
+        <pitest-maven.version>1.15.3</pitest-maven.version>
+        <pitest-junit5-plugin.version>1.2.1</pitest-junit5-plugin.version>
     </properties>
 
     <distributionManagement>
@@ -150,7 +160,7 @@
                         <plugin>
                             <groupId>org.pitest</groupId>
                             <artifactId>pitest-maven</artifactId>
-                            <version>1.15.3</version>
+                            <version>${pitest-maven.version}</version>
                             <configuration>
                                 <verbose>true</verbose>
                                 <threads>4</threads>
@@ -167,7 +177,7 @@
                                 <dependency>
                                     <groupId>org.pitest</groupId>
                                     <artifactId>pitest-junit5-plugin</artifactId>
-                                    <version>1.2.1</version>
+                                    <version>${pitest-junit5-plugin.version}</version>
                                 </dependency>
                             </dependencies>
                             <executions>

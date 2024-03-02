@@ -18,7 +18,6 @@ public class YMLChangelog {
     @JsonProperty(index = 0)
     public String heading;
 
-
     @JsonProperty(index = 1)
     public YMLLabels labels;
 

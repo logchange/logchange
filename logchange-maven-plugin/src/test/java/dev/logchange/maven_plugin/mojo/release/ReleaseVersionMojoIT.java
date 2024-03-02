@@ -29,11 +29,11 @@ class ReleaseVersionMojoIT {
                 .has("changelog/v1.0.0");
 
 
-        File gitKeep = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/unreleased/.gitkeep");
-        File changelog = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "CHANGELOG.md");
-        File taskMovedToRelease = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/v1.0.0/task.yml");
-        File releaseDateFile = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/v1.0.0/release-date.txt");
-        File versionSummary = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/v1.0.0/version-summary.md");
+        File gitKeep = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/unreleased/.gitkeep");
+        File changelog = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "CHANGELOG.md");
+        File taskMovedToRelease = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.0.0/task.yml");
+        File releaseDateFile = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.0.0/release-date.txt");
+        File versionSummary = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.0.0/version-summary.md");
 
         assertThat(gitKeep).exists();
         assertThat(changelog).exists();
@@ -57,11 +57,11 @@ class ReleaseVersionMojoIT {
                 .has("changelog/v1.0.0");
 
 
-        File gitKeep = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/unreleased/.gitkeep");
-        File changelog = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "CHANGELOG.md");
-        File taskMovedToRelease = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/v1.0.0/task.yml");
-        File releaseDateFile = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/v1.0.0/release-date.txt");
-        File versionSummary = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/v1.0.0/version-summary.md");
+        File gitKeep = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/unreleased/.gitkeep");
+        File changelog = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "CHANGELOG.md");
+        File taskMovedToRelease = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.0.0/task.yml");
+        File releaseDateFile = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.0.0/release-date.txt");
+        File versionSummary = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.0.0/version-summary.md");
 
         assertThat(gitKeep).exists();
         assertThat(changelog).exists();
@@ -81,11 +81,11 @@ class ReleaseVersionMojoIT {
                 .has("changelog/v1.3.7");
 
 
-        File gitKeep = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/unreleased/.gitkeep");
-        File changelog = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "CHANGELOG.md");
-        File taskMovedToRelease = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/v1.3.7/task.yml");
-        File releaseDateFile = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/v1.3.7/release-date.txt");
-        File versionSummary = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/v1.3.7/version-summary.md");
+        File gitKeep = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/unreleased/.gitkeep");
+        File changelog = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "CHANGELOG.md");
+        File taskMovedToRelease = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.3.7/task.yml");
+        File releaseDateFile = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.3.7/release-date.txt");
+        File versionSummary = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.3.7/version-summary.md");
 
         assertThat(gitKeep).exists();
         assertThat(changelog).exists();
@@ -107,12 +107,12 @@ class ReleaseVersionMojoIT {
                 .has("changelog/v1.8.9");
 
 
-        File changesXmlFIle = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "TestChanges.xml");
-        File gitKeep = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/unreleased/.gitkeep");
-        File changelog = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "CHANGELOG.md");
-        File taskMovedToRelease = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/v1.8.9/task.yml");
-        File releaseDateFile = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/v1.8.9/release-date.txt");
-        File versionSummary = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/v1.8.9/version-summary.md");
+        File changesXmlFIle = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "TestChanges.xml");
+        File gitKeep = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/unreleased/.gitkeep");
+        File changelog = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "CHANGELOG.md");
+        File taskMovedToRelease = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.8.9/task.yml");
+        File releaseDateFile = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.8.9/release-date.txt");
+        File versionSummary = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.8.9/version-summary.md");
 
         assertThat(changesXmlFIle).exists();
         assertThat(gitKeep).exists();
