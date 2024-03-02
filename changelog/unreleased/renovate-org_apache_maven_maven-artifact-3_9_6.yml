@@ -3,18 +3,5 @@
 # More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
 title: Upgraded org.apache.maven:maven-artifact from 3.9.5 to 3.9.6
 authors:
-  - name: ""
-    nick: marwin1991
-    url: ""
-merge_requests: [
-    ]
-issues: [
-    ]
-links: [
-    ]
+  - nick: marwin1991
 type: dependency_update
-important_notes: [
-    ]
-configurations: [
-    ]
-

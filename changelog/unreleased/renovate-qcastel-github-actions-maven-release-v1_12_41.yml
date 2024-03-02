@@ -3,18 +3,5 @@
 # More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
 title: Upgraded qcastel/github-actions-maven-release from v1.12.39 to v1.12.41
 authors:
-  - name: ""
-    nick: marwin1991
-    url: ""
-merge_requests: [
-    ]
-issues: [
-    ]
-links: [
-    ]
+  - nick: marwin1991
 type: dependency_update
-important_notes: [
-    ]
-configurations: [
-    ]
-

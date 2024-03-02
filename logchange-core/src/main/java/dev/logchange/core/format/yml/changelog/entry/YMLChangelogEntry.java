@@ -1,6 +1,7 @@
 package dev.logchange.core.format.yml.changelog.entry;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.logchange.core.domain.changelog.model.entry.*;
@@ -29,18 +30,22 @@ public class YMLChangelogEntry {
 
     @Singular
     @JsonProperty(index = 1)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<YMLChangelogEntryAuthor> authors;
 
     @Singular
     @JsonProperty(value = "merge_requests", index = 2)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<Long> mergeRequests;
 
     @Singular
     @JsonProperty(index = 3)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<Long> issues;
 
     @Singular
     @JsonProperty(index = 4)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<YMLChangelogEntryLink> links;
 
     @JsonProperty(index = 5)
@@ -48,10 +53,12 @@ public class YMLChangelogEntry {
 
     @Singular
     @JsonProperty(value = "important_notes", index = 6)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<String> importantNotes;
 
     @Singular
     @JsonProperty(index = 7)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<YMLChangelogEntryConfiguration> configurations;
 
     @SneakyThrows
