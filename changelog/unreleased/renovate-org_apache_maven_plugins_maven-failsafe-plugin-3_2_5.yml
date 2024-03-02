@@ -1,0 +1,20 @@
+# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵 
+# Visit https://github.com/logchange/logchange and leave a star 🌟 
+# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
+title: Upgraded org.apache.maven.plugins:maven-failsafe-plugin from 3.2.2 to 3.2.5
+authors:
+  - name: ""
+    nick: marwin1991
+    url: ""
+merge_requests: [
+    ]
+issues: [
+    ]
+links: [
+    ]
+type: dependency_update
+important_notes: [
+    ]
+configurations: [
+    ]
+
