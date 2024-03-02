@@ -23,9 +23,9 @@ class InitProjectMojoIT {
                 .has("changelog/unreleased");
 
 
-        File gitKeep = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/unreleased/.gitkeep");
-        File config = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "changelog/logchange-config.yml");
-        File changelog = new File(result.getMavenProjectResult().getTargetProjectDirectory(), "CHANGELOG.md");
+        File gitKeep = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/unreleased/.gitkeep");
+        File config = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/logchange-config.yml");
+        File changelog = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "CHANGELOG.md");
 
         assertThat(gitKeep).exists();
         assertThat(config).exists();

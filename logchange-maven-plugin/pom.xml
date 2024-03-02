@@ -21,7 +21,8 @@
 
         <!-- TESTS -->
         <maven-verifier.version>1.7.2</maven-verifier.version>
-        <itf.version>0.11.0</itf.version>
+        <itf.version>0.13.1</itf.version>
+        <commons-io.version>2.15.1</commons-io.version>
     </properties>
 
     <dependencies>
@@ -60,13 +61,19 @@
         <dependency>
             <groupId>com.soebes.itf.jupiter.extension</groupId>
             <artifactId>itf-jupiter-extension</artifactId>
-            <version>0.11.0</version>
+            <version>${itf.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.soebes.itf.jupiter.extension</groupId>
             <artifactId>itf-assertj</artifactId>
-            <version>0.11.0</version>
+            <version>${itf.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency> <!-- Verify file exists in tests -->
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -94,7 +101,7 @@
             <plugin>
                 <groupId>com.soebes.itf.jupiter.extension</groupId>
                 <artifactId>itf-maven-plugin</artifactId>
-                <version>0.12.0</version>
+                <version>${itf.version}</version>
                 <executions>
                     <execution>
                         <id>installing</id>
@@ -111,10 +118,10 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>3.2.2</version>
                 <configuration>
-                    <systemProperties>
+                    <systemPropertyVariables>
                         <maven.version>${maven.version}</maven.version>
                         <maven.home>${maven.home}</maven.home>
-                    </systemProperties>
+                    </systemPropertyVariables>
                 </configuration>
                 <executions>
                     <execution>
