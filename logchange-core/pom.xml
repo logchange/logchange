@@ -31,10 +31,16 @@
             <version>${jackson.version}</version>
         </dependency>
 
-        <dependency>
+        <dependency><!--TODO: Remove after logchange-md implementation-->
             <groupId>com.github.Steppschuh</groupId>
             <artifactId>Java-Markdown-Generator</artifactId>
             <version>${Java-Markdown-Generator.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>dev.logchange</groupId>
+            <artifactId>logchange-md</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
