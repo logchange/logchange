@@ -1,4 +1,8 @@
 package dev.logchange.md.list;
 
-public class UnorderedListItem {
+public final class UnorderedListItem {
+
+    public static String stringOf(Object value) {
+        return "- " + value;
+    }
 }
