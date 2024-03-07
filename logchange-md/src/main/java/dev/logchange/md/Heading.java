@@ -1,16 +1,12 @@
-package dev.logchange.md.text.heading;
+package dev.logchange.md;
 
-import dev.logchange.md.util.StringUtil;
+class Heading {
+    private static final int MINIMUM_LEVEL = 1;
+    private static final int MAXIMUM_LEVEL = 6;
+    private static final char UNDERLINE_CHAR_1 = '=';
+    private static final char UNDERLINE_CHAR_2 = '-';
 
-public class Heading {
-
-    public static final int MINIMUM_LEVEL = 1;
-    public static final int MAXIMUM_LEVEL = 6;
-
-    public static final char UNDERLINE_CHAR_1 = '=';
-    public static final char UNDERLINE_CHAR_2 = '-';
-
-    public static String stringOf(Object value, int level) {
+    static String of(Object value, int level) {
         int trimmedLevel = trimLevel(level);
         return predecessor(trimmedLevel) + value + successor(trimmedLevel, value);
     }

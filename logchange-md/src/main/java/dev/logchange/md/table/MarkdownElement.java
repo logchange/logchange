@@ -1,4 +1,4 @@
-package dev.logchange.md;
+package dev.logchange.md.table;
 
 /**
  * Base class that every markdown element extends.

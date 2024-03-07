@@ -1,4 +1,4 @@
-package dev.logchange.md.util;
+package dev.logchange.md;
 
 
 

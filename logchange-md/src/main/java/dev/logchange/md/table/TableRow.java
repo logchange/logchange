@@ -1,9 +1,7 @@
 package dev.logchange.md.table;
 
 
-import dev.logchange.md.MarkdownElement;
-import dev.logchange.md.MarkdownSerializationException;
-import dev.logchange.md.util.StringUtil;
+import dev.logchange.md.StringUtil;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

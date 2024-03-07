@@ -1,16 +1,14 @@
 package dev.logchange.md.table;
 
 
-import dev.logchange.md.MarkdownElement;
-import dev.logchange.md.util.StringUtil;
+import dev.logchange.md.StringUtil;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static dev.logchange.md.util.StringUtil.surroundValueWith;
+import static dev.logchange.md.StringUtil.surroundValueWith;
 
 
 public class Table extends MarkdownElement {
@@ -24,6 +22,49 @@ public class Table extends MarkdownElement {
 
     public Table() {
         this.rows = new ArrayList<>();
+    }
+
+    public static String generateHeaderSeparator(Map<Integer, Integer> columnWidths) {
+        StringBuilder sb = new StringBuilder();
+        for (int columnIndex = 0; columnIndex < columnWidths.entrySet().size(); columnIndex++) {
+            sb.append(SEPARATOR);
+
+            String value = StringUtil.fillUpLeftAligned("", "-", columnWidths.get(columnIndex));
+
+            value = surroundValueWith(value, WHITESPACE);
+
+            sb.append(value);
+            if (columnIndex == columnWidths.entrySet().size() - 1) {
+                sb.append(SEPARATOR);
+            }
+        }
+        return sb.toString();
+    }
+
+    public static Map<Integer, Integer> getColumnWidths(List<TableRow> rows) {
+        Map<Integer, Integer> columnWidths = new HashMap<Integer, Integer>();
+        if (rows.isEmpty()) {
+            return columnWidths;
+        }
+        for (int columnIndex = 0; columnIndex < rows.get(0).getColumns().size(); columnIndex++) {
+            columnWidths.put(columnIndex, getMaximumItemLength(rows, columnIndex, DEFAULT_MINIMUM_COLUMN_WIDTH));
+        }
+        return columnWidths;
+    }
+
+    public static int getMaximumItemLength(List<TableRow> rows, int columnIndex, int minimumColumnWidth) {
+        int maximum = minimumColumnWidth;
+        for (TableRow row : rows) {
+            if (row.getColumns().size() < columnIndex + 1) {
+                continue;
+            }
+            Object value = row.getColumns().get(columnIndex);
+            if (value == null) {
+                continue;
+            }
+            maximum = Math.max(value.toString().length(), maximum);
+        }
+        return maximum;
     }
 
     @Override
@@ -74,70 +115,9 @@ public class Table extends MarkdownElement {
         return sb.toString();
     }
 
-    public static String generateHeaderSeparator(Map<Integer, Integer> columnWidths) {
-        StringBuilder sb = new StringBuilder();
-        for (int columnIndex = 0; columnIndex < columnWidths.entrySet().size(); columnIndex++) {
-            sb.append(SEPARATOR);
-
-            String value = StringUtil.fillUpLeftAligned("", "-", columnWidths.get(columnIndex));
-
-            value = surroundValueWith(value, WHITESPACE);
-
-            sb.append(value);
-            if (columnIndex == columnWidths.entrySet().size() - 1) {
-                sb.append(SEPARATOR);
-            }
-        }
-        return sb.toString();
-    }
-
-    public static Map<Integer, Integer> getColumnWidths(List<TableRow> rows) {
-        Map<Integer, Integer> columnWidths = new HashMap<Integer, Integer>();
-        if (rows.isEmpty()) {
-            return columnWidths;
-        }
-        for (int columnIndex = 0; columnIndex < rows.get(0).getColumns().size(); columnIndex++) {
-            columnWidths.put(columnIndex, getMaximumItemLength(rows, columnIndex, DEFAULT_MINIMUM_COLUMN_WIDTH));
-        }
-        return columnWidths;
-    }
-
-    public static int getMaximumItemLength(List<TableRow> rows, int columnIndex, int minimumColumnWidth) {
-        int maximum = minimumColumnWidth;
-        for (TableRow row : rows) {
-            if (row.getColumns().size() < columnIndex + 1) {
-                continue;
-            }
-            Object value = row.getColumns().get(columnIndex);
-            if (value == null) {
-                continue;
-            }
-            maximum = Math.max(value.toString().length(), maximum);
-        }
-        return maximum;
-    }
-
     public void addRow(TableRow tableRow) {
         this.rows.add(tableRow);
     }
 
-    public static class Builder {
 
-        private Table table;
-
-        public Builder() {
-            table = new Table();
-        }
-
-        public Builder addRow(Object... objects) {
-            TableRow tableRow = new TableRow(Arrays.asList(objects));
-            table.addRow(tableRow);
-            return this;
-        }
-
-        public Table build() {
-            return table;
-        }
-
-    }
 }

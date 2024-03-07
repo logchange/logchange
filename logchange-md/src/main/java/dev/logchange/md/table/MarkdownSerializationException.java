@@ -1,4 +1,4 @@
-package dev.logchange.md;
+package dev.logchange.md.table;
 
 /**
  * Created by steppschuh on 15/12/2016.
