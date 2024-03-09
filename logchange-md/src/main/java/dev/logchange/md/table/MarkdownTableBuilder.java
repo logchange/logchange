@@ -5,21 +5,21 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class TableBuilder {
-    private Table table;
+public class MarkdownTableBuilder {
+    private MarkdownTable table;
 
-    public TableBuilder() {
+    public MarkdownTableBuilder() {
     }
 
-    public TableBuilder(Object... objects) {
+    public MarkdownTableBuilder(Object... objects) {
         initializeTable(objects);
     }
 
     private void initializeTable(Object... objects) {
-        this.table = new Table(new TableRow(Arrays.asList(objects)));
+        this.table = new MarkdownTable(new MarkdownTableRow(Arrays.asList(objects)));
     }
 
-    public TableBuilder addRow(Object... objects) {
+    public MarkdownTableBuilder addRow(Object... objects) {
         if (table == null) {
             initializeTable(objects);
         } else {
@@ -28,7 +28,7 @@ public class TableBuilder {
         return this;
     }
 
-    private TableRow adjustNumberOfColumns(Object... objects) {
+    private MarkdownTableRow adjustNumberOfColumns(Object... objects) {
         List<Object> columns = new LinkedList<>(Arrays.asList(objects));
         final int numberOfColumns = table.getNumberOfColumns();
         if (columns.size() > numberOfColumns) {
@@ -37,17 +37,17 @@ public class TableBuilder {
         return appendEmptyColumns(columns, numberOfColumns);
     }
 
-    private TableRow appendEmptyColumns(List<Object> columns, int numberOfColumns) {
+    private MarkdownTableRow appendEmptyColumns(List<Object> columns, int numberOfColumns) {
         int difference = numberOfColumns - columns.size();
         columns.addAll(Collections.nCopies(difference, ""));
-        return new TableRow(columns);
+        return new MarkdownTableRow(columns);
     }
 
-    private TableRow trimColumns(List<Object> columns, int numberOfColumns) {
-        return new TableRow(columns.subList(0, numberOfColumns));
+    private MarkdownTableRow trimColumns(List<Object> columns, int numberOfColumns) {
+        return new MarkdownTableRow(columns.subList(0, numberOfColumns));
     }
 
-    public String toMarkdownTable() {
+    public String build() {
         return table != null ? table.toString() : "";
     }
 }

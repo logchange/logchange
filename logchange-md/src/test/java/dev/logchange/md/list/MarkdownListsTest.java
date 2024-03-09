@@ -1,4 +1,4 @@
-package dev.logchange.md;
+package dev.logchange.md.list;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -6,27 +6,32 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static dev.logchange.md.StringUtil.fillUpLeftAligned;
-import static dev.logchange.md.StringUtil.surroundValueWith;
 
-
-class Table {
+class MarkdownTable {
 
     private static final String SEPARATOR = "|";
-    private static final String WHITESPACE = " ";
+    private static final char WHITESPACE = ' ';
 
-    private final TableRow header;
-    private final List<TableRow> rows;
+    private final MarkdownTableRow header;
+    private final List<MarkdownTableRow> rows;
     private final Map<Integer, Integer> tableColumnWidths;
 
-    Table(TableRow header) {
+    MarkdownTable(MarkdownTableRow header) {
         this.header = header;
         this.tableColumnWidths = new HashMap<>();
         this.rows = new ArrayList<>();
         calculateTableColumnWidths(header);
     }
 
-    void addRow(TableRow tableRow) {
+    private static String fillUpLeftAligned(String value, char fill, int length) {
+        return value.length() >= length ? value : String.format("%-" + length + "s", value).replace(' ', fill);
+    }
+
+    private static String surroundWithWhitespace(String value) {
+        return WHITESPACE + value + WHITESPACE;
+    }
+
+    void addRow(MarkdownTableRow tableRow) {
         calculateTableColumnWidths(tableRow);
         this.rows.add(tableRow);
     }
@@ -35,7 +40,7 @@ class Table {
         return this.header.getNumberOfCells();
     }
 
-    private void calculateTableColumnWidths(TableRow row) {
+    private void calculateTableColumnWidths(MarkdownTableRow row) {
         Map<Integer, Integer> rowCellWidths = row.getCellWidths();
         for (int columnIndex = 0; columnIndex < getNumberOfColumns(); columnIndex++) {
             this.tableColumnWidths.compute(columnIndex, (key, value) ->
@@ -52,21 +57,21 @@ class Table {
         StringBuilder sb = new StringBuilder();
         sb.append(generateCells(this.header));
         sb.append(generateHeaderSeparator());
-        for (TableRow row : rows) {
+        for (MarkdownTableRow row : rows) {
             sb.append(System.lineSeparator());
             sb.append(generateCells(row));
         }
         return sb.toString();
     }
 
-    private String generateCells(TableRow row) {
+    private String generateCells(MarkdownTableRow row) {
         StringBuilder sb = new StringBuilder();
 
         for (int columnIndex = 0; columnIndex < getNumberOfColumns(); columnIndex++) {
             sb.append(SEPARATOR);
             sb.append(fillUpLeftAligned(
-                    surroundValueWith(escapeSeparatorSign(row.getCell(columnIndex)), WHITESPACE),
-                    ' ',
+                    surroundWithWhitespace(escapeSeparatorSign(row.getCell(columnIndex))),
+                    WHITESPACE,
                     tableColumnWidths.get(columnIndex) + 2));
         }
         return sb.append(SEPARATOR).toString();
@@ -81,7 +86,7 @@ class Table {
         sb.append(System.lineSeparator());
         for (int columnIndex = 0; columnIndex < getNumberOfColumns(); columnIndex++) {
             sb.append(SEPARATOR);
-            sb.append(surroundValueWith(fillUpLeftAligned("", '-', tableColumnWidths.get(columnIndex)), WHITESPACE));
+            sb.append(surroundWithWhitespace(fillUpLeftAligned("", '-', tableColumnWidths.get(columnIndex))));
         }
         return sb.append(SEPARATOR).toString();
     }

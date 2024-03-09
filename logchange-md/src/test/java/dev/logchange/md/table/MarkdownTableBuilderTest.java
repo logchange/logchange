@@ -4,20 +4,18 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class TableBuilderTest {
+class MarkdownTableBuilderTest {
 
     @Test
     void xd() {
-        TableBuilder builder = new TableBuilder();
+        MarkdownTableBuilder builder = new MarkdownTableBuilder();
         builder.addRow("TYP", "RODZAJ", "DASDADADADA");
         builder.addRow("database", "baza danych");
         builder.addRow("database", "baza danych", "trzy", "cztery");
 
-        TableRow row = new TableRow(Arrays.asList("ROW", "ROW", "ROW"));
+        MarkdownTableRow row = new MarkdownTableRow(Arrays.asList("ROW", "ROW", "ROW"));
 
-        System.out.println(builder.toMarkdownTable());
+        System.out.println(builder.build());
         System.out.println(row);
     }
 

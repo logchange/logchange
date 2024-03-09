@@ -1,4 +1,4 @@
-package dev.logchange.md;
+package dev.logchange.md.list;
 
 import java.util.List;
 import java.util.StringJoiner;
@@ -23,7 +23,7 @@ public class MarkdownLists {
     }
 
     private static <T> String unorderedNestedList(List<T> items, int indentationLevel) {
-        String indentation = StringUtil.fillUpLeftAligned("", ' ', indentationLevel * 2);
+        String indentation = fillUpLeftAligned("", ' ', indentationLevel * 2);
         return items.stream()
                 .map(item -> {
                     if (item instanceof List) {
@@ -33,5 +33,9 @@ public class MarkdownLists {
                     }
                 })
                 .collect(Collectors.joining(System.lineSeparator()));
+    }
+
+    public static String fillUpLeftAligned(String value, char fill, int length) {
+        return value.length() >= length ? value : String.format("%-" + length + "s", value).replace(' ', fill);
     }
 }

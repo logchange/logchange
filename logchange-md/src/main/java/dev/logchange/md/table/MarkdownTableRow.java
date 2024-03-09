@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 
-class TableRow {
+class MarkdownTableRow {
 
     private static final int DEFAULT_MINIMUM_CELL_WIDTH = 3;
 
@@ -18,7 +18,7 @@ class TableRow {
     private final Map<Integer, Integer> cellWidths;
 
 
-    TableRow(List<Object> cells) {
+    MarkdownTableRow(List<Object> cells) {
         this.cells = cells;
         this.cellWidths = calculateCellsWidths(cells);
     }

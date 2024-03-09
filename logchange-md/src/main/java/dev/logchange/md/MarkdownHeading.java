@@ -1,6 +1,6 @@
 package dev.logchange.md;
 
-class Heading {
+class MarkdownHeading {
     private static final int MINIMUM_LEVEL = 1;
     private static final int MAXIMUM_LEVEL = 6;
     private static final char UNDERLINE_CHAR_1 = '=';
@@ -19,15 +19,23 @@ class Heading {
         if (level < 3) {
             return "";
         }
-        return StringUtil.fillUpRightAligned("", '#', level) + " ";
+        return fillUpRightAligned(level) + " ";
+    }
+
+    private static String fillUpRightAligned(int length) {
+        return 0 >= length ? "" : String.format("%" + length + "s", "").replace(' ', '#');
     }
 
     private static String successor(int level, Object value) {
         if (level < 3) {
             char underlineChar = (level == 1) ? UNDERLINE_CHAR_1 : UNDERLINE_CHAR_2;
-            return System.lineSeparator() + StringUtil.fillUpLeftAligned("", underlineChar, String.valueOf(value).length());
+            return System.lineSeparator() + fillUpLeftAligned(underlineChar, String.valueOf(value).length());
         }
         return "";
+    }
+
+    private static String fillUpLeftAligned(char fill, int length) {
+        return 0 >= length ? "" : String.format("%-" + length + "s", "").replace(' ', fill);
     }
 }
 

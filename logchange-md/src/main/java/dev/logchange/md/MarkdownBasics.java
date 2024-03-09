@@ -1,6 +1,6 @@
 package dev.logchange.md;
 
-public class Markdown {
+public class MarkdownBasics {
 
     public static String text(Object value) {
         return String.valueOf(value);
@@ -15,6 +15,6 @@ public class Markdown {
     }
 
     public static String heading(Object value, int level) {
-        return Heading.of(value, level);
+        return MarkdownHeading.of(value, level);
     }
 }
