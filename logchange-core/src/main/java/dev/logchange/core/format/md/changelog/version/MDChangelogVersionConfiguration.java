@@ -5,14 +5,15 @@ import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.format.md.MD;
 import dev.logchange.core.format.md.MDList;
 import dev.logchange.core.format.md.changelog.Configurable;
-import net.steppschuh.markdowngenerator.table.Table;
-import net.steppschuh.markdowngenerator.text.code.Code;
-import net.steppschuh.markdowngenerator.text.heading.Heading;
+import dev.logchange.md.table.MarkdownTableBuilder;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import static dev.logchange.md.MarkdownBasics.code;
+import static dev.logchange.md.MarkdownBasics.heading;
 
 class MDChangelogVersionConfiguration extends Configurable implements MD {
 
@@ -30,7 +31,7 @@ class MDChangelogVersionConfiguration extends Configurable implements MD {
 
     private String getConfiguration() {
         if (configurations.size() != 0) {
-            StringBuilder markdownConfiguration = new StringBuilder(new Heading(getConfig().getLabels().getConfiguration().getHeading(), 3) + "\n\n");
+            StringBuilder markdownConfiguration = new StringBuilder(heading(getConfig().getLabels().getConfiguration().getHeading(), 3) + "\n\n");
             Set<String> types = getConfigurationsTypes();
 
             for (String type : types) {
@@ -50,16 +51,16 @@ class MDChangelogVersionConfiguration extends Configurable implements MD {
                 .collect(Collectors.toSet());
     }
 
-    private Table getConfigurationTable(List<ChangelogEntryConfiguration> configurations, String type) {
-        Table.Builder tableBuilder = new Table.Builder().addRow(getConfig().getLabels().getConfiguration().getType() + ": " + type);
+    private String getConfigurationTable(List<ChangelogEntryConfiguration> configurations, String type) {
+        MarkdownTableBuilder tableBuilder = new MarkdownTableBuilder(getConfig().getLabels().getConfiguration().getType() + ": " + type);
 
         for (ChangelogEntryConfiguration configuration : configurations) {
             if (type.equals(configuration.getType())) {
                 MDList configDetails = new MDList();
                 configDetails.add(getConfig().getLabels().getConfiguration().getActions().getAction(configuration.getAction()) + " "
-                        + new Code(configuration.getKey()) + " "
+                        + code(configuration.getKey()) + " "
                         + getConfig().getLabels().getConfiguration().getWithDefaultValue() + ": "
-                        + new Code(configuration.getDefaultValue()));
+                        + code(configuration.getDefaultValue()));
                 configDetails.add(getConfig().getLabels().getConfiguration().getDescription() + ": " + configuration.getDescription());
                 configDetails.add(configuration.getMoreInfo());
 
