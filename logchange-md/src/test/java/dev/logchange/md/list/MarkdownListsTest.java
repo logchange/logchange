@@ -31,7 +31,7 @@ class MarkdownListsTest {
     @ParameterizedTest
     @MethodSource("provideObjectsForUnorderedListItemCheck")
     public void shouldParseAnyObjectAsUnorderedListItem(Object input, String expectedOutput) {
-        // given
+        // when-then
         assertEquals(expectedOutput, MarkdownLists.unorderedListItem(input));
     }
 
@@ -40,16 +40,15 @@ class MarkdownListsTest {
         // given
         List<Object> input = Arrays.asList("string", 'c', 1, 9223372036854775807L, 3f, 4.56, true, null, Arrays.asList("orange", "banana", "apple"));
         String lineSeparator = System.lineSeparator();
-        String expectedOutput =
-                "- string" + lineSeparator +
-                        "- c" + lineSeparator +
-                        "- 1" + lineSeparator +
-                        "- 9223372036854775807" + lineSeparator +
-                        "- 3.0" + lineSeparator +
-                        "- 4.56" + lineSeparator +
-                        "- true" + lineSeparator +
-                        "- null" + lineSeparator +
-                        "- [orange, banana, apple]";
+        String expectedOutput = "- string" + lineSeparator +
+                "- c" + lineSeparator +
+                "- 1" + lineSeparator +
+                "- 9223372036854775807" + lineSeparator +
+                "- 3.0" + lineSeparator +
+                "- 4.56" + lineSeparator +
+                "- true" + lineSeparator +
+                "- null" + lineSeparator +
+                "- [orange, banana, apple]";
 
         // when
         String result = MarkdownLists.unorderedList(input);
@@ -63,19 +62,18 @@ class MarkdownListsTest {
         // given
         List<Object> input = Arrays.asList("string", 'c', 1, 9223372036854775807L, 3f, 4.56, true, null, Arrays.asList("fruits", Arrays.asList("orange", "banana", "apple")));
         String lineSeparator = System.lineSeparator();
-        String expectedOutput =
-                "- string" + lineSeparator +
-                        "- c" + lineSeparator +
-                        "- 1" + lineSeparator +
-                        "- 9223372036854775807" + lineSeparator +
-                        "- 3.0" + lineSeparator +
-                        "- 4.56" + lineSeparator +
-                        "- true" + lineSeparator +
-                        "- null" + lineSeparator +
-                        "  - fruits" + lineSeparator +
-                        "    - orange" + lineSeparator +
-                        "    - banana" + lineSeparator +
-                        "    - apple";
+        String expectedOutput = "- string" + lineSeparator +
+                "- c" + lineSeparator +
+                "- 1" + lineSeparator +
+                "- 9223372036854775807" + lineSeparator +
+                "- 3.0" + lineSeparator +
+                "- 4.56" + lineSeparator +
+                "- true" + lineSeparator +
+                "- null" + lineSeparator +
+                "  - fruits" + lineSeparator +
+                "    - orange" + lineSeparator +
+                "    - banana" + lineSeparator +
+                "    - apple";
 
         // when
         String result = MarkdownLists.unorderedNestedList(input);
@@ -83,5 +81,4 @@ class MarkdownListsTest {
         // then
         assertEquals(expectedOutput, result);
     }
-
 }

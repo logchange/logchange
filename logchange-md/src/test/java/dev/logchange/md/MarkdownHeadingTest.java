@@ -8,7 +8,10 @@ class MarkdownHeadingTest {
 
     @Test
     public void shouldParseObjectAsHeading() {
+        // given
         String lineSeparator = System.lineSeparator();
+
+        // when-then
         assertEquals("null" + lineSeparator + "====", MarkdownHeading.of(null, -1));
         assertEquals("null" + lineSeparator + "====", MarkdownHeading.of(null, 0));
         assertEquals("null" + lineSeparator + "====", MarkdownHeading.of(null, 1));

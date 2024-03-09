@@ -10,6 +10,7 @@ class MarkdownBasicsTest {
 
     @Test
     public void shouldConvertObjectToText() {
+        // when-then
         assertEquals("null", MarkdownBasics.text(null));
         assertEquals("true", MarkdownBasics.text(true));
         assertEquals("9223372036854775807", MarkdownBasics.text(9223372036854775807L));
@@ -18,6 +19,7 @@ class MarkdownBasicsTest {
 
     @Test
     public void shouldConvertObjectToCode() {
+        // when-then
         assertEquals("`null`", MarkdownBasics.code(null));
         assertEquals("`true`", MarkdownBasics.code(true));
         assertEquals("`9223372036854775807`", MarkdownBasics.code(9223372036854775807L));
@@ -26,6 +28,7 @@ class MarkdownBasicsTest {
 
     @Test
     public void shouldConvertObjectToLink() {
+        // when-then
         assertEquals("[null](null)", MarkdownBasics.link(null, null));
         assertEquals("[null](string)", MarkdownBasics.link(null, "string"));
         assertEquals("[true](string)", MarkdownBasics.link(true, "string"));

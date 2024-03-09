@@ -19,8 +19,18 @@ class MarkdownTableRow {
 
 
     MarkdownTableRow(List<Object> cells) {
+        checkCells(cells);
         this.cells = cells;
         this.cellWidths = calculateCellsWidths(cells);
+    }
+
+    private static void checkCells(List<Object> cells) {
+        if (cells == null) {
+            throw new MarkdownTableValidationException("Row cells cannot be null!");
+        }
+        if (cells.isEmpty()) {
+            throw new MarkdownTableValidationException("Row cells cannot be empty!");
+        }
     }
 
     private static Map<Integer, Integer> calculateCellsWidths(List<Object> cells) {

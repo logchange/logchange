@@ -11,29 +11,35 @@ class MarkdownTable {
 
     private static final String SEPARATOR = "|";
     private static final char WHITESPACE = ' ';
+    private static final int DEFAULT_MINIMUM_COLUMN_WIDTH = 3;
 
     private final MarkdownTableRow header;
     private final List<MarkdownTableRow> rows;
     private final Map<Integer, Integer> tableColumnWidths;
 
     MarkdownTable(MarkdownTableRow header) {
+        checkHeader(header);
         this.header = header;
         this.tableColumnWidths = new HashMap<>();
         this.rows = new ArrayList<>();
         calculateTableColumnWidths(header);
     }
 
-    private static String fillUpLeftAligned(String value, char fill, int length) {
-        return value.length() >= length ? value : String.format("%-" + length + "s", value).replace(' ', fill);
+    private static void checkHeader(MarkdownTableRow header) {
+        if (header == null) {
+            throw new MarkdownTableValidationException("Table header cannot be null!");
+        }
+        if (header.getNumberOfCells() == 0) {
+            throw new MarkdownTableValidationException("Table header cannot be empty!");
+        }
     }
 
-    private static String surroundWithWhitespace(String value) {
-        return WHITESPACE + value + WHITESPACE;
-    }
-
-    void addRow(MarkdownTableRow tableRow) {
-        calculateTableColumnWidths(tableRow);
-        this.rows.add(tableRow);
+    boolean addRow(MarkdownTableRow tableRow) {
+        if (tableRow != null && getNumberOfColumns() == tableRow.getNumberOfCells()) {
+            calculateTableColumnWidths(tableRow);
+            return this.rows.add(tableRow);
+        }
+        return false;
     }
 
     int getNumberOfColumns() {
@@ -44,7 +50,8 @@ class MarkdownTable {
         Map<Integer, Integer> rowCellWidths = row.getCellWidths();
         for (int columnIndex = 0; columnIndex < getNumberOfColumns(); columnIndex++) {
             this.tableColumnWidths.compute(columnIndex, (key, value) ->
-                    Math.max((value != null ? value : 0), rowCellWidths.getOrDefault(key, 0)));
+                    Math.max((value != null ? value : DEFAULT_MINIMUM_COLUMN_WIDTH),
+                            rowCellWidths.getOrDefault(key, DEFAULT_MINIMUM_COLUMN_WIDTH)));
         }
     }
 
@@ -77,8 +84,16 @@ class MarkdownTable {
         return sb.append(SEPARATOR).toString();
     }
 
+    private String fillUpLeftAligned(String value, char fill, int length) {
+        return value.length() >= length ? value : String.format("%-" + length + "s", value).replace(' ', fill);
+    }
+
     private String escapeSeparatorSign(Object cell) {
         return String.valueOf(cell).replace(SEPARATOR, "\\" + SEPARATOR);
+    }
+
+    private String surroundWithWhitespace(String value) {
+        return WHITESPACE + value + WHITESPACE;
     }
 
     private String generateHeaderSeparator() {

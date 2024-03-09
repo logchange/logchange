@@ -4,8 +4,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class MarkdownTableBuilder {
+    private static final Logger log = Logger.getLogger(MarkdownTableBuilder.class.getName());
     private MarkdownTable table;
 
     public MarkdownTableBuilder() {
@@ -16,7 +18,11 @@ public class MarkdownTableBuilder {
     }
 
     private void initializeTable(Object... objects) {
-        this.table = new MarkdownTable(new MarkdownTableRow(Arrays.asList(objects)));
+        try {
+            this.table = new MarkdownTable(new MarkdownTableRow(Arrays.asList(objects)));
+        } catch (MarkdownTableValidationException exception) {
+            log.warning("Creation of MarkdownTable caused exception with following message: " + exception.getMessage());
+        }
     }
 
     public MarkdownTableBuilder addRow(Object... objects) {
