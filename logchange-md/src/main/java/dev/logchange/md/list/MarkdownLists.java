@@ -14,7 +14,7 @@ public class MarkdownLists {
      * - third
      * </pre></blockquote>
      * @param items {@code List<T>} - list of items to be formatted.
-     * @return the string representation of Markdown Unordered List.
+     * @return the {@code String} representation of Markdown Unordered List.
      */
     public static <T> String unorderedList(List<T> items) {
         StringJoiner sj = new StringJoiner(System.lineSeparator());
@@ -25,12 +25,12 @@ public class MarkdownLists {
     }
 
     /**
-     * Formats the string representation of value param as Markdown Unordered List Item - example:
+     * Formats the {@code String} representation of value param as Markdown Unordered List Item - example:
      * <blockquote><pre>
      * - list item
      * </pre></blockquote>
      * @param value {@code Object} - object to be formatted.
-     * @return the string representation of single Markdown Unordered List Item.
+     * @return the {@code String} representation of single Markdown Unordered List Item.
      */
     public static String unorderedListItem(Object value) {
         return "- " + value;
@@ -43,14 +43,14 @@ public class MarkdownLists {
      * - 1
      *   - 1.1
      *   - 1.2
-     *   - 1.2
+     *   - 1.3
      * - 2
      *   - 2.1
      *     - 2.1.1
      * - 3
      * </pre></blockquote>
      * @param items {@code List<T>} - list of items to be formatted.
-     * @return the string representation of nested Markdown Unordered List.
+     * @return the {@code String} representation of nested Markdown Unordered List.
      */
     public static <T> String unorderedNestedList(List<T> items) {
         return unorderedNestedList(items, 0);

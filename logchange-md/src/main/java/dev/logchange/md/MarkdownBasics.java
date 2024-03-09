@@ -34,7 +34,7 @@ public class MarkdownBasics {
     }
 
     /**
-     * Formats the string representation of value param to the Markdown heading based on level parameter:
+     * Formats the {@code String} representation of value param to the Markdown heading based on level parameter:
      * <blockquote><pre>
      *      Level 1 - equivalent to Markdown <b>Title / H1</b>
      *      Level 2 - equivalent to Markdown <b>Subtitle / H2</b>
@@ -45,7 +45,7 @@ public class MarkdownBasics {
      * </pre></blockquote>
      * @param value {@code Object} text content of formatted header.
      * @param level {@code int} determines the level of the header. Possible values 1 - 6.
-     * @return the string representation of Markdown heading.
+     * @return the {@code String} representation of Markdown heading.
      */
     public static String heading(Object value, int level) {
         return MarkdownHeading.of(value, level);
