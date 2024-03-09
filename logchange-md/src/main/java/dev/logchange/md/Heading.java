@@ -19,13 +19,13 @@ class Heading {
         if (level < 3) {
             return "";
         }
-        return StringUtil.fillUpRightAligned("", "#", level) + " ";
+        return StringUtil.fillUpRightAligned("", '#', level) + " ";
     }
 
     private static String successor(int level, Object value) {
         if (level < 3) {
             char underlineChar = (level == 1) ? UNDERLINE_CHAR_1 : UNDERLINE_CHAR_2;
-            return System.lineSeparator() + StringUtil.fillUpLeftAligned("", "" + underlineChar, String.valueOf(value).length());
+            return System.lineSeparator() + StringUtil.fillUpLeftAligned("", underlineChar, String.valueOf(value).length());
         }
         return "";
     }

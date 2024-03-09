@@ -8,9 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MarkdownTest {
 
-
     @Test
-    public void shouldConvertObjectToString() {
+    public void shouldConvertObjectToText() {
         assertEquals("null", Markdown.text(null));
         assertEquals("true", Markdown.text(true));
         assertEquals("9223372036854775807", Markdown.text(9223372036854775807L));

@@ -19,5 +19,4 @@ class HeadingTest {
         assertEquals("###### null", Heading.of(null, 6));
         assertEquals("###### null", Heading.of(null, 7));
     }
-
 }

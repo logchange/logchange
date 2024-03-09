@@ -1,123 +1,88 @@
 package dev.logchange.md.table;
 
 
-import dev.logchange.md.StringUtil;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static dev.logchange.md.StringUtil.fillUpLeftAligned;
 import static dev.logchange.md.StringUtil.surroundValueWith;
 
 
-public class Table extends MarkdownElement {
+class Table {
 
-    public static final String SEPARATOR = "|";
-    public static final String WHITESPACE = " ";
-    public static final String DEFAULT_TRIMMING_INDICATOR = "~";
-    public static final int DEFAULT_MINIMUM_COLUMN_WIDTH = 3;
+    private static final String SEPARATOR = "|";
+    private static final String WHITESPACE = " ";
 
+    private final TableRow header;
     private final List<TableRow> rows;
+    private final Map<Integer, Integer> tableColumnWidths;
 
-    public Table() {
+    Table(TableRow header) {
+        this.header = header;
+        this.tableColumnWidths = new HashMap<>();
         this.rows = new ArrayList<>();
+        calculateTableColumnWidths(header);
     }
 
-    public static String generateHeaderSeparator(Map<Integer, Integer> columnWidths) {
-        StringBuilder sb = new StringBuilder();
-        for (int columnIndex = 0; columnIndex < columnWidths.entrySet().size(); columnIndex++) {
-            sb.append(SEPARATOR);
-
-            String value = StringUtil.fillUpLeftAligned("", "-", columnWidths.get(columnIndex));
-
-            value = surroundValueWith(value, WHITESPACE);
-
-            sb.append(value);
-            if (columnIndex == columnWidths.entrySet().size() - 1) {
-                sb.append(SEPARATOR);
-            }
-        }
-        return sb.toString();
-    }
-
-    public static Map<Integer, Integer> getColumnWidths(List<TableRow> rows) {
-        Map<Integer, Integer> columnWidths = new HashMap<Integer, Integer>();
-        if (rows.isEmpty()) {
-            return columnWidths;
-        }
-        for (int columnIndex = 0; columnIndex < rows.get(0).getColumns().size(); columnIndex++) {
-            columnWidths.put(columnIndex, getMaximumItemLength(rows, columnIndex, DEFAULT_MINIMUM_COLUMN_WIDTH));
-        }
-        return columnWidths;
-    }
-
-    public static int getMaximumItemLength(List<TableRow> rows, int columnIndex, int minimumColumnWidth) {
-        int maximum = minimumColumnWidth;
-        for (TableRow row : rows) {
-            if (row.getColumns().size() < columnIndex + 1) {
-                continue;
-            }
-            Object value = row.getColumns().get(columnIndex);
-            if (value == null) {
-                continue;
-            }
-            maximum = Math.max(value.toString().length(), maximum);
-        }
-        return maximum;
-    }
-
-    @Override
-    public String serialize() {
-        Map<Integer, Integer> columnWidths = getColumnWidths(rows);
-
-        StringBuilder sb = new StringBuilder();
-
-        String headerSeparator = generateHeaderSeparator(columnWidths);
-        boolean headerSeperatorAdded = false;
-
-        for (TableRow row : rows) {
-            for (int columnIndex = 0; columnIndex < columnWidths.size(); columnIndex++) {
-                sb.append(SEPARATOR);
-
-                String value = "";
-                if (row.getColumns().size() > columnIndex) {
-                    Object valueObject = row.getColumns().get(columnIndex);
-                    if (valueObject != null) {
-                        value = valueObject.toString();
-                    }
-                }
-
-                if (value.equals(DEFAULT_TRIMMING_INDICATOR)) {
-                    value = StringUtil.fillUpLeftAligned(value, DEFAULT_TRIMMING_INDICATOR, columnWidths.get(columnIndex));
-                    value = surroundValueWith(value, WHITESPACE);
-                } else {
-                    value = surroundValueWith(value, WHITESPACE);
-                    value = StringUtil.fillUpLeftAligned(value, WHITESPACE, columnWidths.get(columnIndex) + 2);
-                }
-
-                sb.append(value);
-
-                if (columnIndex == row.getColumns().size() - 1) {
-                    sb.append(SEPARATOR);
-                }
-            }
-
-            if (rows.indexOf(row) < rows.size() - 1 || rows.size() == 1) {
-                sb.append(System.lineSeparator());
-            }
-
-            if (!headerSeperatorAdded) {
-                sb.append(headerSeparator).append(System.lineSeparator());
-                headerSeperatorAdded = true;
-            }
-        }
-        return sb.toString();
-    }
-
-    public void addRow(TableRow tableRow) {
+    void addRow(TableRow tableRow) {
+        calculateTableColumnWidths(tableRow);
         this.rows.add(tableRow);
     }
 
+    int getNumberOfColumns() {
+        return this.header.getNumberOfCells();
+    }
 
+    private void calculateTableColumnWidths(TableRow row) {
+        Map<Integer, Integer> rowCellWidths = row.getCellWidths();
+        for (int columnIndex = 0; columnIndex < getNumberOfColumns(); columnIndex++) {
+            this.tableColumnWidths.compute(columnIndex, (key, value) ->
+                    Math.max((value != null ? value : 0), rowCellWidths.getOrDefault(key, 0)));
+        }
+    }
+
+    @Override
+    public String toString() {
+        return serialize();
+    }
+
+    private String serialize() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(generateCells(this.header));
+        sb.append(generateHeaderSeparator());
+        for (TableRow row : rows) {
+            sb.append(System.lineSeparator());
+            sb.append(generateCells(row));
+        }
+        return sb.toString();
+    }
+
+    private String generateCells(TableRow row) {
+        StringBuilder sb = new StringBuilder();
+
+        for (int columnIndex = 0; columnIndex < getNumberOfColumns(); columnIndex++) {
+            sb.append(SEPARATOR);
+            sb.append(fillUpLeftAligned(
+                    surroundValueWith(escapeSeparatorSign(row.getCell(columnIndex)), WHITESPACE),
+                    ' ',
+                    tableColumnWidths.get(columnIndex) + 2));
+        }
+        return sb.append(SEPARATOR).toString();
+    }
+
+    private String escapeSeparatorSign(Object cell) {
+        return String.valueOf(cell).replace(SEPARATOR, "\\" + SEPARATOR);
+    }
+
+    private String generateHeaderSeparator() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(System.lineSeparator());
+        for (int columnIndex = 0; columnIndex < getNumberOfColumns(); columnIndex++) {
+            sb.append(SEPARATOR);
+            sb.append(surroundValueWith(fillUpLeftAligned("", '-', tableColumnWidths.get(columnIndex)), WHITESPACE));
+        }
+        return sb.append(SEPARATOR).toString();
+    }
 }

@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
- class MarkdownLists {
+public class MarkdownLists {
 
-     public static <T> String unorderedList(List<T> items) {
+    public static <T> String unorderedList(List<T> items) {
         StringJoiner sj = new StringJoiner(System.lineSeparator());
         items.stream()
                 .map(MarkdownLists::unorderedListItem)
@@ -14,16 +14,16 @@ import java.util.stream.Collectors;
         return sj.toString();
     }
 
-     public static String unorderedListItem(Object value) {
+    public static String unorderedListItem(Object value) {
         return "- " + value;
     }
 
-     public static <T> String unorderedNestedList(List<T> items) {
+    public static <T> String unorderedNestedList(List<T> items) {
         return unorderedNestedList(items, 0);
     }
 
     private static <T> String unorderedNestedList(List<T> items, int indentationLevel) {
-        String indentation = StringUtil.fillUpLeftAligned("", "  ", indentationLevel * 2);
+        String indentation = StringUtil.fillUpLeftAligned("", ' ', indentationLevel * 2);
         return items.stream()
                 .map(item -> {
                     if (item instanceof List) {

@@ -8,30 +8,15 @@ package dev.logchange.md;
 
 public abstract class StringUtil {
 
-    public static String fillUpLeftAligned(String value, String fill, int length) {
-        if (value.length() >= length) {
-            return value;
-        }
-        StringBuilder valueBuilder = new StringBuilder(value);
-        while (valueBuilder.length() < length) {
-            valueBuilder.append(fill);
-        }
-        return valueBuilder.toString();
+    public static String fillUpLeftAligned(String value, char fill, int length) {
+        return value.length() >= length ? value : String.format("%-" + length + "s", value).replace(' ', fill);
     }
 
-    public static String fillUpRightAligned(String value, String fill, int length) {
-        if (value.length() >= length) {
-            return value;
-        }
-        StringBuilder valueBuilder = new StringBuilder(value);
-        while (valueBuilder.length() < length) {
-            valueBuilder.insert(0, fill);
-        }
-        return valueBuilder.toString();
+    static String fillUpRightAligned(String value, char fill, int length) {
+        return value.length() >= length ? value : String.format("%" + length + "s", value).replace(' ', fill);
     }
 
     public static String surroundValueWith(String value, String surrounding) {
         return surrounding + value + surrounding;
     }
-
 }

@@ -1,38 +1,45 @@
 package dev.logchange.md.table;
 
 
-import dev.logchange.md.StringUtil;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import static dev.logchange.md.table.Table.WHITESPACE;
 
-@Getter
-@RequiredArgsConstructor
-public class TableRow<T> extends MarkdownElement {
+class TableRow {
 
-    private final List<T> columns;
+    private static final int DEFAULT_MINIMUM_CELL_WIDTH = 3;
 
-    @Override
-    public String serialize() throws MarkdownSerializationException {
-        StringBuilder sb = new StringBuilder();
-        for (Object column : columns) {
-            checkColumn(column);
-            sb.append(Table.SEPARATOR);
-            sb.append(StringUtil.surroundValueWith(column.toString(), WHITESPACE));
-        }
-        return sb.append(Table.SEPARATOR).toString();
+    private final List<Object> cells;
+
+    @Getter
+    private final Map<Integer, Integer> cellWidths;
+
+
+    TableRow(List<Object> cells) {
+        this.cells = cells;
+        this.cellWidths = calculateCellsWidths(cells);
     }
 
-    private static void checkColumn(Object column) throws MarkdownSerializationException {
-        if (column == null) {
-            throw new MarkdownSerializationException("Column is null");
+    private static Map<Integer, Integer> calculateCellsWidths(List<Object> cells) {
+        Map<Integer, Integer> widths = new HashMap<>();
+        for (int i = 0; i < cells.size(); i++) {
+            widths.put(i, calculateCellWidth(cells.get(i)));
         }
-        if (column.toString().contains(Table.SEPARATOR)) {
-            throw new MarkdownSerializationException("Column contains seperator char \"" + Table.SEPARATOR + "\"");
-        }
+        return widths;
     }
 
+    private static int calculateCellWidth(Object value) {
+        return Math.max(String.valueOf(value).length(), DEFAULT_MINIMUM_CELL_WIDTH);
+    }
+
+    int getNumberOfCells() {
+        return cells.size();
+    }
+
+    Object getCell(int index) {
+        return cells.get(index);
+    }
 }
