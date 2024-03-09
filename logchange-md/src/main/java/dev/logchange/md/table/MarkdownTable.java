@@ -17,8 +17,12 @@ class MarkdownTable {
     private final List<MarkdownTableRow> rows;
     private final Map<Integer, Integer> tableColumnWidths;
 
-    MarkdownTable(MarkdownTableRow header) {
+    public static MarkdownTable of(MarkdownTableRow header) {
         checkHeader(header);
+        return new MarkdownTable(header);
+    }
+
+    private MarkdownTable(MarkdownTableRow header) {
         this.header = header;
         this.tableColumnWidths = new HashMap<>();
         this.rows = new ArrayList<>();

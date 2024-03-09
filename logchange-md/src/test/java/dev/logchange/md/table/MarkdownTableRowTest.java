@@ -14,14 +14,14 @@ class MarkdownTableRowTest {
     @Test
     void shouldThrowExceptionWhenNullHeaderPassed() {
         // when-then
-        MarkdownTableValidationException exception = assertThrows(MarkdownTableValidationException.class, () -> new MarkdownTableRow(null));
+        MarkdownTableValidationException exception = assertThrows(MarkdownTableValidationException.class, () -> MarkdownTableRow.of(null));
         assertEquals("Row cells cannot be null!", exception.getMessage());
     }
 
     @Test
     void shouldThrowExceptionWhenEmptyListPassed() {
         // when-then
-        MarkdownTableValidationException exception = assertThrows(MarkdownTableValidationException.class, () -> new MarkdownTableRow(Collections.emptyList()));
+        MarkdownTableValidationException exception = assertThrows(MarkdownTableValidationException.class, () -> MarkdownTableRow.of(Collections.emptyList()));
         assertEquals("Row cells cannot be empty!", exception.getMessage());
     }
 
@@ -31,7 +31,7 @@ class MarkdownTableRowTest {
         List<Object> list = Arrays.asList(null, "", 1, 12, 123, "     long  cell     ");
 
         // when
-        MarkdownTableRow markdownTableRow = new MarkdownTableRow(list);
+        MarkdownTableRow markdownTableRow = MarkdownTableRow.of(list);
         Map<Integer, Integer> cellWidth = markdownTableRow.getCellWidths();
 
         // then

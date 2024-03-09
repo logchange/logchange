@@ -12,7 +12,7 @@ class MarkdownTableTest {
     @Test
     void shouldThrowExceptionWhenNullHeaderPassed() {
         // when-then
-        MarkdownTableValidationException exception = assertThrows(MarkdownTableValidationException.class, () -> new MarkdownTable(null));
+        MarkdownTableValidationException exception = assertThrows(MarkdownTableValidationException.class, () -> MarkdownTable.of(null));
         assertEquals("Table header cannot be null!", exception.getMessage());
     }
 
@@ -20,10 +20,10 @@ class MarkdownTableTest {
     void shouldGenerateTableWithHeaderOnly() {
         // given
         String expectedTable = "| null |     | HEADER 1 |" + System.lineSeparator() + "| ---- | --- | -------- |";
-        MarkdownTableRow header = new MarkdownTableRow(Arrays.asList(null, "", "HEADER 1"));
+        MarkdownTableRow header = MarkdownTableRow.of(Arrays.asList(null, "", "HEADER 1"));
 
         // when
-        MarkdownTable table = new MarkdownTable(header);
+        MarkdownTable table = MarkdownTable.of(header);
 
         // then
         assertEquals(header.getNumberOfCells(), table.getNumberOfColumns());
@@ -38,11 +38,11 @@ class MarkdownTableTest {
                         "| ---------------------------------------------------------------------------------------------------------- |" + lineSeparator +
                         "| <ul><li>Updated `parameter` with default value: `true`</li><li>Description: Parameter true/false</li></ul> |";
 
-        MarkdownTableRow header = new MarkdownTableRow(Collections.singletonList("Type: database"));
-        MarkdownTableRow row = new MarkdownTableRow(Collections.singletonList("<ul><li>Updated `parameter` with default value: `true`</li><li>Description: Parameter true/false</li></ul>"));
+        MarkdownTableRow header = MarkdownTableRow.of(Collections.singletonList("Type: database"));
+        MarkdownTableRow row = MarkdownTableRow.of(Collections.singletonList("<ul><li>Updated `parameter` with default value: `true`</li><li>Description: Parameter true/false</li></ul>"));
 
         // when
-        MarkdownTable table = new MarkdownTable(header);
+        MarkdownTable table = MarkdownTable.of(header);
         table.addRow(row);
 
         // then
@@ -57,13 +57,13 @@ class MarkdownTableTest {
                 + "| ------ | ------ | -------- |" + System.lineSeparator()
                 + "| Cell 1 | Cell 2 | Cell 3   |";
 
-        MarkdownTableRow header = new MarkdownTableRow(Arrays.asList(null, "", "HEADER 1"));
-        MarkdownTableRow tooShorRow = new MarkdownTableRow(Arrays.asList("Cell 1", "Cell 2"));
-        MarkdownTableRow tooLongRow = new MarkdownTableRow(Arrays.asList("Cell 1", "Cell 2", "Cell 3", "Cell 4"));
-        MarkdownTableRow correctRow = new MarkdownTableRow(Arrays.asList("Cell 1", "Cell 2", "Cell 3"));
+        MarkdownTableRow header = MarkdownTableRow.of(Arrays.asList(null, "", "HEADER 1"));
+        MarkdownTableRow tooShorRow = MarkdownTableRow.of(Arrays.asList("Cell 1", "Cell 2"));
+        MarkdownTableRow tooLongRow = MarkdownTableRow.of(Arrays.asList("Cell 1", "Cell 2", "Cell 3", "Cell 4"));
+        MarkdownTableRow correctRow = MarkdownTableRow.of(Arrays.asList("Cell 1", "Cell 2", "Cell 3"));
 
         // when
-        MarkdownTable table = new MarkdownTable(header);
+        MarkdownTable table = MarkdownTable.of(header);
         boolean resultForTooShort = table.addRow(tooShorRow);
         boolean resultForTooLong = table.addRow(tooLongRow);
         boolean resultNull = table.addRow(null);
@@ -85,11 +85,11 @@ class MarkdownTableTest {
                 + "| --- | ------------- | ------------------- |" + System.lineSeparator()
                 + "| \\|  | \\|\\|          | \\|\\|\\|              |";
 
-        MarkdownTableRow header = new MarkdownTableRow(Arrays.asList(" | ", "string|string", "| string | string |"));
-        MarkdownTableRow correctRow = new MarkdownTableRow(Arrays.asList("|", "||", "|||"));
+        MarkdownTableRow header = MarkdownTableRow.of(Arrays.asList(" | ", "string|string", "| string | string |"));
+        MarkdownTableRow correctRow = MarkdownTableRow.of(Arrays.asList("|", "||", "|||"));
 
         // when
-        MarkdownTable table = new MarkdownTable(header);
+        MarkdownTable table = MarkdownTable.of(header);
         boolean resultForCorrect = table.addRow(correctRow);
 
         // then

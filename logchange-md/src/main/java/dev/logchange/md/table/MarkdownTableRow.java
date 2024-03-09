@@ -18,8 +18,12 @@ class MarkdownTableRow {
     private final Map<Integer, Integer> cellWidths;
 
 
-    MarkdownTableRow(List<Object> cells) {
+    public static MarkdownTableRow of(List<Object> cells) {
         checkCells(cells);
+        return new MarkdownTableRow(cells);
+    }
+
+    private MarkdownTableRow(List<Object> cells) {
         this.cells = cells;
         this.cellWidths = calculateCellsWidths(cells);
     }

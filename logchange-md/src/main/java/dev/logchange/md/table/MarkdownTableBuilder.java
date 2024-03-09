@@ -19,7 +19,7 @@ public class MarkdownTableBuilder {
 
     private void initializeTable(Object... objects) {
         try {
-            this.table = new MarkdownTable(new MarkdownTableRow(Arrays.asList(objects)));
+            this.table = MarkdownTable.of(MarkdownTableRow.of(Arrays.asList(objects)));
         } catch (MarkdownTableValidationException exception) {
             log.warning("Creation of MarkdownTable caused exception with following message: " + exception.getMessage());
         }
@@ -46,11 +46,11 @@ public class MarkdownTableBuilder {
     private MarkdownTableRow appendEmptyColumns(List<Object> columns, int numberOfColumns) {
         int difference = numberOfColumns - columns.size();
         columns.addAll(Collections.nCopies(difference, ""));
-        return new MarkdownTableRow(columns);
+        return MarkdownTableRow.of(columns);
     }
 
     private MarkdownTableRow trimColumns(List<Object> columns, int numberOfColumns) {
-        return new MarkdownTableRow(columns.subList(0, numberOfColumns));
+        return MarkdownTableRow.of(columns.subList(0, numberOfColumns));
     }
 
     public String build() {
