@@ -18,7 +18,7 @@ jobs:
       - name: Set env
         run: echo "RELEASE_BODY_FILE=$(echo $GITHUB_WORKSPACE/changelog/v${GITHUB_REF/refs\/tags\//}/version-summary.md)" >> $GITHUB_ENV
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           #  when tag has 'v' in name no need of adding it before ${GITHUB_REF/refs\/tags\//
           body_path: ${{ env.RELEASE_BODY_FILE }}
