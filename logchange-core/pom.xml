@@ -30,11 +30,11 @@
             <artifactId>jackson-dataformat-yaml</artifactId>
             <version>${jackson.version}</version>
         </dependency>
-
+        
         <dependency>
-            <groupId>com.github.Steppschuh</groupId>
-            <artifactId>Java-Markdown-Generator</artifactId>
-            <version>${Java-Markdown-Generator.version}</version>
+            <groupId>dev.logchange</groupId>
+            <artifactId>logchange-md</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>

@@ -2,7 +2,7 @@ package dev.logchange.core.format.md.changelog.entry;
 
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.format.md.MD;
-import net.steppschuh.markdowngenerator.list.UnorderedListItem;
+import dev.logchange.md.list.MarkdownLists;
 import org.apache.commons.text.StringSubstitutor;
 
 import java.util.HashMap;
@@ -29,7 +29,7 @@ public class MDChangelogEntry implements MD {
 
     @Override
     public String toString() {
-        return new UnorderedListItem(getEntry()).toString();
+        return MarkdownLists.unorderedListItem(getEntry());
     }
 
     private String getEntry() {

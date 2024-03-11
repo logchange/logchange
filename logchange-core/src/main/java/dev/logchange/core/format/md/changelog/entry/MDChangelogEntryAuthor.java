@@ -2,12 +2,13 @@ package dev.logchange.core.format.md.changelog.entry;
 
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryAuthor;
 import dev.logchange.core.format.md.MD;
-import net.steppschuh.markdowngenerator.link.Link;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringSubstitutor;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static dev.logchange.md.MarkdownBasics.link;
 
 class MDChangelogEntryAuthor implements MD {
 
@@ -35,7 +36,7 @@ class MDChangelogEntryAuthor implements MD {
 
     private String getAuthorName() {
         if (StringUtils.isNotBlank(author.getUrl()) && StringUtils.isNotBlank(author.getName())) {
-            return new Link(author.getName(), author.getUrl()).toString();
+            return link(author.getName(), author.getUrl());
         }
 
         return StringUtils.defaultString(author.getName());
@@ -55,7 +56,7 @@ class MDChangelogEntryAuthor implements MD {
         }
 
         if (StringUtils.isNotBlank(author.getUrl())) {
-            return new Link(LINK, author.getUrl()).toString();
+            return link(LINK, author.getUrl());
         }
 
         return StringUtils.EMPTY;
