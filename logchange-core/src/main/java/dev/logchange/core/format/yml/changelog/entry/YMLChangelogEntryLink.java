@@ -1,7 +1,5 @@
 package dev.logchange.core.format.yml.changelog.entry;
 
-//import de.beosign.snakeyamlanno.property.YamlAnySetter;
-//import de.beosign.snakeyamlanno.property.YamlProperty;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -11,7 +9,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.java.Log;
 
+@Log
 @Data
 @Builder
 @NoArgsConstructor
@@ -38,8 +38,6 @@ public class YMLChangelogEntryLink {
 
     @JsonAnySetter
     public void anySetter(String key, Object value) {
-        //TODO Logger.getLogger().warn("Unknown property: " + key + " with value " + value);
+        log.warning("Unknown property: " + key + " with value " + value);
     }
-
-
 }

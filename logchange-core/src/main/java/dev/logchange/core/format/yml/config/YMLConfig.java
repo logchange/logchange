@@ -11,11 +11,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.java.Log;
 
 import java.io.InputStream;
 import java.io.StringWriter;
 
-
+@Log
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -55,8 +56,7 @@ public class YMLConfig {
 
     @JsonAnySetter
     public void anySetter(String key, Object value) {
-        System.out.println("Unknown property: " + key + " with value " + value);
-        //TODO Logger.getLogger().warn("Unknown property: " + key + " with value " + value);
+        log.warning("Unknown property: " + key + " with value " + value);
     }
 
     public Config to() {

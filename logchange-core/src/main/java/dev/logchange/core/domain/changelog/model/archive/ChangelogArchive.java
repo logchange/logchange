@@ -16,7 +16,7 @@ public class ChangelogArchive {
 
     public static ChangelogArchive of(List<String> archiveLines) {
         if (archiveLines == null) {
-            log.severe("Archive cannot be null");
+            log.severe("Archive cannot be null!");
             throw new IllegalArgumentException("Archive cannot be null");
         }
 

@@ -6,11 +6,13 @@ import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.format.md.MDMeta;
 import dev.logchange.core.format.md.changelog.version.MDChangelogVersion;
 import lombok.AllArgsConstructor;
+import lombok.extern.java.Log;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
+@Log
 @AllArgsConstructor
 public class FileVersionSummaryRepository implements VersionSummaryRepository {
 
@@ -31,7 +33,9 @@ public class FileVersionSummaryRepository implements VersionSummaryRepository {
             out.println(meta + md);
 
         } catch (IOException e) {
-            throw new IllegalArgumentException("Could not save changelog to file: " + outputFilePath + " because: " + e.getMessage());
+            String message = "Could not save changelog to file: " + outputFilePath + " because: " + e.getMessage();
+            log.severe(message);
+            throw new IllegalArgumentException(message);
         }
     }
 }

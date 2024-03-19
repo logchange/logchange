@@ -3,8 +3,10 @@ package dev.logchange.core.domain.config.model.labels;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryConfigurationAction;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.extern.java.Log;
 import org.apache.commons.lang3.StringUtils;
 
+@Log
 @Builder
 @AllArgsConstructor
 public class ConfigurationActionLabels {
@@ -28,7 +30,9 @@ public class ConfigurationActionLabels {
             case DELETE:
                 return StringUtils.defaultIfBlank(delete, DEFAULT_DELETE_LABEL);
             default:
-                throw new IllegalArgumentException("Unrecognized action: " + action);
+                String message = "Unrecognized configuration action: " + action;
+                log.severe(message);
+                throw new IllegalArgumentException(message);
         }
     }
 }

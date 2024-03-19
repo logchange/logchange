@@ -9,7 +9,9 @@ import dev.logchange.core.format.yml.config.labels.YMLLabels;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.extern.java.Log;
 
+@Log
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,8 +32,7 @@ public class YMLChangelog {
 
     @JsonAnySetter
     public void anySetter(String key, Object value) {
-        System.out.println("Unknown property: " + key + " with value " + value);
-        //TODO Logger.getLogger().warn("Unknown property: " + key + " with value " + value);
+        log.warning("Unknown property: " + key + " with value " + value);
     }
 
     public Labels toLabels() {
