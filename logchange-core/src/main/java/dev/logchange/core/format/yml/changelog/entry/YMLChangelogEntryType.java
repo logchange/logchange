@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType;
 import lombok.AllArgsConstructor;
+import lombok.extern.java.Log;
 
 import java.util.Arrays;
 
+@Log
 @AllArgsConstructor
 public enum YMLChangelogEntryType {
 
@@ -40,7 +42,9 @@ public enum YMLChangelogEntryType {
             case OTHER:
                 return YMLChangelogEntryType.OTHER;
             default:
-                throw new IllegalArgumentException("Converting ChangelogEntryType failed");
+                String message = "Converting YMLChangelogEntryType failed";
+                log.severe(message);
+                throw new IllegalArgumentException(message);
         }
     }
 
@@ -63,7 +67,9 @@ public enum YMLChangelogEntryType {
             case OTHER:
                 return ChangelogEntryType.OTHER;
             default:
-                throw new IllegalArgumentException("Converting ChangelogEntryType failed");
+                String message = "Converting ChangelogEntryType failed";
+                log.severe(message);
+                throw new IllegalArgumentException(message);
         }
     }
 
@@ -72,7 +78,12 @@ public enum YMLChangelogEntryType {
         return Arrays.stream(values())
                 .filter(value -> value.getType().equals(name))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Cannot match YMLChangelogEntryType for string: " + name));
+                .orElseThrow(() -> {
+                    String message = "Cannot match YMLChangelogEntryType for string: " + name;
+                    log.severe(message);
+                    return new IllegalArgumentException(message);
+                });
+
     }
 
     @JsonValue

@@ -4,11 +4,13 @@ import dev.logchange.core.application.config.ConfigRepository;
 import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.format.yml.config.YMLConfig;
 import lombok.AllArgsConstructor;
+import lombok.extern.java.Log;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
+@Log
 @AllArgsConstructor
 public class FileConfigRepository implements ConfigRepository {
 
@@ -29,7 +31,9 @@ public class FileConfigRepository implements ConfigRepository {
             out.println(content);
 
         } catch (IOException e) {
-            throw new IllegalArgumentException("Could not save config to file: " + configFile + " because: " + e.getMessage());
+            String message = "Could not save config to file: " + configFile + " because: " + e.getMessage();
+            log.severe(message);
+            throw new IllegalArgumentException(message);
         }
     }
 
@@ -37,7 +41,9 @@ public class FileConfigRepository implements ConfigRepository {
         try {
             return new FileInputStream(entryFile);
         } catch (FileNotFoundException e) {
-            throw new IllegalArgumentException("Cannot find entry file: " + entryFile.getName());
+            String message = "Cannot find entry file: " + entryFile.getName();
+            log.severe(message);
+            throw new IllegalArgumentException(message);
         }
     }
 }

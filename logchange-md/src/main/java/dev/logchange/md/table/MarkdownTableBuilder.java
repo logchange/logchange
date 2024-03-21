@@ -1,13 +1,14 @@
 package dev.logchange.md.table;
 
+import lombok.extern.java.Log;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Logger;
 
+@Log
 public class MarkdownTableBuilder {
-    private static final Logger log = Logger.getLogger(MarkdownTableBuilder.class.getName());
     private MarkdownTable table;
 
 

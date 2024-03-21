@@ -10,6 +10,7 @@ import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.format.md.changelog.MDChangelog;
 import dev.logchange.core.format.release_date.ReleaseDate;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
+import lombok.extern.java.Log;
 import org.apache.maven.plugins.changes.model.ChangesDocument;
 import org.apache.maven.plugins.changes.model.io.xpp3.ChangesXpp3Writer;
 
@@ -20,6 +21,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Log
 public class FileChangelogRepository implements ChangelogRepository {
 
     private final File inputDirectory;
@@ -81,7 +83,9 @@ public class FileChangelogRepository implements ChangelogRepository {
             out.println(md);
 
         } catch (IOException e) {
-            throw new IllegalArgumentException("Could not save changelog to file: " + outputFile + " because: " + e.getMessage());
+            String message = "Could not save changelog to file: " + outputFile + " because: " + e.getMessage();
+            log.severe(message);
+            throw new IllegalArgumentException(message);
         }
     }
 
@@ -92,7 +96,9 @@ public class FileChangelogRepository implements ChangelogRepository {
         try (Writer writer = new FileWriter(outputFile)) {
             changesXmlWriter.write(writer, changesDocument);
         } catch (IOException e) {
-            throw new IllegalArgumentException("Could not save changelog to file: " + outputFile + " because: " + e.getMessage());
+            String message = "Could not save changelog to file: " + outputFile + " because: " + e.getMessage();
+            log.severe(message);
+            throw new IllegalArgumentException(message);
         }
     }
 
@@ -135,7 +141,7 @@ public class FileChangelogRepository implements ChangelogRepository {
         try {
             return ChangelogArchive.of(Files.readAllLines(file.toPath(), StandardCharsets.UTF_8));
         } catch (IOException e) {
-            e.printStackTrace();
+            log.severe("Error while getting changelog archive from file: " +  e.getMessage());
             throw new IllegalStateException(e.getMessage());
         }
     }
@@ -169,7 +175,9 @@ public class FileChangelogRepository implements ChangelogRepository {
         try {
             return new FileInputStream(entryFile);
         } catch (FileNotFoundException e) {
-            throw new IllegalArgumentException("Cannot find entry file: " + entryFile.getName());
+            String message = "Cannot find entry file: " + entryFile.getName();
+            log.severe(message);
+            throw new IllegalArgumentException(message);
         }
     }
 

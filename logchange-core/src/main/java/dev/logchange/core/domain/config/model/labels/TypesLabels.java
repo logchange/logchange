@@ -4,9 +4,11 @@ import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.extern.java.Log;
 
 import static org.apache.commons.lang3.StringUtils.defaultIfBlank;
 
+@Log
 @Builder
 @AllArgsConstructor
 public class TypesLabels {
@@ -56,7 +58,9 @@ public class TypesLabels {
             case OTHER:
                 return defaultIfBlank(other, DEFAULT_OTHER_LABEL);
             default:
-                throw new IllegalArgumentException("Unrecognized type: " + type);
+                String message = "Unrecognized changelog entry type: " + type;
+                log.severe(message);
+                throw new IllegalArgumentException(message);
         }
     }
 }

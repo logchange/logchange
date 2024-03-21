@@ -3,11 +3,13 @@ package dev.logchange.core.infrastructure.persistance.changelog;
 import dev.logchange.core.application.changelog.repository.ChangelogEntryRepository;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
+import lombok.extern.java.Log;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
+@Log
 public class FileChangelogEntryRepository implements ChangelogEntryRepository {
 
     private final File outputFile;
@@ -26,7 +28,9 @@ public class FileChangelogEntryRepository implements ChangelogEntryRepository {
             out.println(content);
 
         } catch (IOException e) {
-            throw new IllegalArgumentException("Could not save changelog entry to file: " + outputFile + " because: " + e.getMessage());
+            String message = "Could not save changelog entry to file: " + outputFile + " because: " + e.getMessage();
+            log.severe(message);
+            throw new IllegalArgumentException(message);
         }
     }
 }

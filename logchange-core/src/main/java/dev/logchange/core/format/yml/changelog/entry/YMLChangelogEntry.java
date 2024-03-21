@@ -7,13 +7,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.logchange.core.domain.changelog.model.entry.*;
 import dev.logchange.core.format.yml.ObjectMapperProvider;
 import lombok.*;
+import lombok.extern.java.Log;
 
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Log
 @Data
 @Builder
 @NoArgsConstructor
@@ -78,8 +79,7 @@ public class YMLChangelogEntry {
 
     @JsonAnySetter
     public void anySetter(String key, Object value) {
-        System.out.println("Unknown property: " + key + " with value " + value);
-        //TODO Logger.getLogger().warn("Unknown property: " + key + " with value " + value);
+        log.warning("Unknown property: " + key + " with value " + value);
     }
 
     public ChangelogEntry to() {

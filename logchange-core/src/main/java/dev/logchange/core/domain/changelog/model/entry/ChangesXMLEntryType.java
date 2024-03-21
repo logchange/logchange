@@ -2,10 +2,12 @@ package dev.logchange.core.domain.changelog.model.entry;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.extern.java.Log;
 
 /**
  * Enum for types supported by Changes.xml.
  */
+@Log
 @Getter
 @AllArgsConstructor
 public enum ChangesXMLEntryType {
@@ -33,6 +35,7 @@ public enum ChangesXMLEntryType {
             case REMOVED:
                 return ChangesXMLEntryType.REMOVE;
         }
+        log.severe("Wrong change type: " + markdownEntryType);
         throw new IllegalArgumentException("Wrong change type");
     }
 }

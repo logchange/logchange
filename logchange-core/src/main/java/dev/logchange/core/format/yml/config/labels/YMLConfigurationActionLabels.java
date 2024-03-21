@@ -1,7 +1,5 @@
 package dev.logchange.core.format.yml.config.labels;
 
-//import de.beosign.snakeyamlanno.property.YamlAnySetter;
-//import de.beosign.snakeyamlanno.property.YamlProperty;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -10,7 +8,9 @@ import dev.logchange.core.domain.config.model.labels.ConfigurationActionLabels;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.extern.java.Log;
 
+@Log
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -37,8 +37,7 @@ public class YMLConfigurationActionLabels {
 
     @JsonAnySetter
     public void anySetter(String key, Object value) {
-        System.out.println("Unknown property: " + key + " with value " + value);
-        //TODO Logger.getLogger().warn("Unknown property: " + key + " with value " + value);
+        log.warning("Unknown property: " + key + " with value " + value);
     }
 
     public ConfigurationActionLabels to() {

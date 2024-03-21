@@ -8,7 +8,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.java.Log;
 
+@Log
 @Data
 @Builder
 @NoArgsConstructor
@@ -41,7 +43,7 @@ public class YMLChangelogEntryAuthor {
 
     @JsonAnySetter
     public void anySetter(String key, Object value) {
-        //TODO Logger.getLogger().warn("Unknown property: " + key + " with value " + value);
+        log.warning("Unknown property: " + key + " with value " + value);
     }
 
 }
