@@ -62,6 +62,7 @@ create_entry_file() {
   echo $fileName
   if [ -d "changelog/unreleased" ]; then
     touch "$fileName"
+    > "$fileName" # clear file if existed (problem when renvoate updates same dependency in few placeses in project)
     echo "# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵" >> "$fileName"
     echo "# Visit https://github.com/logchange/logchange and leave a star 🌟" >> "$fileName"
     echo "# More info about configuration you can find at https://github.com/logchange/logchange#yaml-format ⬅️⬅️" >> "$fileName"
