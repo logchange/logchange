@@ -6,6 +6,8 @@ import dev.logchange.core.application.changelog.service.generate.GenerateChangel
 import dev.logchange.core.application.changelog.service.generate.GenerateChangelogXMLService;
 import dev.logchange.core.application.config.ConfigRepository;
 import dev.logchange.core.domain.changelog.command.GenerateChangelogUseCase;
+import dev.logchange.core.domain.changelog.command.ValidateChangelogUseCase;
+import dev.logchange.core.domain.changelog.command.ValidateChangelogUseCase.ValidateChangelogCommand;
 import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogRepository;
 import dev.logchange.core.infrastructure.persistance.changelog.FileVersionSummaryRepository;
@@ -17,6 +19,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 
 import java.io.File;
 
+import static dev.logchange.core.domain.changelog.command.GenerateChangelogUseCase.GenerateChangelogCommand;
 import static dev.logchange.maven_plugin.Constants.*;
 
 @Mojo(name = GENERATE_COMMAND, defaultPhase = LifecyclePhase.NONE)
@@ -36,6 +39,20 @@ public class GenerateChangelogMojo extends AbstractMojo {
         executeGenerate(outputFile, inputDir, configFile, false, "");
     }
 
+    public void validate(String finalChangelogName, String yamlFilesDirectory, String configFile) {
+        getLog().info("Started validation of " + yamlFilesDirectory + " and " + configFile);
+        File changelogDirectory = findChangelogDirectory("./" + yamlFilesDirectory);
+        Config config = findConfig("./" + yamlFilesDirectory + "/" + configFile);
+
+        ChangelogRepository repository = new FileChangelogRepository(changelogDirectory, new File(finalChangelogName), config);
+        VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogDirectory, config);
+        ValidateChangelogUseCase validateChangelog = new GenerateChangelogService(repository, versionSummaryRepository);
+        ValidateChangelogCommand command = ValidateChangelogCommand.of();
+
+        validateChangelog.handle(command);
+        getLog().info("Validation of " + yamlFilesDirectory + " and " + configFile + " successful");
+    }
+
     public void executeGenerate(String finalChangelogName, String yamlFilesDirectory, String configFile, Boolean isXml, String xmlOutputFile) {
         getLog().info("Started generating " + finalChangelogName);
         File changelogDirectory = findChangelogDirectory("./" + yamlFilesDirectory);
@@ -45,7 +62,7 @@ public class GenerateChangelogMojo extends AbstractMojo {
         ChangelogRepository repository = new FileChangelogRepository(changelogDirectory, new File(finalChangelogName), config);
         VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogDirectory, config);
         GenerateChangelogUseCase generateChangelog = new GenerateChangelogService(repository, versionSummaryRepository);
-        GenerateChangelogUseCase.GenerateChangelogCommand command = GenerateChangelogUseCase.GenerateChangelogCommand.of();
+        GenerateChangelogCommand command = GenerateChangelogCommand.of();
 
         generateChangelog.handle(command);
 
@@ -56,7 +73,7 @@ public class GenerateChangelogMojo extends AbstractMojo {
         }
     }
 
-    private void generateChangesXml(String xmlOutputFile, File changelogDirectory, Config config, GenerateChangelogUseCase.GenerateChangelogCommand command) {
+    private void generateChangesXml(String xmlOutputFile, File changelogDirectory, Config config, GenerateChangelogCommand command) {
         ChangelogRepository repository;
         repository = new FileChangelogRepository(changelogDirectory, new File(xmlOutputFile), config);
         GenerateChangelogUseCase generateChangelogXml = new GenerateChangelogXMLService(repository);

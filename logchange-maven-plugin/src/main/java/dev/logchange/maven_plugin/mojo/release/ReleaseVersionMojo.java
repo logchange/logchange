@@ -46,12 +46,15 @@ public class ReleaseVersionMojo extends AbstractMojo {
         String unreleasedDir = inputDir + "/" + unreleasedVersionDir;
         String newDirName = inputDir + "/" + "v" + getVersion();
 
+        GenerateChangelogMojo generateChangelogMojo = new GenerateChangelogMojo();
+        generateChangelogMojo.setLog(getLog());
+
+        generateChangelogMojo.validate(outputFile, inputDir, configFile);
+
         ReleaseDate.addToDir(unreleasedDir);
         removeGitKeep(unreleasedDir);
         renameUnreleasedDir(unreleasedDir, newDirName);
 
-        GenerateChangelogMojo generateChangelogMojo = new GenerateChangelogMojo();
-        generateChangelogMojo.setLog(getLog());
         generateChangelogMojo.executeGenerate(outputFile, inputDir, configFile, isGenerateChangesXml, xmlOutputFile);
 
         new InitProjectMojo().createUnreleased(inputDir, unreleasedVersionDir);
