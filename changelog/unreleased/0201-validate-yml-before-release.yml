@@ -5,7 +5,7 @@ title: Added YML validation before release, so when there is YML syntax error, n
 authors:
   - nick: marwin1991
 merge_requests:
-  - 242
+  - 258
 issues:
   - 201
   - 139
