@@ -31,12 +31,14 @@ class ReleaseVersionMojoIT {
 
         File gitKeep = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/unreleased/.gitkeep");
         File changelog = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "CHANGELOG.md");
+        File originalTask = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/unreleased/task.yml");
         File taskMovedToRelease = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.0.0/task.yml");
         File releaseDateFile = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.0.0/release-date.txt");
         File versionSummary = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.0.0/version-summary.md");
 
         assertThat(gitKeep).exists();
         assertThat(changelog).exists();
+        assertThat(originalTask).doesNotExist();
         assertThat(taskMovedToRelease).exists();
         assertThat(releaseDateFile).exists();
         assertThat(versionSummary).exists();
@@ -120,6 +122,31 @@ class ReleaseVersionMojoIT {
         assertThat(taskMovedToRelease).exists();
         assertThat(releaseDateFile).exists();
         assertThat(versionSummary).exists();
+    }
+
+    @MavenGoal("${project.groupId}:${project.artifactId}:${project.version}:release")
+    @MavenTest
+    @DisplayName("Project with pom.xml, task.yml with syntax error in changelog dir after release task.yml is still in unreleased dir")
+    void releaseWithYMLSyntaxError(MavenExecutionResult result) {
+        assertThat(result).isFailure()
+                .project()
+                .has("changelog")
+                .has("changelog/unreleased");
+
+
+        File gitKeep = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/unreleased/.gitkeep");
+        File changelog = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "CHANGELOG.md");
+        File originalTask = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/unreleased/task.yml");
+        File taskMovedToRelease = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.0.0/task.yml");
+        File releaseDateFile = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.0.0/release-date.txt");
+        File versionSummary = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.0.0/version-summary.md");
+
+        assertThat(gitKeep).exists();
+        assertThat(originalTask).exists();
+        assertThat(changelog).doesNotExist();
+        assertThat(taskMovedToRelease).doesNotExist();
+        assertThat(releaseDateFile).doesNotExist();
+        assertThat(versionSummary).doesNotExist();
     }
 
 

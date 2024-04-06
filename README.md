@@ -280,4 +280,4 @@ According to the official YAML specification one should:
 ## Development
 
 1. Java installed.
-2. `mvn` as a command in your terminal(needed for integration tests).
+2. `mvn` as a command in your terminal(needed for integration tests, IniteliJ does not support maven integration tests).

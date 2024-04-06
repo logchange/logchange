@@ -1,0 +1,13 @@
+# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵 
+# Visit https://github.com/logchange/logchange and leave a star 🌟 
+# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
+title: Added YML validation before release, so when there is YML syntax error, nothing is intact
+authors:
+  - nick: marwin1991
+merge_requests:
+  - 242
+issues:
+  - 201
+  - 139
+  - 102
+type: fixed # [added/changed/deprecated/removed/fixed/security/dependency_update/other]

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 @Log
 @AllArgsConstructor
@@ -79,7 +80,8 @@ public enum YMLChangelogEntryType {
                 .filter(value -> value.getType().equals(name))
                 .findFirst()
                 .orElseThrow(() -> {
-                    String message = "Cannot match YMLChangelogEntryType for string: " + name;
+                    String availableType = Arrays.stream(YMLChangelogEntryType.values()).map(YMLChangelogEntryType::getType).collect(Collectors.joining(", "));
+                    String message = "Cannot match YMLChangelogEntryType for string: " + name + " - Available types: [" + availableType + "].";
                     log.severe(message);
                     return new IllegalArgumentException(message);
                 });
