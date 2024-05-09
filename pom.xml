@@ -65,7 +65,7 @@
         <junit-jupiter.version>5.10.2</junit-jupiter.version>
         <mockito-junit-jupiter.version>5.11.0</mockito-junit-jupiter.version>
         <assertj.version>3.25.3</assertj.version>
-        <pitest-maven.version>1.16.0</pitest-maven.version>
+        <pitest-maven.version>1.16.1</pitest-maven.version>
         <pitest-junit5-plugin.version>1.2.1</pitest-junit5-plugin.version>
     </properties>
 
