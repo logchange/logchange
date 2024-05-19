@@ -1,6 +1,7 @@
 package dev.logchange.core.application.changelog.service.aggregate;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
 
@@ -11,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.zip.GZIPInputStream;
 
+@Log
 @RequiredArgsConstructor
 public class TarGzService {
 
@@ -18,8 +20,11 @@ public class TarGzService {
     private final String url;
 
     public void get() throws IOException {
+        log.info("Starting download from URL: " + url);
         File tarGzFile = downloadFile();
+        log.info("Download completed. Extracting to: " + path.toString());
         extractTarGz(tarGzFile, path.toFile());
+        log.info("Extraction completed successfully.");
     }
 
     private File downloadFile() throws IOException {
@@ -27,10 +32,13 @@ public class TarGzService {
         File tempFile = Files.createTempFile("download", ".tar.gz").toFile();
         try (InputStream in = url.openStream();
              FileOutputStream out = new FileOutputStream(tempFile)) {
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[10 * 1024];
             int bytesRead;
+            int totalBytesRead = 0;
             while ((bytesRead = in.read(buffer)) != -1) {
                 out.write(buffer, 0, bytesRead);
+                totalBytesRead += bytesRead;
+                log.info("Downloaded " + totalBytesRead + " bytes...");
             }
         }
         return tempFile;
@@ -46,8 +54,14 @@ public class TarGzService {
                 if (entry.isDirectory()) {
                     if (!outputFile.exists()) {
                         outputFile.mkdirs();
+                        log.info("Created directory: " + outputFile.getAbsolutePath());
                     }
                 } else {
+                    File parent = outputFile.getParentFile();
+                    if (!parent.exists()) {
+                        parent.mkdirs();
+                        log.info("Created parent directory: " + parent.getAbsolutePath());
+                    }
                     try (FileOutputStream fos = new FileOutputStream(outputFile);
                          BufferedOutputStream bos = new BufferedOutputStream(fos)) {
                         byte[] buffer = new byte[1024];
@@ -55,6 +69,7 @@ public class TarGzService {
                         while ((len = tis.read(buffer)) != -1) {
                             bos.write(buffer, 0, len);
                         }
+                        log.info("Extracted file: " + outputFile.getAbsolutePath());
                     }
                 }
             }
