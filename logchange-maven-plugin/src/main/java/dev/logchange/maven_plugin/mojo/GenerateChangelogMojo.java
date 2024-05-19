@@ -13,6 +13,7 @@ import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogRepo
 import dev.logchange.core.infrastructure.persistance.changelog.FileVersionSummaryRepository;
 import dev.logchange.core.infrastructure.persistance.config.FileConfigRepository;
 import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -41,8 +42,8 @@ public class GenerateChangelogMojo extends AbstractMojo {
 
     public void validate(String finalChangelogName, String yamlFilesDirectory, String configFile) {
         getLog().info("Started validation of " + yamlFilesDirectory + " and " + configFile);
-        File changelogDirectory = findChangelogDirectory("./" + yamlFilesDirectory);
-        Config config = findConfig("./" + yamlFilesDirectory + "/" + configFile);
+        File changelogDirectory = findChangelogDirectory("./" + yamlFilesDirectory, getLog());
+        Config config = findConfig("./" + yamlFilesDirectory + "/" + configFile, false, getLog());
 
         ChangelogRepository repository = new FileChangelogRepository(changelogDirectory, new File(finalChangelogName), config);
         VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogDirectory, config);
@@ -55,9 +56,9 @@ public class GenerateChangelogMojo extends AbstractMojo {
 
     public void executeGenerate(String finalChangelogName, String yamlFilesDirectory, String configFile, Boolean isXml, String xmlOutputFile) {
         getLog().info("Started generating " + finalChangelogName);
-        File changelogDirectory = findChangelogDirectory("./" + yamlFilesDirectory);
+        File changelogDirectory = findChangelogDirectory("./" + yamlFilesDirectory, getLog());
 
-        Config config = findConfig("./" + yamlFilesDirectory + "/" + configFile);
+        Config config = findConfig("./" + yamlFilesDirectory + "/" + configFile, false, getLog());
 
         ChangelogRepository repository = new FileChangelogRepository(changelogDirectory, new File(finalChangelogName), config);
         VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogDirectory, config);
@@ -82,32 +83,39 @@ public class GenerateChangelogMojo extends AbstractMojo {
         getLog().info("Generating " + xmlOutputFile + " successful");
     }
 
-    private File findChangelogDirectory(String directoryPath) {
+    public static File findChangelogDirectory(String directoryPath, Log log) {
         File changelogDir = new File(directoryPath);
         if (!changelogDir.exists()) {
-            getLog().error("There is no " + directoryPath + " directory in this project !!!");
+            log.error("There is no " + directoryPath + " directory in this project !!!");
             throw new RuntimeException("No changelog directory");
         }
 
         if (!changelogDir.isDirectory()) {
-            getLog().error("File " + directoryPath + " is not a directory !!!");
+            log.error("File " + directoryPath + " is not a directory !!!");
             throw new RuntimeException("File " + directoryPath + " is not a directory");
         }
 
         return changelogDir;
     }
 
-    private Config findConfig(String path) {
+    public static Config findConfig(String path, boolean required, Log log) {
         File configFile = new File(path);
 
         if (!configFile.exists()) {
-            getLog().info("There is no config file:  " + path + " for this project, using defaults");
-            return Config.EMPTY;
+            if (required) {
+                String msg = "There is no config file:  " + path + " for this project, but it is required for this action!";
+                log.error(msg);
+                throw new RuntimeException(msg);
+            } else {
+                log.info("There is no config file:  " + path + " for this project, using defaults");
+                return Config.EMPTY;
+            }
         }
 
         if (configFile.isDirectory()) {
-            getLog().error("File " + path + " is a directory !!!");
-            throw new RuntimeException("File " + path + " is a directory !!!");
+            String msg = "File " + path + " is a directory !!!";
+            log.error(msg);
+            throw new RuntimeException(msg);
         }
 
         ConfigRepository configRepository = new FileConfigRepository(configFile);

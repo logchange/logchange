@@ -199,6 +199,16 @@ changelog:
         update: Updated
       with_default_value: with default value
       description: Description
+aggregates:
+  projects:
+    - name: hofund
+      url: https://github.com/logchange/hofund/archive/refs/heads/master.tar.gz
+      type: tar.gz # currently only tar.gz is supported
+      input_dir: changelog # the name where dirs with versions are stored for this project
+    - name: logchange
+      url: https://github.com/logchange/logchange/archive/refs/heads/main.tar.gz
+      type: tar.gz
+      input_dir: changelog
 ```
 
 ### Generating `CHANGELOG.md`

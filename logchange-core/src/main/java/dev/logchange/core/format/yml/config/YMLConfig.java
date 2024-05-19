@@ -1,12 +1,15 @@
 package dev.logchange.core.format.yml.config;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.domain.config.model.Heading;
+import dev.logchange.core.domain.config.model.aggregate.Aggregates;
 import dev.logchange.core.domain.config.model.labels.Labels;
 import dev.logchange.core.format.yml.ObjectMapperProvider;
+import dev.logchange.core.format.yml.config.aggregate.YMLAggregates;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -28,6 +31,10 @@ public class YMLConfig {
 
     @JsonProperty(index = 0)
     public YMLChangelog changelog;
+
+    @JsonProperty(index = 1)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    public YMLAggregates aggregates;
 
     @SneakyThrows
     public static YMLConfig of(InputStream input) {
@@ -63,7 +70,16 @@ public class YMLConfig {
         return Config.builder()
                 .heading(toHeading())
                 .labels(toLabels())
+                .aggregates(toAggregates())
                 .build();
+    }
+
+    private Aggregates toAggregates() {
+        if (aggregates == null) {
+            return Aggregates.EMPTY;
+        } else {
+            return aggregates.to();
+        }
     }
 
     private Labels toLabels() {
