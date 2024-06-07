@@ -1,6 +1,7 @@
 package dev.logchange.core.format.yml.changelog.entry;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,7 +12,9 @@ import lombok.extern.java.Log;
 
 import java.io.InputStream;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Log
@@ -62,13 +65,22 @@ public class YMLChangelogEntry {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<YMLChangelogEntryConfiguration> configurations;
 
+    @JsonIgnore
+    private Set<String> errors = new HashSet<>();
+
     @SneakyThrows
-    public static YMLChangelogEntry of(InputStream input) {
+    public static YMLChangelogEntry of(InputStream input, String filename) {
 //        Yaml yaml = new Yaml(new AnnotationAwareConstructor(YMLChangelogEntry.class));
 //        return yaml.load(input);
 
         ObjectMapper mapper = ObjectMapperProvider.get();
-        return mapper.readValue(input, YMLChangelogEntry.class);
+        YMLChangelogEntry res = mapper.readValue(input, YMLChangelogEntry.class);
+
+        if (!res.errors.isEmpty()) {
+            log.warning("Errors in " + filename + ":\n\t" + String.join("\n\t", res.errors));
+        }
+        
+        return res;
     }
 
     @SneakyThrows
@@ -79,7 +91,7 @@ public class YMLChangelogEntry {
 
     @JsonAnySetter
     public void anySetter(String key, Object value) {
-        log.warning("Unknown property: " + key + " with value " + value);
+        errors.add("Unknown property: " + key + " with value " + value);
     }
 
     public ChangelogEntry to() {

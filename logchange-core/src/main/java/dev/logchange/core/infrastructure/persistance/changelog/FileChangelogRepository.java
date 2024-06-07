@@ -14,6 +14,8 @@ import lombok.extern.java.Log;
 import org.apache.maven.plugins.changes.model.ChangesDocument;
 import org.apache.maven.plugins.changes.model.io.xpp3.ChangesXpp3Writer;
 
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -151,11 +153,11 @@ public class FileChangelogRepository implements ChangelogRepository {
     }
 
     private List<ChangelogEntry> getEntries(File versionDirectory) {
-        return getEntriesFiles(versionDirectory)
-                .sequential()
-                .map(file -> YMLChangelogEntry.of(getEntryInputStream(file)))
-                .map(YMLChangelogEntry::to)
-                .collect(Collectors.toList());
+            return getEntriesFiles(versionDirectory)
+                    .sequential()
+                    .map(file -> YMLChangelogEntry.of(getEntryInputStream(file), file.getPath()))
+                    .map(YMLChangelogEntry::to)
+                    .collect(Collectors.toList());
     }
 
     private Stream<File> getEntriesFiles(File versionDirectory) {
