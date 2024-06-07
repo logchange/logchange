@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 @Log
 @Data
 @Builder
@@ -66,18 +68,18 @@ public class YMLChangelogEntry {
     public List<YMLChangelogEntryConfiguration> configurations;
 
     @JsonIgnore
-    private Set<String> errors = new HashSet<>();
+    private Set<Pair<String, String>> invalidProperties = new HashSet<>();
 
     @SneakyThrows
-    public static YMLChangelogEntry of(InputStream input, String filename) {
+    public static YMLChangelogEntry of(InputStream input, String path) {
 //        Yaml yaml = new Yaml(new AnnotationAwareConstructor(YMLChangelogEntry.class));
 //        return yaml.load(input);
 
         ObjectMapper mapper = ObjectMapperProvider.get();
         YMLChangelogEntry res = mapper.readValue(input, YMLChangelogEntry.class);
 
-        if (!res.errors.isEmpty()) {
-            log.warning("Errors in " + filename + ":\n\t" + String.join("\n\t", res.errors));
+        if (!res.invalidProperties.isEmpty()) {
+            throw new YMLChangelogEntryConfigException(path, res.invalidProperties);
         }
         
         return res;
@@ -91,7 +93,7 @@ public class YMLChangelogEntry {
 
     @JsonAnySetter
     public void anySetter(String key, Object value) {
-        errors.add("Unknown property: " + key + " with value " + value);
+        invalidProperties.add(Pair.of(key, value.toString()));
     }
 
     public ChangelogEntry to() {

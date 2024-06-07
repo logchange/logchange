@@ -10,6 +10,8 @@ import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.format.md.changelog.MDChangelog;
 import dev.logchange.core.format.release_date.ReleaseDate;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
+import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryConfigException;
+import lombok.SneakyThrows;
 import lombok.extern.java.Log;
 import org.apache.maven.plugins.changes.model.ChangesDocument;
 import org.apache.maven.plugins.changes.model.io.xpp3.ChangesXpp3Writer;
@@ -153,11 +155,19 @@ public class FileChangelogRepository implements ChangelogRepository {
     }
 
     private List<ChangelogEntry> getEntries(File versionDirectory) {
-            return getEntriesFiles(versionDirectory)
-                    .sequential()
-                    .map(file -> YMLChangelogEntry.of(getEntryInputStream(file), file.getPath()))
-                    .map(YMLChangelogEntry::to)
-                    .collect(Collectors.toList());
+        return getEntriesFiles(versionDirectory)
+                .sequential()
+                .map((file) -> {
+                    try {
+                        return YMLChangelogEntry.of(getEntryInputStream(file), file.getPath());
+                    } catch (YMLChangelogEntryConfigException e) {
+                        log.warning(e.getMessage());
+                        return null;
+                    }
+                })
+                .filter(Objects::nonNull)
+                .map(YMLChangelogEntry::to)
+                .collect(Collectors.toList());
     }
 
     private Stream<File> getEntriesFiles(File versionDirectory) {
