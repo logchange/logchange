@@ -55,7 +55,7 @@
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <lombok.version>1.18.32</lombok.version>
+        <lombok.version>1.18.34</lombok.version>
         <lombok-maven.version>1.18.22.0</lombok-maven.version>
 
         <maven-changes.version>2.12.1</maven-changes.version>
