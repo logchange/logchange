@@ -225,6 +225,16 @@ versions summaries is done.
 mvn logchange:release
 ```
 
+### Entries validation
+
+The lint command is used to verify the existence of the `changelog` directory and to check that all `.yml` files within are syntactically correct.
+This command is designed for the early detection of potential issues, particularly in a continuous integration environment, 
+allowing developers to address problems before attempting to generate a changelog.
+
+```shell
+mvn logchange:lint
+```
+
 ### Generating `changes.xml` for [maven-changes-plugin](https://maven.apache.org/plugins/maven-changes-plugin/index.html)
 
 Along with `CHANGELOG.md` there is also the option of generating Maven's `changes.xml`.
