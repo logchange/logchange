@@ -225,7 +225,7 @@ versions summaries is done.
 mvn logchange:release
 ```
 
-### Linting entries
+### Entries validation
 
 The lint command is used to verify the existence of the `changelog` directory and to check that all `.yml` files within are syntactically correct.
 This command is designed for the early detection of potential issues, particularly in a continuous integration environment, 
