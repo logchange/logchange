@@ -78,7 +78,7 @@ public class YMLChangelogEntry {
             res = mapper.readValue(input, YMLChangelogEntry.class);
         } catch (ValueInstantiationException e) {
             String msg = ((IllegalArgumentException) e.getCause()).getMessage();
-            throw new YMLChangelogInvalidConfigValuesException(path, Set.of(msg));
+            throw new YMLChangelogInvalidConfigValuesException(path, Collections.singleton(msg));
         }
 
         if (!res.invalidProperties.isEmpty()) {
