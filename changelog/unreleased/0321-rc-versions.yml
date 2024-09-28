@@ -5,7 +5,7 @@ title: Enabled the creation of changelog for release versions with suffixes star
 authors:
   - nick: witx98
 merge_requests:
-  -
+  - 322
 issues:
   - 321
 type: changed # [added/changed/deprecated/removed/fixed/security/dependency_update/other]
