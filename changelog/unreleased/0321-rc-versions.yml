@@ -1,0 +1,11 @@
+# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵
+# Visit https://github.com/logchange/logchange and leave a star 🌟
+# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
+title: Enabled the creation of changelog for release versions with suffixes starting with '-' (except for '-SNAPSHOT').
+authors:
+  - nick: witx98
+merge_requests:
+  -
+issues:
+  - 321
+type: changed # [added/changed/deprecated/removed/fixed/security/dependency_update/other]
