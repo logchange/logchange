@@ -96,6 +96,54 @@ class ReleaseVersionMojoIT {
         assertThat(versionSummary).exists();
     }
 
+    @MavenGoal("${project.groupId}:${project.artifactId}:${project.version}:release")
+    @MavenTest
+    @DisplayName("Project with pom.xml with version set to 1.3.8-RC1")
+    void releaseWithVersionInPomXmlWithRc(MavenExecutionResult result) {
+        assertThat(result).isSuccessful()
+                .project()
+                .has("changelog")
+                .has("changelog/unreleased")
+                .has("changelog/v1.3.8-RC1");
+
+
+        File gitKeep = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/unreleased/.gitkeep");
+        File changelog = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "CHANGELOG.md");
+        File taskMovedToRelease = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.3.8-RC1/task.yml");
+        File releaseDateFile = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.3.8-RC1/release-date.txt");
+        File versionSummary = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.3.8-RC1/version-summary.md");
+
+        assertThat(gitKeep).exists();
+        assertThat(changelog).exists();
+        assertThat(taskMovedToRelease).exists();
+        assertThat(releaseDateFile).exists();
+        assertThat(versionSummary).exists();
+    }
+
+    @MavenGoal("${project.groupId}:${project.artifactId}:${project.version}:release")
+    @MavenTest
+    @DisplayName("Project with pom.xml with version set to 1.3.9-SNAPSHOT")
+    void releaseWithVersionInPomXmlWithSnapshot(MavenExecutionResult result) {
+        assertThat(result).isSuccessful()
+                .project()
+                .has("changelog")
+                .has("changelog/unreleased")
+                .has("changelog/v1.3.9");
+
+
+        File gitKeep = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/unreleased/.gitkeep");
+        File changelog = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "CHANGELOG.md");
+        File taskMovedToRelease = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.3.9/task.yml");
+        File releaseDateFile = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.3.9/release-date.txt");
+        File versionSummary = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.3.9/version-summary.md");
+
+        assertThat(gitKeep).exists();
+        assertThat(changelog).exists();
+        assertThat(taskMovedToRelease).exists();
+        assertThat(releaseDateFile).exists();
+        assertThat(versionSummary).exists();
+    }
+
     @MavenGoal({"${project.groupId}:${project.artifactId}:${project.version}:release"})
     @MavenOption("-DchangesXml")
     @MavenOption("-DoutputFileXml=TestChanges.xml")

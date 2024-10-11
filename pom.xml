@@ -61,11 +61,11 @@
         <maven-changes.version>2.12.1</maven-changes.version>
 
         <!-- TESTS -->
-        <maven-surefire-plugin.version>3.5.0</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.5.1</maven-surefire-plugin.version>
         <junit-jupiter.version>5.10.2</junit-jupiter.version>
         <mockito-junit-jupiter.version>5.12.0</mockito-junit-jupiter.version>
         <assertj.version>3.26.3</assertj.version>
-        <pitest-maven.version>1.16.3</pitest-maven.version>
+        <pitest-maven.version>1.17.0</pitest-maven.version>
         <pitest-junit5-plugin.version>1.2.1</pitest-junit5-plugin.version>
     </properties>
 
@@ -202,7 +202,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.2.5</version>
+                        <version>3.2.7</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -225,7 +225,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.10.0</version>
+                        <version>3.10.1</version>
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>

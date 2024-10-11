@@ -3,6 +3,7 @@ package dev.logchange.maven_plugin.mojo.release;
 import dev.logchange.core.format.release_date.ReleaseDate;
 import dev.logchange.maven_plugin.mojo.GenerateChangelogMojo;
 import dev.logchange.maven_plugin.mojo.init.InitProjectMojo;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -64,8 +65,8 @@ public class ReleaseVersionMojo extends AbstractMojo {
     private String getVersion() {
         String version = project.getVersion();
 
-        if (version.contains("-")) {
-            return version.substring(0, version.indexOf("-"));
+        if (StringUtils.containsIgnoreCase(version, "-SNAPSHOT")) {
+            return version.substring(0, StringUtils.indexOfIgnoreCase(version, "-SNAPSHOT"));
         } else {
             return version;
         }
