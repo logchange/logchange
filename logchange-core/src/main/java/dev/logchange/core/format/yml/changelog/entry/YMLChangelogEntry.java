@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.exc.ValueInstantiationException;
 import dev.logchange.core.domain.changelog.model.entry.*;
 import dev.logchange.core.format.yml.ObjectMapperProvider;
 import lombok.*;
@@ -19,7 +20,6 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-@Log
 @Data
 @Builder
 @NoArgsConstructor
@@ -72,16 +72,19 @@ public class YMLChangelogEntry {
 
     @SneakyThrows
     public static YMLChangelogEntry of(InputStream input, String path) {
-//        Yaml yaml = new Yaml(new AnnotationAwareConstructor(YMLChangelogEntry.class));
-//        return yaml.load(input);
-
         ObjectMapper mapper = ObjectMapperProvider.get();
-        YMLChangelogEntry res = mapper.readValue(input, YMLChangelogEntry.class);
+        YMLChangelogEntry res = null;
+        try {
+            res = mapper.readValue(input, YMLChangelogEntry.class);
+        } catch (ValueInstantiationException e) {
+            String msg = ((IllegalArgumentException) e.getCause()).getMessage();
+            throw new YMLChangelogInvalidConfigValuesException(path, Collections.singleton(msg));
+        }
 
         if (!res.invalidProperties.isEmpty()) {
             throw new YMLChangelogEntryConfigException(path, res.invalidProperties);
         }
-        
+
         return res;
     }
 
