@@ -18,6 +18,20 @@ public class TarGzService {
 
     private final Path path;
     private final String url;
+    private final String inputDir;
+
+    public static void main(String[] args) {
+        try {
+            Path outputPath = FileSystems.getDefault().getPath(".");
+            String fileUrl = "https://github.com/logchange/hofund/archive/refs/heads/master.tar.gz";
+            String inputDir = "/changelog";
+            TarGzService tarGzService = new TarGzService(outputPath, fileUrl, inputDir);
+            tarGzService.get();
+            System.out.println("Download and extraction completed successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void get() throws IOException {
         log.info("Starting download from URL: " + url);
@@ -49,42 +63,41 @@ public class TarGzService {
              GZIPInputStream gis = new GZIPInputStream(fis);
              TarArchiveInputStream tis = new TarArchiveInputStream(gis)) {
             TarArchiveEntry entry;
+            String baseDir = null;
+
             while ((entry = tis.getNextEntry()) != null) {
-                File outputFile = new File(destDir, entry.getName());
-                if (entry.isDirectory()) {
-                    if (!outputFile.exists()) {
-                        outputFile.mkdirs();
-                        log.info("Created directory: " + outputFile.getAbsolutePath());
-                    }
-                } else {
-                    File parent = outputFile.getParentFile();
-                    if (!parent.exists()) {
-                        parent.mkdirs();
-                        log.info("Created parent directory: " + parent.getAbsolutePath());
-                    }
-                    try (FileOutputStream fos = new FileOutputStream(outputFile);
-                         BufferedOutputStream bos = new BufferedOutputStream(fos)) {
-                        byte[] buffer = new byte[1024];
-                        int len;
-                        while ((len = tis.read(buffer)) != -1) {
-                            bos.write(buffer, 0, len);
+                String entryName = entry.getName();
+
+                if (baseDir == null && entry.isDirectory()) {
+                    baseDir = entryName.split("/")[0];
+                }
+
+                if (entryName.startsWith(baseDir + "/" + inputDir)) {
+                    File outputFile = new File(destDir, entryName);
+
+                    if (entry.isDirectory()) {
+                        if (!outputFile.exists()) {
+                            outputFile.mkdirs();
+                            log.info("Created directory: " + outputFile.getAbsolutePath());
                         }
-                        log.info("Extracted file: " + outputFile.getAbsolutePath());
+                    } else {
+                        File parent = outputFile.getParentFile();
+                        if (!parent.exists()) {
+                            parent.mkdirs();
+                            log.info("Created parent directory: " + parent.getAbsolutePath());
+                        }
+                        try (FileOutputStream fos = new FileOutputStream(outputFile);
+                             BufferedOutputStream bos = new BufferedOutputStream(fos)) {
+                            byte[] buffer = new byte[1024];
+                            int len;
+                            while ((len = tis.read(buffer)) != -1) {
+                                bos.write(buffer, 0, len);
+                            }
+                            log.info("Extracted file: " + outputFile.getAbsolutePath());
+                        }
                     }
                 }
             }
-        }
-    }
-
-    public static void main(String[] args) {
-        try {
-            Path outputPath = FileSystems.getDefault().getPath(".");
-            String fileUrl = "https://github.com/logchange/hofund/archive/refs/heads/master.tar.gz";
-            TarGzService tarGzService = new TarGzService(outputPath, fileUrl);
-            tarGzService.get();
-            System.out.println("Download and extraction completed successfully.");
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }
