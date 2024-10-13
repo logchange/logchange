@@ -13,6 +13,7 @@ public class Constants {
 
     public static final String INIT_COMMAND = "init";
     public static final String GENERATE_COMMAND = "generate";
+    public static final String LINT_COMMAND = "lint";
     public static final String ADD_COMMAND = "add";
     public static final String RELEASE_COMMAND = "release";
     public static final String AGGREGATE_COMMAND = "aggregate";

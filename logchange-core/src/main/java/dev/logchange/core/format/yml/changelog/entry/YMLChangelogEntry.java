@@ -1,9 +1,11 @@
 package dev.logchange.core.format.yml.changelog.entry;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.exc.ValueInstantiationException;
 import dev.logchange.core.domain.changelog.model.entry.*;
 import dev.logchange.core.format.yml.ObjectMapperProvider;
 import lombok.*;
@@ -11,10 +13,13 @@ import lombok.extern.java.Log;
 
 import java.io.InputStream;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-@Log
+import org.apache.commons.lang3.tuple.Pair;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -62,13 +67,25 @@ public class YMLChangelogEntry {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<YMLChangelogEntryConfiguration> configurations;
 
-    @SneakyThrows
-    public static YMLChangelogEntry of(InputStream input) {
-//        Yaml yaml = new Yaml(new AnnotationAwareConstructor(YMLChangelogEntry.class));
-//        return yaml.load(input);
+    @JsonIgnore
+    private Set<Pair<String, String>> invalidProperties = new HashSet<>();
 
+    @SneakyThrows
+    public static YMLChangelogEntry of(InputStream input, String path) {
         ObjectMapper mapper = ObjectMapperProvider.get();
-        return mapper.readValue(input, YMLChangelogEntry.class);
+        YMLChangelogEntry res = null;
+        try {
+            res = mapper.readValue(input, YMLChangelogEntry.class);
+        } catch (ValueInstantiationException e) {
+            String msg = ((IllegalArgumentException) e.getCause()).getMessage();
+            throw new YMLChangelogInvalidConfigValuesException(path, Collections.singleton(msg));
+        }
+
+        if (!res.invalidProperties.isEmpty()) {
+            throw new YMLChangelogEntryConfigException(path, res.invalidProperties);
+        }
+
+        return res;
     }
 
     @SneakyThrows
@@ -79,7 +96,7 @@ public class YMLChangelogEntry {
 
     @JsonAnySetter
     public void anySetter(String key, Object value) {
-        log.warning("Unknown property: " + key + " with value " + value);
+        invalidProperties.add(Pair.of(key, value.toString()));
     }
 
     public ChangelogEntry to() {
