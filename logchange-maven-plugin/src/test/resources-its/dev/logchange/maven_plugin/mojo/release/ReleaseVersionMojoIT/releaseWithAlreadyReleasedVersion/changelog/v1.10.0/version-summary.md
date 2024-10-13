@@ -7,7 +7,7 @@
 <!-- !!! ⚠️ DO NOT MODIFY THIS FILE, YOUR CHANGES WILL BE LOST ⚠️ !!! -->
 
 
-[1.10.0] - 2024-10-13
+[1.10.0] - 2024-10-12
 ------------------
 
 ### Added (1 change)
