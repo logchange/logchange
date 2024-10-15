@@ -13,6 +13,10 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 import static dev.logchange.maven_plugin.Constants.*;
 
@@ -54,7 +58,7 @@ public class ReleaseVersionMojo extends AbstractMojo {
 
         ReleaseDate.addToDir(unreleasedDir);
         removeGitKeep(unreleasedDir);
-        renameUnreleasedDir(unreleasedDir, newDirName);
+        renameOrMergeDir(unreleasedDir, newDirName);
 
         generateChangelogMojo.executeGenerate(outputFile, inputDir, configFile, isGenerateChangesXml, xmlOutputFile);
 
@@ -72,13 +76,40 @@ public class ReleaseVersionMojo extends AbstractMojo {
         }
     }
 
-    private void renameUnreleasedDir(String unreleasedDirName, String newDirName) {
+    private void renameOrMergeDir(String unreleasedDirName, String newDirName) {
         File unreleasedDir = new File(unreleasedDirName);
         File newDir = new File(newDirName);
         if (unreleasedDir.renameTo(newDir)) {
-            getLog().info("Renamed " + unreleasedDirName + " to " + newDirName + " successful");
+            getLog().info("Renamed " + unreleasedDirName + " to " + newDirName + " successfully");
         } else {
-            // TODO: throw exception
+            getLog().info("Rename unsuccessful. Merging contents of " + unreleasedDirName + " into " + newDirName);
+
+            if (!newDir.exists()) {
+                throw new RuntimeException("Target directory " + newDirName + " does not exist and renaming failed.");
+            }
+
+            moveDirectoryContents(unreleasedDir.toPath(), newDir.toPath());
+
+            if (unreleasedDir.delete()) {
+                getLog().info("Deleted empty folder: " + unreleasedDirName);
+            } else {
+                getLog().warn("Failed to delete folder: " + unreleasedDirName);
+            }
+        }
+    }
+
+    private void moveDirectoryContents(Path sourceDir, Path targetDir)  {
+        File[] files = sourceDir.toFile().listFiles();
+        if (files != null) {
+            for (File file : files) {
+                Path targetPath = targetDir.resolve(file.getName());
+                try {
+                    Files.move(file.toPath(), targetPath, StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                getLog().info("Moved file: " + file.getName() + " to " + targetPath);
+            }
         }
     }
 
