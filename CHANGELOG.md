@@ -7,6 +7,14 @@
 <!-- !!! ⚠️ DO NOT MODIFY THIS FILE, YOUR CHANGES WILL BE LOST ⚠️ !!! -->
 
 
+[1.10.0] - 2024-10-15
+---------------------
+
+### Added (1 change)
+
+- Enabled the option to re-release already released version. !328 #316 (@witx98 [LINK](https://github.com/witx98))
+
+
 [1.9.0] - 2024-10-12
 --------------------
 
