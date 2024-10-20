@@ -7,6 +7,7 @@ import dev.logchange.maven_plugin.util.ConfigFile;
 import dev.logchange.maven_plugin.util.Dir;
 import dev.logchange.maven_plugin.util.GitKeep;
 import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -31,7 +32,7 @@ public class InitProjectMojo extends AbstractMojo {
     @Override
     public void execute() {
         getLog().info("Initialize project for logchange-maven-plugin");
-        createEmptyChangelogFile(outputFile);
+        createEmptyChangelogFile(outputFile, getLog());
         createUnreleased(inputDir, unreleasedVersionDir);
         createConfig(inputDir);
         getLog().info("Initialize project successful");
@@ -50,17 +51,17 @@ public class InitProjectMojo extends AbstractMojo {
         GitKeep.of(getLog(), inputDir + "/" + unreleasedVersionDir + "/").create();
     }
 
-    public void createEmptyChangelogFile(String path) {
+    public static void createEmptyChangelogFile(String path, Log log) {
         try {
             File changelog = new File(path);
             if (changelog.createNewFile()) {
-                getLog().info("Created: " + changelog.getName());
+                log.info("Created: " + changelog.getName());
             } else {
-                getLog().warn(changelog.getName() + " already exists.");
+                log.warn(changelog.getName() + " already exists.");
             }
         } catch (IOException e) {
             String msg = "An error occurred while creating empty changelog.";
-            getLog().error(msg, e);
+            log.error(msg, e);
             throw new RuntimeException(msg);
         }
     }

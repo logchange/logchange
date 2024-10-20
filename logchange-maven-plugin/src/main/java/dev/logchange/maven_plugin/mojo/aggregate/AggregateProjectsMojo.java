@@ -1,29 +1,26 @@
 package dev.logchange.maven_plugin.mojo.aggregate;
 
-import dev.logchange.core.application.config.ConfigRepository;
+import dev.logchange.core.application.changelog.service.aggregate.AggregateChangelogsVersionsService;
+import dev.logchange.core.domain.changelog.command.AggregateChangelogsVersionsUseCase.AggregateChangelogsVersionsCommand;
 import dev.logchange.core.domain.config.model.Config;
-import dev.logchange.core.infrastructure.persistance.config.FileConfigRepository;
-import dev.logchange.maven_plugin.util.ConfigFile;
-import dev.logchange.maven_plugin.util.Dir;
-import dev.logchange.maven_plugin.util.GitKeep;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
 import java.io.File;
-import java.io.IOException;
 
 import static dev.logchange.maven_plugin.Constants.*;
 import static dev.logchange.maven_plugin.mojo.GenerateChangelogMojo.findChangelogDirectory;
 import static dev.logchange.maven_plugin.mojo.GenerateChangelogMojo.findConfig;
+import static dev.logchange.maven_plugin.mojo.init.InitProjectMojo.createEmptyChangelogFile;
 
 @Mojo(name = AGGREGATE_COMMAND, defaultPhase = LifecyclePhase.NONE, requiresProject = false)
 public class AggregateProjectsMojo extends AbstractMojo {
 
 
-    @Parameter(property = AGGREGATE_VERSION_DIR_MVN_PROPERTY, required = true)
-    private String aggregateVersionDir;
+    @Parameter(property = AGGREGATE_VERSION_MVN_PROPERTY, required = true)
+    private String aggregateVersion;
 
     @Parameter(defaultValue = DEFAULT_INPUT_DIR, property = INPUT_DIR_MVN_PROPERTY)
     private String inputDir;
@@ -37,15 +34,17 @@ public class AggregateProjectsMojo extends AbstractMojo {
     @Override
     public void execute() {
         getLog().info("Aggregate changelog version for different projects");
-        aggregate(aggregateVersionDir, inputDir, configFile, outputFile);
+        aggregate(aggregateVersion, inputDir, configFile, outputFile);
         getLog().info("Aggregate successful");
     }
 
-    private void aggregate(String aggregateVersionDir, String yamlFilesDirectory, String configFile, String outputFile) {
+    private void aggregate(String aggregateVersion, String yamlFilesDirectory, String configFile, String outputFile) {
         File changelogDirectory = findChangelogDirectory("./" + yamlFilesDirectory, getLog());
         Config config = findConfig("./" + yamlFilesDirectory + "/" + configFile, true, getLog());
-
-
+        createEmptyChangelogFile(outputFile, getLog());
+        AggregateChangelogsVersionsCommand command = AggregateChangelogsVersionsCommand.of(config.getAggregates(), aggregateVersion);
+        AggregateChangelogsVersionsService aggregateChangelogsVersionsService = new AggregateChangelogsVersionsService();
+        aggregateChangelogsVersionsService.handle(command);
     }
 
 }

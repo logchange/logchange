@@ -2,7 +2,6 @@ package dev.logchange.core.application.changelog.service.aggregate;
 
 import dev.logchange.core.domain.changelog.command.AggregateChangelogsVersionsUseCase;
 import dev.logchange.core.domain.config.model.aggregate.AggregatedProject;
-import dev.logchange.core.format.yml.config.YMLChangelogException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 
@@ -22,23 +21,18 @@ public class AggregateChangelogsVersionsService implements AggregateChangelogsVe
 
         Path tmpDir = createTmpDir();
         List<Exception> exceptions = new ArrayList<>();
-
-
+        TarGzService tarGzService = new TarGzService(tmpDir);
         for (AggregatedProject project : command.getAggregates().getProjects()) {
-            TarGzService tarGzService = new TarGzService(tmpDir, project.getUrl(), project.getInputDir());
             try {
-                tarGzService.get();
+                Path extractedProjectChangelogDir = tarGzService.get(project.getUrl(), project.getInputDir());
             } catch (IOException e) {
                 exceptions.add(e);
             }
-
         }
 
         if (!exceptions.isEmpty()) {
             throw new YMLAggregationException(exceptions);
         }
-
-
     }
 
     private Path createTmpDir() {
@@ -50,5 +44,4 @@ public class AggregateChangelogsVersionsService implements AggregateChangelogsVe
             throw new IllegalStateException(msg, e);
         }
     }
-
 }
