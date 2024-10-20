@@ -17,32 +17,30 @@ import java.util.zip.GZIPInputStream;
 public class TarGzService {
 
     private final Path path;
-    private final String url;
-    private final String inputDir;
 
     public static void main(String[] args) {
         try {
             Path outputPath = FileSystems.getDefault().getPath(".");
             String fileUrl = "https://github.com/logchange/hofund/archive/refs/heads/master.tar.gz";
             String inputDir = "/changelog";
-            TarGzService tarGzService = new TarGzService(outputPath, fileUrl, inputDir);
-            tarGzService.get();
+            TarGzService tarGzService = new TarGzService(outputPath);
+            tarGzService.get(fileUrl, inputDir);
             System.out.println("Download and extraction completed successfully.");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void get() throws IOException {
-        log.info("Starting download from URL: " + url);
-        File tarGzFile = downloadFile();
+    public void get(String projectUrl, String inputDir) throws IOException {
+        log.info("Starting download from URL: " + projectUrl);
+        File tarGzFile = downloadFile(projectUrl);
         log.info("Download completed. Extracting to: " + path.toString());
-        extractTarGz(tarGzFile, path.toFile());
+        extractTarGz(tarGzFile, inputDir);
         log.info("Extraction completed successfully.");
     }
 
-    private File downloadFile() throws IOException {
-        URL url = new URL(this.url);
+    private File downloadFile(String projectURL) throws IOException {
+        URL url = new URL(projectURL);
         File tempFile = Files.createTempFile("download", ".tar.gz").toFile();
         try (InputStream in = url.openStream();
              FileOutputStream out = new FileOutputStream(tempFile)) {
@@ -58,7 +56,7 @@ public class TarGzService {
         return tempFile;
     }
 
-    private void extractTarGz(File tarGzFile, File destDir) throws IOException {
+    private void extractTarGz(File tarGzFile, String projectChangelogDir) throws IOException {
         try (FileInputStream fis = new FileInputStream(tarGzFile);
              GZIPInputStream gis = new GZIPInputStream(fis);
              TarArchiveInputStream tis = new TarArchiveInputStream(gis)) {
@@ -72,8 +70,8 @@ public class TarGzService {
                     baseDir = entryName.split("/")[0];
                 }
 
-                if (entryName.startsWith(baseDir + "/" + inputDir)) {
-                    File outputFile = new File(destDir, entryName);
+                if (entryName.startsWith(baseDir + "/" + projectChangelogDir)) {
+                    File outputFile = new File(path.toFile(), entryName);
 
                     if (entry.isDirectory()) {
                         if (!outputFile.exists()) {
