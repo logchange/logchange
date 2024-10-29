@@ -10,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChangelogEntry {
 
+    private final ChangelogEntryPrefix prefix;
     private final ChangelogEntryTitle title;
     private final ChangelogEntryType type;
     @Singular

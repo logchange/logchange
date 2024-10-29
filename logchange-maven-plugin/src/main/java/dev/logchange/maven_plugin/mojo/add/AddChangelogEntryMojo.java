@@ -6,6 +6,7 @@ import dev.logchange.core.domain.changelog.command.AddChangelogEntryUseCase;
 import dev.logchange.core.domain.changelog.command.AddChangelogEntryUseCase.AddChangelogEntryCommand;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogEntryRepository;
+import dev.logchange.core.infrastructure.persistance.file.FileRepository;
 import dev.logchange.maven_plugin.mojo.add.entry.ChangelogEntryProviderFactory;
 import lombok.Value;
 import org.apache.maven.plugin.AbstractMojo;
@@ -70,7 +71,7 @@ public class AddChangelogEntryMojo extends AbstractMojo {
 
         getLog().debug(entry.toString());
 
-        ChangelogEntryRepository repository = new FileChangelogEntryRepository(entryFile);
+        ChangelogEntryRepository repository = new FileChangelogEntryRepository(FileRepository.of(entryFile));
         AddChangelogEntryUseCase addChangelogEntry = new AddChangelogEntryService(repository);
         AddChangelogEntryCommand command = AddChangelogEntryCommand.of(entry);
 

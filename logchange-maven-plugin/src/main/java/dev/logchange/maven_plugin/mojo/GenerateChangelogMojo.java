@@ -12,6 +12,7 @@ import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogRepository;
 import dev.logchange.core.infrastructure.persistance.changelog.FileVersionSummaryRepository;
 import dev.logchange.core.infrastructure.persistance.config.FileConfigRepository;
+import dev.logchange.core.infrastructure.persistance.file.FileRepository;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
@@ -45,7 +46,8 @@ public class GenerateChangelogMojo extends AbstractMojo {
         File changelogDirectory = findChangelogDirectory("./" + yamlFilesDirectory, getLog());
         Config config = findConfig("./" + yamlFilesDirectory + "/" + configFile, false, getLog());
 
-        ChangelogRepository repository = new FileChangelogRepository(changelogDirectory, new File(finalChangelogName), config);
+        FileRepository fr = FileRepository.of(new File(finalChangelogName));
+        ChangelogRepository repository = new FileChangelogRepository(changelogDirectory, config, fr, fr, fr);
         VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogDirectory, config);
         ValidateChangelogUseCase validateChangelog = new GenerateChangelogService(repository, versionSummaryRepository);
         ValidateChangelogCommand command = ValidateChangelogCommand.of();
@@ -60,7 +62,8 @@ public class GenerateChangelogMojo extends AbstractMojo {
 
         Config config = findConfig("./" + yamlFilesDirectory + "/" + configFile, false, getLog());
 
-        ChangelogRepository repository = new FileChangelogRepository(changelogDirectory, new File(finalChangelogName), config);
+        FileRepository fr = FileRepository.of(new File(finalChangelogName));
+        ChangelogRepository repository = new FileChangelogRepository(changelogDirectory, config, fr, fr, fr);
         VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogDirectory, config);
         GenerateChangelogUseCase generateChangelog = new GenerateChangelogService(repository, versionSummaryRepository);
         GenerateChangelogCommand command = GenerateChangelogCommand.of();
@@ -75,8 +78,8 @@ public class GenerateChangelogMojo extends AbstractMojo {
     }
 
     private void generateChangesXml(String xmlOutputFile, File changelogDirectory, Config config, GenerateChangelogCommand command) {
-        ChangelogRepository repository;
-        repository = new FileChangelogRepository(changelogDirectory, new File(xmlOutputFile), config);
+        FileRepository fr = FileRepository.of(new File(xmlOutputFile));
+        ChangelogRepository repository = new FileChangelogRepository(changelogDirectory, config, fr, fr, fr);
         GenerateChangelogUseCase generateChangelogXml = new GenerateChangelogXMLService(repository);
 
         generateChangelogXml.handle(command);

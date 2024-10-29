@@ -5,6 +5,7 @@ import dev.logchange.core.application.changelog.service.generate.GenerateChangel
 import dev.logchange.core.domain.changelog.command.GenerateChangelogUseCase;
 import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogRepository;
+import dev.logchange.core.infrastructure.persistance.file.FileRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,8 +38,8 @@ public class GenerateChangesXMLIntegrationTest {
         File changesXmlOutputFile = new File(PATH + "Changes.xml");
         File expectedChangesXmlOutputFile = new File(PATH + "EXPECTED_Changes.xml");
 
-
-        ChangelogRepository repository = new FileChangelogRepository(changelogInputDir, changesXmlOutputFile, Config.EMPTY);
+        FileRepository fr = FileRepository.of(changesXmlOutputFile);
+        ChangelogRepository repository = new FileChangelogRepository(changelogInputDir, Config.EMPTY, fr, fr, fr);
         GenerateChangelogUseCase generateChangelogUseCase = new GenerateChangelogXMLService(repository);
         GenerateChangelogUseCase.GenerateChangelogCommand command = GenerateChangelogUseCase.GenerateChangelogCommand.of();
 
