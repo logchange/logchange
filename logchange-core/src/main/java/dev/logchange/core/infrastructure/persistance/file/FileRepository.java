@@ -1,6 +1,6 @@
 package dev.logchange.core.infrastructure.persistance.file;
 
-import dev.logchange.core.application.file.repository.MarkdownFileWriter;
+import dev.logchange.core.application.file.repository.FileWriter;
 import dev.logchange.core.application.file.repository.XmlFileWriter;
 import dev.logchange.core.application.file.repository.YmlFileReader;
 import lombok.RequiredArgsConstructor;
@@ -17,17 +17,17 @@ import java.util.stream.Stream;
 
 @Log
 @RequiredArgsConstructor(staticName = "of")
-public class FileRepository implements MarkdownFileWriter, YmlFileReader, XmlFileWriter {
+public class FileRepository implements FileWriter, YmlFileReader, XmlFileWriter {
 
     private final File outputFile;
 
 
     @Override
-    public void write(String markdown) {
+    public void write(String content) {
         try (OutputStream os = Files.newOutputStream(outputFile.toPath());
              PrintWriter out = new PrintWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8))) {
 
-            out.println(markdown);
+            out.println(content);
 
         } catch (IOException e) {
             String message = "Could not save markdown to file: " + outputFile + " because: " + e.getMessage();
@@ -75,7 +75,7 @@ public class FileRepository implements MarkdownFileWriter, YmlFileReader, XmlFil
     public void writeXml(ChangesDocument changesDocument) {
         ChangesXpp3Writer changesXmlWriter = new ChangesXpp3Writer();
 
-        try (Writer writer = new FileWriter(outputFile)) {
+        try (Writer writer = new java.io.FileWriter(outputFile)) {
             changesXmlWriter.write(writer, changesDocument);
         } catch (IOException e) {
             String message = "Could not save changes document to file: " + outputFile + " because: " + e.getMessage();

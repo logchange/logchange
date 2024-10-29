@@ -1,7 +1,7 @@
 package dev.logchange.core.infrastructure.persistance.changelog;
 
 import dev.logchange.core.application.changelog.repository.AggregatedVersionRepository;
-import dev.logchange.core.application.file.repository.MarkdownFileWriter;
+import dev.logchange.core.application.file.repository.FileWriter;
 import dev.logchange.core.application.file.repository.YmlFileReader;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.domain.changelog.model.version.ChangelogVersion;
@@ -27,7 +27,7 @@ public class FileAggregatedVersionRepository implements AggregatedVersionReposit
     private final Version version;
     private final Config config;
     private final YmlFileReader reader;
-    private final MarkdownFileWriter writer;
+    private final FileWriter writer;
 
 
     @Override
