@@ -28,6 +28,7 @@ public class YMLChangelogEntry {
             "# Visit https://github.com/logchange/logchange and leave a star \uD83C\uDF1F \n" +
             "# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️\n";
 
+    @JsonIgnore
     public String prefix;
 
     @JsonProperty(index = 0)
@@ -87,11 +88,6 @@ public class YMLChangelogEntry {
         return res;
     }
 
-    public YMLChangelogEntry withPrefix(String prefix) {
-        this.prefix = prefix;
-        return this;
-    }
-
     public static YMLChangelogEntry of(ChangelogEntry entry) {
         return YMLChangelogEntry.builder()
                 .title(entry.getTitle().getValue())
@@ -105,7 +101,10 @@ public class YMLChangelogEntry {
                 .build();
     }
 
-
+    public YMLChangelogEntry withPrefix(String prefix) {
+        this.prefix = prefix;
+        return this;
+    }
 
     @SneakyThrows
     public String toYMLString() {
