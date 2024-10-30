@@ -25,9 +25,9 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class GenerateVersionSummaryWithPrefixIntegrationTest {
+public class AggregateProjectsVersionIntegrationTest {
 
-    private static final String PATH = "src/test/resources/GenerateVersionSummaryWithPrefixIntegrationTest/";
+    private static final String PATH = "src/test/resources/AggregateProjectsVersionIntegrationTest/";
 
     @Test
     void shouldMatchExpectedChangelog() throws IOException {
