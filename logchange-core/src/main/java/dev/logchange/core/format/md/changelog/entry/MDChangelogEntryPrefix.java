@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MDChangelogEntryPrefix implements MD {
-    private static final String prefixFormat = "${prefix} -";
+    private static final String prefixFormat = "${prefix} - ";
     private final ChangelogEntryPrefix prefix;
 
     public MDChangelogEntryPrefix(ChangelogEntryPrefix prefix) {
@@ -30,6 +30,6 @@ public class MDChangelogEntryPrefix implements MD {
         Map<String, String> valuesMap = new HashMap<>();
         valuesMap.put("prefix", MarkdownBasics.bold(this.prefix.getValue()));
         StringSubstitutor sub = new StringSubstitutor(valuesMap);
-        return sub.replace(prefixFormat).trim();
+        return sub.replace(prefixFormat);
     }
 }

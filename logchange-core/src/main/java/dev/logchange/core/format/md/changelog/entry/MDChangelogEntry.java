@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class MDChangelogEntry implements MD {
 
-    private static final String entryFormat = "${prefix} ${title} ${merge_requests} ${issues} ${links} ${authors}";
+    private static final String entryFormat = "${prefix}${title} ${merge_requests} ${issues} ${links} ${authors}";
 
     private final ChangelogEntry entry;
 
@@ -44,6 +44,6 @@ public class MDChangelogEntry implements MD {
         valuesMap.put("authors", mdAuthors.toMD());
 
         StringSubstitutor sub = new StringSubstitutor(valuesMap);
-        return sub.replace(entryFormat).replaceAll("\\s{2,}", " ").trim();
+        return sub.replace(entryFormat).replaceAll("\\s{2,}", " ");
     }
 }
