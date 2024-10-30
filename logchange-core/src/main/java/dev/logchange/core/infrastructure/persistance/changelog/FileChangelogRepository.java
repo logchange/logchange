@@ -59,7 +59,7 @@ public class FileChangelogRepository implements ChangelogRepository {
         List<ChangelogVersion> versions = new LinkedList<>();
         List<ChangelogArchive> archives = new LinkedList<>();
 
-        this.reader.readYmlFiles(inputDirectory).forEach(file -> {
+        this.reader.readFiles(inputDirectory).forEach(file -> {
             if (isVersionDirectory(file)) {
                 versions.add(getChangelogVersion(file));
             }
