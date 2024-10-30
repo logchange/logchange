@@ -44,6 +44,6 @@ public class MDChangelogEntry implements MD {
         valuesMap.put("authors", mdAuthors.toMD());
 
         StringSubstitutor sub = new StringSubstitutor(valuesMap);
-        return sub.replace(entryFormat).replaceAll("\\s{2,}", " ");
+        return sub.replace(entryFormat).replaceAll("\\s{2,}", " ").trim();
     }
 }

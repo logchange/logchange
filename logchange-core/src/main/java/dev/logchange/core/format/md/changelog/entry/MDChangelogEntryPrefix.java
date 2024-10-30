@@ -30,6 +30,6 @@ public class MDChangelogEntryPrefix implements MD {
         Map<String, String> valuesMap = new HashMap<>();
         valuesMap.put("prefix", MarkdownBasics.bold(this.prefix.getValue()));
         StringSubstitutor sub = new StringSubstitutor(valuesMap);
-        return sub.replace(prefixFormat);
+        return sub.replace(prefixFormat).trim();
     }
 }
