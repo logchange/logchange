@@ -29,7 +29,6 @@ public class GenerateVersionSummaryWithPrefixIntegrationTest {
 
     private static final String PATH = "src/test/resources/GenerateVersionSummaryWithPrefixIntegrationTest/";
 
-
     @Test
     void shouldMatchExpectedChangelog() throws IOException {
         //given:
@@ -48,21 +47,18 @@ public class GenerateVersionSummaryWithPrefixIntegrationTest {
         File versionSummaryFile = new File(VERSION_DIR + "version-summary.md");
 
         //then:
-
-
         String expectedContent = FileUtils.fileRead(expectedChangelogOutputFile);
         String actualContent = FileUtils.fileRead(versionSummaryFile);
         assertThat(actualContent).isEqualToIgnoringNewLines(expectedContent);
     }
 
-    Aggregates prepareAggregates() {
+    private Aggregates prepareAggregates() {
         List<AggregatedProject> aggregatedProject = new ArrayList<>();
         aggregatedProject.add(new AggregatedProject("TEST_PROJECT", "URL", AggregatedProjectType.TAR_GZ, "changelog"));
         return Aggregates.builder()
                 .projects(aggregatedProject)
                 .build();
     }
-
 
     static class FakeTarGzExtractor implements TarGzQuery {
 

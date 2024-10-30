@@ -13,10 +13,7 @@ import lombok.extern.java.Log;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Log
@@ -64,9 +61,15 @@ public class AggregateProjectsVersionService implements AggregateProjectsVersion
                 .flatMap(changelogVersion -> changelogVersion.getEntries().stream())
                 .collect(Collectors.toList());
 
+        OffsetDateTime latestReleaseDateTime = versions.stream()
+                .filter(Objects::nonNull)
+                .map(ChangelogVersion::getReleaseDateTime)
+                .max(Comparator.naturalOrder())
+                .orElse(OffsetDateTime.now());
+
         return ChangelogVersion.builder()
                 .version(version)
-                .releaseDateTime(OffsetDateTime.now())
+                .releaseDateTime(latestReleaseDateTime)
                 .entries(mergedEntries)
                 .build();
     }
