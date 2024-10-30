@@ -39,7 +39,7 @@ public class AggregateProjectsVersionIntegrationTest {
         AggregateChangelogsVersionsCommand command = AggregateChangelogsVersionsCommand.of(prepareAggregates(), "1.0.0");
         VersionSummaryRepository vsr = new FileVersionSummaryRepository(changelogInputDir, Config.EMPTY);
         AggregatedVersionQuery avq = new FileAggregatedVersionFinder(command.getVersion(), new FileReader());
-        TarGzQuery tarGzQuery = new FakeTarGzExtractor(PATH + "extracted/changelog");
+        TarGzQuery tarGzQuery = new FakeTarGzExtractor(PATH + "extracted/");
         AggregateProjectsVersionUseCase apv = new AggregateProjectsVersionService(avq, vsr, tarGzQuery);
 
         //when:
@@ -54,7 +54,8 @@ public class AggregateProjectsVersionIntegrationTest {
 
     private Aggregates prepareAggregates() {
         List<AggregatedProject> aggregatedProject = new ArrayList<>();
-        aggregatedProject.add(new AggregatedProject("TEST_PROJECT", "URL", AggregatedProjectType.TAR_GZ, "changelog"));
+        aggregatedProject.add(new AggregatedProject("PROJECT_A", "projectA", AggregatedProjectType.TAR_GZ, "changelog"));
+        aggregatedProject.add(new AggregatedProject("PROJECT_B", "projectB", AggregatedProjectType.TAR_GZ, "changelog"));
         return Aggregates.builder()
                 .projects(aggregatedProject)
                 .build();
@@ -70,7 +71,7 @@ public class AggregateProjectsVersionIntegrationTest {
 
         @Override
         public Path get(String projectUrl, String projectInputDir) throws IOException {
-            return this.predefinedPath;
+            return this.predefinedPath.resolve(projectUrl).resolve(projectInputDir);
         }
     }
 }

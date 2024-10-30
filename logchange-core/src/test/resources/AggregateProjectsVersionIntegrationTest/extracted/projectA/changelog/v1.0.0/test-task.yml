@@ -39,5 +39,5 @@ configurations: # information about changes in available application configurati
     key: aaa.some.value
     default_value: "true" #always string
     description: Enables displying feature name
-    type: a docker-compose
+    type: environment variable
 
