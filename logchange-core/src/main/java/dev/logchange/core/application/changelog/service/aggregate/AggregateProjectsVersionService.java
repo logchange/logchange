@@ -64,6 +64,7 @@ public class AggregateProjectsVersionService implements AggregateProjectsVersion
         OffsetDateTime latestReleaseDateTime = versions.stream()
                 .filter(Objects::nonNull)
                 .map(ChangelogVersion::getReleaseDateTime)
+                .filter(Objects::nonNull)
                 .max(Comparator.naturalOrder())
                 .orElse(OffsetDateTime.now());
 
