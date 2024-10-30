@@ -10,7 +10,7 @@ import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogRepo
 import dev.logchange.core.infrastructure.persistance.changelog.FileVersionSummaryRepository;
 import dev.logchange.core.infrastructure.persistance.config.FileConfigRepository;
 import dev.logchange.core.infrastructure.persistance.file.FileRepository;
-import dev.logchange.core.infrastructure.query.file.FileQuery;
+import dev.logchange.core.infrastructure.query.file.FileReader;
 import org.codehaus.plexus.util.FileUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -48,7 +48,7 @@ public class ChangelogHeadingIntegrationTest {
         Config config = configRepository.find();
 
         FileRepository fr = FileRepository.of(changelogOutputFile);
-        ChangelogRepository repository = new FileChangelogRepository(changelogInputDir, config, new FileQuery(), fr, fr);
+        ChangelogRepository repository = new FileChangelogRepository(changelogInputDir, config, new FileReader(), fr, fr);
         VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogInputDir, config);
         GenerateChangelogUseCase generateChangelogUseCase = new GenerateChangelogService(repository, versionSummaryRepository);
         GenerateChangelogUseCase.GenerateChangelogCommand command = GenerateChangelogUseCase.GenerateChangelogCommand.of();

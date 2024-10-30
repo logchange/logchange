@@ -1,7 +1,7 @@
 package dev.logchange.core.infrastructure.persistance.changelog;
 
 import dev.logchange.core.application.changelog.repository.ChangelogRepository;
-import dev.logchange.core.application.file.repository.FileReader;
+import dev.logchange.core.application.file.query.FileQuery;
 import dev.logchange.core.application.file.repository.FileWriter;
 import dev.logchange.core.application.file.repository.XmlFileWriter;
 import dev.logchange.core.domain.changelog.model.Changelog;
@@ -33,7 +33,7 @@ public class FileChangelogRepository implements ChangelogRepository {
     private final File inputDirectory;
     private final Config config;
 
-    private final FileReader reader;
+    private final FileQuery reader;
     private final FileWriter writer;
     private final XmlFileWriter xmlWriter;
 

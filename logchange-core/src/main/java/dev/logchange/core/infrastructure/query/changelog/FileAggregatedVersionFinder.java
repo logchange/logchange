@@ -1,7 +1,7 @@
 package dev.logchange.core.infrastructure.query.changelog;
 
 import dev.logchange.core.application.changelog.repository.AggregatedVersionQuery;
-import dev.logchange.core.application.file.repository.FileReader;
+import dev.logchange.core.application.file.query.FileQuery;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.domain.changelog.model.version.ChangelogVersion;
 import dev.logchange.core.domain.changelog.model.version.Version;
@@ -22,10 +22,10 @@ import java.util.stream.Collectors;
 
 @Log
 @RequiredArgsConstructor
-public class FileAggregatedVersionQuery implements AggregatedVersionQuery {
+public class FileAggregatedVersionFinder implements AggregatedVersionQuery {
 
     private final Version version;
-    private final FileReader reader;
+    private final FileQuery reader;
 
     @Override
     public Optional<ChangelogVersion> find(Path changelogDirectory, String projectName) {

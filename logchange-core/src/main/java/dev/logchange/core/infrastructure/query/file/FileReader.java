@@ -1,6 +1,6 @@
 package dev.logchange.core.infrastructure.query.file;
 
-import dev.logchange.core.application.file.repository.FileReader;
+import dev.logchange.core.application.file.query.FileQuery;
 import lombok.extern.java.Log;
 
 import java.io.File;
@@ -12,7 +12,7 @@ import java.util.Comparator;
 import java.util.stream.Stream;
 
 @Log
-public class FileQuery implements FileReader {
+public class FileReader implements FileQuery {
 
     /**
      * Returns: The returning stream of files is not sorted.

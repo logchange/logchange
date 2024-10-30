@@ -8,7 +8,7 @@ import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogRepository;
 import dev.logchange.core.infrastructure.persistance.changelog.FileVersionSummaryRepository;
 import dev.logchange.core.infrastructure.persistance.file.FileRepository;
-import dev.logchange.core.infrastructure.query.file.FileQuery;
+import dev.logchange.core.infrastructure.query.file.FileReader;
 import org.codehaus.plexus.util.FileUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,7 +43,7 @@ public class GenerateVersionSummaryIntegrationTest {
         File expectedChangelogOutputFile = new File(VERSION_DIR + "expected-version-summary.md");
 
         FileRepository fr = FileRepository.of(changelogOutputFile);
-        ChangelogRepository repository = new FileChangelogRepository(changelogInputDir, Config.EMPTY, new FileQuery(), fr, fr);
+        ChangelogRepository repository = new FileChangelogRepository(changelogInputDir, Config.EMPTY, new FileReader(), fr, fr);
         VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogInputDir, Config.EMPTY);
         GenerateChangelogUseCase generateChangelogUseCase = new GenerateChangelogService(repository, versionSummaryRepository);
         GenerateChangelogUseCase.GenerateChangelogCommand command = GenerateChangelogUseCase.GenerateChangelogCommand.of();

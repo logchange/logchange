@@ -1,10 +1,10 @@
-package dev.logchange.core.application.file.repository;
+package dev.logchange.core.application.file.query;
 
 import java.io.File;
 import java.io.InputStream;
 import java.util.stream.Stream;
 
-public interface FileReader {
+public interface FileQuery {
 
     Stream<File> readFiles(File directory);
 

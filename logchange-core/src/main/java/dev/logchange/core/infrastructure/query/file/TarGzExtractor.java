@@ -1,5 +1,6 @@
-package dev.logchange.core.application.changelog.service.aggregate;
+package dev.logchange.core.infrastructure.query.file;
 
+import dev.logchange.core.application.file.query.TarGzQuery;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
@@ -13,15 +14,15 @@ import java.util.zip.GZIPInputStream;
 
 @Log
 @RequiredArgsConstructor
-public class TarGzService {
+public class TarGzExtractor implements TarGzQuery {
 
     private final Path extractionPath;
 
-    public Path get(String projectUrl, String inputDir) throws IOException {
+    public Path get(String projectUrl, String projectInputDir) throws IOException {
         log.info("Starting download from URL: " + projectUrl);
         File tarGzFile = downloadFile(projectUrl);
         log.info("Download completed. Extracting to: " + extractionPath.toString());
-        return extractTarGz(tarGzFile, inputDir);
+        return extractTarGz(tarGzFile, projectInputDir);
     }
 
     private File downloadFile(String projectUrl) throws IOException {
