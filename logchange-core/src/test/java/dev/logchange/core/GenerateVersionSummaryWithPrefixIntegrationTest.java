@@ -40,7 +40,7 @@ public class GenerateVersionSummaryWithPrefixIntegrationTest {
         AggregateChangelogsVersionsCommand command = AggregateChangelogsVersionsCommand.of(prepareAggregates(), "1.0.0");
         VersionSummaryRepository vsr = new FileVersionSummaryRepository(changelogInputDir, Config.EMPTY);
         AggregatedVersionQuery avq = new FileAggregatedVersionFinder(command.getVersion(), new FileReader());
-        TarGzQuery tarGzQuery = new FakeTarGzExtractor();
+        TarGzQuery tarGzQuery = new FakeTarGzExtractor(PATH + "extracted/changelog");
         AggregateProjectsVersionUseCase apv = new AggregateProjectsVersionService(avq, vsr, tarGzQuery);
 
         //when:
@@ -66,9 +66,15 @@ public class GenerateVersionSummaryWithPrefixIntegrationTest {
 
     static class FakeTarGzExtractor implements TarGzQuery {
 
+        private final Path predefinedPath;
+
+        public FakeTarGzExtractor(String predefinedPath) {
+            this.predefinedPath = Paths.get(predefinedPath);
+        }
+
         @Override
         public Path get(String projectUrl, String projectInputDir) throws IOException {
-            return Paths.get("../../../../resources/GenerateVersionSummaryWithPrefixIntegrationTest/extracted/changelog");
+            return this.predefinedPath;
         }
     }
 }

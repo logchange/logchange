@@ -21,16 +21,16 @@
 
 ### Added (1 change)
 
-- Test title !1 #1 [TASK_NUMBER](https://www.google.pl) ([Piotr](https://github.com/marwin1991) @marwin1991)
+- **TEST_PROJECT** - Test title !1 #1 [TASK_NUMBER](https://www.google.pl) ([Piotr](https://github.com/marwin1991) @marwin1991)
 
 ### Removed (2 changes)
 
-- Test title !1 #1 [TASK_NUMBER](https://www.google.pl) (Piotr)
-- Test title !1 #1 #2 [TASK_NUMBER](https://www.google.pl) [other link](https://www.google.pl) (@marwin1991) ([Piotr](https://github.com/marwin1991) @marwin1991)
+- **TEST_PROJECT** - Test title !1 #1 [TASK_NUMBER](https://www.google.pl) (Piotr)
+- **TEST_PROJECT** - Test title !1 #1 #2 [TASK_NUMBER](https://www.google.pl) [other link](https://www.google.pl) (@marwin1991) ([Piotr](https://github.com/marwin1991) @marwin1991)
 
 ### Fixed (1 change)
 
-- Test title !1 #1 [TASK_NUMBER](https://www.google.pl) (@marwin1991 [LINK](https://github.com/marwin1991))
+- **TEST_PROJECT** - Test title !1 #1 [TASK_NUMBER](https://www.google.pl) (@marwin1991 [LINK](https://github.com/marwin1991))
 
 ### Configuration changes
 
