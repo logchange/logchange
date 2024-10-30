@@ -5,10 +5,7 @@ import dev.logchange.core.domain.changelog.model.version.ChangelogVersion;
 import java.nio.file.Path;
 import java.util.Optional;
 
-public interface AggregatedVersionRepository {
+public interface AggregatedVersionQuery {
 
     Optional<ChangelogVersion> find(Path changelogDirectory, String projectName);
-
-    void save(ChangelogVersion aggregatedVersion);
-
 }

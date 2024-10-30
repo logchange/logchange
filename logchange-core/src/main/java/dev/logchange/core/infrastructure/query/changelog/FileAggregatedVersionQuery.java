@@ -1,13 +1,10 @@
-package dev.logchange.core.infrastructure.persistance.changelog;
+package dev.logchange.core.infrastructure.query.changelog;
 
-import dev.logchange.core.application.changelog.repository.AggregatedVersionRepository;
-import dev.logchange.core.application.file.repository.FileWriter;
-import dev.logchange.core.application.file.repository.YmlFileReader;
+import dev.logchange.core.application.changelog.repository.AggregatedVersionQuery;
+import dev.logchange.core.application.file.repository.FileReader;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.domain.changelog.model.version.ChangelogVersion;
 import dev.logchange.core.domain.changelog.model.version.Version;
-import dev.logchange.core.domain.config.model.Config;
-import dev.logchange.core.format.md.changelog.version.MDAggregatedVersion;
 import dev.logchange.core.format.release_date.ReleaseDate;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryConfigException;
@@ -17,18 +14,18 @@ import lombok.extern.java.Log;
 
 import java.io.File;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Log
 @RequiredArgsConstructor
-public class FileAggregatedVersionRepository implements AggregatedVersionRepository {
+public class FileAggregatedVersionQuery implements AggregatedVersionQuery {
 
     private final Version version;
-    private final Config config;
-    private final YmlFileReader reader;
-    private final FileWriter writer;
-
+    private final FileReader reader;
 
     @Override
     public Optional<ChangelogVersion> find(Path changelogDirectory, String projectName) {
@@ -73,11 +70,5 @@ public class FileAggregatedVersionRepository implements AggregatedVersionReposit
         }
 
         return entries;
-    }
-
-    @Override
-    public void save(ChangelogVersion aggregatedVersion) {
-        String md = new MDAggregatedVersion(config, aggregatedVersion).toMD();
-        writer.write(md);
     }
 }

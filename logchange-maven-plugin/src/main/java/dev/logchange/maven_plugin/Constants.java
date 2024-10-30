@@ -3,7 +3,6 @@ package dev.logchange.maven_plugin;
 public class Constants {
 
     public static final String DEFAULT_OUTPUT_FILE = "CHANGELOG.md";
-    public static final String DEFAULT_AGGREGATE_OUTPUT_FILE = "CHANGELOG-aggregate.md";
     public static final String DEFAULT_INPUT_DIR = "changelog";
     public static final String DEFAULT_UNRELEASED_VERSION_DIR = "unreleased";
     public static final String DEFAULT_CONFIG_FILE = "logchange-config.yml";

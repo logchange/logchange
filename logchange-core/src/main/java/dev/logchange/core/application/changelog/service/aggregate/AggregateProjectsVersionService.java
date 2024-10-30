@@ -1,6 +1,7 @@
 package dev.logchange.core.application.changelog.service.aggregate;
 
-import dev.logchange.core.application.changelog.repository.AggregatedVersionRepository;
+import dev.logchange.core.application.changelog.repository.AggregatedVersionQuery;
+import dev.logchange.core.application.changelog.repository.VersionSummaryRepository;
 import dev.logchange.core.domain.changelog.command.AggregateProjectsVersionUseCase;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.domain.changelog.model.version.ChangelogVersion;
@@ -20,8 +21,8 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public class AggregateProjectsVersionService implements AggregateProjectsVersionUseCase {
 
-    private final AggregatedVersionRepository versionRepository;
-
+    private final AggregatedVersionQuery aggregatedVersionQuery;
+    private final VersionSummaryRepository versionSummaryRepository;
 
     @Override
     public void handle(AggregateChangelogsVersionsCommand command) {
@@ -35,7 +36,7 @@ public class AggregateProjectsVersionService implements AggregateProjectsVersion
         command.getAggregates().getProjects().forEach(project -> {
             try {
                 Path extractedProjectChangelogDir = tarGzService.get(project.getUrl(), project.getInputDir());
-                Optional<ChangelogVersion> result = versionRepository.find(extractedProjectChangelogDir, project.getName());
+                Optional<ChangelogVersion> result = aggregatedVersionQuery.find(extractedProjectChangelogDir, project.getName());
 
                 if (result.isPresent()) {
                     changelogVersions.add(result.get());
@@ -54,14 +55,14 @@ public class AggregateProjectsVersionService implements AggregateProjectsVersion
         }
 
         ChangelogVersion aggregatedVersion = mergeVersions(changelogVersions, command.getVersion());
-        versionRepository.save(aggregatedVersion);
+        versionSummaryRepository.save(aggregatedVersion);
     }
 
     private ChangelogVersion mergeVersions(List<ChangelogVersion> versions, Version version) {
         log.info("Merging changelog versions");
         List<ChangelogEntry> mergedEntries = versions.stream()
                 .filter(Objects::nonNull)
-                .flatMap(changelogVersion -> changelogVersion.getEntries().stream())// here
+                .flatMap(changelogVersion -> changelogVersion.getEntries().stream())
                 .collect(Collectors.toList());
 
         return ChangelogVersion.builder()

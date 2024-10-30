@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.util.stream.Stream;
 
-public interface YmlFileReader {
+public interface FileReader {
 
     Stream<File> readFiles(File directory);
 
