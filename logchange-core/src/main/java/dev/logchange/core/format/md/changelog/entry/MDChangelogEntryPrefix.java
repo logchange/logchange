@@ -23,7 +23,7 @@ public class MDChangelogEntryPrefix implements MD {
     }
 
     private String getPrefix() {
-        if (this.prefix == null) {
+        if (this.prefix == null || StringUtils.isBlank(this.prefix.getValue())) {
             return StringUtils.EMPTY;
         }
 
