@@ -26,7 +26,7 @@ public enum YMLAggregatedProjectType {
                 .findFirst()
                 .orElseThrow(() -> {
                     String availableType = Arrays.stream(YMLAggregatedProjectType.values()).map(YMLAggregatedProjectType::getType).collect(Collectors.joining(", "));
-                    String message = "Cannot match YMLChangelogEntryType for string: " + name + " - Available types: [" + availableType + "].";
+                    String message = "Cannot match YMLAggregatedProjectType for string: " + name + " - Available types: [" + availableType + "].";
                     log.severe(message);
                     return new IllegalArgumentException(message);
                 });
