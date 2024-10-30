@@ -62,6 +62,27 @@ class YMLChangelogEntryTest {
                 "type: added\n", result);
     }
 
+    @Test
+    void shouldConvertWithoutPrefixToYAMLString() {
+        //given:
+        YMLChangelogEntry entry = getSimple();
+        entry.withPrefix("SOME PREFIX");
+
+        //when:
+        String result = entry.toYMLString();
+
+        //then:
+        assertEquals("# This file is used by logchange tool to generate CHANGELOG.md \uD83C\uDF33 \uD83E\uDE93 => \uD83E\uDEB5 \n" +
+                "# Visit https://github.com/logchange/logchange and leave a star \uD83C\uDF1F \n" +
+                "# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅\uFE0F⬅ \uFE0F\n" +
+                "title: Some title\n" +
+                "authors:\n" +
+                "  - nick: marwin1991\n" +
+                "links:\n" +
+                "  - url: https://github.com/users/marwin1991\n" +
+                "type: added\n", result);
+    }
+
     private YMLChangelogEntry getSimple() {
         return YMLChangelogEntry.builder()
                 .title("Some title")
