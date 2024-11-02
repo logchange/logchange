@@ -30,18 +30,18 @@ class MDChangelogVersionConfiguration extends Configurable implements MD {
     }
 
     private String getConfiguration() {
-        if (configurations.size() != 0) {
-            StringBuilder markdownConfiguration = new StringBuilder(heading(getConfig().getLabels().getConfiguration().getHeading(), 3) + "\n\n");
-            Set<String> types = getConfigurationsTypes();
-
-            for (String type : types) {
-                markdownConfiguration.append(getConfigurationTable(configurations, type)).append("\n\n");
-            }
-
-            return markdownConfiguration.toString();
-        } else {
+        if (configurations == null || configurations.isEmpty()) {
             return StringUtils.EMPTY;
         }
+
+        StringBuilder markdownConfiguration = new StringBuilder(heading(getConfig().getLabels().getConfiguration().getHeading(), 3) + "\n\n");
+        Set<String> types = getConfigurationsTypes();
+
+        for (String type : types) {
+            markdownConfiguration.append(getConfigurationTable(configurations, type)).append("\n\n");
+        }
+
+        return markdownConfiguration.toString();
     }
 
     private Set<String> getConfigurationsTypes() {

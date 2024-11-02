@@ -24,7 +24,7 @@ class MDChangelogEntryPrefixTest {
         String prefix = null;
 
         //when:
-        String result = MDChangelogEntryPrefix.of(null).toString();
+        String result = MDChangelogEntryPrefix.of(prefix).toString();
 
         //then:
         assertEquals("", result);
