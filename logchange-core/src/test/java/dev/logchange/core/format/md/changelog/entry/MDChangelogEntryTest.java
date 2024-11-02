@@ -37,7 +37,7 @@ class MDChangelogEntryTest {
     @Test
     void givenBasicEntryWithPrefix_whenToString_thenResultMatchesFormat() {
         //given:
-        ChangelogEntry entry = getSomeEntry(ChangelogEntryPrefix.of("Some prefix"));
+        ChangelogEntry entry = getSomeEntry("Some prefix");
 
         //when:
         String result = new MDChangelogEntry(entry).toString();
@@ -49,7 +49,7 @@ class MDChangelogEntryTest {
     @Test
     void givenSomeEntryWithPrefix_whenToString_thenResultMatchesToMD() {
         //given:
-        ChangelogEntry entry = getSomeEntry(ChangelogEntryPrefix.of("Some prefix"));
+        ChangelogEntry entry = getSomeEntry("Some prefix");
 
         //when:
         String result1 = new MDChangelogEntry(entry).toString();
@@ -59,7 +59,7 @@ class MDChangelogEntryTest {
         assertEquals(result1, result2);
     }
 
-    private ChangelogEntry getSomeEntry(ChangelogEntryPrefix prefix) {
+    private ChangelogEntry getSomeEntry(String prefix) {
         return ChangelogEntry.builder()
                 .prefix(prefix)
                 .title(ChangelogEntryTitle.of("Some Title"))

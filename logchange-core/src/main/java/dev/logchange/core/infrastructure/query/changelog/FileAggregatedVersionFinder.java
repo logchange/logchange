@@ -54,8 +54,7 @@ public class FileAggregatedVersionFinder implements AggregatedVersionQuery {
         List<ChangelogEntry> entries = reader.readYmlFiles(versionDirectory)
                 .map((file) -> {
                     try {
-                        return YMLChangelogEntry.of(reader.readFileContent(file), file.getPath())
-                                .withPrefix(projectName);
+                        return YMLChangelogEntry.of(reader.readFileContent(file), file.getPath());
                     } catch (YMLChangelogEntryConfigException e) {
                         exceptions.add(e);
                         return null;
@@ -63,6 +62,7 @@ public class FileAggregatedVersionFinder implements AggregatedVersionQuery {
                 })
                 .filter(Objects::nonNull)
                 .map(YMLChangelogEntry::to)
+                .map(entry -> entry.withPrefix(projectName))
                 .collect(Collectors.toList());
 
         if (!exceptions.isEmpty()) {

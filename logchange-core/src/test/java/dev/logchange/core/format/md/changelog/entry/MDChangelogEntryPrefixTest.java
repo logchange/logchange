@@ -1,18 +1,18 @@
 package dev.logchange.core.format.md.changelog.entry;
 
-import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryPrefix;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MDChangelogEntryPrefixTest {
+
     @Test
     void givenSomePrefix_whenToString_thenResultMatchesFormat() {
         //given:
-        ChangelogEntryPrefix prefix = ChangelogEntryPrefix.of("Some prefix");
+        String prefix = "Some prefix";
 
         //when:
-        String result = new MDChangelogEntryPrefix(prefix).toString();
+        String result = MDChangelogEntryPrefix.of(prefix).toString();
 
         //then:
         assertEquals("**Some prefix** - ", result);
@@ -21,10 +21,34 @@ class MDChangelogEntryPrefixTest {
     @Test
     void givenNullPrefix_whenToString_thenResultMatchesFormat() {
         //given:
-        ChangelogEntryPrefix prefix = null;
+        String prefix = null;
 
         //when:
-        String result = new MDChangelogEntryPrefix(prefix).toString();
+        String result = MDChangelogEntryPrefix.of(null).toString();
+
+        //then:
+        assertEquals("", result);
+    }
+
+    @Test
+    void givenEmptyPrefix_whenToString_thenResultMatchesFormat() {
+        //given:
+        String prefix = "";
+
+        //when:
+        String result = MDChangelogEntryPrefix.of(prefix).toString();
+
+        //then:
+        assertEquals("", result);
+    }
+
+    @Test
+    void givenBlankPrefix_whenToString_thenResultMatchesFormat() {
+        //given:
+        String prefix = "   ";
+
+        //when:
+        String result = MDChangelogEntryPrefix.of(prefix).toString();
 
         //then:
         assertEquals("", result);
@@ -33,11 +57,11 @@ class MDChangelogEntryPrefixTest {
     @Test
     void givenSomePrefix_whenToString_thenResultMatchToMD() {
         //given:
-        ChangelogEntryPrefix prefix = ChangelogEntryPrefix.of("Some prefix");
+        String prefix = "Some prefix";
 
         //when:
-        String result1 = new MDChangelogEntryPrefix(prefix).toString();
-        String result2 = new MDChangelogEntryPrefix(prefix).toMD();
+        String result1 = MDChangelogEntryPrefix.of(prefix).toString();
+        String result2 = MDChangelogEntryPrefix.of(prefix).toMD();
 
         //then:
         assertEquals(result1, result2);

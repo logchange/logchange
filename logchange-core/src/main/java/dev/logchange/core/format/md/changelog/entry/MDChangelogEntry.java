@@ -22,7 +22,7 @@ public class MDChangelogEntry implements MD {
 
     public MDChangelogEntry(ChangelogEntry entry) {
         this.entry = entry;
-        this.prefix = new MDChangelogEntryPrefix(entry.getPrefix());
+        this.prefix = MDChangelogEntryPrefix.of(entry.getPrefix());
         this.mdMergeRequests = new MDChangelogEntryMergeRequests(entry.getMergeRequests());
         this.mdIssues = new MDChangelogEntryIssues(entry.getIssues());
         this.mdLinks = new MDChangelogEntryLinks(entry.getLinks());

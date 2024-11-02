@@ -28,9 +28,6 @@ public class YMLChangelogEntry {
             "# Visit https://github.com/logchange/logchange and leave a star \uD83C\uDF1F \n" +
             "# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️\n";
 
-    @JsonIgnore
-    public String prefix;
-
     @JsonProperty(index = 0)
     public String title;
 
@@ -96,14 +93,9 @@ public class YMLChangelogEntry {
                 .issues(entry.getIssues())
                 .links(entry.getLinks().stream().map(YMLChangelogEntryLink::of).collect(Collectors.toList()))
                 .type(YMLChangelogEntryType.of(entry.getType()))
-                .importantNotes(entry.getImportantNotes())
+                .importantNotes(entry.getImportantNotes().stream().map(ChangelogEntryImportantNote::getValue).collect(Collectors.toList()))
                 .configurations(entry.getConfigurations().stream().map(YMLChangelogEntryConfiguration::of).collect(Collectors.toList()))
                 .build();
-    }
-
-    public YMLChangelogEntry withPrefix(String prefix) {
-        this.prefix = prefix;
-        return this;
     }
 
     @SneakyThrows
@@ -119,7 +111,6 @@ public class YMLChangelogEntry {
 
     public ChangelogEntry to() {
         return ChangelogEntry.builder()
-                .prefix(ChangelogEntryPrefix.of(prefix))
                 .title(ChangelogEntryTitle.of(title))
                 .type(type.to())
                 .mergeRequests(mergeRequests())
@@ -169,11 +160,13 @@ public class YMLChangelogEntry {
         }
     }
 
-    private List<String> importantNotes() {
+    private List<ChangelogEntryImportantNote> importantNotes() {
         if (importantNotes == null) {
             return Collections.emptyList();
         } else {
-            return importantNotes;
+            return importantNotes.stream()
+                    .map(ChangelogEntryImportantNote::of)
+                    .collect(Collectors.toList());
         }
     }
 

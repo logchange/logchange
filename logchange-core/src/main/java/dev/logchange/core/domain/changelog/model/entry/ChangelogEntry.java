@@ -3,6 +3,7 @@ package dev.logchange.core.domain.changelog.model.entry;
 import lombok.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Builder
@@ -10,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChangelogEntry {
 
-    private final ChangelogEntryPrefix prefix;
+    private final String prefix;
     private final ChangelogEntryTitle title;
     private final ChangelogEntryType type;
     @Singular
@@ -22,8 +23,32 @@ public class ChangelogEntry {
     @Singular
     private final List<ChangelogEntryAuthor> authors;
     @Singular
-    private final List<String> importantNotes;
+    private final List<ChangelogEntryImportantNote> importantNotes;
     @Singular
     private final List<ChangelogEntryConfiguration> configurations;
 
+    public ChangelogEntry withPrefix(String prefix) {
+        if (prefix == null) {
+            return this;
+        }
+        List<ChangelogEntryImportantNote> prefixedNotes = importantNotes.stream()
+                .map(note -> note.withPrefix(prefix))
+                .collect(Collectors.toList());
+
+        List<ChangelogEntryConfiguration> prefixedConfigurations = configurations.stream()
+                .map(config -> config.withPrefix(prefix))
+                .collect(Collectors.toList());
+
+        return ChangelogEntry.builder()
+                .prefix(prefix)
+                .title(title)
+                .type(type)
+                .mergeRequests(mergeRequests)
+                .issues(issues)
+                .links(links)
+                .authors(authors)
+                .importantNotes(prefixedNotes)
+                .configurations(prefixedConfigurations)
+                .build();
+    }
 }

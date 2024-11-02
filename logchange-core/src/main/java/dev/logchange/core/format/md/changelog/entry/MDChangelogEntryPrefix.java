@@ -1,21 +1,18 @@
 package dev.logchange.core.format.md.changelog.entry;
 
-import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryPrefix;
 import dev.logchange.core.format.md.MD;
 import dev.logchange.md.MarkdownBasics;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringSubstitutor;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@RequiredArgsConstructor(staticName = "of")
 public class MDChangelogEntryPrefix implements MD {
     private static final String prefixFormat = "${prefix} - ";
-    private final ChangelogEntryPrefix prefix;
-
-    public MDChangelogEntryPrefix(ChangelogEntryPrefix prefix) {
-        this.prefix = prefix;
-    }
+    private final String prefix;
 
     @Override
     public String toString() {
@@ -23,12 +20,12 @@ public class MDChangelogEntryPrefix implements MD {
     }
 
     private String getPrefix() {
-        if (this.prefix == null || StringUtils.isBlank(this.prefix.getValue())) {
+        if (StringUtils.isBlank(this.prefix)) {
             return StringUtils.EMPTY;
         }
 
         Map<String, String> valuesMap = new HashMap<>();
-        valuesMap.put("prefix", MarkdownBasics.bold(this.prefix.getValue()));
+        valuesMap.put("prefix", MarkdownBasics.bold(this.prefix));
         StringSubstitutor sub = new StringSubstitutor(valuesMap);
         return sub.replace(prefixFormat);
     }
