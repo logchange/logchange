@@ -19,12 +19,14 @@ public class FileReader implements FileQuery {
      */
     @Override
     public Stream<File> readFiles(File directory) {
+        if (directory == null) {
+            throw new IllegalArgumentException("Input directory cannot be null!");
+        }
         File[] entriesFiles = directory.listFiles();
 
         if (entriesFiles == null) {
             return Stream.empty();
         }
-
         return Arrays.stream(entriesFiles);
     }
 
