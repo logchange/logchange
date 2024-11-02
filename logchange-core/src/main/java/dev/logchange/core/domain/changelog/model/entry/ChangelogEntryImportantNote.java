@@ -24,7 +24,7 @@ public class ChangelogEntryImportantNote implements Comparable<ChangelogEntryImp
 
     @Override
     public int compareTo(ChangelogEntryImportantNote o) {
-        return Comparator.comparing(ChangelogEntryImportantNote::getPrefix)
+        return Comparator.comparing(ChangelogEntryImportantNote::getPrefix, Comparator.nullsLast(String::compareTo))
                 .compare(this, o);
     }
 }

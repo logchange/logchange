@@ -52,7 +52,7 @@ public class ChangelogEntryConfiguration implements Comparable<ChangelogEntryCon
     @Override
     public int compareTo(ChangelogEntryConfiguration o) {
         return Comparator.comparing(ChangelogEntryConfiguration::getType)
-                .thenComparing(ChangelogEntryConfiguration::getPrefix)
+                .thenComparing(ChangelogEntryConfiguration::getPrefix, Comparator.nullsLast(String::compareTo))
                 .thenComparing(ChangelogEntryConfiguration::getAction)
                 .thenComparing(ChangelogEntryConfiguration::getKey)
                 .compare(this, o);
