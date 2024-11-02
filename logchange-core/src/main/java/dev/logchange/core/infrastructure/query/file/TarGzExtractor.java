@@ -57,6 +57,12 @@ public class TarGzExtractor implements TarGzQuery {
             String baseDir = extractBaseDirectory(tis);
             extractEntries(tis, baseDir + projectChangelogDir);
             return this.extractionPath.resolve(baseDir).resolve(projectChangelogDir);
+        } finally {
+            log.info("Deleting downloaded archive file");
+            boolean deleted = tarGzFile.delete();
+            if (!deleted) {
+                log.warning("Cannot delete downloaded archive file: " + tarGzFile.getAbsolutePath());
+            }
         }
     }
 
@@ -80,7 +86,7 @@ public class TarGzExtractor implements TarGzQuery {
             String entryName = entry.getName();
 
             if (entryName.startsWith(changelogDirPath)) {
-                File outputFile = new File(extractionPath.toFile(), entry.getName());
+                File outputFile = new File(extractionPath.toFile(), entryName);
 
                 if (entry.isDirectory()) {
                     createDirectoryIfNotExists(outputFile);
