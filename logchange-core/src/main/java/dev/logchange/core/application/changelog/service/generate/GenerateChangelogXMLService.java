@@ -35,7 +35,7 @@ public class GenerateChangelogXMLService implements GenerateChangelogUseCase {
      * @param changelog changelog
      * @return {@link Release}
      */
-    private ChangesDocument mapChangelogToChangesDocument(Changelog changelog) {
+    public static ChangesDocument mapChangelogToChangesDocument(Changelog changelog) {
         ChangesDocument changesDocument = new ChangesDocument();
         List<Release> changelogReleases = mapVersionsToReleases(changelog.getVersions().getVersions());
 
@@ -51,7 +51,7 @@ public class GenerateChangelogXMLService implements GenerateChangelogUseCase {
      * @param versions list of versions
      * @return {@link List} of {@link Release}
      */
-    private List<Release> mapVersionsToReleases(List<ChangelogVersion> versions) {
+    private static List<Release> mapVersionsToReleases(List<ChangelogVersion> versions) {
         List<Release> releases = new ArrayList<>();
         for (ChangelogVersion version : versions) {
             // if list of entries are empty, assume the version directory is empty
@@ -77,7 +77,7 @@ public class GenerateChangelogXMLService implements GenerateChangelogUseCase {
         return releases;
     }
 
-    private String getReleasedDate(ChangelogVersion version) {
+    private static String getReleasedDate(ChangelogVersion version) {
         if (version.getReleaseDateTime() == null) {
             return "unreleased";
         }
@@ -85,7 +85,7 @@ public class GenerateChangelogXMLService implements GenerateChangelogUseCase {
         return version.getReleaseDateTime().toLocalDate().toString();
     }
 
-    private String authorsToString(List<ChangelogEntryAuthor> authors) {
+    private static String authorsToString(List<ChangelogEntryAuthor> authors) {
         StringBuilder builder = new StringBuilder();
 
         Iterator<ChangelogEntryAuthor> iterator = authors.iterator();

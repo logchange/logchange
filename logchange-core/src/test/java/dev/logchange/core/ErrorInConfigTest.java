@@ -1,20 +1,20 @@
 package dev.logchange.core;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryConfigException;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogInvalidConfigValuesException;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.util.ArrayList;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import com.fasterxml.jackson.databind.exc.ValueInstantiationException;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ErrorInConfigTest {
 

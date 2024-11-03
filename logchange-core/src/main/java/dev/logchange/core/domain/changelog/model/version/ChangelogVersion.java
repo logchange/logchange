@@ -2,6 +2,7 @@ package dev.logchange.core.domain.changelog.model.version;
 
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryConfiguration;
+import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryImportantNote;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,11 +26,11 @@ public class ChangelogVersion implements Comparable<ChangelogVersion> {
         return version.compareTo(o.version);
     }
 
-    public List<String> getImportantNotes() {
+    public List<ChangelogEntryImportantNote> getImportantNotes() {
         return entries.stream()
-                .sequential()
                 .map(ChangelogEntry::getImportantNotes)
                 .flatMap(List::stream)
+                .sorted()
                 .collect(Collectors.toList());
     }
 

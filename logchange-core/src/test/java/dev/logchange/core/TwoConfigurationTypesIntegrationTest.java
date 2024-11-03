@@ -7,6 +7,8 @@ import dev.logchange.core.domain.changelog.command.GenerateChangelogUseCase;
 import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogRepository;
 import dev.logchange.core.infrastructure.persistance.changelog.FileVersionSummaryRepository;
+import dev.logchange.core.infrastructure.persistance.file.FileRepository;
+import dev.logchange.core.infrastructure.query.file.FileReader;
 import org.codehaus.plexus.util.FileUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,8 +41,8 @@ public class TwoConfigurationTypesIntegrationTest {
         File changelogOutputFile = new File(PATH + "CHANGELOG.md");
         File expectedChangelogOutputFile = new File(PATH + "EXPECTED_CHANGELOG.md");
 
-
-        ChangelogRepository repository = new FileChangelogRepository(changelogInputDir, changelogOutputFile, Config.EMPTY);
+        FileRepository fr = FileRepository.of(changelogOutputFile);
+        ChangelogRepository repository = new FileChangelogRepository(changelogInputDir, Config.EMPTY, new FileReader(), fr, fr);
         VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogInputDir, Config.EMPTY);
         GenerateChangelogUseCase generateChangelogUseCase = new GenerateChangelogService(repository, versionSummaryRepository);
         GenerateChangelogUseCase.GenerateChangelogCommand command = GenerateChangelogUseCase.GenerateChangelogCommand.of();
