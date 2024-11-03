@@ -159,7 +159,7 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
         }
     }
 
-    private List<String> getNotes() throws PrompterException {
+    private List<ChangelogEntryImportantNote> getNotes() throws PrompterException {
         String prompt = "Is there any important information about this change (f.e. it affects other system) [Y/y - YES] [N/n - NO] [press ENTER to skip] ";
         List<String> notes = new ArrayList<>();
 
@@ -167,7 +167,9 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
             try {
                 String response = prompter.prompt(prompt);
                 if (response.trim().trim().equalsIgnoreCase("Y")) {
-                    return getNotesRecur(notes);
+                    return getNotesRecur(notes).stream()
+                            .map(ChangelogEntryImportantNote::of)
+                            .collect(Collectors.toList());
                 } else {
                     return Collections.emptyList();
                 }

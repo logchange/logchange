@@ -199,6 +199,16 @@ changelog:
         update: Updated
       with_default_value: with default value
       description: Description
+aggregates:
+  projects:
+    - name: hofund
+      url: https://github.com/logchange/hofund/archive/refs/heads/master.tar.gz
+      type: tar.gz # currently only tar.gz is supported
+      input_dir: changelog # the name where dirs with versions are stored for this project
+    - name: logchange
+      url: https://github.com/logchange/logchange/archive/refs/heads/main.tar.gz
+      type: tar.gz
+      input_dir: changelog
 ```
 
 ### Generating `CHANGELOG.md`
@@ -278,6 +288,35 @@ According to the official YAML specification one should:
 - Whenever applicable use the unquoted style since it is the most readable.
 - Use the single-quoted style (') if characters such as " and \ are being used inside the string to avoid escaping them and therefore improve readability.
 - Use the double-quoted style (") when the first two options aren't sufficient, i.e. in scenarios where more complex line breaks are required or non-printable characters are needed.
+
+## Aggregating changelogs of the same version across different projects
+
+The `aggregate` goal allows you to compile changelogs from multiple projects into a single, 
+consolidated changelog for a specified version. 
+This can be particularly useful when working with a set of related projects or microservices, 
+providing a centralized view of changes across these projects for a single release version.
+
+### Command
+
+To aggregate changelogs for a specified version, use the following Maven command:
+
+```shell
+mvn logchange:aggregate -DaggregateVersion="X.X.X"
+```
+
+### Parameters
+- **aggregateVersion** (required) – The version number to aggregate across all specified projects. This parameter identifies the changelog entries for the specific version you want to compile.
+- **inputDir** (optional) – The directory where the `logchange-config.yml` file is located, defaulting to the `changelog` directory.
+- **configFile** (optional) – The name of the configuration file, defaulting to `logchange-config.yml`.
+
+### Configuration
+
+In the `logchange-config.yml` file, you define the projects to be aggregated in the aggregates section. 
+Each project should be configured with its:
+- **name** - used as a prefix for changelog entries from each project, making it easy to identify the origin of each entry in the aggregated changelog
+- **url** - the URL for downloading the project files as a `tar.gz` repository archive
+- **type** - specifies the type of archive to download; currently, only `tar.gz` format is supported.
+- **input_dir** - indicates the `changelog` directory for each project, where changelog entries for that project are stored.
 
 ## TODO:
 

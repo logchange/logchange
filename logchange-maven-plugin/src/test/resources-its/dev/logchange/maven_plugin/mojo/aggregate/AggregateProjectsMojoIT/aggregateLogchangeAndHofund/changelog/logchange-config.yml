@@ -1,0 +1,10 @@
+aggregates:
+  projects:
+    - name: hofund
+      url: https://github.com/logchange/hofund/archive/refs/heads/master.tar.gz
+      type: tar.gz
+      input_dir: changelog
+    - name: logchange
+      url: https://github.com/logchange/logchange/archive/refs/heads/main.tar.gz
+      type: tar.gz
+      input_dir: changelog
