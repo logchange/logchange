@@ -52,7 +52,6 @@ class FileRepositoryTest {
         outputFile.delete();
     }
 
-
     @Test
     void shouldWriteXmlFile() {
         // given:
@@ -95,5 +94,4 @@ class FileRepositoryTest {
 
         return Changelog.of(versions, Collections.emptyList());
     }
-
 }

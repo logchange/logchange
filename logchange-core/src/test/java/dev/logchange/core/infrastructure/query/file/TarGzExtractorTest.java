@@ -43,6 +43,7 @@ class TarGzExtractorTest {
                 }
             }
         } finally {
+            // cleanup:
             deleteTmpDir(tempDir.toPath());
         }
     }
@@ -58,6 +59,7 @@ class TarGzExtractorTest {
         try {
             assertThrows(IOException.class, () -> tarGzQuery.get(invalidURL, "changelog"));
         } finally {
+            // cleanup:
             tempDir.delete();
         }
     }
@@ -74,6 +76,7 @@ class TarGzExtractorTest {
             tarGzQuery.get("https://github.com/logchange/logchange/archive/refs/heads/main.tar.gz", invalidDir);
             assertEquals(0, Objects.requireNonNull(tempDir.listFiles()).length);
         } finally {
+            // cleanup:
             tempDir.delete();
         }
     }

@@ -18,7 +18,7 @@ class AggregateProjectsMojoIT {
     @MavenGoal("${project.groupId}:${project.artifactId}:${project.version}:aggregate")
     @MavenOption("-DaggregateVersion=0.4.0")
     @MavenTest
-    @DisplayName("Project with pom.xml and task.yml in changelog dir after release task.yml is moved to version dir and CHANGELOG.md is generated")
+    @DisplayName("Project with pom.xml, changelog dir and aggregates config generates aggregated version summary of hofund and logchange 0.4.0 version")
     void aggregateLogchangeAndHofund(MavenExecutionResult result) {
         assertThat(result).isSuccessful()
                 .project()
