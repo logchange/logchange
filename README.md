@@ -56,7 +56,7 @@ You can choose between two options:
         <plugin>
             <groupId>dev.logchange</groupId>
             <artifactId>logchange-maven-plugin</artifactId>
-            <version>1.8.0</version>
+            <version>1.11.0</version>
             <inherited>false</inherited> <!-- For multi module project -->
         </plugin>
     </plugins>
@@ -304,6 +304,8 @@ To aggregate changelogs for a specified version, use the following Maven command
 mvn logchange:aggregate -DaggregateVersion="X.X.X"
 ```
 
+As `aggregateVersion` you can also use `unreleased`.
+
 ### Parameters
 - **aggregateVersion** (required) – The version number to aggregate across all specified projects. This parameter identifies the changelog entries for the specific version you want to compile.
 - **inputDir** (optional) – The directory where the `logchange-config.yml` file is located, defaulting to the `changelog` directory.
@@ -321,8 +323,6 @@ Each project should be configured with its:
 ## TODO:
 
 - add command to create archive-X.md from selected directory
-- add javadocs
-- support  `unreleased*` directories names like `unreleased-1.1`
 - Create Docker image with this tool, that will be use in CI/CD Tool, so that not only java projects will be able to use
   it.
 
