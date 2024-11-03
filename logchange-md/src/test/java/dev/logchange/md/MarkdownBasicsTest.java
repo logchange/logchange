@@ -18,6 +18,16 @@ class MarkdownBasicsTest {
     }
 
     @Test
+    public void shouldConvertObjectToBoldText() {
+        // when-then
+        assertEquals("**null**", MarkdownBasics.bold(null));
+        assertEquals("**true**", MarkdownBasics.bold(true));
+        assertEquals("**9223372036854775807**", MarkdownBasics.bold(9223372036854775807L));
+        assertEquals("**[orange, banana, apple]**", MarkdownBasics.bold(Arrays.asList("orange", "banana", "apple")));
+    }
+
+
+    @Test
     public void shouldConvertObjectToCode() {
         // when-then
         assertEquals("`null`", MarkdownBasics.code(null));

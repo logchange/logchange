@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.exc.ValueInstantiationException;
 import dev.logchange.core.domain.changelog.model.entry.*;
 import dev.logchange.core.format.yml.ObjectMapperProvider;
 import lombok.*;
-import lombok.extern.java.Log;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.InputStream;
 import java.util.Collections;
@@ -17,8 +17,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import org.apache.commons.lang3.tuple.Pair;
 
 @Data
 @Builder
@@ -29,7 +27,6 @@ public class YMLChangelogEntry {
     private static final String YML_HEADING = "# This file is used by logchange tool to generate CHANGELOG.md \uD83C\uDF33 \uD83E\uDE93 => \uD83E\uDEB5 \n" +
             "# Visit https://github.com/logchange/logchange and leave a star \uD83C\uDF1F \n" +
             "# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️\n";
-
 
     @JsonProperty(index = 0)
     public String title;
@@ -88,6 +85,19 @@ public class YMLChangelogEntry {
         return res;
     }
 
+    public static YMLChangelogEntry of(ChangelogEntry entry) {
+        return YMLChangelogEntry.builder()
+                .title(entry.getTitle().getValue())
+                .authors(entry.getAuthors().stream().map(YMLChangelogEntryAuthor::of).collect(Collectors.toList()))
+                .mergeRequests(entry.getMergeRequests().stream().map(ChangelogEntryMergeRequest::getValue).collect(Collectors.toList()))
+                .issues(entry.getIssues())
+                .links(entry.getLinks().stream().map(YMLChangelogEntryLink::of).collect(Collectors.toList()))
+                .type(YMLChangelogEntryType.of(entry.getType()))
+                .importantNotes(entry.getImportantNotes().stream().map(ChangelogEntryImportantNote::getValue).collect(Collectors.toList()))
+                .configurations(entry.getConfigurations().stream().map(YMLChangelogEntryConfiguration::of).collect(Collectors.toList()))
+                .build();
+    }
+
     @SneakyThrows
     public String toYMLString() {
         return YML_HEADING + ObjectMapperProvider.get()
@@ -100,7 +110,6 @@ public class YMLChangelogEntry {
     }
 
     public ChangelogEntry to() {
-
         return ChangelogEntry.builder()
                 .title(ChangelogEntryTitle.of(title))
                 .type(type.to())
@@ -151,11 +160,13 @@ public class YMLChangelogEntry {
         }
     }
 
-    private List<String> importantNotes() {
+    private List<ChangelogEntryImportantNote> importantNotes() {
         if (importantNotes == null) {
             return Collections.emptyList();
         } else {
-            return importantNotes;
+            return importantNotes.stream()
+                    .map(ChangelogEntryImportantNote::of)
+                    .collect(Collectors.toList());
         }
     }
 
@@ -167,18 +178,5 @@ public class YMLChangelogEntry {
                     .map(YMLChangelogEntryConfiguration::to)
                     .collect(Collectors.toList());
         }
-    }
-
-    public static YMLChangelogEntry of(ChangelogEntry entry) {
-        return YMLChangelogEntry.builder()
-                .title(entry.getTitle().getValue())
-                .authors(entry.getAuthors().stream().map(YMLChangelogEntryAuthor::of).collect(Collectors.toList()))
-                .mergeRequests(entry.getMergeRequests().stream().map(ChangelogEntryMergeRequest::getValue).collect(Collectors.toList()))
-                .issues(entry.getIssues())
-                .links(entry.getLinks().stream().map(YMLChangelogEntryLink::of).collect(Collectors.toList()))
-                .type(YMLChangelogEntryType.of(entry.getType()))
-                .importantNotes(entry.getImportantNotes())
-                .configurations(entry.getConfigurations().stream().map(YMLChangelogEntryConfiguration::of).collect(Collectors.toList()))
-                .build();
     }
 }

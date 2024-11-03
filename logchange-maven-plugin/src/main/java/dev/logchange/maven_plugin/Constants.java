@@ -15,10 +15,13 @@ public class Constants {
     public static final String LINT_COMMAND = "lint";
     public static final String ADD_COMMAND = "add";
     public static final String RELEASE_COMMAND = "release";
+    public static final String AGGREGATE_COMMAND = "aggregate";
+
 
     public static final String INPUT_DIR_MVN_PROPERTY = "inputDir";
     public static final String OUTPUT_FILE_MVN_PROPERTY = "outputFile";
     public static final String UNRELEASED_VERSION_DIR_MVN_PROPERTY = "unreleasedVersionDir";
+    public static final String AGGREGATE_VERSION_MVN_PROPERTY = "aggregateVersion";
     public static final String FILENAME_MVN_PROPERTY = "fileName";
     public static final String EMPTY_MVN_PROPERTY = "empty";
 

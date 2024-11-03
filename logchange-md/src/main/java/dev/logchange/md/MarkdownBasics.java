@@ -13,6 +13,16 @@ public class MarkdownBasics {
     }
 
     /**
+     * Formats the string representation of the Object argument with a double asterisk sign prefix and suffix: **
+     *
+     * @param value {@code Object}
+     * @return the value of value.toString() with backtick sing affixes, for example: <code>**text**</code>.
+     */
+    public static String bold(Object value) {
+        return "**" + value + "**";
+    }
+
+    /**
      * Formats the string representation of the Object argument with a backtick sign prefix and suffix: `
      *
      * @param value {@code Object}
