@@ -42,3 +42,9 @@ out/
 # IPython
 profile_default/
 ipython_config.py
+
+### Mac OS ###
+.DS_Store
+
+### Micronaut Framework ###
+.micronaut/
