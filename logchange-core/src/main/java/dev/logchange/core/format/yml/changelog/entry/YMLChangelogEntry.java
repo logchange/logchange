@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.exc.ValueInstantiationException;
 import dev.logchange.core.domain.changelog.model.entry.*;
 import dev.logchange.core.format.yml.ObjectMapperProvider;
 import lombok.*;
@@ -73,8 +72,8 @@ public class YMLChangelogEntry {
         YMLChangelogEntry res = null;
         try {
             res = mapper.readValue(input, YMLChangelogEntry.class);
-        } catch (ValueInstantiationException e) {
-            String msg = ((IllegalArgumentException) e.getCause()).getMessage();
+        } catch (Exception e) {
+            String msg = (e.getCause() != null) ? e.getCause().getMessage() : e.getMessage();
             throw new YMLChangelogInvalidConfigValuesException(path, Collections.singleton(msg));
         }
 
