@@ -6,5 +6,5 @@ authors:
   - nick: witx98
     url: https://github.com/witx98
 merge_requests:
-  -
+  - 343
 type: fixed # [added/changed/deprecated/removed/fixed/security/dependency_update/other]
