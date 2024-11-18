@@ -1,0 +1,8 @@
+# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵 
+# Visit https://github.com/logchange/logchange and leave a star 🌟 
+# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
+title: Upgraded org.apache.maven.plugins:maven-javadoc-plugin from 3.10.1 to 3.11.1
+authors:
+  - nick: marwin1991
+type: dependency_update
+
