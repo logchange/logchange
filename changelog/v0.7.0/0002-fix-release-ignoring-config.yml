@@ -1,0 +1,10 @@
+title: Fix releasing new version, when release used, generated files was created without config.
+authors:
+  - name: Peter
+    nick: marwin1991
+    url: https://github.com/marwin1991
+type: fixed # [added/changed/deprecated/removed/fixed/security/dependency_update/other]
+issues:
+  - 36
+merge_requests:
+  - 37

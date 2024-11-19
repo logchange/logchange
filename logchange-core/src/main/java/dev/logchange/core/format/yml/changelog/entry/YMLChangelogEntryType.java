@@ -1,10 +1,15 @@
 package dev.logchange.core.format.yml.changelog.entry;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.extern.java.Log;
 
-@Getter
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+@Log
 @AllArgsConstructor
 public enum YMLChangelogEntryType {
 
@@ -14,7 +19,7 @@ public enum YMLChangelogEntryType {
     REMOVED("removed"),
     FIXED("fixed"),
     SECURITY("security"),
-
+    DEPENDENCY_UPDATE("dependency_update"),
     OTHER("other");
 
     private final String type;
@@ -33,10 +38,14 @@ public enum YMLChangelogEntryType {
                 return YMLChangelogEntryType.FIXED;
             case SECURITY:
                 return YMLChangelogEntryType.SECURITY;
+            case DEPENDENCY_UPDATE:
+                return YMLChangelogEntryType.DEPENDENCY_UPDATE;
             case OTHER:
                 return YMLChangelogEntryType.OTHER;
             default:
-                throw new IllegalArgumentException("Converting ChangelogEntryType failed");
+                String message = "Converting YMLChangelogEntryType failed";
+                log.severe(message);
+                throw new IllegalArgumentException(message);
         }
     }
 
@@ -54,11 +63,33 @@ public enum YMLChangelogEntryType {
                 return ChangelogEntryType.FIXED;
             case SECURITY:
                 return ChangelogEntryType.SECURITY;
+            case DEPENDENCY_UPDATE:
+                return ChangelogEntryType.DEPENDENCY_UPDATE;
             case OTHER:
                 return ChangelogEntryType.OTHER;
             default:
-                throw new IllegalArgumentException("Converting ChangelogEntryType failed");
+                String message = "Converting ChangelogEntryType failed";
+                log.severe(message);
+                throw new IllegalArgumentException(message);
         }
     }
 
+    @JsonCreator
+    public static YMLChangelogEntryType of(String name) {
+        return Arrays.stream(values())
+                .filter(value -> value.getType().equals(name))
+                .findFirst()
+                .orElseThrow(() -> {
+                    String availableType = Arrays.stream(YMLChangelogEntryType.values()).map(YMLChangelogEntryType::getType).collect(Collectors.joining(", "));
+                    String message = "Cannot match YMLChangelogEntryType for string: " + name + " - Available types: [" + availableType + "].";
+                    log.severe(message);
+                    return new IllegalArgumentException(message);
+                });
+
+    }
+
+    @JsonValue
+    public String getType() {
+        return type;
+    }
 }

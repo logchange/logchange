@@ -4,7 +4,7 @@ import dev.logchange.core.domain.changelog.model.version.Version;
 import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.format.md.MD;
 import dev.logchange.core.format.md.changelog.Configurable;
-import net.steppschuh.markdowngenerator.text.heading.Heading;
+import dev.logchange.md.MarkdownBasics;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringSubstitutor;
 
@@ -34,7 +34,7 @@ class MDChangelogVersionHeading extends Configurable implements MD {
         return getVersionHeading() + "\n\n";
     }
 
-    private Heading getVersionHeading() {
+    private String getVersionHeading() {
         Map<String, String> valuesMap = new HashMap<>();
         if (version.isUnreleased()) {
             valuesMap.put("version", getConfig().getLabels().getUnreleased());
@@ -44,7 +44,7 @@ class MDChangelogVersionHeading extends Configurable implements MD {
         valuesMap.put("releaseData", getVersionDate());
 
         StringSubstitutor sub = new StringSubstitutor(valuesMap);
-        return new Heading(sub.replace(versionHeaderFormat), 2);
+        return MarkdownBasics.heading(sub.replace(versionHeaderFormat), 2);
     }
 
     private String getVersionDate() {

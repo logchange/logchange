@@ -4,11 +4,13 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.extern.java.Log;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.artifact.versioning.ComparableVersion;
 
 import java.util.Comparator;
 
+@Log
 @Getter
 @EqualsAndHashCode
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -19,7 +21,8 @@ public class Version implements Comparable<Version> {
 
     public static Version of(String version) {
         if (StringUtils.isBlank(version)) {
-            throw new IllegalArgumentException("Version cannot be black!");
+            log.severe("Version cannot be blank!");
+            throw new IllegalArgumentException("Version cannot be blank!");
         }
         return new Version(version);
     }

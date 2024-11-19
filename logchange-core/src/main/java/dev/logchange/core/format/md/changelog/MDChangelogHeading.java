@@ -1,15 +1,15 @@
 package dev.logchange.core.format.md.changelog;
 
-import dev.logchange.core.domain.changelog.model.ChangelogHeading;
+import dev.logchange.core.domain.config.model.Heading;
 import dev.logchange.core.format.md.MD;
-import net.steppschuh.markdowngenerator.text.Text;
+import dev.logchange.md.MarkdownBasics;
 import org.apache.commons.lang3.StringUtils;
 
 public class MDChangelogHeading implements MD {
 
-    private final ChangelogHeading heading;
+    private final Heading heading;
 
-    public MDChangelogHeading(ChangelogHeading heading) {
+    public MDChangelogHeading(Heading heading) {
         this.heading = heading;
     }
 
@@ -23,6 +23,6 @@ public class MDChangelogHeading implements MD {
             return StringUtils.EMPTY;
         }
 
-        return new Text(heading.getValue()) + "\n";
+        return MarkdownBasics.text(heading.getValue()) + "\n\n\n";
     }
 }

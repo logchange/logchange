@@ -45,8 +45,8 @@ class EmptyChangelogEntryProvider implements ChangelogEntryProvider {
         return Collections.singletonList(ChangelogEntryAuthor.of("Gal Anonim", "GaLaNo", ""));
     }
 
-    private List<String> getNotes() {
-        return Collections.singletonList("Phasellus euismod placerat ullamcorper. Nam a vehicula sapien, at accumsan purus.");
+    private List<ChangelogEntryImportantNote> getNotes() {
+        return Collections.singletonList(ChangelogEntryImportantNote.of("Phasellus euismod placerat ullamcorper. Nam a vehicula sapien, at accumsan purus."));
     }
 
     private List<ChangelogEntryConfiguration> getConfigurations() {

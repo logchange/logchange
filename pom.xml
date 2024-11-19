@@ -4,7 +4,7 @@
 
     <groupId>dev.logchange</groupId>
     <artifactId>logchange</artifactId>
-    <version>0.7.0-SNAPSHOT</version>
+    <version>1.12.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -13,6 +13,7 @@
         <module>logchange-maven-plugin</module>
         <module>logchange-cli</module>
         <module>logchange-test-reports</module>
+        <module>logchange-md</module>
     </modules>
 
     <name>logchange</name>
@@ -43,19 +44,31 @@
         <tag>HEAD</tag>
     </scm>
 
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <lombok.version>1.18.22</lombok.version>
+        <lombok.version>1.18.36</lombok.version>
         <lombok-maven.version>1.18.22.0</lombok-maven.version>
 
+        <maven-changes.version>2.12.1</maven-changes.version>
+
         <!-- TESTS -->
-        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-        <junit-jupiter.version>5.7.1</junit-jupiter.version>
-        <assertj.version>3.23.1</assertj.version>
+        <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
+        <junit-jupiter.version>5.10.2</junit-jupiter.version>
+        <mockito-junit-jupiter.version>5.12.0</mockito-junit-jupiter.version>
+        <assertj.version>3.26.3</assertj.version>
+        <pitest-maven.version>1.17.1</pitest-maven.version>
+        <pitest-junit5-plugin.version>1.2.1</pitest-junit5-plugin.version>
     </properties>
 
     <distributionManagement>
@@ -70,11 +83,24 @@
     </distributionManagement>
 
     <dependencies>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-changes-plugin</artifactId>
+            <version>${maven-changes.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- TESTS -->
@@ -94,6 +120,17 @@
 
     <build>
         <plugins>
+            <!--
+            Cannot build project if there is circular dependency.
+            But sometimes we want test this plugin so to do that build and uncomment
+            then you can use snapshot version during local testing.
+            -->
+            <!--            <plugin>-->
+            <!--                <groupId>dev.logchange</groupId>-->
+            <!--                <artifactId>logchange-maven-plugin</artifactId>-->
+            <!--                <version>1.1.0-SNAPSHOT</version>-->
+            <!--                <inherited>false</inherited> &lt;!&ndash; For multi module project &ndash;&gt;-->
+            <!--            </plugin>-->
             <plugin>
                 <artifactId>maven-release-plugin</artifactId>
                 <configuration>
@@ -104,7 +141,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.2.1</version>
+                <version>3.3.1</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -126,13 +163,15 @@
                         <plugin>
                             <groupId>org.pitest</groupId>
                             <artifactId>pitest-maven</artifactId>
-                            <version>1.7.3</version>
+                            <version>${pitest-maven.version}</version>
                             <configuration>
                                 <verbose>true</verbose>
                                 <threads>4</threads>
                                 <failWhenNoMutations>false</failWhenNoMutations>
                                 <exportLineCoverage>true</exportLineCoverage>
-                                <outputFormats><value>XML</value></outputFormats>
+                                <outputFormats>
+                                    <value>XML</value>
+                                </outputFormats>
                                 <timestampedReports>false</timestampedReports>
                             </configuration>
                             <!-- https://github.com/hcoles/pitest/issues/284 -->
@@ -141,7 +180,7 @@
                                 <dependency>
                                     <groupId>org.pitest</groupId>
                                     <artifactId>pitest-junit5-plugin</artifactId>
-                                    <version>0.15</version>
+                                    <version>${pitest-junit5-plugin.version}</version>
                                 </dependency>
                             </dependencies>
                             <executions>
@@ -161,10 +200,11 @@
             <id>ci-cd</id>
             <build>
                 <plugins>
+                    
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.0.1</version>
+                        <version>3.2.7</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -183,10 +223,11 @@
                             </execution>
                         </executions>
                     </plugin>
+                    
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.4.0</version>
+                        <version>3.11.1</version>
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
@@ -196,6 +237,20 @@
                             </execution>
                         </executions>
                     </plugin>
+                    
+                    <plugin>
+                        <!-- https://central.sonatype.org/publish/publish-maven/#nexus-staging-maven-plugin-for-deployment-and-release -->
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.7.0</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                    
                 </plugins>
             </build>
         </profile>

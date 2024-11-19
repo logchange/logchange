@@ -1,6 +1,9 @@
 package dev.logchange.core.infrastructure.persistance.changelog;
 
 import dev.logchange.core.application.changelog.repository.ChangelogRepository;
+import dev.logchange.core.application.file.query.FileQuery;
+import dev.logchange.core.application.file.repository.FileWriter;
+import dev.logchange.core.application.file.repository.XmlFileWriter;
 import dev.logchange.core.domain.changelog.model.Changelog;
 import dev.logchange.core.domain.changelog.model.archive.ChangelogArchive;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
@@ -10,42 +13,60 @@ import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.format.md.changelog.MDChangelog;
 import dev.logchange.core.format.release_date.ReleaseDate;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
+import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryConfigException;
+import dev.logchange.core.format.yml.config.YMLChangelogException;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
+import org.apache.maven.plugins.changes.model.ChangesDocument;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
+@Log
+@RequiredArgsConstructor
 public class FileChangelogRepository implements ChangelogRepository {
 
     private final File inputDirectory;
-    private final File outputFile;
-
     private final Config config;
 
-    public FileChangelogRepository(File inputDirectory, File outputFile, Config config) {
-        this.inputDirectory = inputDirectory;
-        this.outputFile = outputFile;
-        this.config = config;
-    }
+    private final FileQuery reader;
+    private final FileWriter writer;
+    private final XmlFileWriter xmlWriter;
 
     @Override
-    public Changelog find() {
-        List<File> inputFiles = getInputFiles();
-
+    public Changelog findMarkdown() {
         List<ChangelogVersion> versions = new LinkedList<>();
         List<ChangelogArchive> archives = new LinkedList<>();
 
-        for (File file : inputFiles) {
+        this.reader.readFiles(inputDirectory).forEach(file -> {
             if (isVersionDirectory(file)) {
                 versions.add(getChangelogVersion(file));
             }
             if (isArchive(file)) {
                 archives.add(getChangelogArchive(file));
             }
-        }
+        });
+        versions.sort(Collections.reverseOrder());
+        return Changelog.of(versions, archives);
+    }
+
+    @Override
+    public Changelog findXML() {
+        List<ChangelogVersion> versions = new LinkedList<>();
+        List<ChangelogArchive> archives = new LinkedList<>();
+
+        this.reader.readFiles(inputDirectory).forEach(file -> {
+            if (isVersionDirectory(file)) {
+                versions.add(getChangelogVersion(file));
+            }
+            if (isXmlArchive(file)) {
+                archives.add(getChangelogArchive(file));
+            }
+        });
         versions.sort(Collections.reverseOrder());
         return Changelog.of(versions, archives);
     }
@@ -53,27 +74,12 @@ public class FileChangelogRepository implements ChangelogRepository {
     @Override
     public void save(Changelog changelog) {
         String md = new MDChangelog(config, changelog).toMD();
-
-        try (OutputStream os = Files.newOutputStream(outputFile.toPath());
-             PrintWriter out = new PrintWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8))) {
-
-            out.println(md);
-
-        } catch (IOException e) {
-            throw new IllegalArgumentException("Could not save changelog to file: " + outputFile + " because: " + e.getMessage());
-        }
+        writer.write(md);
     }
 
-    /**
-     * Returns: The returning list of files is not sorted.
-     */
-    private List<File> getInputFiles() {
-        File[] files = inputDirectory.listFiles();
-
-        if (files == null) {
-            return Collections.emptyList();
-        }
-        return Arrays.asList(files);
+    @Override
+    public void saveXML(ChangesDocument changesDocument) {
+        this.xmlWriter.writeXml(changesDocument);
     }
 
     private boolean isVersionDirectory(File file) {
@@ -82,6 +88,10 @@ public class FileChangelogRepository implements ChangelogRepository {
 
     private boolean isArchive(File file) {
         return file.getName().startsWith("archive");
+    }
+
+    private boolean isXmlArchive(File file) {
+        return file.getName().startsWith("archive") && file.getName().endsWith(".xml");
     }
 
     private ChangelogVersion getChangelogVersion(File versionDirectory) {
@@ -99,7 +109,7 @@ public class FileChangelogRepository implements ChangelogRepository {
         try {
             return ChangelogArchive.of(Files.readAllLines(file.toPath(), StandardCharsets.UTF_8));
         } catch (IOException e) {
-            e.printStackTrace();
+            log.severe("Error while getting changelog archive from file: " + e.getMessage());
             throw new IllegalStateException(e.getMessage());
         }
     }
@@ -109,32 +119,25 @@ public class FileChangelogRepository implements ChangelogRepository {
     }
 
     private List<ChangelogEntry> getEntries(File versionDirectory) {
-        return getEntriesFiles(versionDirectory)
-                .sequential()
-                .map(file -> YMLChangelogEntry.of(getEntryInputStream(file)))
+        List<Exception> exceptions = new ArrayList<>();
+
+        List<ChangelogEntry> entries = reader.readYmlFiles(versionDirectory)
+                .map((file) -> {
+                    try {
+                        return YMLChangelogEntry.of(reader.readFileContent(file), file.getPath());
+                    } catch (YMLChangelogEntryConfigException e) {
+                        exceptions.add(e);
+                        return null;
+                    }
+                })
+                .filter(Objects::nonNull)
                 .map(YMLChangelogEntry::to)
                 .collect(Collectors.toList());
-    }
 
-    private Stream<File> getEntriesFiles(File versionDirectory) {
-        File[] entriesFiles = versionDirectory.listFiles();
-
-        if (entriesFiles == null) {
-            return Stream.empty();
+        if (!exceptions.isEmpty()) {
+            throw new YMLChangelogException(exceptions);
         }
 
-        return Arrays.stream(entriesFiles)
-                .filter(file -> file.getName().contains(".yml") || file.getName().contains(".yaml"))
-                .sorted((f1, f2) -> Comparator.comparing(File::getName)
-                        .compare(f1, f2));
+        return entries;
     }
-
-    private InputStream getEntryInputStream(File entryFile) {
-        try {
-            return new FileInputStream(entryFile);
-        } catch (FileNotFoundException e) {
-            throw new IllegalArgumentException("Cannot find entry file: " + entryFile.getName());
-        }
-    }
-
 }

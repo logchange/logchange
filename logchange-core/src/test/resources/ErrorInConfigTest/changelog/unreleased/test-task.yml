@@ -1,0 +1,24 @@
+title: Test title 1
+authorss:
+  - nick: marwin1991
+    url: https://github.com/marwin1991
+merge_requestss:
+  - 1
+  - 2
+issues:
+  - 1
+links: # links to external systems, like redmine something else
+  - name: TASK_NUMBER
+    url: https://www.google.pl
+type: fixed # [added/changed/deprecated/removed/fixed/security/dependency_update/other]
+important_notes:
+  - Update style.css on server during instalation 1
+  - configuration
+  - configuration
+configurations: # information about changes in available application configurations
+  - type: database parameter
+    action: add # [add/update/delete]
+    key: simpleparam.name.enabled
+    default_value: true
+    description: Enables displying feature name 1
+    more_info: "You can put more information here, any text f.e !1 #1, even [link test](https://google.com)" #if you want to use # sign, yaml value must be a string inside ""

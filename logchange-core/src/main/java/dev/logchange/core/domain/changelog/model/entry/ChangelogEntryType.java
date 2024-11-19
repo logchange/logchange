@@ -13,7 +13,8 @@ public enum ChangelogEntryType {
     REMOVED("removed", 4),
     FIXED("fixed", 5),
     SECURITY("security", 6),
-    OTHER("other", 7);
+    DEPENDENCY_UPDATE("dependency_update", 7),
+    OTHER("other", 8);
 
 
     @Deprecated
@@ -23,6 +24,15 @@ public enum ChangelogEntryType {
     public static ChangelogEntryType from(String orderNumber) {
         for (ChangelogEntryType type : values()) {
             if (type.getOrder().toString().equals(orderNumber)) {
+                return type;
+            }
+        }
+        throw new IllegalArgumentException("Incorrect type!");
+    }
+
+    public static ChangelogEntryType fromNameIgnoreCase(String name) {
+        for (ChangelogEntryType type : values()) {
+            if (type.name().equalsIgnoreCase(name)) {
                 return type;
             }
         }

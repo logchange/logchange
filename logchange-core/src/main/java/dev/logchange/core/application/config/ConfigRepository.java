@@ -6,4 +6,6 @@ public interface ConfigRepository {
 
     Config find();
 
+    void save(Config config);
+
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <body>
+        <release version="unreleased" date="unreleased">
+            <action dev="marwin1991" type="fix">Test title 1</action>
+            <action dev="marwin1991" type="add">Test title 2</action>
+        </release>
+    </body>
+</document>
+

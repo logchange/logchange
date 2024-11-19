@@ -1,9 +1,9 @@
 title: Fixed problem with 'release' maven command that was failing when `logchange-config.yml` missing.
 authors:
-  - name: Piotr
+  - name: Peter
     nick: marwin1991
     url: https://github.com/marwin1991
-type: fixed # [added/changed/deprecated/removed/fixed/security/other]
+type: fixed # [added/changed/deprecated/removed/fixed/security/dependency_update/other]
 issues:
   - 28
 merge_requests:

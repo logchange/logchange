@@ -1,10 +1,14 @@
 package dev.logchange.core.format.yml.changelog.entry;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryConfigurationAction;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.extern.java.Log;
 
-@Getter
+import java.util.Arrays;
+
+@Log
 @AllArgsConstructor
 public enum YMLChangelogEntryConfigurationAction {
 
@@ -23,7 +27,9 @@ public enum YMLChangelogEntryConfigurationAction {
             case DELETE:
                 return ChangelogEntryConfigurationAction.DELETE;
             default:
-                throw new IllegalArgumentException("Converting ChangelogEntryConfigurationAction failed");
+                String message = "Converting ChangelogEntryConfigurationAction failed";
+                log.severe(message);
+                throw new IllegalArgumentException(message);
         }
     }
 
@@ -36,8 +42,27 @@ public enum YMLChangelogEntryConfigurationAction {
             case DELETE:
                 return YMLChangelogEntryConfigurationAction.DELETE;
             default:
-                throw new IllegalArgumentException("Converting ChangelogEntryConfigurationAction failed");
+                String message = "Converting YMLChangelogEntryConfigurationAction failed";
+                log.severe(message);
+                throw new IllegalArgumentException(message);
         }
     }
 
+    @JsonCreator
+    public static YMLChangelogEntryConfigurationAction of(String name) {
+        return Arrays.stream(values())
+                .filter(value -> value.getAction().equals(name))
+                .findFirst()
+                .orElseThrow(() -> {
+                    String message = "Cannot match YMLChangelogEntryConfigurationAction for string: " + name;
+                    log.severe(message);
+                    return new IllegalArgumentException(message);
+                });
+    }
+
+
+    @JsonValue
+    public String getAction() {
+        return action;
+    }
 }

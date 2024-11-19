@@ -2,6 +2,11 @@
 <!-- noinspection -->
 <!-- Prevents auto format, for JetBrains IDE File > Settings > Editor > Code Style (Formatter Tab) > Turn formatter on/off with markers in code comments  -->
 
+<!-- This file is automatically generate by logchange tool 🌳 🪓 => 🪵 -->
+<!-- Visit https://github.com/logchange/logchange and leave a star 🌟 -->
+<!-- !!! ⚠️ DO NOT MODIFY THIS FILE, YOUR CHANGES WILL BE LOST ⚠️ !!! -->
+
+
 [niewydane]
 -----------
 
@@ -25,6 +30,10 @@
 ### Naprawiono (1 zmiana)
 
 - Test title 1 !1 !2 #1 [TASK_NUMBER](https://www.google.pl) (@marwin1991 [LINK](https://github.com/marwin1991))
+
+### Aktualizacje zależności (1 zmiana)
+
+- Test title 6 ([Piotr](https://github.com/marwin1991) @marwin1991)
 
 ### Inne (2 zmian/y)
 
