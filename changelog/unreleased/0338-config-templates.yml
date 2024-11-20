@@ -1,7 +1,7 @@
 # This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵
 # Visit https://github.com/logchange/logchange and leave a star 🌟
 # More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
-title: Ability to configure the entry format in the Changelog.md file.
+title: Added ability to configure the entry format in the Changelog.md file.
 authors:
   - name: Mateusz Witkowski
     nick: witx98
