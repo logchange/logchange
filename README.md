@@ -199,6 +199,8 @@ changelog:
         update: Updated
       with_default_value: with default value
       description: Description
+  templates:
+    entry: "${prefix}${title} ${merge_requests} ${issues} ${links} ${authors}"
 aggregates:
   projects:
     - name: hofund
