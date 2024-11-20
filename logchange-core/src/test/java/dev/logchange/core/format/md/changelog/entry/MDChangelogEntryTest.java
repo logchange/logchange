@@ -1,6 +1,7 @@
 package dev.logchange.core.format.md.changelog.entry;
 
 import dev.logchange.core.domain.changelog.model.entry.*;
+import dev.logchange.core.domain.config.model.Config;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
@@ -15,7 +16,8 @@ class MDChangelogEntryTest {
         ChangelogEntry entry = getSomeEntry(null);
 
         //when:
-        String result = new MDChangelogEntry(entry).toString();
+
+        String result = new MDChangelogEntry(entry, Config.EMPTY).toString();
 
         //then:
         assertEquals("- Some Title !567 #890 [Some link](https//google.com) ([Some Name](https://nick.name) @Nick)", result);
@@ -27,8 +29,8 @@ class MDChangelogEntryTest {
         ChangelogEntry entry = getSomeEntry(null);
 
         //when:
-        String result1 = new MDChangelogEntry(entry).toString();
-        String result2 = new MDChangelogEntry(entry).toMD();
+        String result1 = new MDChangelogEntry(entry, Config.EMPTY).toString();
+        String result2 = new MDChangelogEntry(entry, Config.EMPTY).toMD();
 
         //then:
         assertEquals(result1, result2);
@@ -40,7 +42,7 @@ class MDChangelogEntryTest {
         ChangelogEntry entry = getSomeEntry("Some prefix");
 
         //when:
-        String result = new MDChangelogEntry(entry).toString();
+        String result = new MDChangelogEntry(entry, Config.EMPTY).toString();
 
         //then:
         assertEquals("- **Some prefix** - Some Title !567 #890 [Some link](https//google.com) ([Some Name](https://nick.name) @Nick)", result);
@@ -52,8 +54,8 @@ class MDChangelogEntryTest {
         ChangelogEntry entry = getSomeEntry("Some prefix");
 
         //when:
-        String result1 = new MDChangelogEntry(entry).toString();
-        String result2 = new MDChangelogEntry(entry).toMD();
+        String result1 = new MDChangelogEntry(entry, Config.EMPTY).toString();
+        String result2 = new MDChangelogEntry(entry, Config.EMPTY).toMD();
 
         //then:
         assertEquals(result1, result2);
