@@ -5,6 +5,10 @@ import dev.logchange.core.application.changelog.repository.VersionSummaryReposit
 import dev.logchange.core.application.changelog.service.generate.GenerateChangelogService;
 import dev.logchange.core.domain.changelog.command.GenerateChangelogUseCase;
 import dev.logchange.core.domain.config.model.Config;
+import dev.logchange.core.domain.config.model.Heading;
+import dev.logchange.core.domain.config.model.aggregate.Aggregates;
+import dev.logchange.core.domain.config.model.labels.*;
+import dev.logchange.core.domain.config.model.templates.Templates;
 import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogRepository;
 import dev.logchange.core.infrastructure.persistance.changelog.FileVersionSummaryRepository;
 import dev.logchange.core.infrastructure.persistance.file.FileRepository;
@@ -27,7 +31,6 @@ public class TwoConfigurationTypesIntegrationTest {
     void init() throws IOException {
         new File(PATH + "CHANGELOG.md").createNewFile();
     }
-
 
     @AfterEach
     void cleanup() {
@@ -54,5 +57,70 @@ public class TwoConfigurationTypesIntegrationTest {
         String expectedContent = FileUtils.fileRead(expectedChangelogOutputFile, "UTF-8");
         String actualContent = FileUtils.fileRead(changelogOutputFile, "UTF-8");
         assertThat(actualContent).isEqualToIgnoringNewLines(expectedContent);
+    }
+
+    @Test
+    void shouldMatchExpectedChangelogWithCustomConfiguration() throws IOException {
+        //given:
+        File changelogInputDir = new File(PATH + "changelog");
+        File changelogOutputFile = new File(PATH + "CHANGELOG.md");
+        File expectedChangelogOutputFile = new File(PATH + "EXPECTED_CUSTOM_CHANGELOG.md");
+        Config config = prepareCustomConfig();
+
+        FileRepository fr = FileRepository.of(changelogOutputFile);
+        ChangelogRepository repository = new FileChangelogRepository(changelogInputDir, config, new FileReader(), fr, fr);
+        VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogInputDir, config);
+        GenerateChangelogUseCase generateChangelogUseCase = new GenerateChangelogService(repository, versionSummaryRepository);
+        GenerateChangelogUseCase.GenerateChangelogCommand command = GenerateChangelogUseCase.GenerateChangelogCommand.of();
+
+        //when:
+        generateChangelogUseCase.handle(command);
+
+        //then:
+        String expectedContent = FileUtils.fileRead(expectedChangelogOutputFile, "UTF-8");
+        String actualContent = FileUtils.fileRead(changelogOutputFile, "UTF-8");
+        assertThat(actualContent).isEqualToIgnoringNewLines(expectedContent);
+    }
+
+    private static Config prepareCustomConfig() {
+        TypesLabels typesLabels = TypesLabels.builder()
+                .numberOfChanges(NumberOfChangesLabels.builder()
+                        .singular("modification")
+                        .plural("modifications")
+                        .build())
+                .added("A")
+                .changed("C")
+                .deprecated("D")
+                .removed("R")
+                .fixed("F")
+                .security("F")
+                .dependencyUpdate("DU")
+                .other("O")
+                .build();
+
+        ConfigurationLabels configurations = ConfigurationLabels.builder()
+                .heading("Configuration modifications")
+                .type("Kind")
+                .actions(ConfigurationActionLabels.builder()
+                        .add("Introduced")
+                        .update("Adjusted")
+                        .delete("Removed")
+                        .build())
+                .withDefaultValue("with predefined value")
+                .description("Summary")
+                .build();
+
+
+        return Config.builder()
+                .heading(Heading.of("My heading"))
+                .labels(Labels.builder()
+                        .unreleased("Not released")
+                        .importantNotes("Important remarks")
+                        .types(typesLabels)
+                        .configuration(configurations)
+                        .build())
+                .templates(Templates.builder().entryFormat("${title} ${issues} ${merge_requests}").build())
+                .aggregates(Aggregates.EMPTY)
+                .build();
     }
 }
