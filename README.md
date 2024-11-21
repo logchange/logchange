@@ -213,6 +213,16 @@ aggregates:
       input_dir: changelog
 ```
 
+### Templates
+
+The `templates` section in the `logchange-config.yml` configuration file allows you to customize the format of entries in the `changelog.md` file. Individual elements of an entry can include:  
+- `${prefix}` => `**Project_name** -` (used only with the `aggregate` command and specifies the project name from which the entry was pulled)  
+- `${title}` => `Description of the change`
+- `${merge_requests}` => `!1000`
+- `${issues}` => `#1234`
+- `${links}` => `[logchange](https://github.com/logchange/logchange)`
+- `${authors}` => `([Logchange team](https://github.com/orgs/logchange/teams/logchange-main-team) @logchange-main-team)`
+
 ### Generating `CHANGELOG.md`
 
 Everytime you want to generate `CHANGELOG.md` you can use command:
