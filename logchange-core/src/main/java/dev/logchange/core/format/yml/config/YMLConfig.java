@@ -8,6 +8,7 @@ import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.domain.config.model.Heading;
 import dev.logchange.core.domain.config.model.aggregate.Aggregates;
 import dev.logchange.core.domain.config.model.labels.Labels;
+import dev.logchange.core.domain.config.model.templates.Templates;
 import dev.logchange.core.format.yml.ObjectMapperProvider;
 import dev.logchange.core.format.yml.config.aggregate.YMLAggregates;
 import lombok.AllArgsConstructor;
@@ -70,6 +71,7 @@ public class YMLConfig {
         return Config.builder()
                 .heading(toHeading())
                 .labels(toLabels())
+                .templates(toTemplates())
                 .aggregates(toAggregates())
                 .build();
     }
@@ -88,6 +90,13 @@ public class YMLConfig {
         } else {
             return changelog.toLabels();
         }
+    }
+
+    private Templates toTemplates() {
+        if (changelog == null) {
+            return Templates.EMPTY;
+        }
+        return changelog.toTemplates();
     }
 
 

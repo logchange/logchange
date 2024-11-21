@@ -41,7 +41,7 @@ class MDChangelogEntriesGroup extends Configurable implements MD {
         stringBuilder.append(getTypeHeading()).append("\n").append("\n");
 
         for (ChangelogEntry entry : entries) {
-            stringBuilder.append(new MDChangelogEntry(entry)).append("\n");
+            stringBuilder.append(new MDChangelogEntry(entry, getConfig())).append("\n");
         }
 
         return stringBuilder.append("\n").toString();

@@ -1,16 +1,16 @@
 package dev.logchange.core.format.md.changelog.entry;
 
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
+import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.format.md.MD;
+import dev.logchange.core.format.md.changelog.Configurable;
 import dev.logchange.md.list.MarkdownLists;
 import org.apache.commons.text.StringSubstitutor;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class MDChangelogEntry implements MD {
-
-    private static final String entryFormat = "${prefix}${title} ${merge_requests} ${issues} ${links} ${authors}";
+public class MDChangelogEntry extends Configurable implements MD {
 
     private final ChangelogEntry entry;
 
@@ -20,7 +20,8 @@ public class MDChangelogEntry implements MD {
     private final MDChangelogEntryLinks mdLinks;
     private final MDChangelogEntryAuthors mdAuthors;
 
-    public MDChangelogEntry(ChangelogEntry entry) {
+    public MDChangelogEntry(ChangelogEntry entry, Config config) {
+        super(config);
         this.entry = entry;
         this.prefix = MDChangelogEntryPrefix.of(entry.getPrefix());
         this.mdMergeRequests = new MDChangelogEntryMergeRequests(entry.getMergeRequests());
@@ -44,6 +45,7 @@ public class MDChangelogEntry implements MD {
         valuesMap.put("authors", mdAuthors.toMD());
 
         StringSubstitutor sub = new StringSubstitutor(valuesMap);
-        return sub.replace(entryFormat).replaceAll("\\s{2,}", " ");
+        return sub.replace(getConfig().getTemplates().getEntryFormat())
+                .replaceAll("\\s{2,}", " ");
     }
 }
