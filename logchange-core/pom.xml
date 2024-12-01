@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -9,6 +10,12 @@
     </parent>
 
     <artifactId>logchange-core</artifactId>
+
+    <description>
+        A core library responsible for processing changelogs. It enables reading, writing, and analyzing change data in
+        a format compatible with logchange. It includes tools for validating and processing changelog files, as well as
+        mechanisms for managing their structure.
+    </description>
 
     <properties>
         <jackson.version>2.18.2</jackson.version>
@@ -31,7 +38,7 @@
             <artifactId>jackson-dataformat-yaml</artifactId>
             <version>${jackson.version}</version>
         </dependency>
-        
+
         <dependency>
             <groupId>dev.logchange</groupId>
             <artifactId>logchange-md</artifactId>
