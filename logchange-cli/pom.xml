@@ -61,6 +61,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>dev.logchange</groupId>
+            <artifactId>logchange-commands</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-inject</artifactId>
         </dependency>

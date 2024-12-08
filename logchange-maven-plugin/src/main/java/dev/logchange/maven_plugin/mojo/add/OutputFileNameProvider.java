@@ -5,8 +5,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.codehaus.plexus.components.interactivity.Prompter;
 import org.codehaus.plexus.components.interactivity.PrompterException;
 
-import static dev.logchange.maven_plugin.Constants.EMPTY_MVN_PROPERTY;
-import static dev.logchange.maven_plugin.Constants.FILENAME_MVN_PROPERTY;
+import static dev.logchange.commands.Constants.EMPTY_MVN_PROPERTY;
+import static dev.logchange.commands.Constants.FILENAME_MVN_PROPERTY;
 
 @RequiredArgsConstructor
 public class OutputFileNameProvider {

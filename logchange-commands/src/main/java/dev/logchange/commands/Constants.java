@@ -1,4 +1,4 @@
-package dev.logchange.maven_plugin;
+package dev.logchange.commands;
 
 public class Constants {
 

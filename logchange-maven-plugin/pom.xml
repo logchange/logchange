@@ -28,7 +28,7 @@
     <dependencies>
         <dependency>
             <groupId>dev.logchange</groupId>
-            <artifactId>logchange-core</artifactId>
+            <artifactId>logchange-commands</artifactId>
             <version>${project.version}</version>
         </dependency>
 
