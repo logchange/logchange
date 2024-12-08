@@ -2,6 +2,11 @@
 <!-- noinspection -->
 <!-- Prevents auto format, for JetBrains IDE File > Settings > Editor > Code Style (Formatter Tab) > Turn formatter on/off with markers in code comments  -->
 
+<!-- This file is automatically generate by logchange tool 🌳 🪓 => 🪵 -->
+<!-- Visit https://github.com/logchange/logchange and leave a star 🌟 -->
+<!-- !!! ⚠️ DO NOT MODIFY THIS FILE, YOUR CHANGES WILL BE LOST ⚠️ !!! -->
+
+
 [1.0.11] - 2021-01-26
 ---------------------
 
@@ -32,7 +37,6 @@
 | Type: database parameter                                                                                                          |
 | --------------------------------------------------------------------------------------------------------------------------------- |
 | <ul><li>Added `aaa.some.value` with default value: `true`</li><li>Description: Enables displying feature name</li></ul>           |
-| <ul><li>Added `aaa.some.value` with default value: `true`</li><li>Description: Enables displying feature name</li></ul>           |
 | <ul><li>Added `simpleparam.name.enabled` with default value: `true`</li><li>Description: Enables displying feature name</li></ul> |
 | <ul><li>Added `simpleparam.name.enabled` with default value: `true`</li><li>Description: Enables displying feature name</li></ul> |
 | <ul><li>Added `simpleparam.name.enabled` with default value: `true`</li><li>Description: Enables displying feature name</li></ul> |
@@ -40,15 +44,8 @@
 | <ul><li>Updated `aaa.some.value` with default value: `true`</li><li>Description: Enables displying feature name</li></ul>         |
 | <ul><li>Deleted `aaa.some.value` with default value: `true`</li><li>Description: Enables displying feature name</li></ul>         |
 
-| Type: a docker-compose                                                                                                            |
-| --------------------------------------------------------------------------------------------------------------------------------- |
-| <ul><li>Added `aaa.some.value` with default value: `true`</li><li>Description: Enables displying feature name</li></ul>           |
-| <ul><li>Added `aaa.some.value` with default value: `true`</li><li>Description: Enables displying feature name</li></ul>           |
-| <ul><li>Added `simpleparam.name.enabled` with default value: `true`</li><li>Description: Enables displying feature name</li></ul> |
-| <ul><li>Added `simpleparam.name.enabled` with default value: `true`</li><li>Description: Enables displying feature name</li></ul> |
-| <ul><li>Added `simpleparam.name.enabled` with default value: `true`</li><li>Description: Enables displying feature name</li></ul> |
-| <ul><li>Added `simpleparam.name.enabled` with default value: `true`</li><li>Description: Enables displying feature name</li></ul> |
-| <ul><li>Updated `aaa.some.value` with default value: `true`</li><li>Description: Enables displying feature name</li></ul>         |
-| <ul><li>Deleted `aaa.some.value` with default value: `true`</li><li>Description: Enables displying feature name</li></ul>         |
+| Type: a docker-compose                                                                                                  |
+| ----------------------------------------------------------------------------------------------------------------------- |
+| <ul><li>Added `aaa.some.value` with default value: `true`</li><li>Description: Enables displying feature name</li></ul> |
 
 

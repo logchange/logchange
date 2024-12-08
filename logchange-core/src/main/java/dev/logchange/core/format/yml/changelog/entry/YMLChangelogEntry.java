@@ -1,19 +1,21 @@
 package dev.logchange.core.format.yml.changelog.entry;
 
-import de.beosign.snakeyamlanno.constructor.AnnotationAwareConstructor;
-import de.beosign.snakeyamlanno.property.YamlAnySetter;
-import de.beosign.snakeyamlanno.property.YamlProperty;
-import de.beosign.snakeyamlanno.representer.AnnotationAwareRepresenter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.logchange.core.domain.changelog.model.entry.*;
+import dev.logchange.core.format.yml.ObjectMapperProvider;
 import lombok.*;
-import org.yaml.snakeyaml.DumperOptions;
-import org.yaml.snakeyaml.Yaml;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.InputStream;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
-
 
 @Data
 @Builder
@@ -21,55 +23,92 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class YMLChangelogEntry {
 
-    @YamlProperty(key = "title", order = 0)
+    private static final String YML_HEADING = "# This file is used by logchange tool to generate CHANGELOG.md \uD83C\uDF33 \uD83E\uDE93 => \uD83E\uDEB5 \n" +
+            "# Visit https://github.com/logchange/logchange and leave a star \uD83C\uDF1F \n" +
+            "# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️\n";
+
+    @JsonProperty(index = 0)
     public String title;
+
     @Singular
-    @YamlProperty(key = "authors", order = -1)
+    @JsonProperty(index = 1)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<YMLChangelogEntryAuthor> authors;
+
     @Singular
-    @YamlProperty(key = "merge_requests", order = -2)
+    @JsonProperty(value = "merge_requests", index = 2)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<Long> mergeRequests;
+
     @Singular
-    @YamlProperty(key = "issues", order = -3)
+    @JsonProperty(index = 3)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<Long> issues;
+
     @Singular
-    @YamlProperty(key = "links", order = -4)
+    @JsonProperty(index = 4)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<YMLChangelogEntryLink> links;
-    @YamlProperty(key = "type", order = -5, converter = YMLChangelogEntryTypeConverter.class)
+
+    @JsonProperty(index = 5)
     public YMLChangelogEntryType type;
+
     @Singular
-    @YamlProperty(key = "important_notes", order = -6)
+    @JsonProperty(value = "important_notes", index = 6)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<String> importantNotes;
+
     @Singular
-    @YamlProperty(key = "configurations", order = -7)
+    @JsonProperty(index = 7)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<YMLChangelogEntryConfiguration> configurations;
 
-    public static YMLChangelogEntry of(InputStream input) {
-        Yaml yaml = new Yaml(new AnnotationAwareConstructor(YMLChangelogEntry.class));
-        return yaml.load(input);
+    @JsonIgnore
+    private Set<Pair<String, String>> invalidProperties = new HashSet<>();
+
+    @SneakyThrows
+    public static YMLChangelogEntry of(InputStream input, String path) {
+        ObjectMapper mapper = ObjectMapperProvider.get();
+        YMLChangelogEntry res = null;
+        try {
+            res = mapper.readValue(input, YMLChangelogEntry.class);
+        } catch (Exception e) {
+            String msg = (e.getCause() != null) ? e.getCause().getMessage() : e.getMessage();
+            throw new YMLChangelogInvalidConfigValuesException(path, Collections.singleton(msg));
+        }
+
+        if (!res.invalidProperties.isEmpty()) {
+            throw new YMLChangelogEntryConfigException(path, res.invalidProperties);
+        }
+
+        return res;
     }
 
+    public static YMLChangelogEntry of(ChangelogEntry entry) {
+        return YMLChangelogEntry.builder()
+                .title(entry.getTitle().getValue())
+                .authors(entry.getAuthors().stream().map(YMLChangelogEntryAuthor::of).collect(Collectors.toList()))
+                .mergeRequests(entry.getMergeRequests().stream().map(ChangelogEntryMergeRequest::getValue).collect(Collectors.toList()))
+                .issues(entry.getIssues())
+                .links(entry.getLinks().stream().map(YMLChangelogEntryLink::of).collect(Collectors.toList()))
+                .type(YMLChangelogEntryType.of(entry.getType()))
+                .importantNotes(entry.getImportantNotes().stream().map(ChangelogEntryImportantNote::getValue).collect(Collectors.toList()))
+                .configurations(entry.getConfigurations().stream().map(YMLChangelogEntryConfiguration::of).collect(Collectors.toList()))
+                .build();
+    }
+
+    @SneakyThrows
     public String toYMLString() {
-        DumperOptions dumperOptions = new DumperOptions();
-        dumperOptions.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
-        dumperOptions.setPrettyFlow(true);
-        dumperOptions.setIndent(4);
-        dumperOptions.setIndicatorIndent(2);
-
-        Yaml yaml = new Yaml(new AnnotationAwareRepresenter(), dumperOptions);
-        return yaml.dumpAsMap(this);
+        return YML_HEADING + ObjectMapperProvider.get()
+                .writeValueAsString(this);
     }
 
-    @YamlAnySetter
+    @JsonAnySetter
     public void anySetter(String key, Object value) {
-        System.out.println("Unknown property: " + key + " with value " + value);
-        //TODO Logger.getLogger().warn("Unknown property: " + key + " with value " + value);
+        invalidProperties.add(Pair.of(key, value.toString()));
     }
 
     public ChangelogEntry to() {
-        System.out.println(title);
-
-
         return ChangelogEntry.builder()
                 .title(ChangelogEntryTitle.of(title))
                 .type(type.to())
@@ -120,11 +159,13 @@ public class YMLChangelogEntry {
         }
     }
 
-    private List<String> importantNotes() {
+    private List<ChangelogEntryImportantNote> importantNotes() {
         if (importantNotes == null) {
             return Collections.emptyList();
         } else {
-            return importantNotes;
+            return importantNotes.stream()
+                    .map(ChangelogEntryImportantNote::of)
+                    .collect(Collectors.toList());
         }
     }
 
@@ -136,18 +177,5 @@ public class YMLChangelogEntry {
                     .map(YMLChangelogEntryConfiguration::to)
                     .collect(Collectors.toList());
         }
-    }
-
-    public static YMLChangelogEntry of(ChangelogEntry entry) {
-        return YMLChangelogEntry.builder()
-                .title(entry.getTitle().getValue())
-                .authors(entry.getAuthors().stream().map(YMLChangelogEntryAuthor::of).collect(Collectors.toList()))
-                .mergeRequests(entry.getMergeRequests().stream().map(ChangelogEntryMergeRequest::getValue).collect(Collectors.toList()))
-                .issues(entry.getIssues())
-                .links(entry.getLinks().stream().map(YMLChangelogEntryLink::of).collect(Collectors.toList()))
-                .type(YMLChangelogEntryType.of(entry.getType()))
-                .importantNotes(entry.getImportantNotes())
-                .configurations(entry.getConfigurations().stream().map(YMLChangelogEntryConfiguration::of).collect(Collectors.toList()))
-                .build();
     }
 }

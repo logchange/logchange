@@ -1,37 +1,44 @@
 package dev.logchange.core.format.yml.changelog.entry;
 
-import de.beosign.snakeyamlanno.property.YamlAnySetter;
-import de.beosign.snakeyamlanno.property.YamlProperty;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryConfiguration;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.java.Log;
 
 import java.util.Comparator;
 
+@Log
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class YMLChangelogEntryConfiguration implements Comparable<YMLChangelogEntryConfiguration> {
 
-    @YamlProperty(key = "type", order = 0)
+    @JsonProperty(index = 0)
     public String type;
-    @YamlProperty(key = "action", order = -1, converter = YMLChangelogEntryConfigurationActionConverter.class)
+
+    @JsonProperty(index = 1)
     public YMLChangelogEntryConfigurationAction action;
-    @YamlProperty(key = "key", order = -2)
+
+    @JsonProperty(index = 2)
     public String key;
-    @YamlProperty(key = "default_value", order = -3)
+
+    @JsonProperty(value = "default_value", index = 3)
     public String defaultValue;
-    @YamlProperty(key = "description", order = -4)
+
+    @JsonProperty(index = 4)
     public String description;
-    @YamlProperty(key = "more_info", order = -5)
+
+    @JsonProperty(value = "more_info", index = 5)
     public String moreInfo;
 
-    @YamlAnySetter
+    @JsonAnySetter
     public void anySetter(String key, Object value) {
-        //TODO Logger.getLogger().warn("Unknown property: " + key + " with value " + value);
+        log.warning("Unknown property: " + key + " with value " + value);
     }
 
     @Override

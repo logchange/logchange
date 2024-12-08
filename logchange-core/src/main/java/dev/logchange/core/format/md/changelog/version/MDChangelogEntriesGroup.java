@@ -7,7 +7,7 @@ import dev.logchange.core.domain.config.model.labels.NumberOfChangesLabels;
 import dev.logchange.core.format.md.MD;
 import dev.logchange.core.format.md.changelog.Configurable;
 import dev.logchange.core.format.md.changelog.entry.MDChangelogEntry;
-import net.steppschuh.markdowngenerator.text.heading.Heading;
+import dev.logchange.md.MarkdownBasics;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -41,14 +41,14 @@ class MDChangelogEntriesGroup extends Configurable implements MD {
         stringBuilder.append(getTypeHeading()).append("\n").append("\n");
 
         for (ChangelogEntry entry : entries) {
-            stringBuilder.append(new MDChangelogEntry(entry)).append("\n");
+            stringBuilder.append(new MDChangelogEntry(entry, getConfig())).append("\n");
         }
 
         return stringBuilder.append("\n").toString();
     }
 
-    private Heading getTypeHeading() {
-        return new Heading(getConfig().getLabels().getTypes().getType(type) + " " + getChangesNumber(entries), 3);
+    private String getTypeHeading() {
+        return MarkdownBasics.heading(getConfig().getLabels().getTypes().getType(type) + " " + getChangesNumber(entries), 3);
     }
 
     private String getChangesNumber(List<ChangelogEntry> entriesByType) {

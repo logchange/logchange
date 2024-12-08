@@ -9,6 +9,8 @@ import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogRepository;
 import dev.logchange.core.infrastructure.persistance.changelog.FileVersionSummaryRepository;
 import dev.logchange.core.infrastructure.persistance.config.FileConfigRepository;
+import dev.logchange.core.infrastructure.persistance.file.FileRepository;
+import dev.logchange.core.infrastructure.query.file.FileReader;
 import org.codehaus.plexus.util.FileUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,15 +43,15 @@ public class ChangelogEntryTypeLabelIntegrationTest {
         File changelogOutputFile = new File(PATH + "CHANGELOG.md");
         File configFile = new File(PATH + "changelog/logchange-config.yml");
         File expectedChangelogOutputFile = new File(PATH + "EXPECTED_CHANGELOG.md");
-        String heading = "";
 
         ConfigRepository configRepository = new FileConfigRepository(configFile);
         Config config = configRepository.find();
 
-        ChangelogRepository repository = new FileChangelogRepository(changelogInputDir, changelogOutputFile, config);
+        FileRepository fr = FileRepository.of(changelogOutputFile);
+        ChangelogRepository repository = new FileChangelogRepository(changelogInputDir, config, new FileReader(), fr, fr);
         VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogInputDir, config);
         GenerateChangelogUseCase generateChangelogUseCase = new GenerateChangelogService(repository, versionSummaryRepository);
-        GenerateChangelogUseCase.GenerateChangelogCommand command = GenerateChangelogUseCase.GenerateChangelogCommand.of(heading);
+        GenerateChangelogUseCase.GenerateChangelogCommand command = GenerateChangelogUseCase.GenerateChangelogCommand.of();
 
         //when:
         generateChangelogUseCase.handle(command);

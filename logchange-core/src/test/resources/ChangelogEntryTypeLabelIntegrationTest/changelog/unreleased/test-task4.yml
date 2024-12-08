@@ -14,7 +14,7 @@ links: # links to external systems, like redmine something else
     url: https://www.google.pl
   - name: other link
     url: https://www.google.pl
-type: removed # [added/changed/deprecated/removed/fixed/security/other]
+type: removed # [added/changed/deprecated/removed/fixed/security/dependency_update/other]
 important_notes: some realy important recomendation 4
 configurations: # information about changes in available application configuration
   - action: add # [add/update/delete]

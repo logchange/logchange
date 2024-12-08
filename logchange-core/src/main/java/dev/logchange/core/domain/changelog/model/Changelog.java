@@ -14,24 +14,15 @@ import java.util.List;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Changelog {
 
-    private final ChangelogHeading heading;
     private final ChangelogVersions versions;
     private final ChangelogArchives archives;
 
     public static Changelog of(List<ChangelogVersion> versions, List<ChangelogArchive> archives) {
-        ChangelogHeading changelogHeading = ChangelogHeading.EMPTY;
         ChangelogVersions changelogVersions = ChangelogVersions.of(versions);
         ChangelogArchives changelogArchives = ChangelogArchives.of(archives);
 
-        return new Changelog(changelogHeading, changelogVersions, changelogArchives);
+        return new Changelog(changelogVersions, changelogArchives);
     }
 
-    public Changelog setUpHeading(ChangelogHeading heading) {
-        return Changelog.builder()
-                .heading(heading)
-                .versions(versions)
-                .archives(archives)
-                .build();
-    }
 
 }
