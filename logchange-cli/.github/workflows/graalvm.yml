@@ -1,0 +1,33 @@
+name: GraalVM CE CI
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.m2
+          key: ${{ runner.os }}-maven-test-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-maven-test-
+      - name: Setup GraalVM CE
+        uses: DeLaGuardo/setup-graalvm@3.1
+        with:
+          graalvm-version: 22.2.0.java8
+      - name: Install Native Image
+        run: gu install native-image
+      - name: Docker login
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ secrets.DOCKER_REGISTRY_URL }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build And Push Docker Image
+        env:
+          DOCKER_REPOSITORY_PATH: ${{ secrets.DOCKER_REPOSITORY_PATH }}
+          DOCKER_REGISTRY_URL: ${{ secrets.DOCKER_REGISTRY_URL }}
+          TESTCONTAINERS_RYUK_DISABLED: true
+        run: |
+          export DOCKER_IMAGE=`echo "${DOCKER_REGISTRY_URL}/${DOCKER_REPOSITORY_PATH}/logchange-cli" | sed -e 's#//#/#' -e 's#^/##'`
+          ./mvnw deploy -Dpackaging=docker-native -Djib.docker.image=$DOCKER_IMAGE --no-transfer-progress
