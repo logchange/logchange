@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>dev.logchange</groupId>
         <artifactId>logchange</artifactId>
-        <version>1.12.0-SNAPSHOT</version>
+        <version>1.13.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>logchange-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
+
+    <description>
+        A Maven plugin that integrates logchange functionalities into Maven-based projects. It automates the
+        generation, validation, and updating of changelogs, ensuring consistent and accurate tracking of project
+        changes.
+    </description>
 
     <properties>
         <maven-core.version>3.9.9</maven-core.version>
@@ -22,7 +29,7 @@
         <!-- TESTS -->
         <maven-verifier.version>1.7.2</maven-verifier.version>
         <itf.version>0.13.1</itf.version>
-        <commons-io.version>2.17.0</commons-io.version>
+        <commons-io.version>2.18.0</commons-io.version>
     </properties>
 
     <dependencies>
