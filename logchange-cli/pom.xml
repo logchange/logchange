@@ -3,10 +3,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- MY I HAVE YOUR ATTENTION PLEASE -->
-    <!-- https://repo1.maven.org/maven2/io/micronaut/micronaut-parent/3.6.1/micronaut-parent-3.6.1.pom -->
-    <!-- https://repo1.maven.org/maven2/io/micronaut/micronaut-bom/3.6.1/micronaut-bom-3.6.1.pom -->
-
     <parent>
         <groupId>dev.logchange</groupId>
         <artifactId>logchange</artifactId>
@@ -29,7 +25,8 @@
         <maven-shade-plugin.version>3.6.0</maven-shade-plugin.version>
 
         <micronaut.version>4.7.7</micronaut.version>
-        <micronaut.aot.version>1.1.1</micronaut.aot.version>
+        <micronaut-bom.version>3.10.4</micronaut-bom.version>
+        <micronaut.aot.version>2.5.0</micronaut.aot.version>
         <micronaut-maven-plugin.version>3.5.4</micronaut-maven-plugin.version>
         <picocli.version>4.6.3</picocli.version>
         <exec.mainClass>dev.logchange.cli.LogchangeCliCommand</exec.mainClass>
@@ -44,7 +41,7 @@
             <dependency>
                 <groupId>io.micronaut</groupId>
                 <artifactId>micronaut-bom</artifactId>
-                <version>3.10.4</version>
+                <version>${micronaut-bom.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -144,7 +141,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <testResourcesVersion>${micronaut-maven-plugin.version}</testResourcesVersion>
-                    <micronautAotVersion>${micronaut.version}</micronautAotVersion>
+                    <micronautAotVersion>${micronaut.aot.version}</micronautAotVersion>
                 </configuration>
             </plugin>
 
