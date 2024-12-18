@@ -13,7 +13,7 @@
 
     <properties>
         <packaging>jar</packaging>
-        <graal.version>21.1.0</graal.version>
+        <graal.version>23.0.1</graal.version>
         <jdk.version>21</jdk.version>
         <!-- If you are building with JDK 9 or higher, you can uncomment the lines below to set the release version -->
         <release.version>21</release.version>
@@ -298,6 +298,12 @@
                                 <phase>test</phase>
                             </execution>
                         </executions>
+                        <configuration>
+                            <buildArgs>
+                                <arg>--initialize-at-build-time=org.xml.sax.helpers.LocatorImpl</arg>
+                                <arg>--initialize-at-build-time=org.xml.sax.helpers.AttributesImpl</arg>
+                            </buildArgs>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>

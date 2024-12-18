@@ -20,8 +20,16 @@ public class LogchangeCliCommand implements Runnable {
 
     public void run() {
         // business logic here
+        System.getProperties().list(System.out);
+
+        Version version = new Version("1.0.0");
         if (verbose) {
-            System.out.println("Hi!");
+            System.out.println("Hi! " + version);
         }
+    }
+
+
+    record Version(String version) {
+
     }
 }
