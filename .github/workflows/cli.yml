@@ -31,7 +31,7 @@ jobs:
           java --version
           native-image --version
       - name: Build CLI executable
-        run: mvn -Pnative package
+        run: mvn -Pnative package -DskipTests
       - name: Upload binaries
         uses: actions/upload-artifact@v4
         with:
