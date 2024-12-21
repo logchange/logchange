@@ -1,0 +1,39 @@
+name: GraalVM CE CI
+on:
+  push:
+    branches:
+      - main
+      - cli # TODO remove
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build CLI on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: '21'
+          distribution: 'graalvm-community'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          cache: 'maven'
+          native-image-musl: 'true'
+      - name: Check environment
+        run: |
+          echo "GRAALVM_HOME: $GRAALVM_HOME"
+          echo "JAVA_HOME: $JAVA_HOME"
+          java --version
+          native-image --version
+      - name: Build CLI executable
+        run: mvn -Pnative package
+      - name: Upload binaries
+        uses: actions/upload-artifact@v4
+        with:
+          name: logchange-${{ matrix.os }}
+          path: logchange-cli/target/logchange
