@@ -21,10 +21,10 @@ jobs:
       - uses: graalvm/setup-graalvm@v1
         with:
           java-version: '21'
-          distribution: 'graalvm-community'
+          distribution: 'graalvm'
           github-token: ${{ secrets.GITHUB_TOKEN }}
           cache: 'maven'
-          native-image-musl: 'true'
+#          native-image-musl: 'true'
       - name: Check environment
         run: |
           echo "GRAALVM_HOME: $GRAALVM_HOME"
