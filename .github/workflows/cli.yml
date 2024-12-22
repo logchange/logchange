@@ -31,10 +31,10 @@ jobs:
           java --version
           native-image --version
       # musl is only available on linux
-      - if: ${{ matrix.os }} == 'ubuntu-latest'
+      - if: ${{ matrix.os == 'ubuntu-latest' }}
         name: Build CLI executable (static)
         run: mvn -Pnative-static package -DskipTests
-      - if: ${{ matrix.os }} != 'ubuntu-latest'
+      - if: ${{ matrix.os != 'ubuntu-latest' }}
         name: Build CLI executable (non-static)
         run: mvn -Pnative package -DskipTests
       - name: Upload binaries
