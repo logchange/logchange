@@ -201,6 +201,10 @@ changelog:
       description: Description
   templates:
     entry: "${prefix}${title} ${merge_requests} ${issues} ${links} ${authors}"
+# this section only makes sense when project is root of aggration for other projects with changelogs 
+# f.e. if we has repostireis: mobile-app(root), mobile-app-android, mobile-app-ios 
+# and in mobile-app we want to generate changelog with entries from also from mobile-app-android, mobile-app-ios
+# but mobile-app-android, mobile-app-ios have to have already released versions that we want to aggragate
 aggregates:
   projects:
     - name: hofund
