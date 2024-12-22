@@ -20,8 +20,11 @@ public class Constants {
     public static final String ADD_COMMAND_END_LOG = "Changelog entry successfully added";
 
     public static final String RELEASE_COMMAND = "release";
-    public static final String AGGREGATE_COMMAND = "aggregate";
 
+    public static final String AGGREGATE_COMMAND = "aggregate";
+    public static final String AGGREGATE_COMMAND_DESCRIPTION = "Aggregates projects changelogs to create one";
+    public static final String AGGREGATE_COMMAND_START_LOG = "Running aggregate command...";
+    public static final String AGGREGATE_COMMAND_END_LOG = "Aggregate successfully";
 
     public static final String INPUT_DIR_MVN_PROPERTY = "inputDir";
     public static final String OUTPUT_FILE_MVN_PROPERTY = "outputFile";
