@@ -27,7 +27,7 @@ public class GitKeep {
                 log.warning(gitKeep.getName() + " already exists.");
             }
         } catch (IOException e) {
-            String msg = String.format("An error occurred while creating %s in path: %s", path, e.getMessage());
+            String msg = String.format("An error occurred while creating file: %s msg: %s", path, e.getMessage());
             log.severe(msg);
         }
     }

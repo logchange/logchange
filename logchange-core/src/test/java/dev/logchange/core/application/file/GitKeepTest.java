@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class GitKeepTest {
 
-    private static final String PATH = "src/test/resources/GitKeepTest/";
+    private static final String PATH = "./src/test/resources/GitKeepTest/";
     private static final String GIT_KEEP_NAME = ".gitkeepTest";
 
     @AfterEach
