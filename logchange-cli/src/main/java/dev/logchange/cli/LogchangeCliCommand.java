@@ -1,8 +1,7 @@
 package dev.logchange.cli;
 
-import io.micronaut.configuration.picocli.PicocliRunner;
-
 import lombok.extern.java.Log;
+import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
@@ -13,11 +12,12 @@ import picocli.CommandLine.Option;
         subcommands = { InitCommand.class, GenerateChangelogCommand.class })
 public class LogchangeCliCommand implements Runnable {
 
-    @Option(names = {"-v", "--verbose"}, description = "...")
+    @Option(names = {"-v", "--verbose"}, description = "...", defaultValue = "false")
     boolean verbose;
 
     public static void main(String[] args) throws Exception {
-        PicocliRunner.run(LogchangeCliCommand.class, args);
+        int exitCode = new CommandLine(new LogchangeCliCommand()).execute(args);
+        System.exit(exitCode);
     }
 
     public void run() {
@@ -25,6 +25,7 @@ public class LogchangeCliCommand implements Runnable {
         System.out.println("Hi! " + version);
         log.info("test1");
         if (verbose) {
+            log.info("test2");
             log.finest("test - debug");
         }
     }
