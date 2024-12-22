@@ -1,6 +1,0 @@
-micronaut:
-  application:
-    name: logchange
-logger:
-  levels:
-    root: INFO

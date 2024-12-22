@@ -25,12 +25,7 @@
         <native-maven-plugin.version>0.10.3</native-maven-plugin.version>
         <maven-shade-plugin.version>3.6.0</maven-shade-plugin.version>
 
-        <micronaut.version>4.7.9</micronaut.version>
-        <micronaut.aot.version>2.6.0</micronaut.aot.version>
-        <micronaut-test-junit5.version>4.6.2</micronaut-test-junit5.version>
-        <micronaut-picocli.version>5.6.0</micronaut-picocli.version>
-        <picocli-codege.version>4.7.6</picocli-codege.version>
-        <micronaut-maven-plugin.version>3.5.4</micronaut-maven-plugin.version>
+        <picocli.version>4.7.6</picocli.version>
 
         <exec.mainClass>dev.logchange.cli.LogchangeCliCommand</exec.mainClass>
 
@@ -54,63 +49,27 @@
         </dependency>
 
         <dependency>
-            <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-inject</artifactId>
-            <version>${micronaut.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-runtime</artifactId>
-            <version>${micronaut.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.micronaut.picocli</groupId>
-            <artifactId>micronaut-picocli</artifactId>
-            <version>${micronaut-picocli.version}</version>
+            <groupId>info.picocli</groupId>
+            <artifactId>picocli</artifactId>
+            <version>${picocli.version}</version>
         </dependency>
 
         <!-- TESTS -->
-        <dependency>
-            <groupId>io.micronaut.test</groupId>
-            <artifactId>micronaut-test-junit5</artifactId>
-            <version>${micronaut-test-junit5.version}</version>
-            <scope>runtime</scope>
-        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>io.micronaut.build</groupId>
-                <artifactId>micronaut-maven-plugin</artifactId>
-                <version>${micronaut-maven-plugin.version}</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <testResourcesVersion>${micronaut-maven-plugin.version}</testResourcesVersion>
-                    <micronautAotVersion>${micronaut.aot.version}</micronautAotVersion>
-                </configuration>
-            </plugin>
-
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <!-- Uncomment to enable incremental compilation -->
-                    <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->
-
                     <annotationProcessorPaths combine.children="append">
                         <path>
                             <groupId>info.picocli</groupId>
                             <artifactId>picocli-codegen</artifactId>
-                            <version>4.7.6</version>
+                            <version>${picocli.version}</version>
                         </path>
                     </annotationProcessorPaths>
-                    <compilerArgs>
-                        <arg>-Amicronaut.processing.group=dev.logchange</arg>
-                        <arg>-Amicronaut.processing.module=logchange-cli</arg>
-                    </compilerArgs>
                 </configuration>
             </plugin>
             <plugin>
@@ -149,22 +108,10 @@
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
                 <version>${jib-maven-plugin.version}</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>io.micronaut.build</groupId>
-                        <artifactId>micronaut-maven-plugin</artifactId>
-                        <version>${micronaut-maven-plugin.version}</version>
-                    </dependency>
-                </dependencies>
                 <configuration>
                     <to>
                         <image>${jib.docker.image}:${jib.docker.tag}</image>
                     </to>
-                    <pluginExtensions>
-                        <pluginExtension>
-                            <implementation>io.micronaut.build.jib.JibMicronautExtension</implementation>
-                        </pluginExtension>
-                    </pluginExtensions>
                 </configuration>
             </plugin>
         </plugins>
@@ -208,15 +155,6 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-compiler-plugin</artifactId>
                         <version>${maven-compiler-plugin.version}</version>
-                        <configuration>
-                            <annotationProcessorPaths combine.children="append">
-                                <path>
-                                    <groupId>io.micronaut</groupId>
-                                    <artifactId>micronaut-graal</artifactId>
-                                    <version>${micronaut.version}</version>
-                                </path>
-                            </annotationProcessorPaths>
-                        </configuration>
                     </plugin>
                 </plugins>
             </build>
