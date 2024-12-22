@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class GitKeepTest {
 
-    private static final String PATH = "./src/test/resources/GitKeepTest/";
+    private static final String PATH = "src/test/resources/GitKeepTest/";
     private static final String GIT_KEEP_NAME = ".gitkeepTest";
 
     @AfterEach
@@ -30,6 +30,7 @@ class GitKeepTest {
         GitKeep.of(Paths.get(PATH, GIT_KEEP_NAME)).create();
 
         // then:
+        System.out.println(gitKeepFile.getAbsoluteFile());
         assertTrue(gitKeepFile.exists());
     }
 
@@ -37,6 +38,7 @@ class GitKeepTest {
     void shouldNotThrowExceptionWhenGitKeepAlreadyExists() throws IOException {
         // given:
         File gitKeepFile = new File(PATH + GIT_KEEP_NAME);
+        System.out.println(gitKeepFile.getAbsoluteFile());
         gitKeepFile.createNewFile();
         assertTrue(gitKeepFile.exists());
 
