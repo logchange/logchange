@@ -214,8 +214,7 @@
                         </executions>
                         <configuration>
                             <buildArgs>
-                                <arg>-H:+UnlockExperimentalVMOptions</arg>
-                                <arg>-H:IncludeResources=".*/version.*txt$"</arg>
+                                <arg>--static</arg>
                                 <arg>--initialize-at-build-time=org.xml.sax.helpers.LocatorImpl</arg>
                                 <arg>--initialize-at-build-time=org.xml.sax.helpers.AttributesImpl</arg>
                             </buildArgs>
