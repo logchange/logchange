@@ -6,7 +6,7 @@ import picocli.CommandLine.Command;
 import static dev.logchange.commands.Constants.*;
 
 @CustomLog
-@Command(name = GENERATE_COMMAND, description = GENERATE_COMMAND_DESCRIPTION)
+@Command(name = GENERATE_COMMAND, description = GENERATE_COMMAND_DESCRIPTION, mixinStandardHelpOptions = true)
 public class GenerateChangelogCliCommand implements Runnable {
 
     public void run() {

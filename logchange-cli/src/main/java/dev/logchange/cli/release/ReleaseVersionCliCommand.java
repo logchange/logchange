@@ -7,7 +7,7 @@ import picocli.CommandLine.Command;
 import static dev.logchange.commands.Constants.*;
 
 @CustomLog
-@Command(name = RELEASE_COMMAND, description = RELEASE_COMMAND_DESCRIPTION)
+@Command(name = RELEASE_COMMAND, description = RELEASE_COMMAND_DESCRIPTION, mixinStandardHelpOptions = true)
 public class ReleaseVersionCliCommand implements Runnable {
 
     public void run() {

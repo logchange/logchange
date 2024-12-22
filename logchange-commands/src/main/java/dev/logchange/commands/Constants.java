@@ -2,6 +2,8 @@ package dev.logchange.commands;
 
 public class Constants {
 
+    public static final String BASIC_FOOTER = "\n\n\uD83E\uDEB5\uD83E\uDEB5 Feel free to contact us via email team@logchange.dev \uD83E\uDEB5\uD83E\uDEB5\n\uD83E\uDEB5\uD83E\uDEB5 or visit https://github.com/logchange/logchange \uD83E\uDEB5\uD83E\uDEB5";
+
     public static final String DEFAULT_OUTPUT_FILE = "CHANGELOG.md";
     public static final String DEFAULT_INPUT_DIR = "changelog";
     public static final String DEFAULT_UNRELEASED_VERSION_DIR = "unreleased";
@@ -13,7 +15,7 @@ public class Constants {
     public static final String INIT_COMMAND = "init";
     public static final String INIT_COMMAND_DESCRIPTION = "Initialize current project with basic logchange configuration and directory structure";
     public static final String INIT_COMMAND_START_LOG = "Initialize project for logchange";
-    public static final String INIT_COMMAND_END_LOG = "Initialize project successful. We are happy that you have trusted logchange community!\n\nFeel free to contact us via email team@logchange.dev or visiting https://github.com/logchange/logchange \uD83E\uDEB5\uD83E\uDEB5";
+    public static final String INIT_COMMAND_END_LOG = "Initialize project successful. We are happy that you have trusted logchange community!\n\n" + BASIC_FOOTER;
 
 
     public static final String GENERATE_COMMAND = "generate";
@@ -37,7 +39,6 @@ public class Constants {
     public static final String RELEASE_COMMAND_DESCRIPTION = "Creates new changelog release by moving files from unreleased to vX.X.X directory";
     public static final String RELEASE_COMMAND_START_LOG = "Running release command for version: ";
     public static final String RELEASE_COMMAND_END_LOG = "Changelog entry successfully added";
-
 
     public static final String AGGREGATE_COMMAND = "aggregate";
     public static final String AGGREGATE_COMMAND_DESCRIPTION = "Aggregates projects changelogs to create one";

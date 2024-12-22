@@ -6,7 +6,7 @@ import picocli.CommandLine.Command;
 import static dev.logchange.commands.Constants.*;
 
 @CustomLog
-@Command(name = LINT_COMMAND, description = LINT_COMMAND_DESCRIPTION)
+@Command(name = LINT_COMMAND, description = LINT_COMMAND_DESCRIPTION, mixinStandardHelpOptions = true)
 public class LintCliCommand implements Runnable {
 
     public void run() {

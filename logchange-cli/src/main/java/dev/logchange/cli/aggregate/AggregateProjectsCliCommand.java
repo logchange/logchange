@@ -6,7 +6,7 @@ import picocli.CommandLine.Command;
 import static dev.logchange.commands.Constants.*;
 
 @CustomLog
-@Command(name = AGGREGATE_COMMAND, description = AGGREGATE_COMMAND_DESCRIPTION)
+@Command(name = AGGREGATE_COMMAND, description = AGGREGATE_COMMAND_DESCRIPTION, mixinStandardHelpOptions = true)
 public class AggregateProjectsCliCommand implements Runnable {
 
     public void run() {

@@ -114,6 +114,33 @@
                     </to>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>write-version</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources</directory>
+                                    <includes>
+                                        <include>version.txt</include>
+                                    </includes>
+                                    <!-- This enables the replacement of ${project.version} -->
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
@@ -187,6 +214,8 @@
                         </executions>
                         <configuration>
                             <buildArgs>
+                                <arg>-H:+UnlockExperimentalVMOptions</arg>
+                                <arg>-H:IncludeResources=".*/version.*txt$"</arg>
                                 <arg>--initialize-at-build-time=org.xml.sax.helpers.LocatorImpl</arg>
                                 <arg>--initialize-at-build-time=org.xml.sax.helpers.AttributesImpl</arg>
                             </buildArgs>

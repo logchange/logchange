@@ -1,0 +1,3 @@
+Logchange version: ${project.version}
+Build with Java: ${java.version} - ${java.vendor}
+VirtualMachine: ${java.vm.version} - ${java.vm.vendor} - ${java.vm.name}
