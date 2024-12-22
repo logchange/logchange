@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     name: Build CLI on ${{ matrix.name }}
-    runs-on: ${{ matrix.name }}
+    runs-on: ${{ matrix.runs-on }}
     strategy:
       matrix:
         include:
