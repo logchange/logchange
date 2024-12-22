@@ -9,16 +9,40 @@ on:
 
 jobs:
   build:
-    name: Build CLI on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+    name: Build CLI on ${{ matrix.name }}
+    runs-on: ${{ matrix.name }}
     strategy:
       matrix:
-        os: [macos-latest, windows-latest, ubuntu-latest]
+        include:
+          - name: "Linux x86_64"
+            base: linux
+            runs-on: ubuntu-24.04
+            platform: linuxx64
+
+#          - name: "Linux ARM64"
+#            base: linux
+#            runs-on: self-hosted
+#            platform: linuxarm64
+
+          - name: "macOS x86_64"
+            base: macos
+            runs-on: macos-13
+            platform: darwinx64
+
+          - name: "macOS ARM64"
+            base: macos
+            runs-on: macos-14
+            platform: darwinarm64
+
+          - name: "Windows x86_64"
+            base: windows
+            runs-on: windows-2022
+            platform: windowsx64
     steps:
       - uses: actions/checkout@v4
 
       # musl is only available on linux
-      - if: ${{ matrix.os == 'ubuntu-latest' }}
+      - if: ${{ matrix.base == 'linux' }}
         uses: graalvm/setup-graalvm@v1
         with:
           java-version: '21'
@@ -26,7 +50,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           cache: 'maven'
           native-image-musl: 'true'
-      - if: ${{ matrix.os != 'ubuntu-latest' }}
+      - if: ${{ matrix.base != 'linux' }}
         uses: graalvm/setup-graalvm@v1
         with:
           java-version: '21'
@@ -40,19 +64,22 @@ jobs:
           echo "JAVA_HOME: $JAVA_HOME"
           java --version
           native-image --version
+          uname -s
+          uname -m
 
       # musl is only available on linux
-      - if: ${{ matrix.os == 'ubuntu-latest' }}
+      - if: ${{ matrix.base == 'linux' }}
         name: Build CLI executable (static)
         run: mvn -Pnative-static package -DskipTests
-      - if: ${{ matrix.os != 'ubuntu-latest' }}
+
+      - if: ${{ matrix.base != 'linux' }}
         name: Build CLI executable (non-static)
         run: mvn -Pnative package -DskipTests
 
       - name: Upload binaries
         uses: actions/upload-artifact@v4
         with:
-          name: logchange-${{ matrix.os }}
+          name: logchange-${{ matrix.platform }}
           path: |
             logchange-cli/target/logchange*
             !logchange-cli/target/logchange*.jar
