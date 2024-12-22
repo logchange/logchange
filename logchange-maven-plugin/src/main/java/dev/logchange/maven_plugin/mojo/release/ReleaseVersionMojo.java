@@ -36,7 +36,7 @@ public class ReleaseVersionMojo extends AbstractMojo {
     @Override
     public void execute() {
         String version = ReleaseVersionCommand.getVersion(project.getVersion());
-        getLog().info("Running release command for version: " + version);
+        getLog().info(RELEASE_COMMAND_START_LOG + version);
         ReleaseVersionCommand.of(
                 version,
                 unreleasedVersionDir,
@@ -45,6 +45,6 @@ public class ReleaseVersionMojo extends AbstractMojo {
                 configFile,
                 isGenerateChangesXml,
                 xmlOutputFile).execute();
-        getLog().info("Release finished");
+        getLog().info(RELEASE_COMMAND_END_LOG);
     }
 }

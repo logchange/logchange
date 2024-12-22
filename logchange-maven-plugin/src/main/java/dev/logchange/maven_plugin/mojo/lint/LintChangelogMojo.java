@@ -23,8 +23,8 @@ public class LintChangelogMojo extends AbstractMojo {
 
     @Override
     public void execute() {
-        getLog().info("Running lint command...");
+        getLog().info(LINT_COMMAND_START_LOG);
         LintProjectCommand.of(inputDir, outputFile, configFile).validate();
-        getLog().info("No errors found");
+        getLog().info(LINT_COMMAND_END_LOG);
     }
 }

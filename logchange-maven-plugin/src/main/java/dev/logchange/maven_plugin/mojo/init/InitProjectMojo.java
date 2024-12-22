@@ -22,8 +22,8 @@ public class InitProjectMojo extends AbstractMojo {
 
     @Override
     public void execute() {
-        getLog().info("Initialize project for logchange-maven-plugin");
+        getLog().info(INIT_COMMAND_START_LOG);
         InitProjectCommand.of(inputDir, unreleasedVersionDir, outputFile).execute();
-        getLog().info("Initialize project successful");
+        getLog().info(INIT_COMMAND_END_LOG);
     }
 }
