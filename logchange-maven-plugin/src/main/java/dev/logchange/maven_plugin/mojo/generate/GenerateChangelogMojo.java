@@ -11,7 +11,7 @@ import static dev.logchange.commands.Constants.*;
 @Mojo(name = GENERATE_COMMAND, defaultPhase = LifecyclePhase.NONE)
 public class GenerateChangelogMojo extends AbstractMojo {
 
-    @Parameter(defaultValue = DEFAULT_INPUT_DIR, property = INPUT_DIR_MVN_PROPERTY)
+    @Parameter(defaultValue = DEFAULT_INPUT_DIR, property = INPUT_DIR_PROPERTY)
     private String inputDir;
 
     @Parameter(defaultValue = DEFAULT_OUTPUT_FILE, property = OUTPUT_FILE_MVN_PROPERTY)

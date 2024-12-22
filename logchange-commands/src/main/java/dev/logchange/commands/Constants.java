@@ -2,6 +2,8 @@ package dev.logchange.commands;
 
 public class Constants {
 
+    private static final String OPTION_PREFIX = "--";
+
     public static final String BASIC_FOOTER = "\n\n\uD83E\uDEB5\uD83E\uDEB5 Feel free to contact us via email team@logchange.dev \uD83E\uDEB5\uD83E\uDEB5\n\uD83E\uDEB5\uD83E\uDEB5 or visit https://github.com/logchange/logchange \uD83E\uDEB5\uD83E\uDEB5";
 
     public static final String DEFAULT_OUTPUT_FILE = "CHANGELOG.md";
@@ -13,7 +15,7 @@ public class Constants {
     public static final String GIT_KEEP = ".gitkeep";
 
     public static final String INIT_COMMAND = "init";
-    public static final String INIT_COMMAND_DESCRIPTION = "Initialize current project with basic logchange configuration and directory structure";
+    public static final String INIT_COMMAND_DESCRIPTION = "Initialize current directory (project) with basic logchange configuration and directory structure";
     public static final String INIT_COMMAND_START_LOG = "Initialize project for logchange";
     public static final String INIT_COMMAND_END_LOG = "Initialize project successful. We are happy that you have trusted logchange community!\n\n" + BASIC_FOOTER;
 
@@ -45,9 +47,19 @@ public class Constants {
     public static final String AGGREGATE_COMMAND_START_LOG = "Running aggregate command...";
     public static final String AGGREGATE_COMMAND_END_LOG = "Aggregate successfully";
 
-    public static final String INPUT_DIR_MVN_PROPERTY = "inputDir";
+    public static final String INPUT_DIR_PROPERTY = "inputDir";
+    public static final String INPUT_DIR_OPTION = OPTION_PREFIX + INPUT_DIR_PROPERTY;
+    public static final String INPUT_DIR_OPTION_DESCRIPTION = "Logchange project directory, where config and YML files are stored in version directories";
+
     public static final String OUTPUT_FILE_MVN_PROPERTY = "outputFile";
+    public static final String OUTPUT_FILE_OPTION = OPTION_PREFIX + OUTPUT_FILE_MVN_PROPERTY;
+    public static final String OUTPUT_FILE_OPTION_DESCRIPTION = "Name of changelog file, it will be created if it's not present";
+
     public static final String UNRELEASED_VERSION_DIR_MVN_PROPERTY = "unreleasedVersionDir";
+    public static final String UNRELEASED_VERSION_DIR_OPTION = OPTION_PREFIX + UNRELEASED_VERSION_DIR_MVN_PROPERTY;
+    public static final String UNRELEASED_VERSION_DIR_OPTION_DESCRIPTION = "Name of directory, where YML for unreleased version are stored";
+
+
     public static final String AGGREGATE_VERSION_MVN_PROPERTY = "aggregateVersion";
     public static final String FILENAME_MVN_PROPERTY = "fileName";
     public static final String EMPTY_MVN_PROPERTY = "empty";

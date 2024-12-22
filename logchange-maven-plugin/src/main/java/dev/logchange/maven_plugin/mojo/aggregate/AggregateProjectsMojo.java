@@ -15,7 +15,7 @@ public class AggregateProjectsMojo extends AbstractMojo {
     @Parameter(property = AGGREGATE_VERSION_MVN_PROPERTY, required = true)
     private String aggregateVersion;
 
-    @Parameter(defaultValue = DEFAULT_INPUT_DIR, property = INPUT_DIR_MVN_PROPERTY)
+    @Parameter(defaultValue = DEFAULT_INPUT_DIR, property = INPUT_DIR_PROPERTY)
     private String inputDir;
 
     @Parameter(defaultValue = DEFAULT_CONFIG_FILE, property = CONFIG_FILE_MVN_PROPERTY)

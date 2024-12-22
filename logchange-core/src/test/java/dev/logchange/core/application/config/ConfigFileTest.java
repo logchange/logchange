@@ -16,7 +16,6 @@ class ConfigFileTest {
     private static final String PATH = "src/test/resources/ConfigFileTest/";
     private static final String CONFIG_FILE_NAME = "logchange-config.yml";
 
-
     @AfterEach
     void cleanUp() {
         new File(PATH + CONFIG_FILE_NAME).delete();
@@ -35,17 +34,32 @@ class ConfigFileTest {
     }
 
     @Test
-    void shouldTryCreateConfigFileAndThrowException() throws IOException {
+    void shouldTryCreateConfigFileAndReturnAlreadyExisting() throws IOException {
         // given:
         assertFalse(new File(PATH + CONFIG_FILE_NAME).exists());
-        new File(PATH + CONFIG_FILE_NAME).createNewFile();
+        File expected = new File(PATH + CONFIG_FILE_NAME);
+        expected.createNewFile();
+
+        // when:
+        File result = ConfigFile.of(PATH).create(CONFIG_FILE_NAME);
+
+        // then:
+        assertTrue(result.exists());
+        assertEquals(expected.getAbsolutePath(), result.getAbsolutePath());
+    }
+
+    @Test
+    void shouldTryCreateConfigFileAndThrowExceptionIfItsNotaFile() throws IOException {
+        // given:
+        assertFalse(new File(PATH + CONFIG_FILE_NAME).exists());
+        File expected = new File(PATH + CONFIG_FILE_NAME);
+        expected.mkdir();
 
         // when:
         Exception exception = assertThrows(RuntimeException.class, () -> ConfigFile.of(PATH).create(CONFIG_FILE_NAME));
 
         // then:
-        assertEquals("logchange-config.yml already exists.", exception.getMessage());
-
+        assertEquals(exception.getMessage(), "logchange-config.yml already exists and logchange-config.yml is not a file! (probably it is directory)");
     }
 
     @Test

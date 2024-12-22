@@ -28,9 +28,15 @@ public class ConfigFile {
                 log.info("Created: " + changelogConfig.getName());
                 return changelogConfig;
             } else {
-                String msg = changelogConfig.getName() + " already exists.";
+                String msg = changelogConfig.getName() + " already exists";
                 log.warning(msg);
-                throw new RuntimeException(msg);
+                if (changelogConfig.isFile()) {
+                    return changelogConfig;
+                } else {
+                    String msg2 = fileName + " is not a file! (probably it is directory)";
+                    log.severe(msg2);
+                    throw new RuntimeException(msg + " and " + msg2);
+                }
             }
         } catch (IOException e) {
             String msg = String.format("An error occurred while creating %s in path: %s - %s", fileName, path, e.getMessage());

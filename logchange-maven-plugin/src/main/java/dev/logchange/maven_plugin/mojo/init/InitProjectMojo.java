@@ -11,7 +11,7 @@ import static dev.logchange.commands.Constants.*;
 @Mojo(name = INIT_COMMAND, defaultPhase = LifecyclePhase.NONE)
 public class InitProjectMojo extends AbstractMojo {
 
-    @Parameter(defaultValue = DEFAULT_INPUT_DIR, property = INPUT_DIR_MVN_PROPERTY)
+    @Parameter(defaultValue = DEFAULT_INPUT_DIR, property = INPUT_DIR_PROPERTY)
     private String inputDir;
 
     @Parameter(defaultValue = DEFAULT_UNRELEASED_VERSION_DIR, property = UNRELEASED_VERSION_DIR_MVN_PROPERTY)

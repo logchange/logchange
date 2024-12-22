@@ -3,6 +3,7 @@ package dev.logchange.core.format.yml;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator;
 import org.yaml.snakeyaml.DumperOptions;
@@ -24,6 +25,7 @@ public class ObjectMapperProvider {
 
         ObjectMapper mapper = new ObjectMapper(yamlFactory);
         mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+        mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 
         return mapper;
     }
