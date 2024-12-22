@@ -6,23 +6,24 @@ import lombok.extern.java.Log;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Optional;
 
 @Log
 public class ConfigFile {
 
-    private final String path;
+    private final Path path;
 
-    private ConfigFile(String path) {
+    private ConfigFile(Path path) {
         this.path = path;
     }
 
-    public static ConfigFile of(String path) {
+    public static ConfigFile of(Path path) {
         return new ConfigFile(path);
     }
 
-    public File create(String fileName) {
-        File changelogConfig = new File(path + "/" + fileName);
+    public File create() {
+        File changelogConfig = path.toFile();
         try {
             if (changelogConfig.createNewFile()) {
                 log.info("Created: " + changelogConfig.getName());
@@ -33,13 +34,13 @@ public class ConfigFile {
                 if (changelogConfig.isFile()) {
                     return changelogConfig;
                 } else {
-                    String msg2 = fileName + " is not a file! (probably it is directory)";
+                    String msg2 = path.getFileName() + " is not a file! (probably it is directory)";
                     log.severe(msg2);
                     throw new RuntimeException(msg + " and " + msg2);
                 }
             }
         } catch (IOException e) {
-            String msg = String.format("An error occurred while creating %s in path: %s - %s", fileName, path, e.getMessage());
+            String msg = String.format("An error occurred while creating %s in path: %s", path, e.getMessage());
             log.severe(msg);
             throw new RuntimeException(msg);
         }

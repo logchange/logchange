@@ -38,6 +38,7 @@ public class ReleaseVersionMojo extends AbstractMojo {
         String version = ReleaseVersionCommand.getVersion(project.getVersion());
         getLog().info(RELEASE_COMMAND_START_LOG + version);
         ReleaseVersionCommand.of(
+                DEFAULT_PATH,
                 version,
                 unreleasedVersionDir,
                 inputDir,

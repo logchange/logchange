@@ -5,13 +5,15 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class GitKeepTest {
 
     private static final String PATH = "src/test/resources/GitKeepTest/";
-    private static final String GIT_KEEP_NAME = ".gitkeepTest";
+    private static final String GIT_KEEP_NAME = ".gitkeep";
 
     @AfterEach
     void cleanUp() {
@@ -25,7 +27,7 @@ class GitKeepTest {
         assertFalse(gitKeepFile.exists());
 
         // when:
-        GitKeep.of(PATH).create(GIT_KEEP_NAME);
+        GitKeep.of(Paths.get(PATH, GIT_KEEP_NAME)).create();
 
         // then:
         assertTrue(gitKeepFile.exists());
@@ -39,7 +41,7 @@ class GitKeepTest {
         assertTrue(gitKeepFile.exists());
 
         // when:
-        GitKeep.of(PATH).create(GIT_KEEP_NAME);
+        GitKeep.of(Paths.get(PATH, GIT_KEEP_NAME)).create();
 
         // then:
         assertTrue(gitKeepFile.exists());

@@ -18,6 +18,7 @@ import lombok.extern.java.Log;
 
 import java.io.File;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Log
 @RequiredArgsConstructor(staticName = "of")
@@ -61,6 +62,6 @@ public class AggregateVersionCommand {
     }
 
     public void createVersionDir(String inputDir, String versionDir) {
-        Dir.of(inputDir + "/" + versionDir).create();
+        Dir.of(Paths.get(inputDir, versionDir)).create();
     }
 }

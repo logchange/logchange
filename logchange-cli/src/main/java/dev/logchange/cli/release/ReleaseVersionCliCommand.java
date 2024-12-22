@@ -1,5 +1,6 @@
 package dev.logchange.cli.release;
 
+import dev.logchange.cli.BaseCommand;
 import dev.logchange.commands.release.ReleaseVersionCommand;
 import lombok.CustomLog;
 import picocli.CommandLine.Command;
@@ -11,9 +12,9 @@ import static dev.logchange.commands.Constants.*;
         description = RELEASE_COMMAND_DESCRIPTION,
         mixinStandardHelpOptions = true,
         showDefaultValues = true)
-public class ReleaseVersionCliCommand implements Runnable {
+public class ReleaseVersionCliCommand extends BaseCommand {
 
-    public void run() {
+    public void runCommand() {
         String version = ReleaseVersionCommand.getVersion("TODO");
         log.info(RELEASE_COMMAND_START_LOG + version);
 

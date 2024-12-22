@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,7 +28,7 @@ class ConfigFileTest {
         assertFalse(new File(PATH + CONFIG_FILE_NAME).exists());
 
         // when:
-        ConfigFile.of(PATH).create(CONFIG_FILE_NAME);
+        ConfigFile.of(Paths.get(PATH, CONFIG_FILE_NAME)).create();
 
         // then:
         assertTrue(new File(PATH + CONFIG_FILE_NAME).exists());
@@ -41,7 +42,7 @@ class ConfigFileTest {
         expected.createNewFile();
 
         // when:
-        File result = ConfigFile.of(PATH).create(CONFIG_FILE_NAME);
+        File result = ConfigFile.of(Paths.get(PATH, CONFIG_FILE_NAME)).create();
 
         // then:
         assertTrue(result.exists());
@@ -56,7 +57,7 @@ class ConfigFileTest {
         expected.mkdir();
 
         // when:
-        Exception exception = assertThrows(RuntimeException.class, () -> ConfigFile.of(PATH).create(CONFIG_FILE_NAME));
+        Exception exception = assertThrows(RuntimeException.class, () -> ConfigFile.of(Paths.get(PATH, CONFIG_FILE_NAME)).create());
 
         // then:
         assertEquals(exception.getMessage(), "logchange-config.yml already exists and logchange-config.yml is not a file! (probably it is directory)");
@@ -66,7 +67,7 @@ class ConfigFileTest {
     void shouldFindConfigFile() {
         // given:
         assertFalse(new File(PATH + CONFIG_FILE_NAME).exists());
-        File file = ConfigFile.of(PATH).create(CONFIG_FILE_NAME);
+        File file = ConfigFile.of(Paths.get(PATH, CONFIG_FILE_NAME)).create();
         ConfigRepository configRepository = new FileConfigRepository(file);
         configRepository.save(Config.EMPTY);
 

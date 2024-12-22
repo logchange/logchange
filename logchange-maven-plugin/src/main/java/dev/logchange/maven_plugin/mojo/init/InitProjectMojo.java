@@ -23,7 +23,7 @@ public class InitProjectMojo extends AbstractMojo {
     @Override
     public void execute() {
         getLog().info(INIT_COMMAND_START_LOG);
-        InitProjectCommand.of(inputDir, unreleasedVersionDir, outputFile).execute();
+        InitProjectCommand.of(DEFAULT_PATH, inputDir, unreleasedVersionDir, outputFile).execute();
         getLog().info(INIT_COMMAND_END_LOG);
     }
 }

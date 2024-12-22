@@ -14,7 +14,8 @@ public class ObjectMapperProvider {
         DumperOptions dumperOptions = new DumperOptions();
         dumperOptions.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
         dumperOptions.setPrettyFlow(true);
-        dumperOptions.setIndent(4);
+        dumperOptions.setIndentWithIndicator(true);
+        dumperOptions.setIndent(2);
         dumperOptions.setIndicatorIndent(2);
 
         YAMLFactory yamlFactory = YAMLFactory.builder()

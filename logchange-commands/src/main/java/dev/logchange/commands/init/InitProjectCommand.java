@@ -11,6 +11,8 @@ import lombok.extern.java.Log;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static dev.logchange.commands.Constants.DEFAULT_CONFIG_FILE;
 import static dev.logchange.commands.Constants.GIT_KEEP;
@@ -19,35 +21,48 @@ import static dev.logchange.commands.Constants.GIT_KEEP;
 @RequiredArgsConstructor(staticName = "of")
 public class InitProjectCommand {
 
+    private final String rootPath;
     private final String inputDir;
     private final String unreleasedVersionDir;
     private final String outputFile;
 
     public void execute() {
         log.info("Initializing project");
-        createEmptyChangelogFile(outputFile);
-        createUnreleased(inputDir, unreleasedVersionDir);
-        createConfig(inputDir);
+        checkIfRootExists(rootPath);
+        createEmptyChangelogFile(Paths.get(rootPath, outputFile));
+        createUnreleased(rootPath, inputDir, unreleasedVersionDir);
+        createConfig(rootPath, inputDir);
         log.info("Project initialized");
     }
 
-    private void createConfig(String inputDir) {
+    private void checkIfRootExists(String rootPath) {
+        if (!new File(rootPath).exists()) {
+            String msg = String.format("Root path: %s must exists! Check if you are in right directory!", rootPath);
+            log.severe(msg);
+            throw new RuntimeException(msg);
+        }
+    }
+
+    private void createConfig(String rootPath, String inputDir) {
         log.info("Creating config file");
-        File config = ConfigFile.of(inputDir).create(DEFAULT_CONFIG_FILE);
+        File config = ConfigFile.of(Paths.get(rootPath, inputDir, DEFAULT_CONFIG_FILE)).create();
         ConfigRepository configRepository = new FileConfigRepository(config);
         configRepository.save(Config.EMPTY);
     }
 
-    public static void createUnreleased(String inputDir, String unreleasedVersionDir) {
+    public static void createUnreleased(String rootPath, String inputDir, String unreleasedVersionDir) {
         log.info("Creating unreleased directory");
-        Dir.of(inputDir).create();
-        Dir.of(inputDir + "/" + unreleasedVersionDir).create();
-        GitKeep.of(inputDir + "/" + unreleasedVersionDir + "/").create(GIT_KEEP);
+        Path inputDirPath = Paths.get(rootPath, inputDir);
+        Dir.of(inputDirPath).create();
+        Path unreleasedVersionDirPath = Paths.get(rootPath, inputDir, unreleasedVersionDir);
+        Dir.of(unreleasedVersionDirPath).create();
+        Path gitKeepPath = Paths.get(rootPath, inputDir, unreleasedVersionDir, GIT_KEEP);
+        GitKeep.of(gitKeepPath).create();
     }
 
-    private static void createEmptyChangelogFile(String path) {
+    private static void createEmptyChangelogFile(Path path) {
         try {
-            File changelog = new File(path);
+            File changelog = path.toFile();
             if (changelog.createNewFile()) {
                 log.info("Created: " + changelog.getName());
             } else {

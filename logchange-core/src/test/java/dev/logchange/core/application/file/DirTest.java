@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,7 +27,7 @@ class DirTest {
         assertFalse(new File(PATH + DIR_NAME).exists());
 
         // when:
-        Dir.of(PATH + DIR_NAME).create();
+        Dir.of(Paths.get(PATH, DIR_NAME)).create();
 
         // then:
         assertTrue(new File(PATH + DIR_NAME).exists());

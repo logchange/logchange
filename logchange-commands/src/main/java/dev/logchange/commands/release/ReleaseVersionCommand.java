@@ -20,6 +20,7 @@ import static dev.logchange.commands.Constants.GIT_KEEP;
 @RequiredArgsConstructor(staticName = "of")
 public class ReleaseVersionCommand {
 
+    private final String rootPath;
     private final String version;
     private final String unreleasedVersionDir;
     private final String inputDir;
@@ -44,7 +45,7 @@ public class ReleaseVersionCommand {
                 .withXml(xmlOutputFile)
                 .execute(isGenerateChangesXml);
 
-        InitProjectCommand.createUnreleased(inputDir, unreleasedVersionDir);
+        InitProjectCommand.createUnreleased(rootPath, inputDir, unreleasedVersionDir);
         log.info("New changelog release successful");
     }
 

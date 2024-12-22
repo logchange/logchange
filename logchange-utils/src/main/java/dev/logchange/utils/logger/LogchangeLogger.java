@@ -27,4 +27,10 @@ public class LogchangeLogger {
         level = newLevel;
     }
 
+    public void debug(Exception e) {
+        if (level.isEnabled(LoggerLevel.DEBUG)) {
+            System.out.println("[DEBUG]" + e.getMessage());
+            e.printStackTrace(System.out);
+        }
+    }
 }

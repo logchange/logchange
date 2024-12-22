@@ -11,18 +11,18 @@ import java.util.stream.Stream;
 
 @Log
 public class Dir {
-    private final String path;
+    private final Path path;
 
-    private Dir(String path) {
+    private Dir(Path path) {
         this.path = path;
     }
 
-    public static Dir of(String path) {
+    public static Dir of(Path path) {
         return new Dir(path);
     }
 
     public void create() {
-        File newDir = new File(path);
+        File newDir = path.toFile();
         if (!newDir.exists()) {
             if (newDir.mkdir()) {
                 log.info("Created: " + newDir.getName());

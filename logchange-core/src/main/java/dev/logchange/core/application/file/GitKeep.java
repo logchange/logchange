@@ -4,21 +4,22 @@ import lombok.extern.java.Log;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 
 @Log
 public class GitKeep {
-    private final String path;
+    private final Path path;
 
-    private GitKeep(String path) {
+    private GitKeep(Path path) {
         this.path = path;
     }
 
-    public static GitKeep of(String path) {
+    public static GitKeep of(Path path) {
         return new GitKeep(path);
     }
 
-    public void create(String gitKeepFileName) {
-        File gitKeep = new File(path + gitKeepFileName);
+    public void create() {
+        File gitKeep = path.toFile();
         try {
             if (gitKeep.createNewFile()) {
                 log.info("Created: " + gitKeep.getName());
@@ -26,7 +27,7 @@ public class GitKeep {
                 log.warning(gitKeep.getName() + " already exists.");
             }
         } catch (IOException e) {
-            String msg = String.format("An error occurred while creating %s in path: %s - %s", gitKeepFileName, path, e.getMessage());
+            String msg = String.format("An error occurred while creating %s in path: %s", path, e.getMessage());
             log.severe(msg);
         }
     }

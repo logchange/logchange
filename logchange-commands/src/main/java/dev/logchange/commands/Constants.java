@@ -2,6 +2,8 @@ package dev.logchange.commands;
 
 public class Constants {
 
+    public static final String OPTION_SEPARATOR = " ";
+    private static final String OPTION_SHORT_PREFIX = "-";
     private static final String OPTION_PREFIX = "--";
 
     public static final String BASIC_FOOTER = "\n\n\uD83E\uDEB5\uD83E\uDEB5 Feel free to contact us via email team@logchange.dev \uD83E\uDEB5\uD83E\uDEB5\n\uD83E\uDEB5\uD83E\uDEB5 or visit https://github.com/logchange/logchange \uD83E\uDEB5\uD83E\uDEB5";
@@ -31,7 +33,6 @@ public class Constants {
     public static final String LINT_COMMAND_START_LOG = "Running lint command...";
     public static final String LINT_COMMAND_END_LOG = "No problems found, lint passed successfully";
 
-
     public static final String ADD_COMMAND = "add";
     public static final String ADD_COMMAND_DESCRIPTION = "Creates new .yml file with logchange structure";
     public static final String ADD_COMMAND_START_LOG = "Running add command...";
@@ -46,6 +47,13 @@ public class Constants {
     public static final String AGGREGATE_COMMAND_DESCRIPTION = "Aggregates projects changelogs to create one";
     public static final String AGGREGATE_COMMAND_START_LOG = "Running aggregate command...";
     public static final String AGGREGATE_COMMAND_END_LOG = "Aggregate successfully";
+
+    public static final String DEFAULT_PATH = ".";
+    public static final String PATH_PROPERTY = "path";
+    public static final String PATH_OPTION = OPTION_PREFIX + PATH_PROPERTY;
+    public static final String PATH_SHORT_PROPERTY = "p";
+    public static final String PATH_SHORT_OPTION = OPTION_SHORT_PREFIX + PATH_SHORT_PROPERTY;
+    public static final String PATH_OPTION_DESCRIPTION = "Path to the root directory";
 
     public static final String INPUT_DIR_PROPERTY = "inputDir";
     public static final String INPUT_DIR_OPTION = OPTION_PREFIX + INPUT_DIR_PROPERTY;

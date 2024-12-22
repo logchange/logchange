@@ -1,5 +1,6 @@
 package dev.logchange.cli.lint;
 
+import dev.logchange.cli.BaseCommand;
 import lombok.CustomLog;
 import picocli.CommandLine.Command;
 
@@ -10,9 +11,9 @@ import static dev.logchange.commands.Constants.*;
         description = LINT_COMMAND_DESCRIPTION,
         mixinStandardHelpOptions = true,
         showDefaultValues = true)
-public class LintCliCommand implements Runnable {
+public class LintCliCommand extends BaseCommand {
 
-    public void run() {
+    public void runCommand() {
         log.info(LINT_COMMAND_START_LOG);
 
         //TODO
