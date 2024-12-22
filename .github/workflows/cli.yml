@@ -14,22 +14,33 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, windows-latest, ubuntu-latest]
-#        os: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v4
-      - uses: graalvm/setup-graalvm@v1
+
+      # musl is only available on linux
+      - if: ${{ matrix.os == 'ubuntu-latest' }}
+        uses: graalvm/setup-graalvm@v1
         with:
           java-version: '21'
           distribution: 'graalvm'
           github-token: ${{ secrets.GITHUB_TOKEN }}
           cache: 'maven'
           native-image-musl: 'true'
+      - if: ${{ matrix.os != 'ubuntu-latest' }}
+        uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: '21'
+          distribution: 'graalvm'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          cache: 'maven'
+
       - name: Check environment
         run: |
           echo "GRAALVM_HOME: $GRAALVM_HOME"
           echo "JAVA_HOME: $JAVA_HOME"
           java --version
           native-image --version
+
       # musl is only available on linux
       - if: ${{ matrix.os == 'ubuntu-latest' }}
         name: Build CLI executable (static)
@@ -37,6 +48,7 @@ jobs:
       - if: ${{ matrix.os != 'ubuntu-latest' }}
         name: Build CLI executable (non-static)
         run: mvn -Pnative package -DskipTests
+
       - name: Upload binaries
         uses: actions/upload-artifact@v4
         with:
