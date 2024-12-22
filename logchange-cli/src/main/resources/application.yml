@@ -1,3 +1,6 @@
 micronaut:
   application:
-    name: logchangeCli
+    name: logchange
+logger:
+  levels:
+    root: INFO
