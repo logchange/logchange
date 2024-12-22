@@ -13,7 +13,12 @@ public class Constants {
     public static final String INIT_COMMAND = "init";
     public static final String GENERATE_COMMAND = "generate";
     public static final String LINT_COMMAND = "lint";
+
     public static final String ADD_COMMAND = "add";
+    public static final String ADD_COMMAND_DESCRIPTION = "Creates new .yml file with logchange structure";
+    public static final String ADD_COMMAND_START_LOG = "Running add command...";
+    public static final String ADD_COMMAND_END_LOG = "Changelog entry successfully added";
+
     public static final String RELEASE_COMMAND = "release";
     public static final String AGGREGATE_COMMAND = "aggregate";
 

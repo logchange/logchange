@@ -9,6 +9,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>logchange-utils</module>
         <module>logchange-core</module>
         <module>logchange-commands</module>
         <module>logchange-maven-plugin</module>

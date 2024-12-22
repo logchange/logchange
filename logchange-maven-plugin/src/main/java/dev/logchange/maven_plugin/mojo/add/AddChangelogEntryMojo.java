@@ -52,12 +52,12 @@ public class AddChangelogEntryMojo extends AbstractMojo {
 
     @Override
     public void execute() {
-        getLog().info("Running add command...");
+        getLog().info(ADD_COMMAND_START_LOG);
         AddEntryCommand addEntryCommand = AddEntryCommand.of(inputDir, unreleasedVersionDir);
         outputFileName = new OutputFileNameProvider(empty, prompter, outputFileName).get();
         ChangelogEntry entry = new ChangelogEntryProviderFactory(empty, batchMode, getParams(), prompter).create().get();
         addEntryCommand.execute(entry, outputFileName);
-        getLog().info("Changelog entry successfully added");
+        getLog().info(ADD_COMMAND_END_LOG);
     }
 
     private AddChangelogEntryBatchModeParams getParams() {

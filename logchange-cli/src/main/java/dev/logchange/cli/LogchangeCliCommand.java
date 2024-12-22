@@ -1,5 +1,6 @@
 package dev.logchange.cli;
 
+import dev.logchange.cli.add.AddChangelogEntryCliCommand;
 import lombok.extern.java.Log;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
@@ -9,7 +10,7 @@ import picocli.CommandLine.Option;
 @Command(name = "logchange",
         description = "logchange (CLI) - \uD83E\uDEB5 logchange is a tool which helps creating CHANGELOG by keeping one format and solving merge request conflicts problem by extraction of new CHANGELOG entries to separate files. \n\n Visit https://logchange.dev/\n",
         mixinStandardHelpOptions = true,
-        subcommands = { InitCommand.class, GenerateChangelogCommand.class })
+        subcommands = { InitCliCommand.class, GenerateChangelogCliCommand.class, AddChangelogEntryCliCommand.class })
 public class LogchangeCliCommand implements Runnable {
 
     @Option(names = {"-v", "--verbose"}, description = "...", defaultValue = "false")
