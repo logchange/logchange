@@ -30,8 +30,12 @@ jobs:
           echo "JAVA_HOME: $JAVA_HOME"
           java --version
           native-image --version
-      - name: Build CLI executable
+      - if: ${{ matrix.os }} == ubuntu-latest
+        name: Build CLI executable (static)
         run: mvn -Pnative-static package -DskipTests
+      - if: ${{ matrix.os }} != ubuntu-latest
+        name: Build CLI executable (non-static)
+        run: mvn -Pnative package -DskipTests
       - name: Upload binaries
         uses: actions/upload-artifact@v4
         with:
