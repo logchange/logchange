@@ -214,8 +214,6 @@
                         </executions>
                         <configuration>
                             <buildArgs>
-                                <arg>--libc=glibc</arg>
-                                <arg>--static</arg>
                                 <arg>--initialize-at-build-time=org.xml.sax.helpers.LocatorImpl</arg>
                                 <arg>--initialize-at-build-time=org.xml.sax.helpers.AttributesImpl</arg>
                             </buildArgs>
@@ -253,7 +251,7 @@
                         </executions>
                         <configuration>
                             <buildArgs>
-                                <arg>--libc=glibc</arg>
+                                <arg>--libc=musl</arg>
                                 <arg>--static</arg>
                                 <arg>--initialize-at-build-time=org.xml.sax.helpers.LocatorImpl</arg>
                                 <arg>--initialize-at-build-time=org.xml.sax.helpers.AttributesImpl</arg>

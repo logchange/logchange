@@ -13,15 +13,17 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-latest, windows-latest, ubuntu-latest]
+#        os: [macos-latest, windows-latest, ubuntu-latest]
+        os: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v4
-      - uses: graalvm/setup-graalvm@v1
+      - uses: ./
         with:
           java-version: '21'
           distribution: 'graalvm'
           github-token: ${{ secrets.GITHUB_TOKEN }}
           cache: 'maven'
+          native-image-musl: 'true'
       - name: Check environment
         run: |
           echo "GRAALVM_HOME: $GRAALVM_HOME"
@@ -29,7 +31,7 @@ jobs:
           java --version
           native-image --version
       - name: Build CLI executable
-        run: mvn -Pnative package -DskipTests
+        run: mvn -Pnative-static package -DskipTests
       - name: Upload binaries
         uses: actions/upload-artifact@v4
         with:
