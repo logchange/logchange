@@ -9,8 +9,8 @@ LABEL org.opencontainers.image.authors='team@logchange.dev' \
 
 # Download artifact from GH Actions
 # or build with:
-# mvn package -Pnative-static && cp /logchange-cli/logchange ./logchange-linuxx64
-ADD logchange-linuxx64 /usr/local/bin/logchange
+# mvn package -Pnative-static && cp /logchange-cli/target/logchange .
+ADD logchange /usr/local/bin/logchange
 
 ARG WORKING_PATH="/code"
 RUN mkdir $WORKING_PATH
