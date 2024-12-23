@@ -24,7 +24,7 @@ public class ReleaseVersionMojo extends AbstractMojo {
     @Parameter(defaultValue = DEFAULT_OUTPUT_FILE, property = OUTPUT_FILE_MVN_PROPERTY)
     private String outputFile;
 
-    @Parameter(defaultValue = DEFAULT_CONFIG_FILE, property = CONFIG_FILE_MVN_PROPERTY)
+    @Parameter(defaultValue = DEFAULT_CONFIG_FILE, property = CONFIG_FILE_PROPERTY)
     private String configFile;
 
     @Parameter(defaultValue = "false", property = GENERATE_CHANGES_XML_PROPERTY)

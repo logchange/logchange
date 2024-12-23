@@ -8,6 +8,14 @@ public class Constants {
 
     public static final String BASIC_FOOTER = "\n\nFeel free to contact us via email team@logchange.dev or visit https://github.com/logchange/logchange";
 
+    public static final String INPUT_DIR_PROPERTY = "inputDir";
+    public static final String INPUT_DIR_OPTION = OPTION_PREFIX + INPUT_DIR_PROPERTY;
+    public static final String INPUT_DIR_OPTION_DESCRIPTION = "Logchange project directory, where config and YML files are stored in version directories";
+
+    public static final String CONFIG_FILE_PROPERTY = "configFile";
+    public static final String CONFIG_FILE_OPTION = OPTION_PREFIX + CONFIG_FILE_PROPERTY;
+    public static final String CONFIG_FILE_OPTION_DESCRIPTION = "Name of config file at <" + INPUT_DIR_PROPERTY + "> directory";
+
     public static final String DEFAULT_OUTPUT_FILE = "CHANGELOG.md";
     public static final String DEFAULT_INPUT_DIR = "changelog";
     public static final String DEFAULT_UNRELEASED_VERSION_DIR = "unreleased";
@@ -60,15 +68,13 @@ public class Constants {
     public static final String PATH_SHORT_OPTION = OPTION_SHORT_PREFIX + PATH_SHORT_PROPERTY;
     public static final String PATH_OPTION_DESCRIPTION = "Path to the root directory";
 
-    public static final String INPUT_DIR_PROPERTY = "inputDir";
-    public static final String INPUT_DIR_OPTION = OPTION_PREFIX + INPUT_DIR_PROPERTY;
-    public static final String INPUT_DIR_OPTION_DESCRIPTION = "Logchange project directory, where config and YML files are stored in version directories";
-
     public static final String OUTPUT_FILE_MVN_PROPERTY = "outputFile";
     public static final String OUTPUT_FILE_OPTION = OPTION_PREFIX + OUTPUT_FILE_MVN_PROPERTY;
     public static final String OUTPUT_FILE_OPTION_DESCRIPTION = "Name of changelog file, it will be created if it's not present";
 
-    public static final String AGGREGATE_VERSION_MVN_PROPERTY = "aggregateVersion";
+    public static final String AGGREGATE_VERSION_PROPERTY = "aggregateVersion";
+    public static final String AGGREGATE_VERSION_OPTION = OPTION_PREFIX + AGGREGATE_VERSION_PROPERTY;
+    public static final String AGGREGATE_VERSION_OPTION_DESCRIPTION = "Version number that we want to aggregate across all projects defined at <" + CONFIG_FILE_PROPERTY + "> in section aggregates";
 
     public static final String FILENAME_PROPERTY = "fileName";
     public static final String FILENAME_OPTION = OPTION_PREFIX + FILENAME_PROPERTY;
@@ -79,7 +85,6 @@ public class Constants {
     public static final String BATCH_MODE_PROPERTY = "batchMode";
     public static final String BATCH_MODE_OPTION = OPTION_PREFIX + BATCH_MODE_PROPERTY;
 
-    public static final String CONFIG_FILE_MVN_PROPERTY = "configFile";
     public static final String GENERATE_CHANGES_XML_PROPERTY = "changesXml";
     public static final String XML_OUTPUT_FILE_PROPERTY = "outputFileXml";
 

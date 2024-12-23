@@ -12,13 +12,13 @@ import static dev.logchange.commands.Constants.*;
 @Mojo(name = AGGREGATE_COMMAND, defaultPhase = LifecyclePhase.NONE, requiresProject = false)
 public class AggregateProjectsMojo extends AbstractMojo {
 
-    @Parameter(property = AGGREGATE_VERSION_MVN_PROPERTY, required = true)
+    @Parameter(property = AGGREGATE_VERSION_PROPERTY, required = true)
     private String aggregateVersion;
 
     @Parameter(defaultValue = DEFAULT_INPUT_DIR, property = INPUT_DIR_PROPERTY)
     private String inputDir;
 
-    @Parameter(defaultValue = DEFAULT_CONFIG_FILE, property = CONFIG_FILE_MVN_PROPERTY)
+    @Parameter(defaultValue = DEFAULT_CONFIG_FILE, property = CONFIG_FILE_PROPERTY)
     private String configFile;
 
     @Override
