@@ -86,7 +86,12 @@ public class Constants {
     public static final String BATCH_MODE_OPTION = OPTION_PREFIX + BATCH_MODE_PROPERTY;
 
     public static final String GENERATE_CHANGES_XML_PROPERTY = "changesXml";
+    public static final String GENERATE_CHANGES_XML_OPTION = OPTION_PREFIX + GENERATE_CHANGES_XML_PROPERTY;
+    public static final String GENERATE_CHANGES_XML_OPTION_DESCRIPTION = "[true/false] Should generate also XML file?";
+
     public static final String XML_OUTPUT_FILE_PROPERTY = "outputFileXml";
+    public static final String XML_OUTPUT_FILE_OPTION = OPTION_PREFIX + XML_OUTPUT_FILE_PROPERTY;
+    public static final String XML_OUTPUT_FILE_OPTION_DESCRIPTION = "";
 
     public static final String RELEASE_DATE_FORMAT = "yyyy-MM-dd";
 
