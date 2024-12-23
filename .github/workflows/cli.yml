@@ -94,11 +94,16 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name != 'pull_request'
     steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
       - name: Download Linux x86_64 Artifact
         uses: actions/download-artifact@v4
         with:
           name: logchange-linuxx64
           path: .
+
+      - run: ls -l
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
