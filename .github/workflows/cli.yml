@@ -103,8 +103,6 @@ jobs:
           name: logchange-linuxx64
           path: .
 
-      - run: ls -l
-
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
@@ -116,8 +114,9 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: logchange/logchange
-
-      - run: ls -l
+          tags: |
+            type=edge,branch=main
+            type=ref,event=tag
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
