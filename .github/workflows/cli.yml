@@ -91,7 +91,7 @@ jobs:
     name: Publish Docker image to Docker Hub
     needs: build
     runs-on: ubuntu-latest
-    if: github.event_name == 'release'
+    if: github.event_name != 'pull_request'
     steps:
       - name: Download Linux x86_64 Artifact
         uses: actions/download-artifact@v4
