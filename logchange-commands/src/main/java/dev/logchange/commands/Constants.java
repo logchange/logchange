@@ -68,8 +68,8 @@ public class Constants {
     public static final String PATH_SHORT_OPTION = OPTION_SHORT_PREFIX + PATH_SHORT_PROPERTY;
     public static final String PATH_OPTION_DESCRIPTION = "Path to the root directory";
 
-    public static final String OUTPUT_FILE_MVN_PROPERTY = "outputFile";
-    public static final String OUTPUT_FILE_OPTION = OPTION_PREFIX + OUTPUT_FILE_MVN_PROPERTY;
+    public static final String OUTPUT_FILE_PROPERTY = "outputFile";
+    public static final String OUTPUT_FILE_OPTION = OPTION_PREFIX + OUTPUT_FILE_PROPERTY;
     public static final String OUTPUT_FILE_OPTION_DESCRIPTION = "Name of changelog file, it will be created if it's not present";
 
     public static final String AGGREGATE_VERSION_PROPERTY = "aggregateVersion";

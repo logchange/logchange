@@ -10,6 +10,7 @@ import static dev.logchange.commands.Constants.*;
 @CustomLog
 @Command(name = AGGREGATE_COMMAND,
         description = AGGREGATE_COMMAND_DESCRIPTION,
+        separator = OPTION_SEPARATOR,
         mixinStandardHelpOptions = true,
         showDefaultValues = true)
 public class AggregateProjectsCliCommand extends BaseCommand {

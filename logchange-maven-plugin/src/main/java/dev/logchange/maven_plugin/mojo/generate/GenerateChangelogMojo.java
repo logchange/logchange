@@ -14,7 +14,7 @@ public class GenerateChangelogMojo extends AbstractMojo {
     @Parameter(defaultValue = DEFAULT_INPUT_DIR, property = INPUT_DIR_PROPERTY)
     private String inputDir;
 
-    @Parameter(defaultValue = DEFAULT_OUTPUT_FILE, property = OUTPUT_FILE_MVN_PROPERTY)
+    @Parameter(defaultValue = DEFAULT_OUTPUT_FILE, property = OUTPUT_FILE_PROPERTY)
     private String outputFile;
 
     @Parameter(defaultValue = DEFAULT_CONFIG_FILE, property = CONFIG_FILE_PROPERTY)
@@ -22,8 +22,8 @@ public class GenerateChangelogMojo extends AbstractMojo {
 
     @Override
     public void execute() {
-        getLog().info("Running generate command...");
+        getLog().info(GENERATE_COMMAND_START_LOG);
         GenerateProjectCommand.of(inputDir, outputFile, configFile).execute(false);
-        getLog().info("Changelog successfully generated");
+        getLog().info(GENERATE_COMMAND_END_LOG);
     }
 }

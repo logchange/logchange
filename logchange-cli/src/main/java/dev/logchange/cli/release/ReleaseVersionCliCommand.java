@@ -10,6 +10,7 @@ import static dev.logchange.commands.Constants.*;
 @CustomLog
 @Command(name = RELEASE_COMMAND,
         description = RELEASE_COMMAND_DESCRIPTION,
+        separator = OPTION_SEPARATOR,
         mixinStandardHelpOptions = true,
         showDefaultValues = true)
 public class ReleaseVersionCliCommand extends BaseCommand {

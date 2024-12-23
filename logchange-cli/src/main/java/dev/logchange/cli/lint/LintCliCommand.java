@@ -9,6 +9,7 @@ import static dev.logchange.commands.Constants.*;
 @CustomLog
 @Command(name = LINT_COMMAND,
         description = LINT_COMMAND_DESCRIPTION,
+        separator = OPTION_SEPARATOR,
         mixinStandardHelpOptions = true,
         showDefaultValues = true)
 public class LintCliCommand extends BaseCommand {
