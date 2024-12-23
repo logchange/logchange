@@ -11,12 +11,12 @@ import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogRepo
 import dev.logchange.core.infrastructure.persistance.changelog.FileVersionSummaryRepository;
 import dev.logchange.core.infrastructure.persistance.file.FileRepository;
 import dev.logchange.core.infrastructure.query.file.FileReader;
+import lombok.CustomLog;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 
 import java.io.File;
 
-@Log
+@CustomLog
 @RequiredArgsConstructor(staticName = "of")
 public class LintProjectCommand {
 
