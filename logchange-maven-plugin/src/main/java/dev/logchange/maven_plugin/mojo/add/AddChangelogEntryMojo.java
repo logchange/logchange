@@ -24,13 +24,13 @@ public class AddChangelogEntryMojo extends AbstractMojo {
     @Parameter(defaultValue = DEFAULT_UNRELEASED_VERSION_DIR, property = UNRELEASED_VERSION_DIR_MVN_PROPERTY)
     private String unreleasedVersionDir;
 
-    @Parameter(property = FILENAME_MVN_PROPERTY)
+    @Parameter(property = FILENAME_PROPERTY)
     private String outputFileName;
 
-    @Parameter(defaultValue = "false", property = BATCH_MODE_MVN_PROPERTY)
+    @Parameter(defaultValue = "false", property = BATCH_MODE_PROPERTY)
     private boolean batchMode;
 
-    @Parameter(defaultValue = "false", property = EMPTY_MVN_PROPERTY)
+    @Parameter(defaultValue = "false", property = EMPTY_PROPERTY)
     private boolean empty;
 
     @Parameter(property = "title")

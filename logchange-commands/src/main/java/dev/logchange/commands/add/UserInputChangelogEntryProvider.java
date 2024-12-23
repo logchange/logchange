@@ -110,8 +110,8 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
     }
 
     private List<ChangelogEntryLink> getLinksRecur(List<ChangelogEntryLink> links) {
-        String name = prompter.prompt("Give a link caption or press ENTER to skip");
-        String link = prompter.prompt("Give a link");
+        String name = prompter.prompt("Give a link caption [press ENTER to skip] ");
+        String link = prompter.prompt("Give a link ");
         links.add(ChangelogEntryLink.of(name, link));
 
         if (prompter.prompt("Is there any other links you want to include? [Y/y - YES] [N/n - NO]").trim().equalsIgnoreCase("Y")) {
@@ -141,9 +141,9 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
 
     private List<ChangelogEntryAuthor> getAuthorsRecur(List<ChangelogEntryAuthor> authors) {
         try {
-            String name = prompter.prompt("Give a name of author or press ENTER to skip");
-            String nick = prompter.prompt("Give a nickname of author or press ENTER to skip");
-            String url = prompter.prompt("Give a url of author profile or press ENTER to skip");
+            String name = prompter.prompt("Give a name of author [press ENTER to skip] ");
+            String nick = prompter.prompt("Give a nickname of author [press ENTER to skip] ");
+            String url = prompter.prompt("Give a url of author profile [press ENTER to skip] ");
             authors.add(ChangelogEntryAuthor.of(name, nick, url));
         } catch (IllegalArgumentException e) {
             prompter.showMessage(e.getMessage());
@@ -178,7 +178,7 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
     }
 
     private List<String> getNotesRecur(List<String> notes) {
-        String note = prompter.prompt("Give a note");
+        String note = prompter.prompt("Give a note ");
         notes.add(note.trim());
 
         if (prompter.prompt("Is there any other note you want to include? [Y/y - YES] [N/n - NO]").trim().equalsIgnoreCase("Y")) {
@@ -208,12 +208,12 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
 
     private List<ChangelogEntryConfiguration> getConfigurationsRecur(List<ChangelogEntryConfiguration> configurations) {
         try {
-            String type = prompter.prompt("Give a type of a configuration property (f.e. database, or system env, or application.properties)");
+            String type = prompter.prompt("Give a type of a configuration property (f.e. database, or system env, or application.properties) ");
             ChangelogEntryConfigurationAction action = getConfigurationAction();
-            String key = prompter.prompt("Give a key of configuration property (f.e. server.port)");
-            String defaultValue = prompter.prompt("Give a default value of configuration property (f.e. 8443) or press ENTER to skip");
-            String description = prompter.prompt("Give a description of configuration property (f.e. Port to handle incoming https traffic ) or press ENTER to skip");
-            String moreInfo = prompter.prompt("Here you can specify more information about configuration property (f.e. Remember to disable port 8080 to disable standard http traffic ) or press ENTER to skip");
+            String key = prompter.prompt("Give a key of configuration property (f.e. server.port) ");
+            String defaultValue = prompter.prompt("Give a default value of configuration property (f.e. 8443) [press ENTER to skip] ");
+            String description = prompter.prompt("Give a description of configuration property (f.e. Port to handle incoming https traffic ) [press ENTER to skip] ");
+            String moreInfo = prompter.prompt("Here you can specify more information about configuration property (f.e. Remember to disable port 8080 to disable standard http traffic ) [press ENTER to skip] ");
             configurations.add(ChangelogEntryConfiguration.of(type, action, key, defaultValue, description, moreInfo));
         } catch (IllegalArgumentException e) {
             prompter.showMessage(e.getMessage());

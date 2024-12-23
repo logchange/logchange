@@ -10,8 +10,8 @@ import static dev.logchange.commands.Constants.*;
 
 @CustomLog
 @Command(name = INIT_COMMAND,
-        separator = OPTION_SEPARATOR,
         description = INIT_COMMAND_DESCRIPTION,
+        separator = OPTION_SEPARATOR,
         mixinStandardHelpOptions = true,
         showDefaultValues = true)
 public class InitCliCommand extends BaseCommand {

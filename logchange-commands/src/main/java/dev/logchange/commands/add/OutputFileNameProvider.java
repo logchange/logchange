@@ -3,8 +3,8 @@ package dev.logchange.commands.add;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 
-import static dev.logchange.commands.Constants.EMPTY_MVN_PROPERTY;
-import static dev.logchange.commands.Constants.FILENAME_MVN_PROPERTY;
+import static dev.logchange.commands.Constants.EMPTY_PROPERTY;
+import static dev.logchange.commands.Constants.FILENAME_PROPERTY;
 
 @RequiredArgsConstructor
 public class OutputFileNameProvider {
@@ -19,7 +19,7 @@ public class OutputFileNameProvider {
         }
 
         if (empty) {
-            throw new IllegalArgumentException("When using -D" + EMPTY_MVN_PROPERTY + " or -DbatchMode option, you have to also use -D" + FILENAME_MVN_PROPERTY + "=0001-some-change.yml");
+            throw new IllegalArgumentException("When using -D" + EMPTY_PROPERTY + " or -DbatchMode option, you have to also use -D" + FILENAME_PROPERTY + "=0001-some-change.yml");
         }
 
         try {

@@ -3,8 +3,8 @@ package dev.logchange.commands;
 public class Constants {
 
     public static final String OPTION_SEPARATOR = " ";
-    private static final String OPTION_SHORT_PREFIX = "-";
-    private static final String OPTION_PREFIX = "--";
+    public static final String OPTION_SHORT_PREFIX = "-";
+    public static final String OPTION_PREFIX = "--";
 
     public static final String BASIC_FOOTER = "\n\nFeel free to contact us via email team@logchange.dev or visit https://github.com/logchange/logchange";
 
@@ -69,10 +69,16 @@ public class Constants {
 
 
     public static final String AGGREGATE_VERSION_MVN_PROPERTY = "aggregateVersion";
-    public static final String FILENAME_MVN_PROPERTY = "fileName";
-    public static final String EMPTY_MVN_PROPERTY = "empty";
 
-    public static final String BATCH_MODE_MVN_PROPERTY = "batchMode";
+    public static final String FILENAME_PROPERTY = "fileName";
+    public static final String FILENAME_OPTION = OPTION_PREFIX + FILENAME_PROPERTY;
+
+    public static final String EMPTY_PROPERTY = "empty";
+    public static final String EMPTY_OPTION = OPTION_PREFIX + EMPTY_PROPERTY;
+
+    public static final String BATCH_MODE_PROPERTY = "batchMode";
+    public static final String BATCH_MODE_OPTION = OPTION_PREFIX + BATCH_MODE_PROPERTY;
+
     public static final String CONFIG_FILE_MVN_PROPERTY = "configFile";
     public static final String GENERATE_CHANGES_XML_PROPERTY = "changesXml";
     public static final String XML_OUTPUT_FILE_PROPERTY = "outputFileXml";
