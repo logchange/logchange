@@ -1,8 +1,6 @@
-package dev.logchange.maven_plugin.mojo.add.entry;
+package dev.logchange.commands.add;
 
-import dev.logchange.maven_plugin.mojo.add.AddChangelogEntryMojo.AddChangelogEntryBatchModeParams;
 import lombok.RequiredArgsConstructor;
-import org.codehaus.plexus.components.interactivity.Prompter;
 
 @RequiredArgsConstructor
 public class ChangelogEntryProviderFactory {
@@ -12,7 +10,7 @@ public class ChangelogEntryProviderFactory {
     private final boolean batchMode;
 
     private final AddChangelogEntryBatchModeParams batchModeParams;
-    private final Prompter prompter;
+    private final AddEntryPrompter prompter;
 
     public ChangelogEntryProvider create() {
         if (batchMode && empty) {

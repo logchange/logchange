@@ -1,9 +1,10 @@
 package dev.logchange.maven_plugin.mojo.add;
 
+import dev.logchange.commands.add.AddChangelogEntryBatchModeParams;
 import dev.logchange.commands.add.AddEntryCommand;
+import dev.logchange.commands.add.ChangelogEntryProviderFactory;
+import dev.logchange.commands.add.OutputFileNameProvider;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
-import dev.logchange.maven_plugin.mojo.add.entry.ChangelogEntryProviderFactory;
-import lombok.Value;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -53,9 +54,10 @@ public class AddChangelogEntryMojo extends AbstractMojo {
     @Override
     public void execute() {
         getLog().info(ADD_COMMAND_START_LOG);
+        MavenAddEntryPrompter mavenPrompter = MavenAddEntryPrompter.of(prompter);
         AddEntryCommand addEntryCommand = AddEntryCommand.of(inputDir, unreleasedVersionDir);
-        outputFileName = new OutputFileNameProvider(empty, prompter, outputFileName).get();
-        ChangelogEntry entry = new ChangelogEntryProviderFactory(empty, batchMode, getParams(), prompter).create().get();
+        outputFileName = new OutputFileNameProvider(empty, mavenPrompter, outputFileName).get();
+        ChangelogEntry entry = new ChangelogEntryProviderFactory(empty, batchMode, getParams(), mavenPrompter).create().get();
         addEntryCommand.execute(entry, outputFileName);
         getLog().info(ADD_COMMAND_END_LOG);
     }
@@ -70,12 +72,4 @@ public class AddChangelogEntryMojo extends AbstractMojo {
         );
     }
 
-    @Value(staticConstructor = "of")
-    public static class AddChangelogEntryBatchModeParams {
-        String title;
-        String author;
-        String type;
-        String linkName;
-        String linkUrl;
-    }
 }

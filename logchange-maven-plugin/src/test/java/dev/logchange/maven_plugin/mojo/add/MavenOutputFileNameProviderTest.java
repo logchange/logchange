@@ -1,5 +1,6 @@
 package dev.logchange.maven_plugin.mojo.add;
 
+import dev.logchange.commands.add.OutputFileNameProvider;
 import org.codehaus.plexus.components.interactivity.Prompter;
 import org.codehaus.plexus.components.interactivity.PrompterException;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,14 +11,14 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class OutputFileNameProviderTest {
+class MavenOutputFileNameProviderTest {
 
     private OutputFileNameProvider fileNameProvider;
-    private Prompter prompter;
+    private MavenAddEntryPrompter prompter;
 
     @BeforeEach
     void setUp() {
-        prompter = new MockPrompter();
+        prompter = MavenAddEntryPrompter.of(new MockPrompter());
         fileNameProvider = new OutputFileNameProvider(false, prompter, null);
     }
 
@@ -46,7 +47,7 @@ class OutputFileNameProviderTest {
     @Test
     void testGet_WithPrompterException() throws PrompterException {
         // given
-        prompter = new MockPrompter(true);
+        prompter = MavenAddEntryPrompter.of(new MockPrompter(true));
         fileNameProvider = new OutputFileNameProvider(false, prompter, null);
 
         // then
@@ -82,7 +83,7 @@ class OutputFileNameProviderTest {
     @Test
     void testGetOutputFileName_WithEmptyInput() {
         // given
-        prompter = new MockPrompter(false, "", "test-file");
+        prompter = MavenAddEntryPrompter.of(new MockPrompter(false, "", "test-file"));
         fileNameProvider = new OutputFileNameProvider(false, prompter, null);
 
         // when
@@ -95,7 +96,7 @@ class OutputFileNameProviderTest {
     @Test
     void testGetOutputFileName_WithWhitespaceInput() {
         // given
-        prompter = new MockPrompter(false, " ", "test-file");
+        prompter = MavenAddEntryPrompter.of(new MockPrompter(false, " ", "test-file"));
         fileNameProvider = new OutputFileNameProvider(false, prompter, null);
 
         // when

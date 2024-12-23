@@ -1,7 +1,6 @@
-package dev.logchange.maven_plugin.mojo.add.entry;
+package dev.logchange.commands.add;
 
 import dev.logchange.core.domain.changelog.model.entry.*;
-import dev.logchange.maven_plugin.mojo.add.AddChangelogEntryMojo.AddChangelogEntryBatchModeParams;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 

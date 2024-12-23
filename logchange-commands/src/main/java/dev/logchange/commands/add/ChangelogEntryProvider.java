@@ -1,4 +1,4 @@
-package dev.logchange.maven_plugin.mojo.add.entry;
+package dev.logchange.commands.add;
 
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 

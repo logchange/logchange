@@ -1,10 +1,8 @@
-package dev.logchange.maven_plugin.mojo.add.entry;
+package dev.logchange.commands.add;
 
 import dev.logchange.core.domain.changelog.model.entry.*;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
-import org.codehaus.plexus.components.interactivity.Prompter;
-import org.codehaus.plexus.components.interactivity.PrompterException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,7 +13,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
 
-    private final Prompter prompter;
+    private final AddEntryPrompter prompter;
 
     public ChangelogEntry get() {
         try {
@@ -29,12 +27,12 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
                     .importantNotes(getNotes())
                     .configurations(getConfigurations())
                     .build();
-        } catch (PrompterException e) {
+        } catch (Exception e) {
             throw new IllegalArgumentException(e.getMessage());
         }
     }
 
-    private ChangelogEntryTitle getTitle() throws PrompterException {
+    private ChangelogEntryTitle getTitle() {
         while (true) {
             try {
                 return ChangelogEntryTitle.of(prompter.prompt("What is changelog's entry title(e.g. Adding new awesome product to order list)"));
@@ -44,7 +42,7 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
         }
     }
 
-    private ChangelogEntryType getType() throws PrompterException {
+    private ChangelogEntryType getType() {
         String prompt = Arrays.stream(ChangelogEntryType.values())
                 .map(ChangelogEntryType::toString)
                 .collect(Collectors.joining(System.lineSeparator())) +
@@ -60,7 +58,7 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
         }
     }
 
-    private List<ChangelogEntryMergeRequest> getMergeRequests() throws PrompterException {
+    private List<ChangelogEntryMergeRequest> getMergeRequests() {
         String prompt = "What is the MR's number? (numbers, seperated with comma) [press ENTER to skip] ";
 
         while (true) {
@@ -77,7 +75,7 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
         }
     }
 
-    private List<Long> getIssues() throws PrompterException {
+    private List<Long> getIssues() {
         String prompt = "What is the issue's number?(numbers, seperated with comma) [press ENTER to skip] ";
 
         while (true) {
@@ -93,7 +91,7 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
         }
     }
 
-    private List<ChangelogEntryLink> getLinks() throws PrompterException {
+    private List<ChangelogEntryLink> getLinks() {
         String prompt = "Is there any links you want to include? [Y/y - YES] [N/n - NO] [press ENTER to skip] ";
         List<ChangelogEntryLink> links = new ArrayList<>();
 
@@ -111,7 +109,7 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
         }
     }
 
-    private List<ChangelogEntryLink> getLinksRecur(List<ChangelogEntryLink> links) throws PrompterException {
+    private List<ChangelogEntryLink> getLinksRecur(List<ChangelogEntryLink> links) {
         String name = prompter.prompt("Give a link caption or press ENTER to skip");
         String link = prompter.prompt("Give a link");
         links.add(ChangelogEntryLink.of(name, link));
@@ -123,7 +121,7 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
         }
     }
 
-    private List<ChangelogEntryAuthor> getAuthors() throws PrompterException {
+    private List<ChangelogEntryAuthor> getAuthors() {
         String prompt = "Is there any authors of this change, that you want to include? [Y/y - YES] [N/n - NO] [press ENTER to skip] ";
         List<ChangelogEntryAuthor> authors = new ArrayList<>();
 
@@ -141,7 +139,7 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
         }
     }
 
-    private List<ChangelogEntryAuthor> getAuthorsRecur(List<ChangelogEntryAuthor> authors) throws PrompterException {
+    private List<ChangelogEntryAuthor> getAuthorsRecur(List<ChangelogEntryAuthor> authors) {
         try {
             String name = prompter.prompt("Give a name of author or press ENTER to skip");
             String nick = prompter.prompt("Give a nickname of author or press ENTER to skip");
@@ -159,7 +157,7 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
         }
     }
 
-    private List<ChangelogEntryImportantNote> getNotes() throws PrompterException {
+    private List<ChangelogEntryImportantNote> getNotes() {
         String prompt = "Is there any important information about this change (f.e. it affects other system) [Y/y - YES] [N/n - NO] [press ENTER to skip] ";
         List<String> notes = new ArrayList<>();
 
@@ -179,7 +177,7 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
         }
     }
 
-    private List<String> getNotesRecur(List<String> notes) throws PrompterException {
+    private List<String> getNotesRecur(List<String> notes) {
         String note = prompter.prompt("Give a note");
         notes.add(note.trim());
 
@@ -190,7 +188,7 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
         }
     }
 
-    private List<ChangelogEntryConfiguration> getConfigurations() throws PrompterException {
+    private List<ChangelogEntryConfiguration> getConfigurations() {
         String prompt = "Is there any configuration change regarding this change (f.e. new feature flag) [Y/y - YES] [N/n - NO] [press ENTER to skip] ";
         List<ChangelogEntryConfiguration> configurations = new ArrayList<>();
 
@@ -208,7 +206,7 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
         }
     }
 
-    private List<ChangelogEntryConfiguration> getConfigurationsRecur(List<ChangelogEntryConfiguration> configurations) throws PrompterException {
+    private List<ChangelogEntryConfiguration> getConfigurationsRecur(List<ChangelogEntryConfiguration> configurations) {
         try {
             String type = prompter.prompt("Give a type of a configuration property (f.e. database, or system env, or application.properties)");
             ChangelogEntryConfigurationAction action = getConfigurationAction();
@@ -229,7 +227,7 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
         }
     }
 
-    private ChangelogEntryConfigurationAction getConfigurationAction() throws PrompterException {
+    private ChangelogEntryConfigurationAction getConfigurationAction() {
         String prompt = Arrays.stream(ChangelogEntryConfigurationAction.values())
                 .map(ChangelogEntryConfigurationAction::toString)
                 .collect(Collectors.joining(System.lineSeparator())) +

@@ -1,9 +1,7 @@
-package dev.logchange.maven_plugin.mojo.add;
+package dev.logchange.commands.add;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
-import org.codehaus.plexus.components.interactivity.Prompter;
-import org.codehaus.plexus.components.interactivity.PrompterException;
 
 import static dev.logchange.commands.Constants.EMPTY_MVN_PROPERTY;
 import static dev.logchange.commands.Constants.FILENAME_MVN_PROPERTY;
@@ -12,7 +10,7 @@ import static dev.logchange.commands.Constants.FILENAME_MVN_PROPERTY;
 public class OutputFileNameProvider {
 
     private final boolean empty;
-    private final Prompter prompter;
+    private final AddEntryPrompter prompter;
     private final String commandLineOutputFileName;
 
     public String get() {
@@ -26,12 +24,12 @@ public class OutputFileNameProvider {
 
         try {
             return getOutputFileName();
-        } catch (PrompterException e) {
+        } catch (Exception e) {
             throw new IllegalArgumentException("Couldn't get file name", e);
         }
     }
 
-    String adjust(String commandLineOutputFileName) {
+    public String adjust(String commandLineOutputFileName) {
         return commandLineOutputFileName
                 .replaceAll("\\.yml", "")
                 .replaceAll("\\.yaml", "")
@@ -41,7 +39,7 @@ public class OutputFileNameProvider {
                 + ".yml";
     }
 
-    private String getOutputFileName() throws PrompterException {
+    private String getOutputFileName() {
         while (true) {
             String name = prompter.prompt("What is the filename(e.g. 000231-adding-new-product)");
             if (StringUtils.isBlank(name)) {

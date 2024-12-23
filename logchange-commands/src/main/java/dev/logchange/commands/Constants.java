@@ -6,7 +6,7 @@ public class Constants {
     private static final String OPTION_SHORT_PREFIX = "-";
     private static final String OPTION_PREFIX = "--";
 
-    public static final String BASIC_FOOTER = "\n\n\uD83E\uDEB5\uD83E\uDEB5 Feel free to contact us via email team@logchange.dev \uD83E\uDEB5\uD83E\uDEB5\n\uD83E\uDEB5\uD83E\uDEB5 or visit https://github.com/logchange/logchange \uD83E\uDEB5\uD83E\uDEB5";
+    public static final String BASIC_FOOTER = "\n\nFeel free to contact us via email team@logchange.dev or visit https://github.com/logchange/logchange";
 
     public static final String DEFAULT_OUTPUT_FILE = "CHANGELOG.md";
     public static final String DEFAULT_INPUT_DIR = "changelog";
