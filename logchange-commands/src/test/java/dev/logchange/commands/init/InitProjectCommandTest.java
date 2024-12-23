@@ -16,7 +16,6 @@ class InitProjectCommandTest {
     private static final String GIT_KEEP_FILE = ".gitkeep";
     private static final String OUTPUT_FILE = "CHANGELOG.md";
 
-
     @AfterEach
     void cleanup() {
         new File(PATH + INPUT_DIR + UNRELEASED + GIT_KEEP_FILE).delete();

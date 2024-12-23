@@ -12,14 +12,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GenerateProjectCommandTest {
 
-
     private static final String PATH = "src/test/resources/GenerateProjectCommandTest/";
     private static final String INPUT_DIR = "changelog/";
     private static final String UNRELEASED = "unreleased/";
     private static final String CONFIG_FILE = "logchange-config.yml";
     private static final String TEST_FILE = "test-entry.yml";
     private static final String OUTPUT_FILE = "CHANGELOG.md";
-
 
     @AfterEach
     void cleanup() {
