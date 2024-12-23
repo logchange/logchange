@@ -1,14 +1,10 @@
 package dev.logchange.maven_plugin.mojo.add;
 
-import dev.logchange.core.application.changelog.repository.ChangelogEntryRepository;
-import dev.logchange.core.application.changelog.service.add.AddChangelogEntryService;
-import dev.logchange.core.domain.changelog.command.AddChangelogEntryUseCase;
-import dev.logchange.core.domain.changelog.command.AddChangelogEntryUseCase.AddChangelogEntryCommand;
+import dev.logchange.commands.add.AddChangelogEntryBatchModeParams;
+import dev.logchange.commands.add.AddEntryCommand;
+import dev.logchange.commands.add.ChangelogEntryProviderFactory;
+import dev.logchange.commands.add.OutputFileNameProvider;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
-import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogEntryRepository;
-import dev.logchange.core.infrastructure.persistance.file.FileRepository;
-import dev.logchange.maven_plugin.mojo.add.entry.ChangelogEntryProviderFactory;
-import lombok.Value;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -16,27 +12,25 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.plexus.components.interactivity.Prompter;
 
 import javax.inject.Inject;
-import java.io.File;
-import java.io.IOException;
 
-import static dev.logchange.maven_plugin.Constants.*;
+import static dev.logchange.commands.Constants.*;
 
 @Mojo(name = ADD_COMMAND, defaultPhase = LifecyclePhase.NONE)
 public class AddChangelogEntryMojo extends AbstractMojo {
 
-    @Parameter(defaultValue = DEFAULT_INPUT_DIR, property = INPUT_DIR_MVN_PROPERTY)
+    @Parameter(defaultValue = DEFAULT_INPUT_DIR, property = INPUT_DIR_PROPERTY)
     private String inputDir;
 
-    @Parameter(defaultValue = DEFAULT_UNRELEASED_VERSION_DIR, property = UNRELEASED_VERSION_DIR_MVN_PROPERTY)
+    @Parameter(defaultValue = DEFAULT_UNRELEASED_VERSION_DIR, property = UNRELEASED_VERSION_DIR_PROPERTY)
     private String unreleasedVersionDir;
 
-    @Parameter(property = FILENAME_MVN_PROPERTY)
+    @Parameter(property = FILENAME_PROPERTY)
     private String outputFileName;
 
-    @Parameter(defaultValue = "false", property = BATCH_MODE_MVN_PROPERTY)
+    @Parameter(defaultValue = "false", property = BATCH_MODE_PROPERTY)
     private boolean batchMode;
 
-    @Parameter(defaultValue = "false", property = EMPTY_MVN_PROPERTY)
+    @Parameter(defaultValue = "false", property = EMPTY_PROPERTY)
     private boolean empty;
 
     @Parameter(property = "title")
@@ -59,52 +53,13 @@ public class AddChangelogEntryMojo extends AbstractMojo {
 
     @Override
     public void execute() {
-        checkIfCanAdd(inputDir, unreleasedVersionDir);
-        outputFileName = new OutputFileNameProvider(empty, prompter, outputFileName).get();
-        ChangelogEntry entry = new ChangelogEntryProviderFactory(empty, batchMode, getParams(), prompter).create().get();
-        executeAdd(inputDir, unreleasedVersionDir, outputFileName, entry);
-    }
-
-    public void executeAdd(String inputDir, String unreleasedVersionDir, String outputFile, ChangelogEntry entry) {
-        String path = "./" + inputDir + "/" + unreleasedVersionDir + "/" + outputFile;
-        File entryFile = createFile(path);
-
-        getLog().debug(entry.toString());
-
-        ChangelogEntryRepository repository = new FileChangelogEntryRepository(FileRepository.of(entryFile));
-        AddChangelogEntryUseCase addChangelogEntry = new AddChangelogEntryService(repository);
-        AddChangelogEntryCommand command = AddChangelogEntryCommand.of(entry);
-
-        addChangelogEntry.handle(command);
-    }
-
-    private void checkIfCanAdd(String inputDir, String unreleasedVersionDir) {
-        String path = "./" + inputDir + "/" + unreleasedVersionDir;
-        File unreleasedDir = new File(path);
-
-        if (!unreleasedDir.exists() || !unreleasedDir.isDirectory()) {
-            String msg = "Cannot add new entry if " + path + " not exists nor is directory";
-            getLog().error(msg);
-            throw new RuntimeException(msg);
-        }
-    }
-
-    private File createFile(String path) {
-        try {
-            File changelog = new File(path);
-            if (changelog.createNewFile()) {
-                getLog().info("Created: " + changelog.getName());
-                return changelog;
-            } else {
-                String msg = "Entry with name: " + changelog.getName() + "  already exists!";
-                getLog().warn(msg);
-                throw new RuntimeException(msg);
-            }
-        } catch (IOException e) {
-            String msg = "An error occurred while creating empty changelog entry file with path: " + path;
-            getLog().error(msg, e);
-            throw new RuntimeException(msg);
-        }
+        getLog().info(ADD_COMMAND_START_LOG);
+        MavenAddEntryPrompter mavenPrompter = MavenAddEntryPrompter.of(prompter);
+        AddEntryCommand addEntryCommand = AddEntryCommand.of(inputDir, unreleasedVersionDir);
+        outputFileName = new OutputFileNameProvider(empty, mavenPrompter, outputFileName).get();
+        ChangelogEntry entry = new ChangelogEntryProviderFactory(empty, batchMode, getParams(), mavenPrompter).create().get();
+        addEntryCommand.execute(entry, outputFileName);
+        getLog().info(ADD_COMMAND_END_LOG);
     }
 
     private AddChangelogEntryBatchModeParams getParams() {
@@ -117,12 +72,4 @@ public class AddChangelogEntryMojo extends AbstractMojo {
         );
     }
 
-    @Value(staticConstructor = "of")
-    public static class AddChangelogEntryBatchModeParams {
-        String title;
-        String author;
-        String type;
-        String linkName;
-        String linkUrl;
-    }
 }

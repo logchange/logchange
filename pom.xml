@@ -9,8 +9,11 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>logchange-utils</module>
         <module>logchange-core</module>
+        <module>logchange-commands</module>
         <module>logchange-maven-plugin</module>
+        <module>logchange-cli</module>
         <module>logchange-test-reports</module>
         <module>logchange-md</module>
     </modules>
@@ -53,7 +56,8 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-
+        <java.version>1.8</java.version>
+        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <lombok.version>1.18.36</lombok.version>
@@ -119,6 +123,22 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
             <!--
             Cannot build project if there is circular dependency.
             But sometimes we want test this plugin so to do that build and uncomment

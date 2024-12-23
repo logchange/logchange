@@ -1,7 +1,8 @@
-# This file configures logchange tool 🌳 🪓 => 🪵
-# Visit https://github.com/logchange/logchange and leave a star 🌟
-# More info about configuration you can find https://github.com/logchange/logchange#configuration
+# This file configures logchange tool 🌳 🪓 => 🪵 
+# Visit https://github.com/logchange/logchange and leave a star 🌟 
+# More info about configuration you can find https://github.com/logchange/logchange#configuration 
 changelog:
+  heading: ""
   labels:
     unreleased: unreleased
     important_notes: Important notes
@@ -22,7 +23,9 @@ changelog:
       type: Type
       actions:
         add: Added
-        delete: Deleted
         update: Updated
+        delete: Deleted
       with_default_value: with default value
       description: Description
+  templates:
+    entry: "${prefix}${title} ${merge_requests} ${issues} ${links} ${authors}"
