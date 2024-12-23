@@ -1,6 +1,8 @@
 package dev.logchange.cli.aggregate;
 
 import dev.logchange.cli.BaseCommand;
+import dev.logchange.commands.aggregate.AggregateVersionCommand;
+import dev.logchange.commands.release.ReleaseVersionCommand;
 import lombok.CustomLog;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -26,9 +28,7 @@ public class AggregateProjectsCliCommand extends BaseCommand {
 
     public void runCommand() {
         log.info(AGGREGATE_COMMAND_START_LOG);
-
-        //TODO
-
+        AggregateVersionCommand.of(ReleaseVersionCommand.getVersion(aggregateVersion), inputDir, configFile).execute();
         log.info(AGGREGATE_COMMAND_END_LOG);
     }
 

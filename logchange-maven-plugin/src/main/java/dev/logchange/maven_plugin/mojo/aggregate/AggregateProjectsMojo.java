@@ -23,8 +23,8 @@ public class AggregateProjectsMojo extends AbstractMojo {
 
     @Override
     public void execute() {
-        getLog().info("Running aggregate command...");
+        getLog().info(AGGREGATE_COMMAND_START_LOG);
         AggregateVersionCommand.of(ReleaseVersionCommand.getVersion(aggregateVersion), inputDir, configFile).execute();
-        getLog().info("Aggregate successful");
+        getLog().info(AGGREGATE_COMMAND_END_LOG);
     }
 }
