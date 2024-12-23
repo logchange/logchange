@@ -14,6 +14,11 @@ public class Constants {
     public static final String DEFAULT_CONFIG_FILE = "logchange-config.yml";
     public static final String DEFAULT_XML_OUTPUT_FILE = "changes.xml";
 
+    public static final String UNRELEASED_VERSION_DIR_PROPERTY = "unreleasedVersionDir";
+    public static final String UNRELEASED_VERSION_DIR_OPTION = OPTION_PREFIX + UNRELEASED_VERSION_DIR_PROPERTY;
+    public static final String UNRELEASED_VERSION_DIR_OPTION_DESCRIPTION = "Name of directory, where YML for unreleased version are stored";
+
+
     public static final String GIT_KEEP = ".gitkeep";
 
     public static final String INIT_COMMAND = "init";
@@ -34,7 +39,7 @@ public class Constants {
     public static final String LINT_COMMAND_END_LOG = "No problems found, lint passed successfully";
 
     public static final String ADD_COMMAND = "add";
-    public static final String ADD_COMMAND_DESCRIPTION = "Creates new .yml file with logchange structure";
+    public static final String ADD_COMMAND_DESCRIPTION = "Creates new .yml file with logchange structure in <" + UNRELEASED_VERSION_DIR_PROPERTY + "> directory";
     public static final String ADD_COMMAND_START_LOG = "Running add command...";
     public static final String ADD_COMMAND_END_LOG = "Changelog entry successfully added";
 
@@ -62,11 +67,6 @@ public class Constants {
     public static final String OUTPUT_FILE_MVN_PROPERTY = "outputFile";
     public static final String OUTPUT_FILE_OPTION = OPTION_PREFIX + OUTPUT_FILE_MVN_PROPERTY;
     public static final String OUTPUT_FILE_OPTION_DESCRIPTION = "Name of changelog file, it will be created if it's not present";
-
-    public static final String UNRELEASED_VERSION_DIR_MVN_PROPERTY = "unreleasedVersionDir";
-    public static final String UNRELEASED_VERSION_DIR_OPTION = OPTION_PREFIX + UNRELEASED_VERSION_DIR_MVN_PROPERTY;
-    public static final String UNRELEASED_VERSION_DIR_OPTION_DESCRIPTION = "Name of directory, where YML for unreleased version are stored";
-
 
     public static final String AGGREGATE_VERSION_MVN_PROPERTY = "aggregateVersion";
 

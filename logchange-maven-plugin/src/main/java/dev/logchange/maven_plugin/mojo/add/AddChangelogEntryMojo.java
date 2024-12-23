@@ -21,7 +21,7 @@ public class AddChangelogEntryMojo extends AbstractMojo {
     @Parameter(defaultValue = DEFAULT_INPUT_DIR, property = INPUT_DIR_PROPERTY)
     private String inputDir;
 
-    @Parameter(defaultValue = DEFAULT_UNRELEASED_VERSION_DIR, property = UNRELEASED_VERSION_DIR_MVN_PROPERTY)
+    @Parameter(defaultValue = DEFAULT_UNRELEASED_VERSION_DIR, property = UNRELEASED_VERSION_DIR_PROPERTY)
     private String unreleasedVersionDir;
 
     @Parameter(property = FILENAME_PROPERTY)
