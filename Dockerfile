@@ -12,8 +12,11 @@ LABEL org.opencontainers.image.authors='team@logchange.dev' \
 # mvn package -Pnative-static && cp /logchange-cli/target/logchange .
 ADD logchange /usr/local/bin/logchange
 
+# Ensure the binary has execute permissions
+RUN chmod +x /usr/local/bin/logchange
+
 ARG WORKING_PATH="/code"
 RUN mkdir $WORKING_PATH
 WORKDIR $WORKING_PATH
 
-CMD ["logchnage", "--help"]
+CMD ["logchange", "--help"]

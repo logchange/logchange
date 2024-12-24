@@ -127,6 +127,12 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
+      - name: run structure tests
+        uses: plexsystems/container-structure-test-action@v0.1.0
+        with:
+          image: logchange/logchange
+          config: docker-test.yml
+
       - name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v3
         with:

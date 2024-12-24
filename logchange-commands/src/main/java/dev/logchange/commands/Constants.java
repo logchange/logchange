@@ -6,7 +6,7 @@ public class Constants {
     public static final String OPTION_SHORT_PREFIX = "-";
     public static final String OPTION_PREFIX = "--";
 
-    public static final String BASIC_FOOTER = "\n\nFeel free to contact us via email team@logchange.dev or visit https://github.com/logchange/logchange";
+    public static final String BASIC_FOOTER = "\n\nFeel free to contact us via email team@logchange.dev \nor visit https://github.com/logchange/logchange";
 
     public static final String INPUT_DIR_PROPERTY = "inputDir";
     public static final String INPUT_DIR_OPTION = OPTION_PREFIX + INPUT_DIR_PROPERTY;

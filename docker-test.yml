@@ -1,0 +1,5 @@
+commandTests:
+  - name:  "logchange installed"
+    command: "logchange"
+    args: ["--help"]
+    excludedOutput: [".*Usage: logchange [-hV] [COMMAND]*"]
