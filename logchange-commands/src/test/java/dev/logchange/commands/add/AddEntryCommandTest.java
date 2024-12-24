@@ -14,30 +14,31 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AddEntryCommandTest {
 
-    private static final String PATH = "src/test/resources/AddEntryCommandTest/changelog/";
-    private static final String UNRELEASED = "unreleased/";
+    private static final String PATH = "src/test/resources/AddEntryCommandTest";
+    private static final String INPUT_DIR = "changelog";
+    private static final String UNRELEASED = "unreleased";
     private static final String OUTPUT_FILE = "00001-new-entry.yml";
     private static final String TEST_FILE = "test-file.yml";
 
     @AfterEach
     void cleanup() {
-        new File(PATH + UNRELEASED + OUTPUT_FILE).delete();
+        new File(PATH + "/" + INPUT_DIR + "/" + UNRELEASED + "/" + OUTPUT_FILE).delete();
     }
 
     @Test
     void shouldAddEntry() throws IOException {
         // given:
-        File outputFile =  new File(PATH + UNRELEASED + OUTPUT_FILE);
+        File outputFile = new File(PATH + "/" + INPUT_DIR + "/" + UNRELEASED + "/" + OUTPUT_FILE);
         assertFalse(outputFile.exists());
 
         ChangelogEntry entry = ChangelogEntry.builder()
-                .title(ChangelogEntryTitle.of( "title"))
+                .title(ChangelogEntryTitle.of("title"))
                 .type(ChangelogEntryType.ADDED)
                 .mergeRequest(ChangelogEntryMergeRequest.of(1000L))
                 .issue(100L)
                 .link(ChangelogEntryLink.of("name", "url"))
                 .author(ChangelogEntryAuthor.of("NAME", "NICK", "URL"))
-                .importantNote(ChangelogEntryImportantNote.of( "important note"))
+                .importantNote(ChangelogEntryImportantNote.of("important note"))
                 .configuration(ChangelogEntryConfiguration.of(
                         "type",
                         ChangelogEntryConfigurationAction.ADD,
@@ -49,11 +50,11 @@ class AddEntryCommandTest {
 
 
         // when:
-        AddEntryCommand.of(PATH, UNRELEASED).execute(entry, OUTPUT_FILE);
+        AddEntryCommand.of(PATH, INPUT_DIR, UNRELEASED).execute(entry, OUTPUT_FILE);
 
         // then:
         assertTrue(outputFile.exists());
-        String expectedContent = FileUtils.fileRead(PATH + UNRELEASED + TEST_FILE, "UTF-8");
+        String expectedContent = FileUtils.fileRead(PATH + "/" + INPUT_DIR + "/" + UNRELEASED + "/" + TEST_FILE, "UTF-8");
         String actualContent = FileUtils.fileRead(outputFile, "UTF-8");
         assertThat(actualContent).isEqualToIgnoringWhitespace(expectedContent);
     }

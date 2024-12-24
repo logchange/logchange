@@ -18,21 +18,21 @@ class InitProjectCommandTest {
 
     @AfterEach
     void cleanup() {
-        new File(PATH + INPUT_DIR + UNRELEASED + GIT_KEEP_FILE).delete();
-        new File(PATH + INPUT_DIR + UNRELEASED).delete();
-        new File(PATH + INPUT_DIR + CONFIG_FILE).delete();
-        new File(PATH + INPUT_DIR).delete();
-        new File(PATH + OUTPUT_FILE).delete();
+        new File(PATH + "/" + INPUT_DIR + "/" + UNRELEASED + "/" + GIT_KEEP_FILE).delete();
+        new File(PATH + "/" + INPUT_DIR + "/" + UNRELEASED).delete();
+        new File(PATH + "/" + INPUT_DIR + "/" + CONFIG_FILE).delete();
+        new File(PATH + "/" + INPUT_DIR).delete();
+        new File(PATH + "/" + OUTPUT_FILE).delete();
     }
 
     @Test
     void shouldInitializeProject() {
         // given:
-        File gitKeepFile = new File(PATH + INPUT_DIR + UNRELEASED + GIT_KEEP_FILE);
-        File unreleasedDir = new File(PATH + INPUT_DIR + UNRELEASED);
-        File configFile = new File(PATH + INPUT_DIR + CONFIG_FILE);
-        File changelogDir = new File(PATH + INPUT_DIR);
-        File changelogFile = new File(PATH + OUTPUT_FILE);
+        File gitKeepFile = new File(PATH + "/" + INPUT_DIR + "/" + UNRELEASED + "/" + GIT_KEEP_FILE);
+        File unreleasedDir = new File(PATH + "/" + INPUT_DIR + "/" + UNRELEASED);
+        File configFile = new File(PATH + "/" + INPUT_DIR + "/" + CONFIG_FILE);
+        File changelogDir = new File(PATH + "/" + INPUT_DIR);
+        File changelogFile = new File(PATH + "/" + OUTPUT_FILE);
 
         assertFalse(changelogDir.exists());
         assertFalse(changelogFile.exists());

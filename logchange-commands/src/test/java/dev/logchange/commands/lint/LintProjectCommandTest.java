@@ -29,7 +29,7 @@ class LintProjectCommandTest {
         assertTrue(entry.exists());
 
         // when-then:
-        assertDoesNotThrow(() -> LintProjectCommand.of(VALID_PATH + INPUT_DIR, VALID_PATH + OUTPUT_FILE, CONFIG_FILE).validate());
+        assertDoesNotThrow(() -> LintProjectCommand.of(VALID_PATH, INPUT_DIR, VALID_PATH + OUTPUT_FILE, CONFIG_FILE).validate());
     }
 
     @Test
@@ -46,7 +46,7 @@ class LintProjectCommandTest {
         assertTrue(entry.exists());
 
         // when-then:
-        assertDoesNotThrow(() -> LintProjectCommand.of(VALID_PATH + INPUT_DIR, VALID_PATH + OUTPUT_FILE, CONFIG_FILE).validate());
+        assertDoesNotThrow(() -> LintProjectCommand.of(VALID_PATH, INPUT_DIR, VALID_PATH + OUTPUT_FILE, CONFIG_FILE).validate());
     }
 
     @Test
@@ -63,7 +63,7 @@ class LintProjectCommandTest {
         assertTrue(entry.exists());
 
         // when-then:
-        Exception exception = assertThrows(RuntimeException.class, () -> LintProjectCommand.of(INVALID_PATH + INPUT_DIR, INVALID_PATH + OUTPUT_FILE, CONFIG_FILE).validate());
+        Exception exception = assertThrows(RuntimeException.class, () -> LintProjectCommand.of(INVALID_PATH, INPUT_DIR, INVALID_PATH + OUTPUT_FILE, CONFIG_FILE).validate());
 
         // then:
         assertEquals("There is no ./src/test/resources/LintProjectCommandTest/invalidMissingChangelogDirectory/changelog/ directory in this project !!!", exception.getMessage());
@@ -87,7 +87,7 @@ class LintProjectCommandTest {
         assertTrue(entry.exists());
 
         // when-then:
-        Exception exception = assertThrows(RuntimeException.class, () -> LintProjectCommand.of(INVALID_PATH + INPUT_DIR, INVALID_PATH + OUTPUT_FILE, CONFIG_FILE).validate());
+        Exception exception = assertThrows(RuntimeException.class, () -> LintProjectCommand.of(INVALID_PATH, INPUT_DIR, INVALID_PATH + OUTPUT_FILE, CONFIG_FILE).validate());
 
         // then:
         assertEquals(expectedOutput, exception.getMessage());

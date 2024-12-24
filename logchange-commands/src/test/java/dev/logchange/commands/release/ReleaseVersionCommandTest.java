@@ -1,7 +1,146 @@
 package dev.logchange.commands.release;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ReleaseVersionCommandTest {
 
+    private static final String PATH = "src/test/resources/ReleaseVersionCommandTest";
+    private static final String INPUT_DIR = "changelog";
+    private static final String UNRELEASED = "unreleased";
+    private static final String CONFIG_FILE = "logchange-config.yml";
+    private static final String TEST_FILE = "test-entry.yml";
+    private static final String OUTPUT_FILE = "CHANGELOG.md";
+    private static final String XML_OUTPUT_FILE = "changes.xml";
+    private static final String GIT_KEEP = ".gitkeep";
+    private static final String VERSION_DIR = "v1.0.0";
+    private static final String VERSION_SUMMARY_FILE = "version-summary.md";
+    private static final String RELEASE_DATE_FILE = "release-date.txt";
+
+    @Test
+    void shouldReleaseVersion() throws IOException {
+        // given:
+        String VALID_PATH = PATH + "/valid/";
+        String VALID_INPUT_DIR = VALID_PATH + INPUT_DIR + "/";
+        File changelogDir = new File(VALID_INPUT_DIR);
+        File unreleasedDir = new File(VALID_INPUT_DIR + UNRELEASED);
+        File config = new File(VALID_INPUT_DIR + CONFIG_FILE);
+        File entry = new File(VALID_INPUT_DIR + UNRELEASED + "/" + TEST_FILE);
+
+        File outputFile = new File(VALID_PATH + OUTPUT_FILE);
+        File createdGitKeep = new File(VALID_INPUT_DIR + UNRELEASED + "/" + GIT_KEEP);
+
+        File versionDirectory = new File(VALID_INPUT_DIR + VERSION_DIR);
+        File movedEntry = new File(VALID_INPUT_DIR + VERSION_DIR + "/" + TEST_FILE);
+        File releaseDateFile = new File(VALID_INPUT_DIR + VERSION_DIR + "/" + RELEASE_DATE_FILE);
+        File versionSummaryFile = new File(VALID_INPUT_DIR + VERSION_DIR + "/" + VERSION_SUMMARY_FILE);
+
+        assertTrue(changelogDir.exists());
+        assertTrue(unreleasedDir.exists());
+        assertTrue(config.exists());
+        assertTrue(entry.exists());
+
+        assertFalse(outputFile.exists());
+        assertFalse(createdGitKeep.exists());
+
+        assertFalse(versionDirectory.exists());
+        assertFalse(movedEntry.exists());
+        assertFalse(releaseDateFile.exists());
+        assertFalse(versionSummaryFile.exists());
+
+        // when:
+        ReleaseVersionCommand.of(
+                VALID_PATH,
+                "1.0.0",
+                UNRELEASED,
+                INPUT_DIR,
+                VALID_PATH + OUTPUT_FILE,
+                CONFIG_FILE,
+                false,
+                XML_OUTPUT_FILE).execute();
+
+        // then:
+        assertTrue(outputFile.exists());
+        assertTrue(createdGitKeep.exists());
+        assertTrue(versionDirectory.exists());
+        assertFalse(entry.exists());
+        assertTrue(movedEntry.exists());
+        assertTrue(releaseDateFile.exists());
+        assertTrue(versionSummaryFile.exists());
+
+        // cleanup:
+        outputFile.delete();
+        createdGitKeep.delete();
+        Files.move(movedEntry.toPath(), entry.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        releaseDateFile.delete();
+        versionSummaryFile.delete();
+        versionDirectory.delete();
+    }
+
+    @Test
+    void shouldReleaseVersionWithoutConfig() throws IOException {
+        // given:
+        String VALID_PATH = PATH + "/validWithoutConfig/";
+        String VALID_INPUT_DIR = VALID_PATH + INPUT_DIR + "/";
+        File changelogDir = new File(VALID_INPUT_DIR);
+        File unreleasedDir = new File(VALID_INPUT_DIR + UNRELEASED);
+        File config = new File(VALID_INPUT_DIR + CONFIG_FILE);
+        File entry = new File(VALID_INPUT_DIR + UNRELEASED + "/" + TEST_FILE);
+
+        File outputFile = new File(VALID_PATH + OUTPUT_FILE);
+        File createdGitKeep = new File(VALID_INPUT_DIR + UNRELEASED + "/" + GIT_KEEP);
+
+        File versionDirectory = new File(VALID_INPUT_DIR + VERSION_DIR);
+        File movedEntry = new File(VALID_INPUT_DIR + VERSION_DIR + "/" + TEST_FILE);
+        File releaseDateFile = new File(VALID_INPUT_DIR + VERSION_DIR + "/" + RELEASE_DATE_FILE);
+        File versionSummaryFile = new File(VALID_INPUT_DIR + VERSION_DIR + "/" + VERSION_SUMMARY_FILE);
+
+        assertTrue(changelogDir.exists());
+        assertTrue(unreleasedDir.exists());
+        assertFalse(config.exists());
+        assertTrue(entry.exists());
+
+        assertFalse(outputFile.exists());
+        assertFalse(createdGitKeep.exists());
+
+        assertFalse(versionDirectory.exists());
+        assertFalse(movedEntry.exists());
+        assertFalse(releaseDateFile.exists());
+        assertFalse(versionSummaryFile.exists());
+
+        // when:
+        ReleaseVersionCommand.of(
+                VALID_PATH,
+                "1.0.0",
+                UNRELEASED,
+                INPUT_DIR,
+                VALID_PATH + OUTPUT_FILE,
+                CONFIG_FILE,
+                false,
+                XML_OUTPUT_FILE).execute();
+
+        // then:
+        assertTrue(outputFile.exists());
+        assertTrue(createdGitKeep.exists());
+        assertTrue(versionDirectory.exists());
+        assertFalse(entry.exists());
+        assertTrue(movedEntry.exists());
+        assertTrue(releaseDateFile.exists());
+        assertTrue(versionSummaryFile.exists());
+
+        // cleanup:
+        outputFile.delete();
+        createdGitKeep.delete();
+        Files.move(movedEntry.toPath(), entry.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        releaseDateFile.delete();
+        versionSummaryFile.delete();
+        versionDirectory.delete();
+    }
 }

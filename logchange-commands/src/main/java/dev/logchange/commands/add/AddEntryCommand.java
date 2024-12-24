@@ -17,17 +17,18 @@ import java.io.IOException;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class AddEntryCommand {
 
+    private final String rootPath;
     private final String inputDir;
     private final String unreleasedVersionDir;
 
-    public static AddEntryCommand of(String inputDir, String unreleasedVersionDir) {
-        checkIfCanAdd(inputDir, unreleasedVersionDir);
-        return new AddEntryCommand(inputDir, unreleasedVersionDir);
+    public static AddEntryCommand of(String rootPath, String inputDir, String unreleasedVersionDir) {
+        checkIfCanAdd(rootPath, inputDir, unreleasedVersionDir);
+        return new AddEntryCommand(rootPath, inputDir, unreleasedVersionDir);
     }
 
     public void execute(ChangelogEntry entry, String outputFile) {
         log.info("Adding new entry");
-        String path = "./" + inputDir + "/" + unreleasedVersionDir + "/" + outputFile;
+        String path = rootPath + "/" + inputDir + "/" + unreleasedVersionDir + "/" + outputFile;
         File entryFile = createFile(path);
 
         log.finer(entry.toString());
@@ -58,8 +59,8 @@ public class AddEntryCommand {
         }
     }
 
-    private static void checkIfCanAdd(String inputDir, String unreleasedVersionDir) {
-        String path = "./" + inputDir + "/" + unreleasedVersionDir;
+    private static void checkIfCanAdd(String rootPath, String inputDir, String unreleasedVersionDir) {
+        String path = rootPath + "/" + inputDir + "/" + unreleasedVersionDir;
         File unreleasedDir = new File(path);
 
         if (!unreleasedDir.exists() || !unreleasedDir.isDirectory()) {
