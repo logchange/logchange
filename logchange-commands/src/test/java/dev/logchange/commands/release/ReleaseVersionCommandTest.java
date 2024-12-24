@@ -202,7 +202,7 @@ class ReleaseVersionCommandTest {
     void shouldThrowExceptionWhenInvalidYmlFile() throws IOException {
         // given:
         String expectedError = "Errors found:\n" +
-                "Errors in src\\test\\resources\\ReleaseVersionCommandTest\\invalidYML\\changelog\\unreleased\\invalid-entry.yml:\n" +
+                "Errors in src/test/resources/ReleaseVersionCommandTest/invalidYML/changelog/unreleased/invalid-entry.yml:\n" +
                 "\tUnknown property [issue] with value [100]\n" +
                 "\n";
         String INVALID_PATH = PATH + "/invalidYML";

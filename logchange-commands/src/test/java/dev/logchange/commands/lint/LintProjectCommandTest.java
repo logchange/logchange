@@ -74,7 +74,7 @@ class LintProjectCommandTest {
     void shouldThrowExceptionWithInvalidYmlEntry() {
         // given:
         String expectedOutput = "Errors found:\n" +
-                "Errors in src\\test\\resources\\LintProjectCommandTest\\invalidSyntax\\changelog\\unreleased\\invalid-entry.yml:\n" +
+                "Errors in src/test/resources/LintProjectCommandTest/invalidSyntax/changelog/unreleased/invalid-entry.yml:\n" +
                 "\tUnknown property [issue] with value [100]\n" +
                 "\n";
         String INVALID_PATH = PATH + "invalidSyntax";
