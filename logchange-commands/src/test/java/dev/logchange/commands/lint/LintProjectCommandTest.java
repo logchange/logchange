@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LintProjectCommandTest {
@@ -90,6 +91,6 @@ class LintProjectCommandTest {
         Exception exception = assertThrows(RuntimeException.class, () -> LintProjectCommand.of(INVALID_PATH, INPUT_DIR, INVALID_PATH + OUTPUT_FILE, CONFIG_FILE).validate());
 
         // then:
-        assertEquals(expectedOutput, exception.getMessage());
+        assertThat(exception.getMessage()).isEqualToIgnoringNewLines(expectedOutput);
     }
 }

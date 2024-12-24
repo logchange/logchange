@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ReleaseVersionCommandTest {
@@ -244,7 +245,7 @@ class ReleaseVersionCommandTest {
                 XML_OUTPUT_FILE).execute());
 
         // then:
-        assertEquals(expectedError, exception.getMessage());
+        assertThat(exception.getMessage()).isEqualToIgnoringNewLines(expectedError);
         assertFalse(outputFile.exists());
         assertFalse(createdGitKeep.exists());
         assertFalse(versionDirectory.exists());
