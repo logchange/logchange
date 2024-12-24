@@ -11,10 +11,11 @@ import picocli.CommandLine;
 import picocli.CommandLine.Command;
 
 import static dev.logchange.commands.Constants.BASIC_FOOTER;
+import static dev.logchange.commands.Constants.LOGCHANGE_DESCRIPTION;
 
 @CustomLog
 @Command(name = "logchange",
-        description = "logchange (CLI) - \uD83E\uDEB5 logchange is a tool which helps creating CHANGELOG by keeping one format and solving merge request conflicts problem by extraction of new CHANGELOG entries to separate files. \n\n Visit https://logchange.dev/ for more information\n",
+        description = LOGCHANGE_DESCRIPTION,
         mixinStandardHelpOptions = true,
         versionProvider = LogchangeVersionProvider.class,
         footer = BASIC_FOOTER,
