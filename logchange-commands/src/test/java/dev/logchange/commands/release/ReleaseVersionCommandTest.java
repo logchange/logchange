@@ -7,8 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ReleaseVersionCommandTest {
 
@@ -142,5 +141,116 @@ class ReleaseVersionCommandTest {
         releaseDateFile.delete();
         versionSummaryFile.delete();
         versionDirectory.delete();
+    }
+
+    @Test
+    void shouldThrowExceptionWhenMissingChangelogDirectory() throws IOException {
+        // given:
+        String INVALID_PATH = PATH + "/invalidMissingChangelogDirectory/";
+        String INVALID_INPUT_DIR = INVALID_PATH + INPUT_DIR + "/";
+        File changelogDir = new File(INVALID_INPUT_DIR);
+        File unreleasedDir = new File(INVALID_INPUT_DIR + UNRELEASED);
+        File config = new File(INVALID_INPUT_DIR + CONFIG_FILE);
+        File entry = new File(INVALID_PATH + TEST_FILE);
+
+        File outputFile = new File(INVALID_PATH + OUTPUT_FILE);
+        File createdGitKeep = new File(INVALID_INPUT_DIR + UNRELEASED + "/" + GIT_KEEP);
+
+        File versionDirectory = new File(INVALID_INPUT_DIR + VERSION_DIR);
+        File movedEntry = new File(INVALID_INPUT_DIR + VERSION_DIR + "/" + TEST_FILE);
+        File releaseDateFile = new File(INVALID_INPUT_DIR + VERSION_DIR + "/" + RELEASE_DATE_FILE);
+        File versionSummaryFile = new File(INVALID_INPUT_DIR + VERSION_DIR + "/" + VERSION_SUMMARY_FILE);
+
+        assertFalse(changelogDir.exists());
+        assertFalse(unreleasedDir.exists());
+        assertFalse(config.exists());
+        assertTrue(entry.exists());
+
+        assertFalse(outputFile.exists());
+        assertFalse(createdGitKeep.exists());
+
+        assertFalse(versionDirectory.exists());
+        assertFalse(movedEntry.exists());
+        assertFalse(releaseDateFile.exists());
+        assertFalse(versionSummaryFile.exists());
+
+        // when:
+        Exception exception = assertThrows(RuntimeException.class, () -> ReleaseVersionCommand.of(
+                INVALID_PATH,
+                "1.0.0",
+                UNRELEASED,
+                INPUT_DIR,
+                INVALID_PATH + OUTPUT_FILE,
+                CONFIG_FILE,
+                false,
+                XML_OUTPUT_FILE).execute());
+
+        // then:
+        assertEquals("There is no src/test/resources/ReleaseVersionCommandTest/invalidMissingChangelogDirectory//changelog directory in this project !!!", exception.getMessage());
+        assertFalse(outputFile.exists());
+        assertFalse(createdGitKeep.exists());
+        assertFalse(versionDirectory.exists());
+        assertTrue(entry.exists());
+        assertFalse(movedEntry.exists());
+        assertFalse(releaseDateFile.exists());
+        assertFalse(versionSummaryFile.exists());
+    }
+
+
+    @Test
+    void shouldThrowExceptionWhenInvalidYmlFile() throws IOException {
+        // given:
+        String expectedError = "Errors found:\n" +
+                "Errors in src\\test\\resources\\ReleaseVersionCommandTest\\invalidYML\\changelog\\unreleased\\invalid-entry.yml:\n" +
+                "\tUnknown property [issue] with value [100]\n" +
+                "\n";
+        String INVALID_PATH = PATH + "/invalidYML/";
+        String INVALID_INPUT_DIR = INVALID_PATH + INPUT_DIR + "/";
+        File changelogDir = new File(INVALID_INPUT_DIR);
+        File unreleasedDir = new File(INVALID_INPUT_DIR + UNRELEASED);
+        File config = new File(INVALID_INPUT_DIR + CONFIG_FILE);
+        File entry = new File(INVALID_INPUT_DIR + UNRELEASED + "/invalid-entry.yml");
+
+        File outputFile = new File(INVALID_PATH + OUTPUT_FILE);
+        File createdGitKeep = new File(INVALID_INPUT_DIR + UNRELEASED + "/" + GIT_KEEP);
+
+        File versionDirectory = new File(INVALID_INPUT_DIR + VERSION_DIR);
+        File movedEntry = new File(INVALID_INPUT_DIR + VERSION_DIR + "/" + TEST_FILE);
+        File releaseDateFile = new File(INVALID_INPUT_DIR + VERSION_DIR + "/" + RELEASE_DATE_FILE);
+        File versionSummaryFile = new File(INVALID_INPUT_DIR + VERSION_DIR + "/" + VERSION_SUMMARY_FILE);
+
+        assertTrue(changelogDir.exists());
+        assertTrue(unreleasedDir.exists());
+        assertFalse(config.exists());
+        assertTrue(entry.exists());
+
+        assertFalse(outputFile.exists());
+        assertFalse(createdGitKeep.exists());
+
+        assertFalse(versionDirectory.exists());
+        assertFalse(movedEntry.exists());
+        assertFalse(releaseDateFile.exists());
+        assertFalse(versionSummaryFile.exists());
+
+        // when:
+        Exception exception = assertThrows(RuntimeException.class, () -> ReleaseVersionCommand.of(
+                INVALID_PATH,
+                "1.0.0",
+                UNRELEASED,
+                INPUT_DIR,
+                INVALID_PATH + OUTPUT_FILE,
+                CONFIG_FILE,
+                false,
+                XML_OUTPUT_FILE).execute());
+
+        // then:
+        assertEquals(expectedError, exception.getMessage());
+        assertFalse(outputFile.exists());
+        assertFalse(createdGitKeep.exists());
+        assertFalse(versionDirectory.exists());
+        assertTrue(entry.exists());
+        assertFalse(movedEntry.exists());
+        assertFalse(releaseDateFile.exists());
+        assertFalse(versionSummaryFile.exists());
     }
 }
