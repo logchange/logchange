@@ -27,7 +27,7 @@ public class LintCliCommand extends BaseCommand {
 
     public void runCommand() {
         log.info(LINT_COMMAND_START_LOG);
-        LintProjectCommand.of(inputDir, outputFile, configFile).validate();
+        LintProjectCommand.of(DEFAULT_PATH, inputDir, outputFile, configFile).validate();
         log.info(LINT_COMMAND_END_LOG);
     }
 
