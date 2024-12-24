@@ -24,7 +24,7 @@ public class AggregateProjectsMojo extends AbstractMojo {
     @Override
     public void execute() {
         getLog().info(AGGREGATE_COMMAND_START_LOG);
-        AggregateVersionCommand.of(PATH, ReleaseVersionCommand.getVersion(aggregateVersion), inputDir, configFile).execute();
+        AggregateVersionCommand.of(DEFAULT_PATH, ReleaseVersionCommand.getVersion(aggregateVersion), inputDir, configFile).execute();
         getLog().info(AGGREGATE_COMMAND_END_LOG);
     }
 }
