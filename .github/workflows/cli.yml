@@ -129,8 +129,9 @@ jobs:
 
       - name: run structure tests
         uses: plexsystems/container-structure-test-action@v0.1.0
+        if: github.ref == 'refs/heads/main' # test only on main
         with:
-          image: logchange/logchange
+          image: logchange/logchange:edge
           config: docker-test.yml
 
       - name: Docker Hub Description
