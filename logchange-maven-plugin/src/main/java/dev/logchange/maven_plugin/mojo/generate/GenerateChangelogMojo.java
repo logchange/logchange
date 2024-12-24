@@ -23,7 +23,7 @@ public class GenerateChangelogMojo extends AbstractMojo {
     @Override
     public void execute() {
         getLog().info(GENERATE_COMMAND_START_LOG);
-        GenerateProjectCommand.of(inputDir, outputFile, configFile).execute(false);
+        GenerateProjectCommand.of(DEFAULT_PATH, inputDir, outputFile, configFile).execute(false);
         getLog().info(GENERATE_COMMAND_END_LOG);
     }
 }

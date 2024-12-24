@@ -32,16 +32,16 @@ public class ReleaseVersionCommand {
     public void execute() {
         log.info("Begin preparation from new changelog release: " + version);
 
-        String unreleasedDir = inputDir + "/" + unreleasedVersionDir;
-        String newDirName = inputDir + "/" + "v" + version;
+        String unreleasedDir = rootPath + "/" + inputDir + "/" + unreleasedVersionDir;
+        String newDirName = rootPath + "/" + inputDir + "/" + "v" + version;
 
-        LintProjectCommand.of(inputDir, outputFile, configFile).validate();
+        LintProjectCommand.of(rootPath, inputDir, outputFile, configFile).validate();
 
         ReleaseDate.addToDir(unreleasedDir);
         removeGitKeep(unreleasedDir);
         renameOrMergeDir(unreleasedDir, newDirName);
 
-        GenerateProjectCommand.of(inputDir, outputFile, configFile)
+        GenerateProjectCommand.of(rootPath, inputDir, outputFile, configFile)
                 .withXml(xmlOutputFile)
                 .execute(isGenerateChangesXml);
 
