@@ -22,7 +22,7 @@
         <maven.compiler.target>21</maven.compiler.target>
 
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
-        <native-maven-plugin.version>0.10.3</native-maven-plugin.version>
+        <native-maven-plugin.version>0.10.4</native-maven-plugin.version>
         <maven-shade-plugin.version>3.6.0</maven-shade-plugin.version>
 
         <picocli.version>4.7.6</picocli.version>
@@ -117,7 +117,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>3.3.1</version>
                 <executions>
                     <execution>
                         <id>write-version</id>

@@ -2,11 +2,12 @@ package dev.logchange.commands;
 
 public class Constants {
 
+    public static final String LOGCHANGE_DESCRIPTION = "\nlogchange (CLI) - logchange is a tool which helps creating CHANGELOG by keeping one format and solving merge request conflicts problem by extraction of new CHANGELOG entries to separate files. \n\n Visit https://logchange.dev/ for more information\n";
+    public static final String BASIC_FOOTER = "\n\nFeel free to contact us via email team@logchange.dev \nor visit https://github.com/logchange/logchange";
+
     public static final String OPTION_SEPARATOR = " ";
     public static final String OPTION_SHORT_PREFIX = "-";
     public static final String OPTION_PREFIX = "--";
-
-    public static final String BASIC_FOOTER = "\n\nFeel free to contact us via email team@logchange.dev or visit https://github.com/logchange/logchange";
 
     public static final String INPUT_DIR_PROPERTY = "inputDir";
     public static final String INPUT_DIR_OPTION = OPTION_PREFIX + INPUT_DIR_PROPERTY;
@@ -15,6 +16,12 @@ public class Constants {
     public static final String CONFIG_FILE_PROPERTY = "configFile";
     public static final String CONFIG_FILE_OPTION = OPTION_PREFIX + CONFIG_FILE_PROPERTY;
     public static final String CONFIG_FILE_OPTION_DESCRIPTION = "Name of config file at <" + INPUT_DIR_PROPERTY + "> directory";
+
+    public static final String OUTPUT_FILE_PROPERTY = "outputFile";
+    public static final String OUTPUT_FILE_OPTION = OPTION_PREFIX + OUTPUT_FILE_PROPERTY;
+    public static final String OUTPUT_FILE_OPTION_DESCRIPTION = "Name of changelog file, it will be created if it's not present";
+
+
 
     public static final String DEFAULT_OUTPUT_FILE = "CHANGELOG.md";
     public static final String DEFAULT_INPUT_DIR = "changelog";
@@ -30,34 +37,33 @@ public class Constants {
     public static final String GIT_KEEP = ".gitkeep";
 
     public static final String INIT_COMMAND = "init";
-    public static final String INIT_COMMAND_DESCRIPTION = "Initialize current directory (project) with basic logchange configuration and directory structure";
+    public static final String INIT_COMMAND_DESCRIPTION = "Initialize directory (project) with basic logchange configuration and directory structure";
     public static final String INIT_COMMAND_START_LOG = "Initialize project for logchange";
     public static final String INIT_COMMAND_END_LOG = "Initialize project successful. We are happy that you have trusted logchange community!\n\n" + BASIC_FOOTER;
 
 
     public static final String GENERATE_COMMAND = "generate";
-    public static final String GENERATE_COMMAND_DESCRIPTION = "Generates changelog file based on current file content";
+    public static final String GENERATE_COMMAND_DESCRIPTION = "Generates changelog file (<" + OUTPUT_FILE_PROPERTY + ">) based on .yml entries and archives (does not moves any files)";
     public static final String GENERATE_COMMAND_START_LOG = "Running generate command...";
     public static final String GENERATE_COMMAND_END_LOG = "Changelog successfully generated";
 
-
     public static final String LINT_COMMAND = "lint";
-    public static final String LINT_COMMAND_DESCRIPTION = "Lints and validates yml files and logchange config";
+    public static final String LINT_COMMAND_DESCRIPTION = "Lints and validates YML files and logchange config";
     public static final String LINT_COMMAND_START_LOG = "Running lint command...";
     public static final String LINT_COMMAND_END_LOG = "No problems found, lint passed successfully";
 
     public static final String ADD_COMMAND = "add";
-    public static final String ADD_COMMAND_DESCRIPTION = "Creates new .yml file with logchange structure in <" + UNRELEASED_VERSION_DIR_PROPERTY + "> directory";
+    public static final String ADD_COMMAND_DESCRIPTION = "Creates new YML file with logchange structure in <" + UNRELEASED_VERSION_DIR_PROPERTY + "> directory";
     public static final String ADD_COMMAND_START_LOG = "Running add command...";
     public static final String ADD_COMMAND_END_LOG = "Changelog entry successfully added";
 
     public static final String RELEASE_COMMAND = "release";
-    public static final String RELEASE_COMMAND_DESCRIPTION = "Creates new changelog release by moving files from unreleased to vX.X.X directory";
+    public static final String RELEASE_COMMAND_DESCRIPTION = "Creates new changelog release by moving files from <" + UNRELEASED_VERSION_DIR_PROPERTY + "> directory to vX.X.X directory";
     public static final String RELEASE_COMMAND_START_LOG = "Running release command for version: ";
     public static final String RELEASE_COMMAND_END_LOG = "Changelog entry successfully added";
 
     public static final String AGGREGATE_COMMAND = "aggregate";
-    public static final String AGGREGATE_COMMAND_DESCRIPTION = "Aggregates projects changelogs to create one";
+    public static final String AGGREGATE_COMMAND_DESCRIPTION = "Aggregates projects changelogs to create one. Useful when we have many projects that make up one product.";
     public static final String AGGREGATE_COMMAND_START_LOG = "Running aggregate command...";
     public static final String AGGREGATE_COMMAND_END_LOG = "Aggregate successfully";
 
@@ -67,10 +73,6 @@ public class Constants {
     public static final String PATH_SHORT_PROPERTY = "p";
     public static final String PATH_SHORT_OPTION = OPTION_SHORT_PREFIX + PATH_SHORT_PROPERTY;
     public static final String PATH_OPTION_DESCRIPTION = "Path to the root directory";
-
-    public static final String OUTPUT_FILE_PROPERTY = "outputFile";
-    public static final String OUTPUT_FILE_OPTION = OPTION_PREFIX + OUTPUT_FILE_PROPERTY;
-    public static final String OUTPUT_FILE_OPTION_DESCRIPTION = "Name of changelog file, it will be created if it's not present";
 
     public static final String AGGREGATE_VERSION_PROPERTY = "aggregateVersion";
     public static final String AGGREGATE_VERSION_OPTION = OPTION_PREFIX + AGGREGATE_VERSION_PROPERTY;
