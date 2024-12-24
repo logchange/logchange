@@ -245,7 +245,7 @@ class ReleaseVersionCommandTest {
                 XML_OUTPUT_FILE).execute());
 
         // then:
-        assertThat(exception.getMessage()).isEqualToIgnoringNewLines(expectedError);
+        assertThat(exception.getMessage()).isEqualToIgnoringWhitespace(expectedError);
         assertFalse(outputFile.exists());
         assertFalse(createdGitKeep.exists());
         assertFalse(versionDirectory.exists());

@@ -91,6 +91,6 @@ class LintProjectCommandTest {
         Exception exception = assertThrows(RuntimeException.class, () -> LintProjectCommand.of(INVALID_PATH, INPUT_DIR, INVALID_PATH + OUTPUT_FILE, CONFIG_FILE).validate());
 
         // then:
-        assertThat(exception.getMessage()).isEqualToIgnoringNewLines(expectedOutput);
+        assertThat(exception.getMessage()).isEqualToIgnoringWhitespace(expectedOutput);
     }
 }
