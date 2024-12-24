@@ -204,20 +204,20 @@ class ReleaseVersionCommandTest {
                 "Errors in src\\test\\resources\\ReleaseVersionCommandTest\\invalidYML\\changelog\\unreleased\\invalid-entry.yml:\n" +
                 "\tUnknown property [issue] with value [100]\n" +
                 "\n";
-        String INVALID_PATH = PATH + "/invalidYML/";
-        String INVALID_INPUT_DIR = INVALID_PATH + INPUT_DIR + "/";
+        String INVALID_PATH = PATH + "/invalidYML";
+        String INVALID_INPUT_DIR = INVALID_PATH + "/" + INPUT_DIR;
         File changelogDir = new File(INVALID_INPUT_DIR);
-        File unreleasedDir = new File(INVALID_INPUT_DIR + UNRELEASED);
-        File config = new File(INVALID_INPUT_DIR + CONFIG_FILE);
-        File entry = new File(INVALID_INPUT_DIR + UNRELEASED + "/invalid-entry.yml");
+        File unreleasedDir = new File(INVALID_INPUT_DIR + "/" + UNRELEASED);
+        File config = new File(INVALID_INPUT_DIR + "/" + CONFIG_FILE);
+        File entry = new File(INVALID_INPUT_DIR + "/" + UNRELEASED + "/invalid-entry.yml");
 
-        File outputFile = new File(INVALID_PATH + OUTPUT_FILE);
-        File createdGitKeep = new File(INVALID_INPUT_DIR + UNRELEASED + "/" + GIT_KEEP);
+        File outputFile = new File(INVALID_PATH + "/" + OUTPUT_FILE);
+        File createdGitKeep = new File(INVALID_INPUT_DIR + "/" + UNRELEASED + "/" + GIT_KEEP);
 
-        File versionDirectory = new File(INVALID_INPUT_DIR + VERSION_DIR);
-        File movedEntry = new File(INVALID_INPUT_DIR + VERSION_DIR + "/" + TEST_FILE);
-        File releaseDateFile = new File(INVALID_INPUT_DIR + VERSION_DIR + "/" + RELEASE_DATE_FILE);
-        File versionSummaryFile = new File(INVALID_INPUT_DIR + VERSION_DIR + "/" + VERSION_SUMMARY_FILE);
+        File versionDirectory = new File(INVALID_INPUT_DIR + "/" + VERSION_DIR);
+        File movedEntry = new File(INVALID_INPUT_DIR + "/" + VERSION_DIR + "/" + TEST_FILE);
+        File releaseDateFile = new File(INVALID_INPUT_DIR + "/" + VERSION_DIR + "/" + RELEASE_DATE_FILE);
+        File versionSummaryFile = new File(INVALID_INPUT_DIR + "/" + VERSION_DIR + "/" + VERSION_SUMMARY_FILE);
 
         assertTrue(changelogDir.exists());
         assertTrue(unreleasedDir.exists());
