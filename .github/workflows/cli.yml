@@ -183,7 +183,7 @@ jobs:
 #        run: echo $GITHUB_WORKSPACE/changelog/v${GITHUB_REF/refs\/tags\//}/version-summary.md
 #
 #      - name: Set RELEASE_BODY_FILE env
-#        run: echo "RELEASE_BODY_FILE=$(echo $GITHUB_WORKSPACE/changelog/v${GITHUB_REF/refs\/tags\//}/version-summary.md)" >> $GITHUB_ENV
+        run: echo "RELEASE_BODY_FILE=$(echo $GITHUB_WORKSPACE/changelog/v${GITHUB_REF/refs\/tags\//}/version-summary.md)" >> $GITHUB_ENV
 
       - name: Release
         uses: softprops/action-gh-release@v2
@@ -191,7 +191,7 @@ jobs:
           #  when tag has 'v' in name no need of adding it before ${GITHUB_REF/refs\/tags\//
 #          body_path: ${{ env.RELEASE_BODY_FILE }}
           files: |
-            $GITHUB_WORKSPACE/logchange-linuxx64
+            ${{ github.workspace }}/logchange-linuxx64
             $GITHUB_WORKSPACE/logchange-darwinx64
             $GITHUB_WORKSPACE/logchange-darwinarm64
             $GITHUB_WORKSPACE/logchange-windowsx64.exe
