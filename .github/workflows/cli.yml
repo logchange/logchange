@@ -190,7 +190,6 @@ jobs:
         with:
           #  when tag has 'v' in name no need of adding it before ${GITHUB_REF/refs\/tags\//
 #          body_path: ${{ env.RELEASE_BODY_FILE }}
-          body_path: "Test release"
           files: |
             logchange-linuxx64
             logchange-darwinx64
