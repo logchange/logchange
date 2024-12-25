@@ -154,6 +154,9 @@ jobs:
         with:
           path: ./bins
 
+      - name: Package artifacts
+        run: for d in /bins/*/; do zip -r "/bins/$(basename "$d").zip" "$d"; done
+
       - name: List artifacts
         run: |
           tree ./bins
@@ -173,10 +176,11 @@ jobs:
           #  when tag has 'v' in name no need of adding it before ${GITHUB_REF/refs\/tags\//
 #          body_path: ${{ env.RELEASE_BODY_FILE }}
           # upload-artifact creates files like this:
-          # ./bins/logchange-linuxx64/logchange-linuxx64
+          # ./bins/logchange-linuxx64/logchange
+          # then we zip it to make it smaller
           # https://github.com/softprops/action-gh-release/issues/342
           files: |
-            ./bins/*/*
+            ./bins/*.zip
         env:
           # Cannot use GITHUB_TOKEN because of:
           # https://github.com/orgs/community/discussions/27028
