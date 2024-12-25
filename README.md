@@ -56,7 +56,7 @@ You can choose between two options:
         <plugin>
             <groupId>dev.logchange</groupId>
             <artifactId>logchange-maven-plugin</artifactId>
-            <version>1.11.0</version>
+            <version>1.13.0</version>
             <inherited>false</inherited> <!-- For multi module project -->
         </plugin>
     </plugins>
@@ -346,68 +346,68 @@ CLI tool offers all the available features of those of maven plugin:
 
 ### logchange init
 
-| Option                   | Default Value       | Description                                                               |
-|--------------------------|---------------------|---------------------------------------------------------------------------|
-| `--path, -p`              | `current directory` | Specifies the root path for the initialization.                            |
-| `--inputDir`              | `changelog`         | Specifies the input directory for reading data.                            |
-| `--unreleasedVersionDir`  | `unreleased`        | Specifies the directory for unreleased versions where changes are stored. |
-| `--outputFile`            | `CHANGELOG.md`      | Specifies the name of the output file where the initialized data will be saved. |
+| Option                   | Default Value       | Description                                                                        |
+|--------------------------|---------------------|------------------------------------------------------------------------------------|
+| `--path, -p`             | `current directory` | Specifies the root path for the logchange initialization.                          |
+| `--inputDir`             | `changelog`         | Specifies the input directory for the logchange data.                              |
+| `--unreleasedVersionDir` | `unreleased`        | Specifies the directory for unreleased changes where entries are stored.           |
+| `--outputFile`           | `CHANGELOG.md`      | Specifies the name of the output file where the generated changelog will be saved. |
 
 
 ### logchange add
 
-| Option                | Default Value    | Description                                                                          |
-|-----------------------|------------------|--------------------------------------------------------------------------------------|
-| `--inputDir`           | `changelog`      | Specifies the input directory from which data for the CHANGELOG entry will be taken. |
-| `--unreleasedVersionDir` | `unreleased`    | Specifies the directory for unreleased versions where pending changes are stored.    |
-| `--fileName`           | N/A              | The name of the entry file.                                                          |
-| `--batchMode`          | `false`          | Determines if the command should run in batch mode (process multiple entries).       |
-| `--empty`              | `false`          | Allows adding an empty entry (without content).                                      |
-| `--title`              | N/A              | The title of the CHANGELOG entry.                                                    |
-| `--author`             | N/A              | The author of the change, assigned to the CHANGELOG entry.                           |
-| `--type`               | N/A              | The type of change (e.g., "added", "changed", etc.).                                 |
-| `--link.name`          | N/A              | The name of the link to be included in the change description.                       |
-| `--link.url`           | N/A              | The URL associated with the link, such as a bug report or documentation.             |
+| Option                   | Default Value | Description                                                      |
+|--------------------------|---------------|------------------------------------------------------------------|
+| `--inputDir`             | `changelog`   | Specifies the input directory for the logchange data.            |
+| `--unreleasedVersionDir` | `unreleased`  | Specifies the directory where created entries will be stored.    |
+| `--fileName`             | N/A           | The name of the entry file.                                      |
+| `--batchMode`            | `false`       | Determines if the command should run in batch mode.              |
+| `--empty`                | `false`       | Allows adding an empty entry.                                    |
+| `--title`                | N/A           | The title of the CHANGELOG entry.                                |
+| `--author`               | N/A           | The author of the change, assigned to the CHANGELOG entry.       |
+| `--type`                 | N/A           | The type of change (e.g., "added", "changed", etc.).             |
+| `--link.name`            | N/A           | The name of the link to be included in the change description.   |
+| `--link.url`             | N/A           | The URL associated with the link, such as a bug report or issue. |
 
 
 ### logchange generate
 
-| Option              | Default Value          | Description                                                             |
-|---------------------|------------------------|-------------------------------------------------------------------------|
-| `--inputDir`         | `changelog`            | Specifies the input directory for reading the CHANGELOG data.           |
-| `--outputFile`       | `CHANGELOG.md`         | Specifies the name of the output file where the generated CHANGELOG will be saved. |
-| `--configFile`       | `logchange-config.yml` | Specifies the configuration file used for generating the CHANGELOG.     |
+| Option         | Default Value          | Description                                                                        |
+|----------------|------------------------|------------------------------------------------------------------------------------|
+| `--inputDir`   | `changelog`            | Specifies the input directory for the logchange data.                              |
+| `--outputFile` | `CHANGELOG.md`         | Specifies the name of the output file where the generated CHANGELOG will be saved. |
+| `--configFile` | `logchange-config.yml` | Specifies the name of configuration file.                                          |
 
 
 ### logchange lint
 
-| Option              | Default Value         | Description                                                             |
-|---------------------|-----------------------|-------------------------------------------------------------------------|
-| `--inputDir`         | `changelog`           | Specifies the input directory for linting the CHANGELOG data.           |
-| `--outputFile`       | `CHANGELOG.md`        | Specifies the name of the output file where the linting results will be saved. |
-| `--configFile`       | `logchange-config.yml` | Specifies the configuration file used for linting the CHANGELOG.        |
+| Option         | Default Value          | Description                                                                        |
+|----------------|------------------------|------------------------------------------------------------------------------------|
+| `--inputDir`   | `changelog`            | Specifies the input directory for the logchange data.                              |
+| `--outputFile` | `CHANGELOG.md`         | Specifies the name of the output file where the generated changelog will be saved. |
+| `--configFile` | `logchange-config.yml` | Specifies the name of configuration file.                                          |
 
 
 ### logchange release
 
-| Option                     | Default Value          | Description                                                                 |
-|----------------------------|------------------------|-----------------------------------------------------------------------------|
-| `--versionToRelease`        | N/A                    | Specifies the name of the version that we want to release (e.g., `2.1.1`).   |
-| `--unreleasedVersionDir`    | `unreleased`           | Specifies the directory for unreleased versions where changes are stored.    |
-| `--inputDir`                | `changelog`            | Specifies the input directory for reading the data related to the release.   |
-| `--outputFile`              | `CHANGELOG.md`         | Specifies the name of the output file where the release information will be saved. |
-| `--configFile`              | `logchange-config.yml` | Specifies the configuration file used for releasing the version.            |
-| `--generateChangesXml`      | `false`                | Specifies whether to generate an XML file containing the changes.            |
-| `--xmlOutputFile`           | `changes.xml`          | Specifies the name of the XML output file to store the changes in XML format. |
+| Option                   | Default Value          | Description                                                                        |
+|--------------------------|------------------------|------------------------------------------------------------------------------------|
+| `--versionToRelease`     | N/A                    | Specifies the name of the version that we want to release (e.g., `2.1.1`).         |
+| `--unreleasedVersionDir` | `unreleased`           | Specifies the directory for unreleased changes where entries are stored.           |
+| `--inputDir`             | `changelog`            | Specifies the input directory for the logchange data.                              |
+| `--outputFile`           | `CHANGELOG.md`         | Specifies the name of the output file where the generated changelog will be saved. |
+| `--configFile`           | `logchange-config.yml` | Specifies the name of configuration file.                                          |
+| `--generateChangesXml`   | `false`                | Specifies whether to generate an XML file containing the changes.                  |
+| `--xmlOutputFile`        | `changes.xml`          | Specifies the name of the XML output file.                                         |
 
 
 ### logchange aggregate
 
-| Option                | Default Value         | Description                                                                 |
-|-----------------------|-----------------------|-----------------------------------------------------------------------------|
-| `--aggregateVersion`   | N/A                   | Specifies the version that the aggregation will be performed for.           |
-| `--inputDir`           | `changelog`           | Specifies the input directory containing the projects to aggregate.          |
-| `--configFile`         | `logchange-config.yml` | Specifies the configuration file used for the aggregation process.           |
+| Option               | Default Value          | Description                                                       |
+|----------------------|------------------------|-------------------------------------------------------------------|
+| `--aggregateVersion` | N/A                    | Specifies the version that the aggregation will be performed for. |
+| `--inputDir`         | `changelog`            | Specifies the input directory for the logchange data.             |
+| `--configFile`       | `logchange-config.yml` | Specifies the name of configuration file.                         |
 
 
 ### Distribution
