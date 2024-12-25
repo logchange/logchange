@@ -27,20 +27,20 @@ jobs:
 #            runs-on: self-hosted
 #            platform: linuxarm64
 
-#          - name: "macOS x86_64"
-#            base: macos
-#            runs-on: macos-13
-#            platform: darwinx64
-#
-#          - name: "macOS ARM64"
-#            base: macos
-#            runs-on: macos-14
-#            platform: darwinarm64
-#
-#          - name: "Windows x86_64"
-#            base: windows
-#            runs-on: windows-2022
-#            platform: windowsx64
+          - name: "macOS x86_64"
+            base: macos
+            runs-on: macos-13
+            platform: darwinx64
+
+          - name: "macOS ARM64"
+            base: macos
+            runs-on: macos-14
+            platform: darwinarm64
+
+          - name: "Windows x86_64"
+            base: windows
+            runs-on: windows-2022
+            platform: windowsx64
     steps:
       - uses: actions/checkout@v4
 
@@ -141,7 +141,7 @@ jobs:
           repository: logchange/logchange
 
   create-release:
-    name: Creates GitHub release
+    name: Create Release
     needs: build
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')
