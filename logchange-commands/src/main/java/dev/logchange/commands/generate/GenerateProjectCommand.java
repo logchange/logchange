@@ -24,20 +24,21 @@ import java.io.File;
 @RequiredArgsConstructor(staticName = "of")
 public class GenerateProjectCommand {
 
+    private final String rootPath;
     private final String inputDir;
     private final String outputFile;
     private final String configFile;
     private String xmlOutputFile;
 
     public GenerateProjectCommand withXml(String xmlOutputFile) {
-        return new GenerateProjectCommand(inputDir, outputFile, configFile, xmlOutputFile);
+        return new GenerateProjectCommand(rootPath, inputDir, outputFile, configFile, xmlOutputFile);
     }
 
     public void execute(Boolean xml) {
         log.info("Started generating " + outputFile);
-        File changelogDirectory = Dir.find("./" + inputDir);
+        File changelogDirectory = Dir.find(rootPath + "/" + inputDir);
 
-        String configPath = "./" + inputDir + "/" + configFile;
+        String configPath = rootPath + "/" + inputDir + "/" + configFile;
         Config config = ConfigFile.find(configPath).orElseGet(() -> {
             log.info("There is no config file:  " + configPath + " for this project, using defaults");
             return Config.EMPTY;

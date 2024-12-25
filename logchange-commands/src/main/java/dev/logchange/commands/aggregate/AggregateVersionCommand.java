@@ -24,15 +24,16 @@ import java.nio.file.Paths;
 @RequiredArgsConstructor(staticName = "of")
 public class AggregateVersionCommand {
 
+    private final String rootPath;
     private final String aggregateVersion;
     private final String inputDir;
     private final String configFile;
 
     public void execute() {
         log.info("Started aggregating " + aggregateVersion + " version");
-        File changelogDirectory = Dir.find("./" + inputDir);
+        File changelogDirectory = Dir.find(rootPath + "/" + inputDir);
 
-        String configPath = "./" + inputDir + "/" + configFile;
+        String configPath = rootPath + "/" + inputDir + "/" + configFile;
         Config config = getConfig(configPath);
         AggregateChangelogsVersionsCommand command = AggregateChangelogsVersionsCommand.of(config.getAggregates(), aggregateVersion);
 

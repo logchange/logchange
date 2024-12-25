@@ -1,0 +1,41 @@
+# This file configures logchange tool 🌳 🪓 => 🪵 
+# Visit https://github.com/logchange/logchange and leave a star 🌟 
+# More info about configuration you can find https://github.com/logchange/logchange#configuration 
+changelog:
+  heading: ""
+  labels:
+    unreleased: unreleased
+    important_notes: Important notes
+    types:
+      added: Added
+      changed: Changed
+      deprecated: Deprecated
+      removed: Removed
+      fixed: Fixed
+      security: Security
+      dependency_update: Dependency updates
+      other: Security
+      number_of_changes:
+        singular: change
+        plural: changes
+    configuration:
+      heading: Configuration changes
+      type: Type
+      actions:
+        add: Added
+        update: Updated
+        delete: Deleted
+      with_default_value: with default value
+      description: Description
+  templates:
+    entry: "${prefix}${title} ${merge_requests} ${issues} ${links} ${authors}"
+aggregates:
+  projects:
+    - name: hofund
+      url: https://github.com/logchange/hofund/archive/refs/heads/master.tar.gz
+      type: tar.gz
+      input_dir: changelog
+    - name: logchange
+      url: https://github.com/logchange/logchange/archive/refs/heads/main.tar.gz
+      type: tar.gz
+      input_dir: changelog

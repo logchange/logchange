@@ -20,14 +20,15 @@ import java.io.File;
 @RequiredArgsConstructor(staticName = "of")
 public class LintProjectCommand {
 
+    private final String rootPath;
     private final String inputDir;
     private final String outputFile;
     private final String configFile;
 
     public void validate() {
         log.info("Started validation of " + inputDir + " and " + configFile);
-        File changelogDirectory = Dir.find("./" + inputDir);
-        String configPath = "./" + inputDir + "/" + configFile;
+        File changelogDirectory = Dir.find(rootPath + "/" + inputDir);
+        String configPath = rootPath + "/" + inputDir + "/" + configFile;
         Config config = ConfigFile.find(configPath).orElseGet(() -> {
             log.info("There is no config file:  " + configPath + " for this project, using defaults");
             return Config.EMPTY;
