@@ -145,6 +145,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')
+    strategy:
+      matrix:
+        os-type-arch: [linuxx64, darwinx64, darwinarm64, windowsx64]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -152,31 +155,19 @@ jobs:
       - name: Download logchange binaries artifact - linuxx64
         uses: actions/download-artifact@v4
         with:
-          name: logchange-linuxx64
-          path: ./logchange-linuxx64
-
-      - name: Download logchange binaries artifact - darwinx64
-        uses: actions/download-artifact@v4
-        with:
-          name: logchange-darwinx64
-          path: ./logchange-darwinx64
-
-      - name: Download logchange binaries artifact - darwinarm64
-        uses: actions/download-artifact@v4
-        with:
-          name: logchange-darwinarm64
-          path: ./logchange-darwinarm64
-
-      - name: Download logchange binaries artifact - windowsx64
-        uses: actions/download-artifact@v4
-        with:
-          name: logchange-windowsx64
-          path: ./logchange-windowsx64.exe
+          name: logchange-${{matrix.os-type-arch}}
+          path: ./binaries/${{matrix.os-type-arch}}/
 
       - name: Test files
         run: ls -l
 
-#      - name: Test files (if version-summary.md exists)
+      - name: Test files 2
+        run: ls -l ./binaries
+
+      - name: Test files ${{matrix.os-type-arch}}
+        run: ls -l ./binaries/${{matrix.os-type-arch}}/
+
+      #      - name: Test files (if version-summary.md exists)
 #        run: ls -l && ls -l ./changelog && echo "v${GITHUB_REF/refs\/tags\//}" && ls -l ./changelog/v${GITHUB_REF/refs\/tags\//}
 #
 #      - name: Check if file exissts
@@ -191,10 +182,7 @@ jobs:
           #  when tag has 'v' in name no need of adding it before ${GITHUB_REF/refs\/tags\//
 #          body_path: ${{ env.RELEASE_BODY_FILE }}
           files: |
-            ${{ github.workspace }}/logchange-linuxx64
-            $GITHUB_WORKSPACE/logchange-darwinx64
-            $GITHUB_WORKSPACE/logchange-darwinarm64
-            $GITHUB_WORKSPACE/logchange-windowsx64.exe
+            ./binaries/*/*
         env:
           # Cannot use GITHUB_TOKEN because of:
           # https://github.com/orgs/community/discussions/27028
