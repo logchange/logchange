@@ -173,6 +173,9 @@ jobs:
           name: logchange-windowsx64
           path: ./logchange-windowsx64.exe
 
+      - name: Test files
+        run: ls -l
+
 #      - name: Test files (if version-summary.md exists)
 #        run: ls -l && ls -l ./changelog && echo "v${GITHUB_REF/refs\/tags\//}" && ls -l ./changelog/v${GITHUB_REF/refs\/tags\//}
 #
