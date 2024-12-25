@@ -1,19 +1,18 @@
 # This workflow will build a Java project with Maven
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
+name: Publish to Central Repo
 
-#name: Publish to Central Repo
-#
-#on:
-#  release:
-#    types: [ created ]
-#
-#jobs:
-#  deploy:
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#      - uses: actions/checkout@v4
+on:
+  release:
+    types: [ created ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
 #      - name: Set up Maven Central Repository
 #        uses: actions/setup-java@v4
 #        with:
