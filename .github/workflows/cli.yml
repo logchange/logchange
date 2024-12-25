@@ -145,9 +145,6 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')
-    strategy:
-      matrix:
-        os-type-arch: [linuxx64, darwinx64, darwinarm64, windowsx64]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -155,17 +152,11 @@ jobs:
       - name: Download logchange binaries artifact - linuxx64
         uses: actions/download-artifact@v4
         with:
-          name: logchange-${{matrix.os-type-arch}}
-          path: ./binaries/${{matrix.os-type-arch}}/
+          path: ./bins
 
-      - name: Test files
-        run: ls -l
-
-      - name: Test files 2
-        run: ls -l ./binaries
-
-      - name: Test files ${{matrix.os-type-arch}}
-        run: ls -l ./binaries/${{matrix.os-type-arch}}/
+      - name: List artifacts
+        run: |
+          tree ./bins
 
       #      - name: Test files (if version-summary.md exists)
 #        run: ls -l && ls -l ./changelog && echo "v${GITHUB_REF/refs\/tags\//}" && ls -l ./changelog/v${GITHUB_REF/refs\/tags\//}
@@ -181,8 +172,11 @@ jobs:
         with:
           #  when tag has 'v' in name no need of adding it before ${GITHUB_REF/refs\/tags\//
 #          body_path: ${{ env.RELEASE_BODY_FILE }}
+          # upload-artifact creates files like this:
+          # ./bins/logchange-linuxx64/logchange-linuxx64
+          # https://github.com/softprops/action-gh-release/issues/342
           files: |
-            ./binaries/*/*
+            ./bins/*/*
         env:
           # Cannot use GITHUB_TOKEN because of:
           # https://github.com/orgs/community/discussions/27028
