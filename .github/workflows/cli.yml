@@ -149,11 +149,29 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Download logchange binaries artifact
+      - name: Download logchange binaries artifact - linuxx64
         uses: actions/download-artifact@v4
         with:
-          name: logchange-${{ matrix.platform }}
-          path: ./logchange-${{ matrix.platform }}
+          name: logchange-linuxx64
+          path: ./logchange-linuxx64
+
+      - name: Download logchange binaries artifact - darwinx64
+        uses: actions/download-artifact@v4
+        with:
+          name: logchange-darwinx64
+          path: ./logchange-darwinx64
+
+      - name: Download logchange binaries artifact - darwinarm64
+        uses: actions/download-artifact@v4
+        with:
+          name: logchange-darwinarm64
+          path: ./logchange-darwinarm64
+
+      - name: Download logchange binaries artifact - windowsx64
+        uses: actions/download-artifact@v4
+        with:
+          name: logchange-windowsx64
+          path: ./logchange-windowsx64.exe
 
       - name: Test files (if version-summary.md exists)
         run: ls -l && ls -l ./changelog && echo "v${GITHUB_REF/refs\/tags\//}" && ls -l ./changelog/v${GITHUB_REF/refs\/tags\//}
@@ -170,7 +188,10 @@ jobs:
           #  when tag has 'v' in name no need of adding it before ${GITHUB_REF/refs\/tags\//
           body_path: ${{ env.RELEASE_BODY_FILE }}
           files: |
-            logchange-${{ matrix.platform }}
+            logchange-linuxx64
+            logchange-darwinx64
+            logchange-darwinarm64
+            logchange-windowsx64.exe
         env:
           # Cannot use GITHUB_TOKEN because of:
           # https://github.com/orgs/community/discussions/27028
