@@ -155,7 +155,7 @@ jobs:
           path: ./bins
 
       - name: Package artifacts
-        run: for d in /bins/*/; do zip -r "/bins/$(basename "$d").zip" "$d"; done
+        run: for d in ./bins/*/; do zip -r "./bins/$(basename "$d").zip" "$d"; done
 
       - name: List artifacts
         run: |
