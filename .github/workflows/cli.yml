@@ -161,21 +161,21 @@ jobs:
         run: |
           tree ./bins
 
-      #      - name: Test files (if version-summary.md exists)
-#        run: ls -l && ls -l ./changelog && echo "v${GITHUB_REF/refs\/tags\//}" && ls -l ./changelog/v${GITHUB_REF/refs\/tags\//}
-#
-#      - name: Check if file exissts
-#        run: echo $GITHUB_WORKSPACE/changelog/v${GITHUB_REF/refs\/tags\//}/version-summary.md
-#
-#      - name: Set RELEASE_BODY_FILE env
-#        run: echo "RELEASE_BODY_FILE=$(echo $GITHUB_WORKSPACE/changelog/v${GITHUB_REF/refs\/tags\//}/version-summary.md)" >> $GITHUB_ENV
+      - name: Test files (if version-summary.md exists)
+        run: ls -l && ls -l ./changelog && echo "v${GITHUB_REF/refs\/tags\//}" && ls -l ./changelog/v${GITHUB_REF/refs\/tags\//}
+
+      - name: Check if file exissts
+        run: echo $GITHUB_WORKSPACE/changelog/v${GITHUB_REF/refs\/tags\//}/version-summary.md
+
+      - name: Set RELEASE_BODY_FILE env
+        run: echo "RELEASE_BODY_FILE=$(echo $GITHUB_WORKSPACE/changelog/v${GITHUB_REF/refs\/tags\//}/version-summary.md)" >> $GITHUB_ENV
 
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
           #  when tag has 'v' in name no need of adding it before ${GITHUB_REF/refs\/tags\//
-#          body_path: ${{ env.RELEASE_BODY_FILE }}
-          # upload-artifact creates files like this:
+          body_path: ${{ env.RELEASE_BODY_FILE }}
+          # upload-artifact and then download creates files like this:
           # ./bins/logchange-linuxx64/logchange
           # then we zip it to make it smaller
           # https://github.com/softprops/action-gh-release/issues/342
