@@ -3,12 +3,14 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/logchange/logchange/graphs/contributors" alt="Contributors">
-        <img src="https://img.shields.io/github/contributors/logchange/logchange" /></a>
-    <a href="https://github.com/logchange/logchange/pulse" alt="Activity">
-        <img src="https://img.shields.io/github/commit-activity/m/logchange/logchange" /></a>
-    <a href="https://search.maven.org/search?q=g:%22dev.logchange%22%20AND%20a:%22logchange-maven-plugin%22" alt="Maven Central">
-        <img src="https://img.shields.io/maven-central/v/dev.logchange/logchange-maven-plugin.svg?label=Maven%20Central" /></a>
+    <a href="https://github.com/logchange/logchange/graphs/contributors">
+        <img src="https://img.shields.io/github/contributors/logchange/logchange" alt="Contributors"/></a>
+    <a href="https://github.com/logchange/logchange/pulse">
+        <img src="https://img.shields.io/github/commit-activity/m/logchange/logchange" alt="Activity"/></a>
+    <a href="https://hub.docker.com/repository/docker/logchange/logchange/">
+        <img src="https://img.shields.io/docker/v/logchange/logchange?sort=semver&color=green" alt="DockerHub"/></a>
+    <a href="https://search.maven.org/search?q=g:%22dev.logchange%22%20AND%20a:%22logchange-maven-plugin%22">
+        <img src="https://img.shields.io/maven-central/v/dev.logchange/logchange-maven-plugin.svg?label=Maven%20Central" alt="Maven Central"/></a>
 </p>
 
 🌳 `CHANGELOG.md` is one of the most important files in a repository. It allows others to find out about
@@ -22,13 +24,12 @@ encounter it when someone merged changes to `CHANGELOG.md` before you.
 🌲 When you create new merge/pull request and in the meantime you will release version, with old-fashioned `CHANGELOG.md`
 you have to remember, to move new changelog's entry up, to the new version section. With this tool you don't have to!
 
-🪓 If your PO is against you to use this tool in your projects, don't worry... just ask him to do `CHANGELOG.md` by his
-own, and he will be the first one, who will ask you to use this tool. 🔥
+🪓 If your PO is against you to use this tool in your projects, don't worry... just ask him to do `CHANGELOG.md` by himself, and he will be the first one, who will ask you to use this tool. 🔥
 
 **🪵 To solve these problems, this project was created. It allows to keep a changelog style and reduce merge request
 conflicts by keeping every change in a separate YAML file and generate `CHANGELOG.md` during release.**
 
-This tool is also helpful to create reliable release notes during your release process.
+📜 This tool is also helpful to create reliable release notes during your release process.
 
 ### Reference
 
@@ -39,7 +40,11 @@ developing various types of projects.
 The same problem with merge conflicts with `CHANGELOG.md` was described by
 GitLab. [LINK](https://about.gitlab.com/blog/2018/07/03/solving-gitlabs-changelog-conflict-crisis/)
 
-## Usage
+## Usage and installation
+
+**logchange is distributed as:**
+- **CLI** (binary) - you can use it regardless of the technology used in the project. (Also available as [logchange docker image], suited for CI/CD)
+- **Maven Plugin** - dedicated to projects based on the [Maven] tool
 
 ### Maven Plugin
 
@@ -343,6 +348,9 @@ It allows you to create and maintain CHANGELOGs independently of your project’
 
 CLI tool offers all the available features of those of maven plugin:
 
+### Starting
+
+TODO
 
 ### logchange init
 
@@ -410,10 +418,11 @@ CLI tool offers all the available features of those of maven plugin:
 | `--configFile`       | `logchange-config.yml` | Specifies the name of configuration file.                         |
 
 
-### Distribution
+## CI/CD
 
-Find the official image on Docker Hub: [Logchange Docker Image](https://hub.docker.com/repository/docker/logchange/logchange/)
+### GitHub Actions
 
+### GitLab CI/CD
 
 ## TODO:
 
@@ -423,3 +432,7 @@ Find the official image on Docker Hub: [Logchange Docker Image](https://hub.dock
 
 1. Java installed.
 2. `mvn` as a command in your terminal(needed for integration tests, IniteliJ does not support maven integration tests).
+
+#### References
+[Maven](https://maven.apache.org/)
+[logchange docker image](https://hub.docker.com/repository/docker/logchange/logchange/)
