@@ -8,7 +8,9 @@
     <a href="https://github.com/logchange/logchange/pulse">
         <img src="https://img.shields.io/github/commit-activity/m/logchange/logchange" alt="Activity"/></a>
     <a href="https://hub.docker.com/repository/docker/logchange/logchange/">
-        <img src="https://img.shields.io/docker/v/logchange/logchange?sort=semver&color=green" alt="DockerHub"/></a>
+        <img src="https://img.shields.io/docker/v/logchange/logchange?sort=semver&color=green&label=DockerHub" alt="DockerHub"/></a>
+    <a href="https://hub.docker.com/repository/docker/logchange/logchange/">
+        <img src="https://img.shields.io/docker/pulls/logchange/logchange" alt="DockerHub Pulls"/></a>
     <a href="https://search.maven.org/search?q=g:%22dev.logchange%22%20AND%20a:%22logchange-maven-plugin%22">
         <img src="https://img.shields.io/maven-central/v/dev.logchange/logchange-maven-plugin.svg?label=Maven%20Central" alt="Maven Central"/></a>
 </p>
