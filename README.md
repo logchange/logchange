@@ -11,7 +11,7 @@
         <img src="https://img.shields.io/docker/v/logchange/logchange?sort=semver&color=green&label=DockerHub" alt="DockerHub"/></a>
     <a href="https://hub.docker.com/repository/docker/logchange/logchange/">
         <img src="https://img.shields.io/docker/pulls/logchange/logchange" alt="DockerHub Pulls"/></a>
-    <a href="https://search.maven.org/search?q=g:%22dev.logchange%22%20AND%20a:%22logchange-maven-plugin%22">
+    <a href="https://central.sonatype.com/artifact/dev.logchange/logchange-maven-plugin">
         <img src="https://img.shields.io/maven-central/v/dev.logchange/logchange-maven-plugin.svg?label=Maven%20Central" alt="Maven Central"/></a>
 </p>
 
