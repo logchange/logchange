@@ -435,6 +435,5 @@ TODO
 1. Java installed.
 2. `mvn` as a command in your terminal(needed for integration tests, IniteliJ does not support maven integration tests).
 
-#### References
-- [Maven]: https://maven.apache.org/
-- [logchange docker image]: https://hub.docker.com/r/logchange/logchange
+[Maven]: https://maven.apache.org/
+[logchange docker image]: https://hub.docker.com/r/logchange/logchange
