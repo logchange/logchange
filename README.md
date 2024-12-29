@@ -45,8 +45,8 @@ GitLab. [LINK](https://about.gitlab.com/blog/2018/07/03/solving-gitlabs-changelo
 ## Usage and installation
 
 ### logchange is distributed as:
-- **CLI** (binary) - you can use it regardless of the technology used in the project. (Also available as [logchange docker image][], suited for CI/CD)
-- **Maven Plugin** - dedicated to projects based on the [Maven][] tool
+- [**CLI** (binary)](https://github.com/logchange/logchange?tab=readme-ov-file#logchange-cli) - you can use it regardless of the technology used in the project. Also available as [logchange docker image][], suited for CI/CD
+- [**Maven Plugin**](https://github.com/logchange/logchange?tab=readme-ov-file#maven-plugin) - dedicated to projects based on the [Maven][] tool
 
 ### Maven Plugin
 
