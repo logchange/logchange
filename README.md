@@ -437,4 +437,4 @@ TODO
 
 #### References
 - [Maven]: https://maven.apache.org/
-- [logchange docker image]: https://hub.docker.com/repository/docker/logchange/logchange/
+- [logchange docker image]: https://hub.docker.com/r/logchange/logchange
