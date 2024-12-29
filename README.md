@@ -44,9 +44,9 @@ GitLab. [LINK](https://about.gitlab.com/blog/2018/07/03/solving-gitlabs-changelo
 
 ## Usage and installation
 
-**logchange is distributed as:**
-- **CLI** (binary) - you can use it regardless of the technology used in the project. (Also available as [logchange docker image], suited for CI/CD)
-- **Maven Plugin** - dedicated to projects based on the [Maven] tool
+### logchange is distributed as:
+- **CLI** (binary) - you can use it regardless of the technology used in the project. (Also available as [logchange docker image](), suited for CI/CD)
+- **Maven Plugin** - dedicated to projects based on the [Maven]() tool
 
 ### Maven Plugin
 
@@ -436,5 +436,5 @@ TODO
 2. `mvn` as a command in your terminal(needed for integration tests, IniteliJ does not support maven integration tests).
 
 #### References
-[Maven](https://maven.apache.org/)
-[logchange docker image](https://hub.docker.com/repository/docker/logchange/logchange/)
+- [Maven](https://maven.apache.org/)
+- [logchange docker image](https://hub.docker.com/repository/docker/logchange/logchange/)
