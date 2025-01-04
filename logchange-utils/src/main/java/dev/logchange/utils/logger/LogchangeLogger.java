@@ -10,6 +10,18 @@ public class LogchangeLogger {
         return instance;
     }
 
+    public void error(String msg) {
+        if (level.isEnabled(LoggerLevel.ERROR)) {
+            System.out.println("[ERROR]" + msg);
+        }
+    }
+
+    public void warn(String msg) {
+        if (level.isEnabled(LoggerLevel.WARN)) {
+            System.out.println("[WARN]" + msg);
+        }
+    }
+
     public void info(String msg) {
         if (level.isEnabled(LoggerLevel.INFO)) {
             System.out.println(msg);
