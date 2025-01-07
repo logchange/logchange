@@ -115,8 +115,7 @@ public class ReleaseVersionCommand {
     private Path findUnreleasedDir() {
         Path dirWithVersion = Paths.get(rootPath, inputDir, unreleasedVersionDir + UNRELEASED_DIR_SEPARATOR + version);
 
-        if (dirWithVersion.toFile().exists()) {
-            log.info("Found directory: " + dirWithVersion);
+        if (isDir(dirWithVersion)) {
             return dirWithVersion;
         }
 
@@ -125,13 +124,26 @@ public class ReleaseVersionCommand {
                 "(ps. you can check out unreleased directories with specific version to allow simultaneous development " +
                 "of more than one version at same branch)");
 
-        if (standardUnreleasedDir.toFile().exists()) {
-            log.info("Found directory: " + dirWithVersion);
+        if (isDir(standardUnreleasedDir)) {
             return standardUnreleasedDir;
         }
 
         String msg = "THERE IS NO DIRECTORY TO RELEASE FROM! Check if your project contains: " + standardUnreleasedDir + " or " + dirWithVersion + " with YML files as changelog entries. Visit https://github.com/logchange/logchange for more details.";
         log.error(msg);
         throw new RuntimeException(msg);
+    }
+
+    private boolean isDir(Path path) {
+        if (path.toFile().exists()) {
+            if (path.toFile().isDirectory()) {
+                log.info("Found directory: " + path);
+                return true;
+            } else {
+                String msg = path + " is not a directory!";
+                log.error(msg);
+                throw new RuntimeException(msg);
+            }
+        }
+        return false;
     }
 }
