@@ -96,11 +96,18 @@ have to start from `archive` phrase (f.e. `archive-1.0.0.md`).
 After using `init` command (or just creating `changelog/unreleased` directory) your project is ready, and you can start
 adding new changelog entries by creating YAML files.
 
-**IMPORTANT:** If you develop on two main branches like f.e 1.1.X and 1.2.X **do not** merge 1.1.X branch to 1.2.X
-before release otherwise YAML files (stored in `unreleased` directory) will merge in one big version (because all files
-from both versions will be in the same directory).
-_In the future, if there will be a need, there is a plan to support `unreleased*` directories names
-like `unreleased-1.1`_
+**⚠️IMPORTANT:**
+If you’re developing multiple versions simultaneously (whether on the same branch or separate 
+branches that you merge, cherry-pick, etc.), consider creating dedicated `unreleased` directories 
+for each version (e.g., `unreleased-1.3.7`). When you release a new version (say, `1.3.7`), 
+**logchange** will look for `unreleased-1.3.7` first and release it as `v1.3.7`. 
+If this folder doesn’t exist, **logchange** will fall back to looking 
+for default `unreleased` directory (ps. `unreleased` can be changed by setting property `unreleasedVersionDir`).
+
+Also, if you have two active main branches (e.g., `1.1.X` and `1.2.X`) but only a single 
+`unreleased` folder, do **not** merge branch `1.1.X` into `1.2.X` before releasing. 
+Otherwise, all YAML files from both versions will wind up in the same directory, resulting in a single, 
+combined release. Use dedicated `unreleased` directories.
 
 ### Adding new change
 

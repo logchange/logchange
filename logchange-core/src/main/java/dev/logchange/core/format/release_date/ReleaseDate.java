@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -31,7 +32,7 @@ public class ReleaseDate {
     }
 
     @SneakyThrows
-    public static void addToDir(String unreleasedDir) {
+    public static void addToDir(Path unreleasedDir) {
         File releaseDateFile = new File(unreleasedDir + "/" + RELEASE_DATE_FILENAME);
 
         FileWriter fileWriter = new FileWriter(releaseDateFile);

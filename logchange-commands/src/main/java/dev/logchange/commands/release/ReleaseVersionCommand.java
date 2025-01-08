@@ -4,21 +4,29 @@ import dev.logchange.commands.generate.GenerateProjectCommand;
 import dev.logchange.commands.init.InitProjectCommand;
 import dev.logchange.commands.lint.LintProjectCommand;
 import dev.logchange.core.format.release_date.ReleaseDate;
+import lombok.CustomLog;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 import static dev.logchange.commands.Constants.GIT_KEEP;
 
-@Log
+@CustomLog
 @RequiredArgsConstructor(staticName = "of")
 public class ReleaseVersionCommand {
+
+    /**
+     * Separates <unreleasedVersionDir> from version for example
+     * if unreleasedVersionDir is "unreleased" and version to release is 1.0.0
+     * we have to check if dir unreleased-1.0.0 exists
+     */
+    private static final String UNRELEASED_DIR_SEPARATOR = "-";
 
     private final String rootPath;
     private final String version;
@@ -32,7 +40,7 @@ public class ReleaseVersionCommand {
     public void execute() {
         log.info("Begin preparation from new changelog release: " + version);
 
-        String unreleasedDir = rootPath + "/" + inputDir + "/" + unreleasedVersionDir;
+        Path unreleasedDir = findUnreleasedDir();
         String newDirName = rootPath + "/" + inputDir + "/" + "v" + version;
 
         LintProjectCommand.of(rootPath, inputDir, outputFile, configFile).validate();
@@ -58,13 +66,13 @@ public class ReleaseVersionCommand {
         }
     }
 
-    private void renameOrMergeDir(String unreleasedDirName, String newDirName) {
-        File unreleasedDir = new File(unreleasedDirName);
+    private void renameOrMergeDir(Path unreleasedDirPath, String newDirName) {
+        File unreleasedDir = unreleasedDirPath.toFile();
         File newDir = new File(newDirName);
         if (unreleasedDir.renameTo(newDir)) {
-            log.info("Renamed " + unreleasedDirName + " to " + newDirName + " successfully");
+            log.info("Renamed " + unreleasedDirPath + " to " + newDirName + " successfully");
         } else {
-            log.info("Rename unsuccessful. Merging contents of " + unreleasedDirName + " into " + newDirName);
+            log.info("Rename unsuccessful. Merging contents of " + unreleasedDirPath + " into " + newDirName);
 
             if (!newDir.exists()) {
                 throw new RuntimeException("Target directory " + newDirName + " does not exist and renaming failed.");
@@ -73,9 +81,9 @@ public class ReleaseVersionCommand {
             moveDirectoryContents(unreleasedDir.toPath(), newDir.toPath());
 
             if (unreleasedDir.delete()) {
-                log.info("Deleted empty folder: " + unreleasedDirName);
+                log.info("Deleted empty folder: " + unreleasedDirPath);
             } else {
-                log.warning("Failed to delete folder: " + unreleasedDirName);
+                log.warn("Failed to delete folder: " + unreleasedDirPath);
             }
         }
     }
@@ -95,12 +103,47 @@ public class ReleaseVersionCommand {
         }
     }
 
-    private void removeGitKeep(String unreleasedDir) {
+    private void removeGitKeep(Path unreleasedDir) {
         File gitKeep = new File(unreleasedDir + "/" + GIT_KEEP);
         if (gitKeep.delete()) {
             log.info("Deleted: " + gitKeep.getName());
         } else {
-            log.warning(gitKeep.getName() + " cannot be deleted.");
+            log.warn(gitKeep.getName() + " cannot be deleted.");
         }
+    }
+
+    private Path findUnreleasedDir() {
+        Path dirWithVersion = Paths.get(rootPath, inputDir, unreleasedVersionDir + UNRELEASED_DIR_SEPARATOR + version);
+
+        if (isDir(dirWithVersion)) {
+            return dirWithVersion;
+        }
+
+        Path standardUnreleasedDir = Paths.get(rootPath, inputDir, unreleasedVersionDir);
+        log.info("Could not find " + dirWithVersion + " so checking if " + standardUnreleasedDir + " exists " +
+                "(ps. you can check out unreleased directories with specific version to allow simultaneous development " +
+                "of more than one version at same branch)");
+
+        if (isDir(standardUnreleasedDir)) {
+            return standardUnreleasedDir;
+        }
+
+        String msg = "THERE IS NO DIRECTORY TO RELEASE FROM! Check if your project contains: " + standardUnreleasedDir + " or " + dirWithVersion + " with YML files as changelog entries. Visit https://github.com/logchange/logchange for more details.";
+        log.error(msg);
+        throw new RuntimeException(msg);
+    }
+
+    private boolean isDir(Path path) {
+        if (path.toFile().exists()) {
+            if (path.toFile().isDirectory()) {
+                log.info("Found directory: " + path);
+                return true;
+            } else {
+                String msg = path + " is not a directory!";
+                log.error(msg);
+                throw new RuntimeException(msg);
+            }
+        }
+        return false;
     }
 }
