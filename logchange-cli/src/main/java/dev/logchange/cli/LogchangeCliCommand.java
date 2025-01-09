@@ -32,8 +32,13 @@ public class LogchangeCliCommand implements Runnable {
 
     private static CommandLine commandLine;
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         commandLine = new CommandLine(new LogchangeCliCommand());
+        commandLine.setExecutionExceptionHandler((ex, cmd, parseResult) -> {
+            log.error(String.format("Command %s execution failed", cmd.getCommandName()));
+            log.error(ex.getMessage());
+            return 1;
+        });
         int exitCode = commandLine.execute(args);
         System.exit(exitCode);
     }

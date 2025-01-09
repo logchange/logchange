@@ -12,13 +12,13 @@ public class LogchangeLogger {
 
     public void error(String msg) {
         if (level.isEnabled(LoggerLevel.ERROR)) {
-            System.out.println("[ERROR]" + msg);
+            System.out.println("[ERROR] " + msg);
         }
     }
 
     public void warn(String msg) {
         if (level.isEnabled(LoggerLevel.WARN)) {
-            System.out.println("[WARN]" + msg);
+            System.out.println("[WARN] " + msg);
         }
     }
 
@@ -30,7 +30,7 @@ public class LogchangeLogger {
 
     public void debug(String msg) {
         if (level.isEnabled(LoggerLevel.DEBUG)) {
-            System.out.println("[DEBUG]" + msg);
+            System.out.println("[DEBUG] " + msg);
         }
     }
 
@@ -41,7 +41,7 @@ public class LogchangeLogger {
 
     public void debug(Exception e) {
         if (level.isEnabled(LoggerLevel.DEBUG)) {
-            System.out.println("[DEBUG]" + e.getMessage());
+            System.out.println("[DEBUG] " + e.getMessage());
             e.printStackTrace(System.out);
         }
     }
