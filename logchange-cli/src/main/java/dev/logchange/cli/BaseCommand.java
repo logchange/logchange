@@ -18,10 +18,10 @@ public abstract class BaseCommand implements Runnable {
             if (verbose) {
                 LogchangeLogger.setLevel(LoggerLevel.DEBUG);
             }
-
             runCommand();
         } catch (Exception e) {
             log.debug(e);
+            throw new RuntimeException(e);
         }
     }
 
