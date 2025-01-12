@@ -61,7 +61,6 @@
 
         <lombok.version>1.18.36</lombok.version>
         <lombok-maven.version>1.18.22.0</lombok-maven.version>
-        <maven-deploy-plugin.version>3.1.3</maven-deploy-plugin.version>
         <maven-changes.version>2.12.1</maven-changes.version>
 
         <!-- TESTS -->
@@ -169,15 +168,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>${maven-deploy-plugin.version}</version>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-                <inherited>false</inherited>
-            </plugin>
+
         </plugins>
     </build>
 
@@ -226,6 +217,22 @@
         <profile>
             <id>ci-cd</id>
             <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <!-- https://central.sonatype.org/publish/publish-maven/#nexus-staging-maven-plugin-for-deployment-and-release -->
+                            <groupId>org.sonatype.plugins</groupId>
+                            <artifactId>nexus-staging-maven-plugin</artifactId>
+                            <version>1.7.0</version>
+                            <extensions>true</extensions>
+                            <configuration>
+                                <serverId>ossrh</serverId>
+                                <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                                <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                            </configuration>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
                 <plugins>
 
                     <plugin>
@@ -264,20 +271,6 @@
                             </execution>
                         </executions>
                     </plugin>
-
-                    <plugin>
-                        <!-- https://central.sonatype.org/publish/publish-maven/#nexus-staging-maven-plugin-for-deployment-and-release -->
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.7.0</version>
-                        <extensions>true</extensions>
-                        <configuration>
-                            <serverId>ossrh</serverId>
-                            <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                        </configuration>
-                    </plugin>
-
                 </plugins>
             </build>
         </profile>

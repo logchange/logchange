@@ -71,8 +71,8 @@
             <scope>test</scope>
             <exclusions>
                 <exclusion>
-                    <groupId> org.junit.jupiter</groupId>
-                    <artifactId> junit-jupiter-api</artifactId>
+                    <groupId>org.junit.jupiter</groupId>
+                    <artifactId>junit-jupiter-api</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -148,6 +148,17 @@
     </build>
 
     <profiles>
+        <profile>
+            <id>ci-cd</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
         <profile>
             <id>pitest</id>
             <build>
