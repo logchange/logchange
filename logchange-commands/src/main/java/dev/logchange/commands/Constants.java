@@ -80,6 +80,7 @@ public class Constants {
 
     public static final String FILENAME_PROPERTY = "fileName";
     public static final String FILENAME_OPTION = OPTION_PREFIX + FILENAME_PROPERTY;
+    public static final String FILENAME_OPTION_DESCRIPTION = "Name of file for new changelog entry for example: task1.yml";
 
     public static final String EMPTY_PROPERTY = "empty";
     public static final String EMPTY_OPTION = OPTION_PREFIX + EMPTY_PROPERTY;

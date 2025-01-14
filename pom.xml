@@ -12,6 +12,7 @@
         <module>logchange-core</module>
         <module>logchange-commands</module>
         <module>logchange-maven-plugin</module>
+        <module>logchange-gradle-plugin</module>
         <module>logchange-cli</module>
         <module>logchange-test-reports</module>
         <module>logchange-md</module>
@@ -62,6 +63,8 @@
         <lombok.version>1.18.36</lombok.version>
         <lombok-maven.version>1.18.22.0</lombok-maven.version>
         <maven-changes.version>2.12.1</maven-changes.version>
+
+        <maven-site-plugin.version>3.21.0</maven-site-plugin.version>
 
         <!-- TESTS -->
         <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>

@@ -54,11 +54,13 @@ public class AddChangelogEntryMojo extends AbstractMojo {
     @Override
     public void execute() {
         getLog().info(ADD_COMMAND_START_LOG);
+
         MavenAddEntryPrompter mavenPrompter = MavenAddEntryPrompter.of(prompter);
         AddEntryCommand addEntryCommand = AddEntryCommand.of(DEFAULT_PATH, inputDir, unreleasedVersionDir);
         outputFileName = new OutputFileNameProvider(empty, mavenPrompter, outputFileName).get();
         ChangelogEntry entry = new ChangelogEntryProviderFactory(empty, batchMode, getParams(), mavenPrompter).create().get();
         addEntryCommand.execute(entry, outputFileName);
+
         getLog().info(ADD_COMMAND_END_LOG);
     }
 
