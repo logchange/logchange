@@ -1,5 +1,7 @@
 package dev.logchange.gradle_plugin.add;
 
+import dev.logchange.commands.add.*;
+import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.gradle_plugin.LogchangePluginExtension;
 import lombok.Setter;
 import org.gradle.api.DefaultTask;
@@ -11,6 +13,13 @@ import static dev.logchange.commands.Constants.*;
 public abstract class AddChangelogEntryTask extends DefaultTask {
 
     private String fileName;
+    private boolean empty;
+    private boolean batchMode;
+    private String title;
+    private String author;
+    private String type;
+    private String linkName;
+    private String linkUrl;
 
     @Setter
     private LogchangePluginExtension extension;
@@ -20,15 +29,62 @@ public abstract class AddChangelogEntryTask extends DefaultTask {
         this.fileName = fileName;
     }
 
+    @Option(option = EMPTY_PROPERTY, description = EMPTY_OPTION_DESCRIPTION)
+    public void setEmpty(boolean empty) {
+        this.empty = empty;
+    }
+
+    @Option(option = BATCH_MODE_PROPERTY, description = BATCH_MODE_OPTION_DESCRIPTION)
+    public void setBatchMode(boolean batchMode) {
+        this.batchMode = batchMode;
+    }
+
+    @Option(option = "title", description = "")
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Option(option = "author", description = "")
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    @Option(option = "type", description = "")
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    @Option(option = "link.name", description = "")
+    public void setLinkName(String linkName) {
+        this.linkName = linkName;
+    }
+
+    @Option(option = "link.url", description = "")
+    public void setLinkUrl(String linkUrl) {
+        this.linkUrl = linkUrl;
+    }
+
     @TaskAction
     public void doAdd() {
         getLogger().info(ADD_COMMAND_START_LOG);
-        if (fileName == null) {
-            getLogger().lifecycle("No --fileName provided. Using default...");
-        } else {
-            getLogger().lifecycle("Got fileName: " + fileName + " extension: " + extension);
-        }
-        // Tutaj możesz np. wczytać ten plik, zrobić co trzeba...
+
+        AddEntryPrompter mavenPrompter = GradleAddEntryPrompter.of();
+        AddEntryCommand addEntryCommand = AddEntryCommand.of(DEFAULT_PATH, extension.getInputDir(), extension.getUnreleasedVersionDir());
+        fileName = new OutputFileNameProvider(empty, mavenPrompter, fileName).get();
+        ChangelogEntry entry = new ChangelogEntryProviderFactory(empty, batchMode, getParams(), mavenPrompter).create().get();
+        addEntryCommand.execute(entry, fileName);
+
+        getLogger().info(ADD_COMMAND_END_LOG);
+    }
+
+    private AddChangelogEntryBatchModeParams getParams() {
+        return AddChangelogEntryBatchModeParams.of(
+                title,
+                author,
+                type,
+                linkName,
+                linkUrl
+        );
     }
 
 

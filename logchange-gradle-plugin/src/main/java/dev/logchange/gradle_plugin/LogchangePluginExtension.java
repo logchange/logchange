@@ -1,34 +1,19 @@
 package dev.logchange.gradle_plugin;
 
-import static dev.logchange.commands.Constants.DEFAULT_INPUT_DIR;
-import static dev.logchange.commands.Constants.DEFAULT_UNRELEASED_VERSION_DIR;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+import static dev.logchange.commands.Constants.*;
+
+@Getter
+@Setter
+@ToString
 public class LogchangePluginExtension {
 
+    private String rootPath = DEFAULT_PATH;
     private String inputDir = DEFAULT_INPUT_DIR;
     private String unreleasedVersionDir = DEFAULT_UNRELEASED_VERSION_DIR;
+    private String outputFile = DEFAULT_OUTPUT_FILE;
 
-    public String getInputDir() {
-        return inputDir;
-    }
-
-    public void setInputDir(String inputDir) {
-        this.inputDir = inputDir;
-    }
-
-    public String getUnreleasedVersionDir() {
-        return unreleasedVersionDir;
-    }
-
-    public void setUnreleasedVersionDir(String unreleasedVersionDir) {
-        this.unreleasedVersionDir = unreleasedVersionDir;
-    }
-
-    @Override
-    public String toString() {
-        return "LogchangePluginExtension{" +
-                "inputDir='" + inputDir + '\'' +
-                ", unreleasedVersionDir='" + unreleasedVersionDir + '\'' +
-                '}';
-    }
 }

@@ -84,9 +84,11 @@ public class Constants {
 
     public static final String EMPTY_PROPERTY = "empty";
     public static final String EMPTY_OPTION = OPTION_PREFIX + EMPTY_PROPERTY;
+    public static final String EMPTY_OPTION_DESCRIPTION = "true/false; default false; if set to true, generates empty entry with some lorem ipsum content";
 
     public static final String BATCH_MODE_PROPERTY = "batchMode";
     public static final String BATCH_MODE_OPTION = OPTION_PREFIX + BATCH_MODE_PROPERTY;
+    public static final String BATCH_MODE_OPTION_DESCRIPTION = "Batch mode for generating new changelog entry, no user interaction";
 
     public static final String GENERATE_CHANGES_XML_PROPERTY = "changesXml";
     public static final String GENERATE_CHANGES_XML_OPTION = OPTION_PREFIX + GENERATE_CHANGES_XML_PROPERTY;

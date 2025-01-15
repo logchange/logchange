@@ -29,10 +29,10 @@ public class AddChangelogEntryCliCommand extends BaseCommand {
     @Option(names = FILENAME_OPTION, description = FILENAME_OPTION_DESCRIPTION)
     private String outputFileName;
 
-    @Option(defaultValue = "false", names = BATCH_MODE_OPTION)
+    @Option(defaultValue = "false", names = BATCH_MODE_OPTION, description = BATCH_MODE_OPTION_DESCRIPTION)
     private boolean batchMode;
 
-    @Option(defaultValue = "false", names = EMPTY_OPTION)
+    @Option(defaultValue = "false", names = EMPTY_OPTION, description = EMPTY_OPTION_DESCRIPTION)
     private boolean empty;
 
     @Option(names = OPTION_PREFIX + "title")
