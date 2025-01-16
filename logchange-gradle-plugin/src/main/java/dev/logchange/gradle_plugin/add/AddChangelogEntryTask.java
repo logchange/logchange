@@ -9,6 +9,9 @@ import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.TaskAction;
 import org.gradle.api.tasks.options.Option;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static dev.logchange.commands.Constants.*;
 
 @CustomLog
@@ -19,6 +22,7 @@ public abstract class AddChangelogEntryTask extends DefaultTask {
     private boolean batchMode;
     private String title;
     private String author;
+    private List<String> authors;
     private String type;
     private String linkName;
     private String linkUrl;
@@ -46,9 +50,14 @@ public abstract class AddChangelogEntryTask extends DefaultTask {
         this.title = title;
     }
 
-    @Option(option = "author", description = "")
+    @Option(option = AUTHOR_PROPERTY, description = AUTHOR_OPTION_DESCRIPTION)
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    @Option(option = AUTHORS_PROPERTY, description = AUTHORS_OPTION_DESCRIPTION)
+    public void setAuthors(String authors) {
+        this.authors = Arrays.asList(authors.split(","));
     }
 
     @Option(option = "type", description = "")
@@ -83,6 +92,7 @@ public abstract class AddChangelogEntryTask extends DefaultTask {
         return AddChangelogEntryBatchModeParams.of(
                 title,
                 author,
+                authors,
                 type,
                 linkName,
                 linkUrl

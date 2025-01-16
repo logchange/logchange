@@ -81,6 +81,14 @@ public class Constants {
     public static final String FILENAME_OPTION = OPTION_PREFIX + FILENAME_PROPERTY;
     public static final String FILENAME_OPTION_DESCRIPTION = "Name of file for new changelog entry for example: task1.yml";
 
+    public static final String AUTHOR_PROPERTY = "author";
+    public static final String AUTHOR_OPTION = OPTION_PREFIX + AUTHOR_PROPERTY;
+    public static final String AUTHOR_OPTION_DESCRIPTION = "Name of the author for new changelog entry";
+
+    public static final String AUTHORS_PROPERTY = "authors";
+    public static final String AUTHORS_OPTION = OPTION_PREFIX + AUTHORS_PROPERTY;
+    public static final String AUTHORS_OPTION_DESCRIPTION = "List of authors, separated by commas";
+
     public static final String EMPTY_PROPERTY = "empty";
     public static final String EMPTY_OPTION = OPTION_PREFIX + EMPTY_PROPERTY;
     public static final String EMPTY_OPTION_DESCRIPTION = "true/false; default false; if set to true, generates empty entry with some lorem ipsum content";

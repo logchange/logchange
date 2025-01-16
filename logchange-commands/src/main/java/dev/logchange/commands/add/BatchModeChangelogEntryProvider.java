@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class BatchModeChangelogEntryProvider implements ChangelogEntryProvider {
@@ -39,8 +40,20 @@ public class BatchModeChangelogEntryProvider implements ChangelogEntryProvider {
     }
 
     private List<ChangelogEntryAuthor> getAuthors() {
-        if (StringUtils.isNotBlank(params.getAuthor())) {
-            return Collections.singletonList(ChangelogEntryAuthor.of("", params.getAuthor(), ""));
+        String author = params.getAuthor();
+        List<String> authors = params.getAuthors();
+        if (author != null && authors != null) {
+            throw new IllegalArgumentException("Batch mode does not allow simultaneous use of 'author' and 'authors' options.");
+        }
+
+        if (authors != null) {
+            return authors.stream()
+                    .map(a -> ChangelogEntryAuthor.of("", a, ""))
+                    .collect(Collectors.toList());
+        }
+
+        if (StringUtils.isNotBlank(author)) {
+            return Collections.singletonList(ChangelogEntryAuthor.of("", author, ""));
         }
 
         return Collections.emptyList();
