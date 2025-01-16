@@ -25,7 +25,7 @@ public class AddChangelogEntryMojo extends AbstractMojo {
     private String unreleasedVersionDir;
 
     @Parameter(property = FILENAME_PROPERTY)
-    private String outputFileName;
+    private String fileName;
 
     @Parameter(defaultValue = "false", property = BATCH_MODE_PROPERTY)
     private boolean batchMode;
@@ -54,11 +54,13 @@ public class AddChangelogEntryMojo extends AbstractMojo {
     @Override
     public void execute() {
         getLog().info(ADD_COMMAND_START_LOG);
+
         MavenAddEntryPrompter mavenPrompter = MavenAddEntryPrompter.of(prompter);
         AddEntryCommand addEntryCommand = AddEntryCommand.of(DEFAULT_PATH, inputDir, unreleasedVersionDir);
-        outputFileName = new OutputFileNameProvider(empty, mavenPrompter, outputFileName).get();
+        fileName = new OutputFileNameProvider(empty, mavenPrompter, fileName).get();
         ChangelogEntry entry = new ChangelogEntryProviderFactory(empty, batchMode, getParams(), mavenPrompter).create().get();
-        addEntryCommand.execute(entry, outputFileName);
+        addEntryCommand.execute(entry, fileName);
+
         getLog().info(ADD_COMMAND_END_LOG);
     }
 
