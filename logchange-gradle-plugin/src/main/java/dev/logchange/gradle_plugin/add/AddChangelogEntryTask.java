@@ -3,6 +3,7 @@ package dev.logchange.gradle_plugin.add;
 import dev.logchange.commands.add.*;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.gradle_plugin.LogchangePluginExtension;
+import lombok.CustomLog;
 import lombok.Setter;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.TaskAction;
@@ -10,6 +11,7 @@ import org.gradle.api.tasks.options.Option;
 
 import static dev.logchange.commands.Constants.*;
 
+@CustomLog
 public abstract class AddChangelogEntryTask extends DefaultTask {
 
     private String fileName;
@@ -66,7 +68,7 @@ public abstract class AddChangelogEntryTask extends DefaultTask {
 
     @TaskAction
     public void doAdd() {
-        getLogger().info(ADD_COMMAND_START_LOG);
+        log.info(ADD_COMMAND_START_LOG);
 
         AddEntryPrompter mavenPrompter = GradleAddEntryPrompter.of();
         AddEntryCommand addEntryCommand = AddEntryCommand.of(DEFAULT_PATH, extension.getInputDir(), extension.getUnreleasedVersionDir());
@@ -74,7 +76,7 @@ public abstract class AddChangelogEntryTask extends DefaultTask {
         ChangelogEntry entry = new ChangelogEntryProviderFactory(empty, batchMode, getParams(), mavenPrompter).create().get();
         addEntryCommand.execute(entry, fileName);
 
-        getLogger().info(ADD_COMMAND_END_LOG);
+        log.info(ADD_COMMAND_END_LOG);
     }
 
     private AddChangelogEntryBatchModeParams getParams() {

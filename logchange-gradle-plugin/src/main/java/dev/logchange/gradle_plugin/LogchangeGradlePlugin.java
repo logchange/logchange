@@ -48,6 +48,13 @@ public class LogchangeGradlePlugin implements Plugin<Project> {
             task.setGroup("logchange");
         });
 
+        project.getTasks().register("aggregateChangelogs", ReleaseVersionTask.class, task -> {
+            task.setExtension(extension);
+            task.setProject(project);
+            task.setDescription(AGGREGATE_COMMAND_DESCRIPTION);
+            task.setGroup("logchange");
+        });
+
     }
 
 }
