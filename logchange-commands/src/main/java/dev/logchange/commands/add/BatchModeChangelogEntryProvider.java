@@ -40,18 +40,14 @@ public class BatchModeChangelogEntryProvider implements ChangelogEntryProvider {
     }
 
     private List<ChangelogEntryAuthor> getAuthors() {
-        String author = params.getAuthor();
         List<String> authors = params.getAuthors();
-        if (author != null && authors != null && !authors.isEmpty()) {
-            throw new IllegalArgumentException("Batch mode does not allow simultaneous use of 'author' and 'authors' options.");
-        }
-
         if (authors != null && !authors.isEmpty()) {
             return authors.stream()
                     .map(a -> ChangelogEntryAuthor.of("", a, ""))
                     .collect(Collectors.toList());
         }
 
+        String author = params.getAuthor();
         if (StringUtils.isNotBlank(author)) {
             return Collections.singletonList(ChangelogEntryAuthor.of("", author, ""));
         }

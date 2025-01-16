@@ -59,7 +59,7 @@ class BatchModeChangelogEntryProviderTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> new BatchModeChangelogEntryProvider(params).get());
 
         // then:
-        assertEquals("Batch mode does not allow simultaneous use of 'author' and 'authors' options.", exception.getMessage());
+        assertEquals("It is not allowed to simultaneously use of 'author' and 'authors' options!", exception.getMessage());
     }
 
 }
