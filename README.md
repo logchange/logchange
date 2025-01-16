@@ -384,6 +384,7 @@ TODO
 | `--empty`                | `false`       | Allows adding an empty entry.                                    |
 | `--title`                | N/A           | The title of the CHANGELOG entry.                                |
 | `--author`               | N/A           | The author of the change, assigned to the CHANGELOG entry.       |
+| `--authors`              | N/A           | List of authors, separated by commas.                            |
 | `--type`                 | N/A           | The type of change (e.g., "added", "changed", etc.).             |
 | `--link.name`            | N/A           | The name of the link to be included in the change description.   |
 | `--link.url`             | N/A           | The URL associated with the link, such as a bug report or issue. |
