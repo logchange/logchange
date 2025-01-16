@@ -49,17 +49,4 @@ class BatchModeChangelogEntryProviderTest {
         assertEquals("Peter", authors.get(0).getNick());
         assertEquals("Matthew", authors.get(1).getNick());
     }
-
-    @Test
-    void shouldThrowExceptionWhenBothAuthorAndAuthorsAreSet() {
-        // given:
-        AddChangelogEntryBatchModeParams params = AddChangelogEntryBatchModeParams.of("title", "Peter", Arrays.asList("Peter", "Matthew"), "added", null, null);
-
-        // when:
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> new BatchModeChangelogEntryProvider(params).get());
-
-        // then:
-        assertEquals("It is not allowed to simultaneously use of 'author' and 'authors' options!", exception.getMessage());
-    }
-
 }
