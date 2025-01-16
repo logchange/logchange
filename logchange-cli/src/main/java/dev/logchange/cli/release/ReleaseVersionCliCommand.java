@@ -17,7 +17,7 @@ import static dev.logchange.commands.Constants.*;
 public class ReleaseVersionCliCommand extends BaseCommand {
 
 
-    @Option(required = true, names = "--versionToRelease", description = "Name of the version that we want to release (f.e 2.1.1)")
+    @Option(required = true, names = VERSION_TO_RELEASE_OPTION, description = VERSION_TO_RELEASE_OPTION_DESCRIPTION)
     private String versionToRelease;
 
     @Option(defaultValue = DEFAULT_UNRELEASED_VERSION_DIR, names = UNRELEASED_VERSION_DIR_OPTION, description = UNRELEASED_VERSION_DIR_OPTION_DESCRIPTION)

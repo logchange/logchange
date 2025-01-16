@@ -16,5 +16,7 @@ public class LogchangePluginExtension {
     private String unreleasedVersionDir = DEFAULT_UNRELEASED_VERSION_DIR;
     private String outputFile = DEFAULT_OUTPUT_FILE;
     private String configFile = DEFAULT_CONFIG_FILE;
+    private boolean generateChangesXml = false;
+    private String xmlOutputFile = DEFAULT_XML_OUTPUT_FILE;
 
 }

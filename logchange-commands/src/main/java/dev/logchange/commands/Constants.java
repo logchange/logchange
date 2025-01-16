@@ -22,7 +22,6 @@ public class Constants {
     public static final String OUTPUT_FILE_OPTION_DESCRIPTION = "Name of changelog file, it will be created if it's not present";
 
 
-
     public static final String DEFAULT_OUTPUT_FILE = "CHANGELOG.md";
     public static final String DEFAULT_INPUT_DIR = "changelog";
     public static final String DEFAULT_UNRELEASED_VERSION_DIR = "unreleased";
@@ -100,4 +99,8 @@ public class Constants {
 
     public static final String RELEASE_DATE_FORMAT = "yyyy-MM-dd";
 
+    public static final String VERSION_TO_RELEASE_PROPERTY = "versionToRelease";
+    public static final String VERSION_TO_RELEASE_OPTION = OPTION_PREFIX + VERSION_TO_RELEASE_PROPERTY;
+    public static final String VERSION_TO_RELEASE_OPTION_DESCRIPTION = "Name of the version that we want to release (f.e 2.1.1). If we use many unreleased directories (f.e unreleased-2.1.1, unreleased) logchange will first look for directory with version corresponding to releasing version. If there will be not such a folder, logchange will release from unreleased directory.";
+    public static final String VERSION_TO_RELEASE_OPTION_DESCRIPTION_EMPTY = VERSION_TO_RELEASE_OPTION_DESCRIPTION + " If not specified, logchange will use version from current project (removing -SNAPSHOT suffix).";
 }

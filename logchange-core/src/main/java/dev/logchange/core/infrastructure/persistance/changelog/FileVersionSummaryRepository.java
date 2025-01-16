@@ -23,7 +23,7 @@ public class FileVersionSummaryRepository implements VersionSummaryRepository {
         String meta = new MDMeta().toMD();
         String md = new MDChangelogVersion(config, version).toMD();
 
-        String outputFilePath = inputDirectory.getAbsolutePath() + "/" + version.getVersion().getDirName() + "/version-summary.md";
+        String outputFilePath = inputDirectory.getPath() + "/" + version.getVersion().getDirName() + "/version-summary.md";
         File outputFile = new File(outputFilePath);
 
         FileRepository fileRepository = FileRepository.of(outputFile);

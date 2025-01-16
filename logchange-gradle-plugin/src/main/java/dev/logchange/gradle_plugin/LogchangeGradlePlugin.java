@@ -4,6 +4,7 @@ import dev.logchange.gradle_plugin.add.AddChangelogEntryTask;
 import dev.logchange.gradle_plugin.generate.GenerateChangelogTask;
 import dev.logchange.gradle_plugin.init.InitTask;
 import dev.logchange.gradle_plugin.lint.LintChangelogTask;
+import dev.logchange.gradle_plugin.release.ReleaseVersionTask;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 
@@ -16,31 +17,37 @@ public class LogchangeGradlePlugin implements Plugin<Project> {
         LogchangePluginExtension extension = project.getExtensions()
                 .create("logchange", LogchangePluginExtension.class);
 
-        project.getTasks().register("add", AddChangelogEntryTask.class, task -> {
+        project.getTasks().register("addChangelogEntry", AddChangelogEntryTask.class, task -> {
             task.setExtension(extension);
             task.setDescription(ADD_COMMAND_DESCRIPTION);
             task.setGroup("logchange");
         });
 
-        project.getTasks().register("init-logchange", InitTask.class, task -> {
+        project.getTasks().register("initLogchange", InitTask.class, task -> {
             task.setExtension(extension);
             task.setDescription(INIT_COMMAND_DESCRIPTION);
             task.setGroup("logchange");
         });
 
-        project.getTasks().register("lint", LintChangelogTask.class, task -> {
+        project.getTasks().register("lintChangelog", LintChangelogTask.class, task -> {
             task.setExtension(extension);
             task.setDescription(LINT_COMMAND_DESCRIPTION);
             task.setGroup("logchange");
         });
 
-
-        project.getTasks().register("generate", GenerateChangelogTask.class, task -> {
+        project.getTasks().register("generateChangelog", GenerateChangelogTask.class, task -> {
             task.setExtension(extension);
             task.setDescription(GENERATE_COMMAND_DESCRIPTION);
             task.setGroup("logchange");
         });
 
+        project.getTasks().register("releaseChangelog", ReleaseVersionTask.class, task -> {
+            task.setExtension(extension);
+            task.setProject(project);
+            task.setDescription(GENERATE_COMMAND_DESCRIPTION);
+            task.setGroup("logchange");
+        });
 
     }
+
 }
