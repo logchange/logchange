@@ -17,38 +17,40 @@ public class LogchangeGradlePlugin implements Plugin<Project> {
         LogchangePluginExtension extension = project.getExtensions()
                 .create("logchange", LogchangePluginExtension.class);
 
-        project.getTasks().register("addChangelogEntry", AddChangelogEntryTask.class, task -> {
+        String taskPrefix = extension.getTaskPrefix();
+
+        project.getTasks().register(taskPrefix + ADD_COMMAND, AddChangelogEntryTask.class, task -> {
             task.setExtension(extension);
             task.setDescription(ADD_COMMAND_DESCRIPTION);
             task.setGroup("logchange");
         });
 
-        project.getTasks().register("initLogchange", InitTask.class, task -> {
+        project.getTasks().register(taskPrefix + INIT_COMMAND + "Logchange", InitTask.class, task -> {
             task.setExtension(extension);
             task.setDescription(INIT_COMMAND_DESCRIPTION);
             task.setGroup("logchange");
         });
 
-        project.getTasks().register("lintChangelog", LintChangelogTask.class, task -> {
+        project.getTasks().register(taskPrefix + LINT_COMMAND, LintChangelogTask.class, task -> {
             task.setExtension(extension);
             task.setDescription(LINT_COMMAND_DESCRIPTION);
             task.setGroup("logchange");
         });
 
-        project.getTasks().register("generateChangelog", GenerateChangelogTask.class, task -> {
+        project.getTasks().register(taskPrefix + GENERATE_COMMAND, GenerateChangelogTask.class, task -> {
             task.setExtension(extension);
             task.setDescription(GENERATE_COMMAND_DESCRIPTION);
             task.setGroup("logchange");
         });
 
-        project.getTasks().register("releaseChangelog", ReleaseVersionTask.class, task -> {
+        project.getTasks().register(taskPrefix + RELEASE_COMMAND, ReleaseVersionTask.class, task -> {
             task.setExtension(extension);
             task.setProject(project);
             task.setDescription(GENERATE_COMMAND_DESCRIPTION);
             task.setGroup("logchange");
         });
 
-        project.getTasks().register("aggregateChangelogs", ReleaseVersionTask.class, task -> {
+        project.getTasks().register(taskPrefix + AGGREGATE_COMMAND, ReleaseVersionTask.class, task -> {
             task.setExtension(extension);
             task.setProject(project);
             task.setDescription(AGGREGATE_COMMAND_DESCRIPTION);

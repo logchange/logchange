@@ -11,6 +11,8 @@ import static dev.logchange.commands.Constants.*;
 @ToString
 public class LogchangePluginExtension {
 
+    private String taskPrefix = "";
+
     private String rootPath = DEFAULT_PATH;
     private String inputDir = DEFAULT_INPUT_DIR;
     private String unreleasedVersionDir = DEFAULT_UNRELEASED_VERSION_DIR;
