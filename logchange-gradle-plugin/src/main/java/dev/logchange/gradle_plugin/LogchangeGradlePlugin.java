@@ -1,6 +1,7 @@
 package dev.logchange.gradle_plugin;
 
 import dev.logchange.gradle_plugin.add.AddChangelogEntryTask;
+import dev.logchange.gradle_plugin.generate.GenerateChangelogTask;
 import dev.logchange.gradle_plugin.init.InitTask;
 import dev.logchange.gradle_plugin.lint.LintChangelogTask;
 import org.gradle.api.Plugin;
@@ -15,22 +16,28 @@ public class LogchangeGradlePlugin implements Plugin<Project> {
         LogchangePluginExtension extension = project.getExtensions()
                 .create("logchange", LogchangePluginExtension.class);
 
-
-        project.getTasks().register("logchange-add", AddChangelogEntryTask.class, task -> {
+        project.getTasks().register("add", AddChangelogEntryTask.class, task -> {
             task.setExtension(extension);
             task.setDescription(ADD_COMMAND_DESCRIPTION);
             task.setGroup("logchange");
         });
 
-        project.getTasks().register("logchange-init", InitTask.class, task -> {
+        project.getTasks().register("init-logchange", InitTask.class, task -> {
             task.setExtension(extension);
             task.setDescription(INIT_COMMAND_DESCRIPTION);
             task.setGroup("logchange");
         });
 
-        project.getTasks().register("logchange-lint", LintChangelogTask.class, task -> {
+        project.getTasks().register("lint", LintChangelogTask.class, task -> {
             task.setExtension(extension);
             task.setDescription(LINT_COMMAND_DESCRIPTION);
+            task.setGroup("logchange");
+        });
+
+
+        project.getTasks().register("generate", GenerateChangelogTask.class, task -> {
+            task.setExtension(extension);
+            task.setDescription(GENERATE_COMMAND_DESCRIPTION);
             task.setGroup("logchange");
         });
 
