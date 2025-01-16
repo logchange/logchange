@@ -7,6 +7,18 @@
 <!-- !!! ⚠️ DO NOT MODIFY THIS FILE, YOUR CHANGES WILL BE LOST ⚠️ !!! -->
 
 
+[1.16.0] - 2025-01-16
+---------------------
+
+### Added (1 change)
+
+- Added Gradle plugin !398 #397 ([Peter](https://github.com/marwin1991) @marwin1991)
+
+### Dependency updates (1 change)
+
+- Upgraded renovatebot/github-action from v41.0.8 to v41.0.9 (@marwin1991)
+
+
 [1.15.0] - 2025-01-12
 ---------------------
 
