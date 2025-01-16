@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
 
     private final AddEntryPrompter prompter;
+    private final AddChangelogEntryBatchModeParams batchModeParams;
 
     public ChangelogEntry get() {
         try {
@@ -33,6 +34,11 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
     }
 
     private ChangelogEntryTitle getTitle() {
+        String title = batchModeParams.getTitle();
+        if (StringUtils.isNotBlank(title)) {
+            return ChangelogEntryTitle.of(title);
+        }
+
         while (true) {
             try {
                 return ChangelogEntryTitle.of(prompter.prompt("What is changelog's entry title(e.g. Adding new awesome product to order list)"));
@@ -43,6 +49,11 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
     }
 
     private ChangelogEntryType getType() {
+        String type = batchModeParams.getType();
+        if (StringUtils.isNotBlank(type)) {
+            return ChangelogEntryType.fromNameIgnoreCase(type);
+        }
+
         String prompt = Arrays.stream(ChangelogEntryType.values())
                 .map(ChangelogEntryType::toString)
                 .collect(Collectors.joining(System.lineSeparator())) +
@@ -92,6 +103,11 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
     }
 
     private List<ChangelogEntryLink> getLinks() {
+        String linkUrl = batchModeParams.getLinkUrl();
+        if (StringUtils.isNotBlank(linkUrl)) {
+            return Collections.singletonList(ChangelogEntryLink.of(batchModeParams.getLinkName(), linkUrl));
+        }
+
         String prompt = "Is there any links you want to include? [Y/y - YES] [N/n - NO] [press ENTER to skip] ";
         List<ChangelogEntryLink> links = new ArrayList<>();
 
@@ -122,6 +138,18 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
     }
 
     private List<ChangelogEntryAuthor> getAuthors() {
+        String author = batchModeParams.getAuthor();
+        List<String> authorsList = batchModeParams.getAuthors();
+        if (StringUtils.isNotBlank(author) || (authorsList != null && !authorsList.isEmpty())) {
+            if (StringUtils.isNotBlank(author)) {
+                return Collections.singletonList(ChangelogEntryAuthor.of("", author, ""));
+            } else {
+                return authorsList.stream()
+                        .map(a -> ChangelogEntryAuthor.of("", a, ""))
+                        .collect(Collectors.toList());
+            }
+        }
+
         String prompt = "Is there any authors of this change, that you want to include? [Y/y - YES] [N/n - NO] [press ENTER to skip] ";
         List<ChangelogEntryAuthor> authors = new ArrayList<>();
 
