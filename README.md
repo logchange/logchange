@@ -47,6 +47,8 @@ GitLab. [LINK](https://about.gitlab.com/blog/2018/07/03/solving-gitlabs-changelo
 ### logchange is distributed as:
 - [**CLI** (binary)](https://github.com/logchange/logchange?tab=readme-ov-file#logchange-cli) - you can use it regardless of the technology used in the project. Also available as [logchange docker image][], suited for CI/CD
 - [**Maven Plugin**](https://github.com/logchange/logchange?tab=readme-ov-file#maven-plugin) - dedicated to projects based on the [Maven][] tool
+- [**Gradle Plugin**](https://github.com/logchange/logchange?tab=readme-ov-file#gradle-plugin) - dedicated to projects based on the [Gradle][] tool
+
 
 ### Maven Plugin
 
@@ -426,6 +428,36 @@ TODO
 | `--inputDir`         | `changelog`            | Specifies the input directory for the logchange data.             |
 | `--configFile`       | `logchange-config.yml` | Specifies the name of configuration file.                         |
 
+## Gradle Plugin
+
+### Starting
+
+Add plugin to `build.gradle`:
+```groovy
+plugins {
+	....
+	id 'dev.logchange' version '1.16.0'
+}
+```
+
+You can also configure basic properties in `build.gradle`:
+(these are defaults so you don't have to define anything)
+```groovy
+logchange {
+   taskPrefix = "" // define task prefix, when logchange task duplicates other tasks ( Cannot add task 'XXXX' as a task with that name already exists.)
+   rootPath = "."
+   inputDir = "changelog"
+   unreleasedVersionDir = "unreleased"
+   outputFile = "CHANGELOG.md"
+   configFile = "logchange-config.yml"
+   generateChangesXml = false
+   xmlOutputFile = "changes.xml"
+}
+```
+
+### gradle initLogchange
+
+TODO
 
 ## CI/CD
 
@@ -444,3 +476,4 @@ TODO
 
 [Maven]: https://maven.apache.org/
 [logchange docker image]: https://hub.docker.com/r/logchange/logchange
+[Gradle]: https://gradle.org/
