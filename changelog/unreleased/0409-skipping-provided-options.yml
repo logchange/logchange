@@ -1,0 +1,13 @@
+# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵
+# Visit https://github.com/logchange/logchange and leave a star 🌟
+# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
+title: Added skipping already provided options in interactive mode (batchMode = false)
+authors:
+  - name: Mateusz Witkowski
+    nick: witx98
+    url: https://github.com/witx98
+issues:
+  - 400
+merge_requests:
+  - 409
+type: fixed # [added/changed/deprecated/removed/fixed/security/dependency_update/other]

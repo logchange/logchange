@@ -26,6 +26,6 @@ public class ChangelogEntryProviderFactory {
             return new BatchModeChangelogEntryProvider(batchModeParams);
         }
 
-        return new UserInputChangelogEntryProvider(prompter);
+        return new UserInputChangelogEntryProvider(prompter, batchModeParams);
     }
 }
