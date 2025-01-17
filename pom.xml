@@ -4,7 +4,7 @@
 
     <groupId>dev.logchange</groupId>
     <artifactId>logchange</artifactId>
-    <version>1.16.1-SNAPSHOT</version>
+    <version>1.16.1</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -43,7 +43,7 @@
         <connection>scm:git:${project.scm.url}</connection>
         <developerConnection>scm:git:${project.scm.url}</developerConnection>
         <url>https://github.com/logchange/logchange.git</url>
-        <tag>HEAD</tag>
+        <tag>1.16.1</tag>
     </scm>
 
     <repositories>
