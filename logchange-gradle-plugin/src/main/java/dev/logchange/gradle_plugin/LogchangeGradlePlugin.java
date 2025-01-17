@@ -46,7 +46,7 @@ public class LogchangeGradlePlugin implements Plugin<Project> {
         project.getTasks().register(taskPrefix + RELEASE_COMMAND, ReleaseVersionTask.class, task -> {
             task.setExtension(extension);
             task.setProject(project);
-            task.setDescription(GENERATE_COMMAND_DESCRIPTION);
+            task.setDescription(RELEASE_COMMAND_DESCRIPTION);
             task.setGroup("logchange");
         });
 
