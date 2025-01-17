@@ -142,10 +142,10 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
         List<String> authorsList = batchModeParams.getAuthors();
         if (StringUtils.isNotBlank(author) || (authorsList != null && !authorsList.isEmpty())) {
             if (StringUtils.isNotBlank(author)) {
-                return Collections.singletonList(ChangelogEntryAuthor.of("", author.trim(), ""));
+                return Collections.singletonList(ChangelogEntryAuthor.of(author.trim()));
             } else {
                 return authorsList.stream()
-                        .map(a -> ChangelogEntryAuthor.of("", a.trim(), ""))
+                        .map(a -> ChangelogEntryAuthor.of(a.trim()))
                         .collect(Collectors.toList());
             }
         }

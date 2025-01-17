@@ -43,13 +43,13 @@ public class BatchModeChangelogEntryProvider implements ChangelogEntryProvider {
         List<String> authors = params.getAuthors();
         if (authors != null && !authors.isEmpty()) {
             return authors.stream()
-                    .map(a -> ChangelogEntryAuthor.of("", a.trim(), ""))
+                    .map(a -> ChangelogEntryAuthor.of(a.trim()))
                     .collect(Collectors.toList());
         }
 
         String author = params.getAuthor();
         if (StringUtils.isNotBlank(author)) {
-            return Collections.singletonList(ChangelogEntryAuthor.of("", author.trim(), ""));
+            return Collections.singletonList(ChangelogEntryAuthor.of(author.trim()));
         }
 
         return Collections.emptyList();

@@ -1,6 +1,8 @@
 package dev.logchange.core.domain.changelog.model.entry;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -82,4 +84,75 @@ class ChangelogEntryAuthorTest {
         assertEquals("", author.getUrl());
     }
 
+    @Test
+    void givenOnlyName_shouldCreateAuthorWithCorrectNameAndBlankNickAndUrl() {
+        // given:
+        String input = " John doe ";
+        String expected = "John doe";
+
+        // when
+        ChangelogEntryAuthor changelogEntryAuthor = ChangelogEntryAuthor.of(input);
+
+        // then:
+        assertEquals(expected, changelogEntryAuthor.getName());
+        assertEquals("", changelogEntryAuthor.getNick());
+        assertEquals("", changelogEntryAuthor.getUrl());
+    }
+
+    @Test
+    void givenOnlyNick_shouldCreateAuthorWithCorrectNickAndBlankNameAndUrl() {
+        // given:
+        String input = "; jdoe ";
+        String expected = "jdoe";
+
+        // when
+        ChangelogEntryAuthor changelogEntryAuthor = ChangelogEntryAuthor.of(input);
+
+        // then:
+        assertEquals("", changelogEntryAuthor.getName());
+        assertEquals(expected, changelogEntryAuthor.getNick());
+        assertEquals("", changelogEntryAuthor.getUrl());
+    }
+
+    @Test
+    void givenOnlyUrl_shouldCreateAuthorWithCorrectUrlAndBlankNameAndNick() {
+        // given:
+        String input = "; ; https://github.com/logchange ";
+        String expected = "https://github.com/logchange";
+
+        // when
+        ChangelogEntryAuthor changelogEntryAuthor = ChangelogEntryAuthor.of(input);
+
+        // then:
+        assertEquals("", changelogEntryAuthor.getName());
+        assertEquals("", changelogEntryAuthor.getNick());
+        assertEquals(expected, changelogEntryAuthor.getUrl());
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    void givenBlankString_shouldThrowException(String input) {
+        // when
+        Exception ex = assertThrows(IllegalArgumentException.class, () ->ChangelogEntryAuthor.of(input));
+
+        // then:
+        assertEquals("Cannot create blank author", ex.getMessage());
+    }
+
+    @Test
+    void givenFullAuthorInformation_shouldFillAllObjectProperties() {
+        // given:
+        String input = "John Doe; jdoe; https://github.com/logchange ";
+        String expectedName = "John Doe";
+        String expectedNick = "jdoe";
+        String expectedURL = "https://github.com/logchange";
+
+        // when
+        ChangelogEntryAuthor changelogEntryAuthor = ChangelogEntryAuthor.of(input);
+
+        // then:
+        assertEquals(expectedName, changelogEntryAuthor.getName());
+        assertEquals(expectedNick, changelogEntryAuthor.getNick());
+        assertEquals(expectedURL, changelogEntryAuthor.getUrl());
+    }
 }
