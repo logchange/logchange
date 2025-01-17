@@ -9,13 +9,13 @@
 
     <modules>
         <module>logchange-utils</module>
+        <module>logchange-md</module>
         <module>logchange-core</module>
         <module>logchange-commands</module>
         <module>logchange-maven-plugin</module>
         <module>logchange-gradle-plugin</module>
         <module>logchange-cli</module>
         <module>logchange-test-reports</module>
-        <module>logchange-md</module>
     </modules>
 
     <name>logchange</name>

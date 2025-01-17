@@ -25,20 +25,24 @@
     </dependencies>
 
     <profiles>
-        <profile>
-            <id>ci-cd</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <configuration>
-                            <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
+<!--        Like always mavens shows supremacy and if we skip last module -->
+<!--        nothing will be published:-->
+<!--        https://stackoverflow.com/a/27557285/10346383 first comment -->
+<!--        bug: https://issues.sonatype.org/browse/NEXUS-9138 -->
+<!--        <profile>-->
+<!--            <id>ci-cd</id>-->
+<!--            <build>-->
+<!--                <plugins>-->
+<!--                    <plugin>-->
+<!--                        <groupId>org.sonatype.plugins</groupId>-->
+<!--                        <artifactId>nexus-staging-maven-plugin</artifactId>-->
+<!--                        <configuration>-->
+<!--                            <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>-->
+<!--                        </configuration>-->
+<!--                    </plugin>-->
+<!--                </plugins>-->
+<!--            </build>-->
+<!--        </profile>-->
         <profile>
             <id>pitest</id>
             <build>
