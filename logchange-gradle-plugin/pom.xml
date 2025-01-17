@@ -17,7 +17,7 @@
     </description>
 
     <properties>
-        <gradle-all.version>8.2.1</gradle-all.version>
+        <gradle-all.version>8.10.2</gradle-all.version>
         <groovy-all.version>4.0.24</groovy-all.version>
         <gradle-api-maven-plugin.version>0.0.6</gradle-api-maven-plugin.version>
     </properties>
@@ -33,6 +33,7 @@
             <groupId>org.gradle</groupId>
             <artifactId>gradle-all</artifactId>
             <version>${gradle-all.version}</version>
+            <scope>test</scope> <!-- It's important to add this as test, because otherwise importing this plugin will require such a dependency, what will cause an error -->
         </dependency>
 
         <dependency>
