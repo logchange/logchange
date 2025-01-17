@@ -13,6 +13,8 @@ import org.codehaus.plexus.components.interactivity.Prompter;
 
 import javax.inject.Inject;
 
+import java.util.List;
+
 import static dev.logchange.commands.Constants.*;
 
 @Mojo(name = ADD_COMMAND, defaultPhase = LifecyclePhase.NONE)
@@ -36,8 +38,11 @@ public class AddChangelogEntryMojo extends AbstractMojo {
     @Parameter(property = "title")
     private String title;
 
-    @Parameter(property = "author")
+    @Parameter(property = AUTHOR_PROPERTY)
     private String author;
+
+    @Parameter(property = AUTHORS_PROPERTY)
+    private List<String> authors;
 
     @Parameter(property = "type")
     private String type;
@@ -68,6 +73,7 @@ public class AddChangelogEntryMojo extends AbstractMojo {
         return AddChangelogEntryBatchModeParams.of(
                 title,
                 author,
+                authors,
                 type,
                 linkName,
                 linkUrl

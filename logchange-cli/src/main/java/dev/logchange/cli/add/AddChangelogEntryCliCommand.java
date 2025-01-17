@@ -10,6 +10,8 @@ import lombok.CustomLog;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
+import java.util.List;
+
 import static dev.logchange.commands.Constants.*;
 
 @CustomLog
@@ -38,8 +40,11 @@ public class AddChangelogEntryCliCommand extends BaseCommand {
     @Option(names = OPTION_PREFIX + "title")
     private String title;
 
-    @Option(names = OPTION_PREFIX + "author")
+    @Option(names = AUTHOR_OPTION, description = AUTHOR_OPTION_DESCRIPTION)
     private String author;
+
+    @Option(names = AUTHORS_OPTION, description = AUTHORS_OPTION_DESCRIPTION, split = ",")
+    private List<String> authors;
 
     @Option(names = OPTION_PREFIX + "type")
     private String type;
@@ -67,6 +72,7 @@ public class AddChangelogEntryCliCommand extends BaseCommand {
         return AddChangelogEntryBatchModeParams.of(
                 title,
                 author,
+                authors,
                 type,
                 linkName,
                 linkUrl
