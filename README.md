@@ -375,19 +375,19 @@ TODO
 
 ### logchange add
 
-| Option                   | Default Value | Description                                                      |
-|--------------------------|---------------|------------------------------------------------------------------|
-| `--inputDir`             | `changelog`   | Specifies the input directory for the logchange data.            |
-| `--unreleasedVersionDir` | `unreleased`  | Specifies the directory where created entries will be stored.    |
-| `--fileName`             | N/A           | The name of the entry file.                                      |
-| `--batchMode`            | `false`       | Determines if the command should run in batch mode.              |
-| `--empty`                | `false`       | Allows adding an empty entry.                                    |
-| `--title`                | N/A           | The title of the CHANGELOG entry.                                |
-| `--author`               | N/A           | The author of the change, assigned to the CHANGELOG entry.       |
-| `--authors`              | N/A           | List of authors, separated by commas.                            |
-| `--type`                 | N/A           | The type of change (e.g., "added", "changed", etc.).             |
-| `--link.name`            | N/A           | The name of the link to be included in the change description.   |
-| `--link.url`             | N/A           | The URL associated with the link, such as a bug report or issue. |
+| Option                   | Default Value | Description                                                                                                                                                                                                                            |
+|--------------------------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `--inputDir`             | `changelog`   | Specifies the input directory for the logchange data.                                                                                                                                                                                  |
+| `--unreleasedVersionDir` | `unreleased`  | Specifies the directory where created entries will be stored.                                                                                                                                                                          |
+| `--fileName`             | N/A           | The name of the entry file.                                                                                                                                                                                                            |
+| `--batchMode`            | `false`       | Determines if the command should run in batch mode.                                                                                                                                                                                    |
+| `--empty`                | `false`       | Allows adding an empty entry.                                                                                                                                                                                                          |
+| `--title`                | N/A           | The title of the CHANGELOG entry.                                                                                                                                                                                                      |
+| `--author`               | N/A           | The author of the change, assigned to the CHANGELOG entry. The value should follow the format: `"name; nick; url"`, with fields separated by the `;` character.                                                                        |
+| `--authors`              | N/A           | A list of authors, separated by commas. For each author, the same format as in the `--author` option applies, e.g., `"John Doe; jdoe; https://github.com/logchange/hofund, Richard Roe; rroe; https://github.com/logchange/valhalla"`. |
+| `--type`                 | N/A           | The type of change (e.g., "added", "changed", etc.).                                                                                                                                                                                   |
+| `--link.name`            | N/A           | The name of the link to be included in the change description.                                                                                                                                                                         |
+| `--link.url`             | N/A           | The URL associated with the link, such as a bug report or issue.                                                                                                                                                                       |
 
 
 ### logchange generate
