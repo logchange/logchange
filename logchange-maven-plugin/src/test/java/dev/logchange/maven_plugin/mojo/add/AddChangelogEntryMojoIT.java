@@ -44,7 +44,7 @@ class AddChangelogEntryMojoIT {
                 "# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅\uFE0F⬅ \uFE0F\n" +
                 "title: '\"Upgraded A from 1.0.0 to 2.0.0\"'\n" +
                 "authors:\n" +
-                "  - nick: marwin1991\n" +
+                "  - name: marwin1991\n" +
                 "links:\n" +
                 "  - name: notes\n" +
                 "    url: https://logchange.dev\n" +

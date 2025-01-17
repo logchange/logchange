@@ -34,4 +34,17 @@ public class ChangelogEntryAuthor {
         return new ChangelogEntryAuthor(name, nick, url);
     }
 
+    public static ChangelogEntryAuthor of(String author) {
+        if (StringUtils.isBlank(author)) {
+            throw new IllegalArgumentException("Cannot create blank author");
+        }
+        String[] authorParts = author.split(";");
+
+        String name = (authorParts.length > 0 ? authorParts[0] : "").trim();
+        String nick = (authorParts.length > 1 ? authorParts[1] : "").trim();
+        String url = (authorParts.length > 2 ? authorParts[2] : "").trim();
+
+        return ChangelogEntryAuthor.of(name, nick, url);
+    }
+
 }

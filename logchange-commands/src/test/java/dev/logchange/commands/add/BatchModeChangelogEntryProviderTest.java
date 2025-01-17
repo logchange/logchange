@@ -33,7 +33,9 @@ class BatchModeChangelogEntryProviderTest {
 
         // then:
         assertEquals(1, changelogEntry.getAuthors().size());
-        assertEquals("Peter", changelogEntry.getAuthors().get(0).getNick());
+        assertEquals("Peter", changelogEntry.getAuthors().get(0).getName());
+        assertEquals("", changelogEntry.getAuthors().get(0).getNick());
+        assertEquals("", changelogEntry.getAuthors().get(0).getUrl());
     }
 
     @Test
@@ -46,7 +48,7 @@ class BatchModeChangelogEntryProviderTest {
 
         // then:
         assertEquals(2, authors.size());
-        assertEquals("Peter", authors.get(0).getNick());
-        assertEquals("Matthew", authors.get(1).getNick());
+        assertEquals("Peter", authors.get(0).getName());
+        assertEquals("Matthew", authors.get(1).getName());
     }
 }
