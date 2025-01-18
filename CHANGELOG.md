@@ -7,6 +7,14 @@
 <!-- !!! ⚠️ DO NOT MODIFY THIS FILE, YOUR CHANGES WILL BE LOST ⚠️ !!! -->
 
 
+[1.16.4] - 2025-01-18
+---------------------
+
+### Fixed (1 change)
+
+- Fixed deployed to maven central repository. ([Peter Zmilczak](https://github.com/marwin1991) @marwin1991)
+
+
 [1.16.3] - 2025-01-17
 ---------------------
 
