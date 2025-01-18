@@ -15,7 +15,7 @@ import java.util.List;
 public class ReleaseDate {
 
     public static final String RELEASE_DATE_FILENAME = "release-date.txt";
-    ;
+
     public static final String RELEASE_DATE_FORMAT = "yyyy-MM-dd";
 
     public static OffsetDateTime getFromDir(File versionDirectory) {
@@ -28,7 +28,8 @@ public class ReleaseDate {
         return Arrays.stream(files)
                 .filter(file -> file.getName().equals(ReleaseDate.RELEASE_DATE_FILENAME))
                 .map(ReleaseDate::getFromFile)
-                .findFirst().orElse(null);
+                .findFirst()
+                .orElse(null);
     }
 
     @SneakyThrows
