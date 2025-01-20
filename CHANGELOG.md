@@ -7,6 +7,18 @@
 <!-- !!! ⚠️ DO NOT MODIFY THIS FILE, YOUR CHANGES WILL BE LOST ⚠️ !!! -->
 
 
+[1.16.5] - 2025-01-19
+---------------------
+
+### Fixed (1 change)
+
+- Changed groovy-all scope dependency for gradle plugin to provided. ([Peter Zmilczak](https://github.com/marwin1991) @marwin1991)
+
+### Dependency updates (1 change)
+
+- Upgraded org.assertj:assertj-core from 3.27.2 to 3.27.3 (marwin1991)
+
+
 [1.16.4] - 2025-01-18
 ---------------------
 
