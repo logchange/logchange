@@ -65,7 +65,7 @@ You can choose between two options:
         <plugin>
             <groupId>dev.logchange</groupId>
             <artifactId>logchange-maven-plugin</artifactId>
-            <version>1.13.0</version>
+            <version>1.16.5</version>
             <inherited>false</inherited> <!-- For multi module project -->
         </plugin>
     </plugins>
@@ -437,7 +437,7 @@ Add plugin to `build.gradle`:
 ```groovy
 plugins {
 	....
-	id 'dev.logchange' version '1.16.0'
+	id 'dev.logchange' version '1.16.6'
 }
 ```
 
@@ -455,9 +455,18 @@ logchange {
 }
 ```
 
-### gradle initLogchange
+### Gradle Tasks
 
-TODO
+```text
+Logchange tasks
+---------------
+logchangeAdd - Creates new YML file with logchange structure in <unreleasedVersionDir> directory
+logchangeAggregate - Aggregates projects changelogs to create one. Useful when we have many projects that make up one product.
+logchangeGenerate - Generates changelog file (<outputFile>) based on .yml entries and archives (does not moves any files)
+logchangeInit - Initialize directory (project) with basic logchange configuration and directory structure
+logchangeLint - Lints and validates YML files and logchange config
+logchangeRelease - Creates new changelog release by moving files from <unreleasedVersionDir> directory to vX.X.X directory
+```
 
 ## CI/CD
 
