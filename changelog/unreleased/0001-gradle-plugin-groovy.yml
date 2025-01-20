@@ -1,0 +1,12 @@
+# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵
+# Visit https://github.com/logchange/logchange and leave a star 🌟
+# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
+title: Added `logchange` prefix to all Gradle tasks. Removed broken taskPrefix property from Gradle plugin configuration.
+authors:
+  - name: Peter Zmilczak
+    nick: marwin1991
+    url: https://github.com/marwin1991
+links:
+  - name: "Issue-397 Commnet"
+    url: https://github.com/logchange/logchange/issues/397#issuecomment-2603254252
+type: changed # [added/changed/deprecated/removed/fixed/security/dependency_update/other]

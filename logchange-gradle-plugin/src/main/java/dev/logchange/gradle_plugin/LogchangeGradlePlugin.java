@@ -5,6 +5,7 @@ import dev.logchange.gradle_plugin.generate.GenerateChangelogTask;
 import dev.logchange.gradle_plugin.init.InitTask;
 import dev.logchange.gradle_plugin.lint.LintChangelogTask;
 import dev.logchange.gradle_plugin.release.ReleaseVersionTask;
+import org.apache.commons.lang3.StringUtils;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 
@@ -12,51 +13,57 @@ import static dev.logchange.commands.Constants.*;
 
 public class LogchangeGradlePlugin implements Plugin<Project> {
 
+    private static final String GRADLE_CONFIG = "logchange";
+    private static final String TASK_PREFIX = "logchange";
+    private static final String TASK_GROUP = "logchange";
+
     @Override
     public void apply(Project project) {
         LogchangePluginExtension extension = project.getExtensions()
-                .create("logchange", LogchangePluginExtension.class);
+                .create(GRADLE_CONFIG, LogchangePluginExtension.class);
 
-        String taskPrefix = extension.getTaskPrefix();
-
-        project.getTasks().register(taskPrefix + ADD_COMMAND, AddChangelogEntryTask.class, task -> {
+        project.getTasks().register(getTaskName(ADD_COMMAND), AddChangelogEntryTask.class, task -> {
             task.setExtension(extension);
             task.setDescription(ADD_COMMAND_DESCRIPTION);
-            task.setGroup("logchange");
+            task.setGroup(TASK_GROUP);
         });
 
-        project.getTasks().register(taskPrefix + INIT_COMMAND + "Logchange", InitTask.class, task -> {
+        project.getTasks().register(getTaskName(INIT_COMMAND), InitTask.class, task -> {
             task.setExtension(extension);
             task.setDescription(INIT_COMMAND_DESCRIPTION);
-            task.setGroup("logchange");
+            task.setGroup(TASK_GROUP);
         });
 
-        project.getTasks().register(taskPrefix + LINT_COMMAND, LintChangelogTask.class, task -> {
+        project.getTasks().register(getTaskName(LINT_COMMAND), LintChangelogTask.class, task -> {
             task.setExtension(extension);
             task.setDescription(LINT_COMMAND_DESCRIPTION);
-            task.setGroup("logchange");
+            task.setGroup(TASK_GROUP);
         });
 
-        project.getTasks().register(taskPrefix + GENERATE_COMMAND, GenerateChangelogTask.class, task -> {
+        project.getTasks().register(getTaskName(GENERATE_COMMAND), GenerateChangelogTask.class, task -> {
             task.setExtension(extension);
             task.setDescription(GENERATE_COMMAND_DESCRIPTION);
-            task.setGroup("logchange");
+            task.setGroup(TASK_GROUP);
         });
 
-        project.getTasks().register(taskPrefix + RELEASE_COMMAND, ReleaseVersionTask.class, task -> {
+        project.getTasks().register(getTaskName(RELEASE_COMMAND), ReleaseVersionTask.class, task -> {
             task.setExtension(extension);
             task.setProject(project);
             task.setDescription(RELEASE_COMMAND_DESCRIPTION);
-            task.setGroup("logchange");
+            task.setGroup(TASK_GROUP);
         });
 
-        project.getTasks().register(taskPrefix + AGGREGATE_COMMAND, ReleaseVersionTask.class, task -> {
+        project.getTasks().register(getTaskName(AGGREGATE_COMMAND), ReleaseVersionTask.class, task -> {
             task.setExtension(extension);
             task.setProject(project);
             task.setDescription(AGGREGATE_COMMAND_DESCRIPTION);
-            task.setGroup("logchange");
+            task.setGroup(TASK_GROUP);
         });
 
+    }
+
+    private static String getTaskName(String taskName) {
+        return TASK_PREFIX + StringUtils.capitalize(taskName);
     }
 
 }

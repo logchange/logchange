@@ -445,7 +445,6 @@ You can also configure basic properties in `build.gradle`:
 (these are defaults so you don't have to define anything)
 ```groovy
 logchange {
-   taskPrefix = "" // define task prefix, when logchange task duplicates other tasks ( Cannot add task 'XXXX' as a task with that name already exists.)
    rootPath = "."
    inputDir = "changelog"
    unreleasedVersionDir = "unreleased"
