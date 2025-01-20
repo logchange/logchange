@@ -15,12 +15,20 @@ public class GradleAddEntryPrompter implements AddEntryPrompter {
         if (console != null) {
             return console.readLine(message);
         } else {
-            return JOptionPane.showInputDialog(
+            String inputRequired = JOptionPane.showInputDialog(
                     null,
-                    message,
+                    message + " [press cancel to terminate task]",
                     "Input required",
                     JOptionPane.QUESTION_MESSAGE
             );
+
+            if (inputRequired != null) {
+                return inputRequired;
+            } else {
+                String msg = "Cancel pressed, terminating task";
+                System.out.println(msg);
+                throw new RuntimeException(msg);
+            }
         }
     }
 
