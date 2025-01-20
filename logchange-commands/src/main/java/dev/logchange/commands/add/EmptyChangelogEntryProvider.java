@@ -26,7 +26,7 @@ class EmptyChangelogEntryProvider implements ChangelogEntryProvider {
     }
 
     private ChangelogEntryType getType() {
-        return ChangelogEntryType.ADDED;
+        return ChangelogEntryType.values().get(0);
     }
 
     private List<ChangelogEntryMergeRequest> getMergeRequests() {

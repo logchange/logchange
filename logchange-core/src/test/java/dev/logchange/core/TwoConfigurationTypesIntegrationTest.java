@@ -88,14 +88,15 @@ public class TwoConfigurationTypesIntegrationTest {
                         .singular("modification")
                         .plural("modifications")
                         .build())
-                .added("A")
-                .changed("C")
-                .deprecated("D")
-                .removed("R")
-                .fixed("F")
-                .security("F")
-                .dependencyUpdate("DU")
-                .other("O")
+//                .
+//                .added("A")
+//                .changed("C")
+//                .deprecated("D")
+//                .removed("R")
+//                .fixed("F")
+//                .security("F")
+//                .dependencyUpdate("DU")
+//                .other("O")
                 .build();
 
         ConfigurationLabels configurations = ConfigurationLabels.builder()

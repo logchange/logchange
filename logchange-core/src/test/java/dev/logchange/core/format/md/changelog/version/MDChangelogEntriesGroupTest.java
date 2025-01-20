@@ -14,7 +14,7 @@ class MDChangelogEntriesGroupTest {
     @Test
     void givenOneEntry_whenToString_thenResultMatches() {
         //given:
-        ChangelogEntryType type = ChangelogEntryType.ADDED;
+        ChangelogEntryType type = ChangelogEntryType.fromNameIgnoreCase("added");
         List<ChangelogEntry> entries = Collections.singletonList(getSomeEntry(type));
 
         //when:
@@ -30,7 +30,7 @@ class MDChangelogEntriesGroupTest {
     @Test
     void givenTwoEntries_whenToString_thenResultMatches() {
         //given:
-        ChangelogEntryType type = ChangelogEntryType.ADDED;
+        ChangelogEntryType type = ChangelogEntryType.fromNameIgnoreCase("added");
         List<ChangelogEntry> entries = Arrays.asList(getSomeEntry(type), getSomeEntry(type));
 
         //when:
@@ -47,7 +47,7 @@ class MDChangelogEntriesGroupTest {
     @Test
     void givenTwoEntries_whenToString_thenResultMatchesToMD() {
         //given:
-        ChangelogEntryType type = ChangelogEntryType.ADDED;
+        ChangelogEntryType type = ChangelogEntryType.fromNameIgnoreCase("added");
         List<ChangelogEntry> entries = Arrays.asList(getSomeEntry(type), getSomeEntry(type));
 
         //when:

@@ -21,21 +21,15 @@ public enum ChangesXMLEntryType {
     private final Integer order;
 
     public static ChangesXMLEntryType getXmlTypeFromMarkdownEntryType(ChangelogEntryType markdownEntryType) {
-        switch (markdownEntryType) {
-            case ADDED:
-                return ChangesXMLEntryType.ADD;
-            case CHANGED:
-            case FIXED:
-                return ChangesXMLEntryType.FIX;
-            case DEPRECATED:
-            case SECURITY:
-            case DEPENDENCY_UPDATE:
-            case OTHER:
-                return ChangesXMLEntryType.UPDATE;
-            case REMOVED:
-                return ChangesXMLEntryType.REMOVE;
+        log.info("Changelog entry key: " + markdownEntryType.getKey());
+        if ("added".equals(markdownEntryType.getKey())) {
+            return ADD;
+        } else if ("fixed".equals(markdownEntryType.getKey()) || "changed".equals(markdownEntryType.getKey())) {
+            return FIX;
+        } else if ("removed".equals(markdownEntryType.getKey())) {
+            return REMOVE;
+        } else {
+            return ChangesXMLEntryType.UPDATE;
         }
-        log.severe("Wrong change type: " + markdownEntryType);
-        throw new IllegalArgumentException("Wrong change type");
     }
 }
