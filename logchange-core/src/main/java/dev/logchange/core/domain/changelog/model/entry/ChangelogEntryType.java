@@ -1,24 +1,28 @@
 package dev.logchange.core.domain.changelog.model.entry;
 
-import com.sun.tools.javac.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChangelogEntryType {
 
-    private final static List<ChangelogEntryType> defaultEntryTypes = List.of(
-            new ChangelogEntryType("added", 1),
-            new ChangelogEntryType("changed", 2),
-            new ChangelogEntryType("deprecated", 3),
-            new ChangelogEntryType("removed", 4),
-            new ChangelogEntryType("fixed", 5),
-            new ChangelogEntryType("security", 6),
-            new ChangelogEntryType("dependency_update", 7),
-            new ChangelogEntryType("other", 8)
-    );
+    private final static List<ChangelogEntryType> defaultEntryTypes = new ArrayList<>();
+
+    static {
+        defaultEntryTypes.add(new ChangelogEntryType("added", 1));
+        defaultEntryTypes.add(new ChangelogEntryType("changed", 2));
+        defaultEntryTypes.add(new ChangelogEntryType("deprecated", 3));
+        defaultEntryTypes.add(new ChangelogEntryType("removed", 4));
+        defaultEntryTypes.add(new ChangelogEntryType("fixed", 5));
+        defaultEntryTypes.add(new ChangelogEntryType("security", 6));
+        defaultEntryTypes.add(new ChangelogEntryType("dependency_update", 7));
+        defaultEntryTypes.add(new ChangelogEntryType("other", 8));
+    }
 
     private final String key;
     private final Integer order;
