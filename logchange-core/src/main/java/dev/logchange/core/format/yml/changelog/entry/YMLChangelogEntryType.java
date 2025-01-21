@@ -6,86 +6,34 @@ import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType;
 import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
 
-import java.util.Arrays;
 import java.util.stream.Collectors;
 
 @Log
 @AllArgsConstructor
-public enum YMLChangelogEntryType {
-
-    ADDED("added"),
-    CHANGED("changed"),
-    DEPRECATED("deprecated"),
-    REMOVED("removed"),
-    FIXED("fixed"),
-    SECURITY("security"),
-    DEPENDENCY_UPDATE("dependency_update"),
-    OTHER("other");
+public class YMLChangelogEntryType {
 
     private final String type;
 
     static YMLChangelogEntryType of(ChangelogEntryType type) {
-        switch (type) {
-            case ADDED:
-                return YMLChangelogEntryType.ADDED;
-            case CHANGED:
-                return YMLChangelogEntryType.CHANGED;
-            case DEPRECATED:
-                return YMLChangelogEntryType.DEPRECATED;
-            case REMOVED:
-                return YMLChangelogEntryType.REMOVED;
-            case FIXED:
-                return YMLChangelogEntryType.FIXED;
-            case SECURITY:
-                return YMLChangelogEntryType.SECURITY;
-            case DEPENDENCY_UPDATE:
-                return YMLChangelogEntryType.DEPENDENCY_UPDATE;
-            case OTHER:
-                return YMLChangelogEntryType.OTHER;
-            default:
-                String message = "Converting YMLChangelogEntryType failed";
-                log.severe(message);
-                throw new IllegalArgumentException(message);
-        }
+        return new YMLChangelogEntryType(type.getKey());
     }
 
     ChangelogEntryType to() {
-        switch (this) {
-            case ADDED:
-                return ChangelogEntryType.ADDED;
-            case CHANGED:
-                return ChangelogEntryType.CHANGED;
-            case DEPRECATED:
-                return ChangelogEntryType.DEPRECATED;
-            case REMOVED:
-                return ChangelogEntryType.REMOVED;
-            case FIXED:
-                return ChangelogEntryType.FIXED;
-            case SECURITY:
-                return ChangelogEntryType.SECURITY;
-            case DEPENDENCY_UPDATE:
-                return ChangelogEntryType.DEPENDENCY_UPDATE;
-            case OTHER:
-                return ChangelogEntryType.OTHER;
-            default:
-                String message = "Converting ChangelogEntryType failed";
-                log.severe(message);
-                throw new IllegalArgumentException(message);
-        }
+        return ChangelogEntryType.fromNameIgnoreCase(type);
     }
 
     @JsonCreator
     public static YMLChangelogEntryType of(String name) {
-        return Arrays.stream(values())
-                .filter(value -> value.getType().equals(name))
+        return ChangelogEntryType.values().stream()
+                .filter(value -> value.getKey().equals(name))
                 .findFirst()
+                .map(YMLChangelogEntryType::of)
                 .orElseThrow(() -> {
-                    String availableType = Arrays.stream(YMLChangelogEntryType.values()).map(YMLChangelogEntryType::getType).collect(Collectors.joining(", "));
+                    String availableType = ChangelogEntryType.values().stream().map(ChangelogEntryType::getKey).collect(Collectors.joining(", "));
                     String message = "Cannot match YMLChangelogEntryType for string: " + name + " - Available types: [" + availableType + "].";
                     log.severe(message);
                     return new IllegalArgumentException(message);
                 });
-
     }
 
     @JsonValue

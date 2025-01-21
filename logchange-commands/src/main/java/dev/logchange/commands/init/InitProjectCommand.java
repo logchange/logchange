@@ -46,7 +46,7 @@ public class InitProjectCommand {
     private void createConfig(String rootPath, String inputDir) {
         log.info("Creating config file");
         File config = ConfigFile.of(Paths.get(rootPath, inputDir, DEFAULT_CONFIG_FILE)).create();
-        ConfigRepository configRepository = new FileConfigRepository(config);
+        ConfigRepository configRepository = FileConfigRepository.of(config);
         configRepository.save(Config.EMPTY);
     }
 

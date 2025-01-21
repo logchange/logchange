@@ -5,8 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.extern.java.Log;
+import org.apache.commons.lang3.StringUtils;
 
-import static org.apache.commons.lang3.StringUtils.defaultIfBlank;
+import java.util.HashMap;
+import java.util.Map;
+
+import static dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType.*;
 
 @Log
 @Builder
@@ -23,44 +27,36 @@ public class TypesLabels {
     public static final String DEFAULT_DEPENDENCY_UPDATE_LABEL = "Dependency updates";
     public static final String DEFAULT_OTHER_LABEL = "Other";
 
+    private static final Map<String, String> defaultLabels = new HashMap<>();
     public static final TypesLabels EMPTY = TypesLabels.builder()
+            .entryTypesLabels(defaultLabels)
             .numberOfChanges(NumberOfChangesLabels.EMPTY)
             .build();
 
-    private String added;
-    private String changed;
-    private String deprecated;
-    private String removed;
-    private String fixed;
-    private String security;
-    private String dependencyUpdate;
-    private String other;
+    static {
+        defaultLabels.put(DEFAULT_ENTRY_TYPE_ADDED, DEFAULT_ADDED_LABEL);
+        defaultLabels.put(DEFAULT_ENTRY_TYPE_CHANGED, DEFAULT_CHANGED_LABEL);
+        defaultLabels.put(DEFAULT_ENTRY_TYPE_DEPRECATED, DEFAULT_DEPRECATED_LABEL);
+        defaultLabels.put(DEFAULT_ENTRY_TYPE_REMOVED, DEFAULT_REMOVED_LABEL);
+        defaultLabels.put(DEFAULT_ENTRY_TYPE_FIXED, DEFAULT_FIXED_LABEL);
+        defaultLabels.put(DEFAULT_ENTRY_TYPE_SECURITY, DEFAULT_SECURITY_LABEL);
+        defaultLabels.put(DEFAULT_ENTRY_TYPE_DEPENDENCY_UPDATE, DEFAULT_DEPENDENCY_UPDATE_LABEL);
+        defaultLabels.put(DEFAULT_ENTRY_TYPE_OTHER, DEFAULT_OTHER_LABEL);
+    }
+
+    @Getter
+    private Map<String, String> entryTypesLabels;
 
     @Getter
     private NumberOfChangesLabels numberOfChanges;
 
     public String getType(ChangelogEntryType type) {
-        switch (type) {
-            case ADDED:
-                return defaultIfBlank(added, DEFAULT_ADDED_LABEL);
-            case CHANGED:
-                return defaultIfBlank(changed, DEFAULT_CHANGED_LABEL);
-            case DEPRECATED:
-                return defaultIfBlank(deprecated, DEFAULT_DEPRECATED_LABEL);
-            case REMOVED:
-                return defaultIfBlank(removed, DEFAULT_REMOVED_LABEL);
-            case FIXED:
-                return defaultIfBlank(fixed, DEFAULT_FIXED_LABEL);
-            case SECURITY:
-                return defaultIfBlank(security, DEFAULT_SECURITY_LABEL);
-            case DEPENDENCY_UPDATE:
-                return defaultIfBlank(dependencyUpdate, DEFAULT_DEPENDENCY_UPDATE_LABEL);
-            case OTHER:
-                return defaultIfBlank(other, DEFAULT_OTHER_LABEL);
-            default:
-                String message = "Unrecognized changelog entry type: " + type;
-                log.severe(message);
-                throw new IllegalArgumentException(message);
+        String label = entryTypesLabels.get(type.getKey());
+
+        if (label == null) {
+            return StringUtils.capitalize(type.getKey().replace("_", " "));
+        } else {
+            return label;
         }
     }
 }

@@ -68,7 +68,7 @@ class ConfigFileTest {
         // given:
         assertFalse(new File(PATH + CONFIG_FILE_NAME).exists());
         File file = ConfigFile.of(Paths.get(PATH, CONFIG_FILE_NAME)).create();
-        ConfigRepository configRepository = new FileConfigRepository(file);
+        ConfigRepository configRepository = FileConfigRepository.of(file);
         configRepository.save(Config.EMPTY);
 
 

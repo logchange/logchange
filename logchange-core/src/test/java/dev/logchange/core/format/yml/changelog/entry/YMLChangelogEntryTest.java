@@ -67,7 +67,7 @@ class YMLChangelogEntryTest {
                 .title("Some title")
                 .author(new YMLChangelogEntryAuthor(null,"marwin1991",null))
                 .link(new YMLChangelogEntryLink(null, "https://github.com/users/marwin1991"))
-                .type(YMLChangelogEntryType.ADDED)
+                .type(YMLChangelogEntryType.of("added"))
                 .build();
     }
 
@@ -78,7 +78,7 @@ class YMLChangelogEntryTest {
                 .mergeRequest(1L)
                 .issue(1L)
                 .link(new YMLChangelogEntryLink("marwin1991", "https://github.com/users/marwin1991"))
-                .type(YMLChangelogEntryType.ADDED)
+                .type(YMLChangelogEntryType.of("added"))
                 .importantNote("Some important note")
                 .configuration(YMLChangelogEntryConfiguration.builder()
                         .type("DB")

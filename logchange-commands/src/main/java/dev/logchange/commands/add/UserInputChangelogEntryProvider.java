@@ -54,7 +54,7 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
             return ChangelogEntryType.fromNameIgnoreCase(type);
         }
 
-        String prompt = Arrays.stream(ChangelogEntryType.values())
+        String prompt = ChangelogEntryType.values().stream()
                 .map(ChangelogEntryType::toString)
                 .collect(Collectors.joining(System.lineSeparator())) +
                 System.lineSeparator() +

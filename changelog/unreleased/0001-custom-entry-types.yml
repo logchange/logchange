@@ -1,0 +1,13 @@
+# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵
+# Visit https://github.com/logchange/logchange and leave a star 🌟
+# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
+title: Allowed to define custom entry types in `logchange-config.yml`
+authors:
+  - name: Peter Zmilczak
+    nick: marwin1991
+    url: https://github.com/marwin1991
+issues:
+  - 399
+merge_requests:
+  - 421
+type: added # [added/changed/deprecated/removed/fixed/security/dependency_update/other]

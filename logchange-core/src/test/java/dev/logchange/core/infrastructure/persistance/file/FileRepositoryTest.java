@@ -77,7 +77,7 @@ class FileRepositoryTest {
     private Changelog prepareChangelog() {
         ChangelogEntry entry = ChangelogEntry.builder()
                 .title(ChangelogEntryTitle.of("Some Title"))
-                .type(ChangelogEntryType.ADDED)
+                .type(ChangelogEntryType.fromNameIgnoreCase("added"))
                 .build();
 
         List<ChangelogEntry> entries = new ArrayList<>();

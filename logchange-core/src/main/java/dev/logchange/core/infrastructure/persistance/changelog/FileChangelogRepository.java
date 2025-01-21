@@ -7,6 +7,7 @@ import dev.logchange.core.application.file.repository.XmlFileWriter;
 import dev.logchange.core.domain.changelog.model.Changelog;
 import dev.logchange.core.domain.changelog.model.archive.ChangelogArchive;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
+import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType;
 import dev.logchange.core.domain.changelog.model.version.ChangelogVersion;
 import dev.logchange.core.domain.changelog.model.version.Version;
 import dev.logchange.core.domain.config.model.Config;
@@ -119,6 +120,7 @@ public class FileChangelogRepository implements ChangelogRepository {
     }
 
     private List<ChangelogEntry> getEntries(File versionDirectory) {
+        ChangelogEntryType.setEntryTypes(config.getEntryTypes());
         List<Exception> exceptions = new ArrayList<>();
 
         List<ChangelogEntry> entries = reader.readYmlFiles(versionDirectory)

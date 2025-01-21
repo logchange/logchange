@@ -59,7 +59,7 @@ public class ConfigFile {
             throw new RuntimeException(msg);
         }
 
-        ConfigRepository configRepository = new FileConfigRepository(configFile);
+        ConfigRepository configRepository = FileConfigRepository.of(configFile);
         return Optional.of(configRepository.find());
     }
 }

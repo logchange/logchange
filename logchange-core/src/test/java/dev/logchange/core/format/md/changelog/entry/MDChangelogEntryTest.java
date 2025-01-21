@@ -65,7 +65,7 @@ class MDChangelogEntryTest {
         return ChangelogEntry.builder()
                 .prefix(prefix)
                 .title(ChangelogEntryTitle.of("Some Title"))
-                .type(ChangelogEntryType.ADDED)
+                .type(ChangelogEntryType.fromNameIgnoreCase("added"))
                 .mergeRequest(ChangelogEntryMergeRequest.of(567L))
                 .issue(890L)
                 .link(new ChangelogEntryLink("Some link", "https//google.com"))

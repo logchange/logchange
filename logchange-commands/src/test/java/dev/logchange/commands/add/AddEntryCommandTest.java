@@ -33,7 +33,7 @@ class AddEntryCommandTest {
 
         ChangelogEntry entry = ChangelogEntry.builder()
                 .title(ChangelogEntryTitle.of("title"))
-                .type(ChangelogEntryType.ADDED)
+                .type(ChangelogEntryType.fromNameIgnoreCase("added"))
                 .mergeRequest(ChangelogEntryMergeRequest.of(1000L))
                 .issue(100L)
                 .link(ChangelogEntryLink.of("name", "url"))

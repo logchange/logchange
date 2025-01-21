@@ -3,18 +3,23 @@ package dev.logchange.core.infrastructure.persistance.config;
 import dev.logchange.core.application.config.ConfigRepository;
 import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.format.yml.config.YMLConfig;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.extern.java.Log;
+import lombok.CustomLog;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
-@Log
-@AllArgsConstructor
+@CustomLog
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class FileConfigRepository implements ConfigRepository {
 
     private final File configFile;
+
+    public static FileConfigRepository of(File configFile) {
+        return new FileConfigRepository(configFile);
+    }
 
     @Override
     public Config find() {
@@ -32,7 +37,7 @@ public class FileConfigRepository implements ConfigRepository {
 
         } catch (IOException e) {
             String message = "Could not save config to file: " + configFile + " because: " + e.getMessage();
-            log.severe(message);
+            log.error(message);
             throw new IllegalArgumentException(message);
         }
     }
@@ -42,7 +47,7 @@ public class FileConfigRepository implements ConfigRepository {
             return new FileInputStream(entryFile);
         } catch (FileNotFoundException e) {
             String message = "Cannot find entry file: " + entryFile.getName();
-            log.severe(message);
+            log.error(message);
             throw new IllegalArgumentException(message);
         }
     }

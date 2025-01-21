@@ -5,22 +5,20 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.logchange.core.domain.config.model.Config;
+import dev.logchange.core.domain.config.model.CustomChangelogEntryType;
 import dev.logchange.core.domain.config.model.Heading;
 import dev.logchange.core.domain.config.model.aggregate.Aggregates;
 import dev.logchange.core.domain.config.model.labels.Labels;
 import dev.logchange.core.domain.config.model.templates.Templates;
 import dev.logchange.core.format.yml.ObjectMapperProvider;
 import dev.logchange.core.format.yml.config.aggregate.YMLAggregates;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.SneakyThrows;
-import lombok.extern.java.Log;
+import lombok.*;
 
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.util.List;
 
-@Log
+@CustomLog
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -39,9 +37,6 @@ public class YMLConfig {
 
     @SneakyThrows
     public static YMLConfig of(InputStream input) {
-//        Yaml yaml = new Yaml(new AnnotationAwareConstructor(YMLConfig.class));
-//        return yaml.load(input);
-
         ObjectMapper mapper = ObjectMapperProvider.get();
         return mapper.readValue(input, YMLConfig.class);
     }
@@ -49,6 +44,7 @@ public class YMLConfig {
     public static YMLConfig of(Config config) {
         return YMLConfig.builder()
                 .changelog(YMLChangelog.of(config))
+                //we skipp aggregates because we don't want it in default config
                 .build();
     }
 
@@ -64,16 +60,25 @@ public class YMLConfig {
 
     @JsonAnySetter
     public void anySetter(String key, Object value) {
-        log.warning("Unknown property: " + key + " with value " + value);
+        log.warn("Unknown property: " + key + " with value " + value);
     }
 
     public Config to() {
         return Config.builder()
                 .heading(toHeading())
+                .entryTypes(toEntryTypes())
                 .labels(toLabels())
                 .templates(toTemplates())
                 .aggregates(toAggregates())
                 .build();
+    }
+
+    private List<CustomChangelogEntryType> toEntryTypes() {
+        if (changelog == null) {
+            return CustomChangelogEntryType.EMPTY;
+        } else {
+            return changelog.toEntryTypes();
+        }
     }
 
     private Aggregates toAggregates() {
