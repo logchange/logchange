@@ -3,11 +3,13 @@ package dev.logchange.core;
 import dev.logchange.core.application.changelog.repository.ChangelogRepository;
 import dev.logchange.core.application.changelog.repository.VersionSummaryRepository;
 import dev.logchange.core.application.changelog.service.generate.GenerateChangelogService;
+import dev.logchange.core.application.config.ConfigRepository;
 import dev.logchange.core.domain.changelog.command.GenerateChangelogUseCase;
 import dev.logchange.core.domain.changelog.command.GenerateChangelogUseCase.GenerateChangelogCommand;
 import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogRepository;
 import dev.logchange.core.infrastructure.persistance.changelog.FileVersionSummaryRepository;
+import dev.logchange.core.infrastructure.persistance.config.FileConfigRepository;
 import dev.logchange.core.infrastructure.persistance.file.FileRepository;
 import dev.logchange.core.infrastructure.query.file.FileReader;
 import org.codehaus.plexus.util.FileUtils;
@@ -37,21 +39,24 @@ public class CustomEntryTypesIntegrationTest {
 
     @Test
     void shouldMatchExpectedChangelog() throws IOException {
-        //given:
+        // given:
         File changelogInputDir = new File(PATH + "changelog");
         File changelogOutputFile = new File(PATH + "CHANGELOG.md");
         File expectedChangelogOutputFile = new File(PATH + "EXPECTED_CHANGELOG.md");
+        File configFile = new File(PATH + "changelog/logchange-config.yml");
 
         FileRepository fr = FileRepository.of(changelogOutputFile);
-        ChangelogRepository repository = new FileChangelogRepository(changelogInputDir, Config.EMPTY, new FileReader(), fr, fr);
-        VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogInputDir, Config.EMPTY);
+        ConfigRepository cr = FileConfigRepository.of(configFile);
+        Config config = cr.find();
+        ChangelogRepository repository = new FileChangelogRepository(changelogInputDir, config, new FileReader(), fr, fr);
+        VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogInputDir, config);
         GenerateChangelogUseCase generateChangelogUseCase = new GenerateChangelogService(repository, versionSummaryRepository);
         GenerateChangelogCommand command = GenerateChangelogCommand.of();
 
-        //when:
+        // when:
         generateChangelogUseCase.handle(command);
 
-        //then:
+        // then:
         String expectedContent = FileUtils.fileRead(expectedChangelogOutputFile);
         String actualContent = FileUtils.fileRead(changelogOutputFile);
         assertThat(actualContent).isEqualToIgnoringNewLines(expectedContent);

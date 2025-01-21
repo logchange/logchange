@@ -44,7 +44,7 @@ public class ChangelogHeadingIntegrationTest {
         File configFile = new File(PATH + "changelog/logchange-config.yml");
         File expectedChangelogOutputFile = new File(PATH + "EXPECTED_CHANGELOG.md");
 
-        ConfigRepository configRepository = new FileConfigRepository(configFile);
+        ConfigRepository configRepository = FileConfigRepository.of(configFile);
         Config config = configRepository.find();
 
         FileRepository fr = FileRepository.of(changelogOutputFile);

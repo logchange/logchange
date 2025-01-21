@@ -7,29 +7,29 @@
 <!-- !!! ⚠️ DO NOT MODIFY THIS FILE, YOUR CHANGES WILL BE LOST ⚠️ !!! -->
 
 
-[unreleased]
-------------
+[niewydane]
+-----------
 
-### Important notes
+### Ważne
 
 - Update style.css on server during instalation 1
 - configuration 2
 - configuration 3
 - Update style.css on server during instalation
 
-### Fixed (1 change)
+### Dodano (1 zmiana)
 
 - Test title !1 !2 #1 [TASK_NUMBER](https://www.google.pl) (@marwin1991 [LINK](https://github.com/marwin1991))
 
-### Other (1 change)
+### Inne (1 zmiana)
 
 - Test title !1 #1 [TASK_NUMBER](https://www.google.pl) (Piotr)
 
-### Configuration changes
+### Zmiany konfiguracji
 
-| Type: database parameter                                                                                                                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <ul><li>Added `simpleparam.name.enabled` with default value: `true`</li><li>Description: Enables displying feature name</li><li>You can put more information here, any text f.e !1 #1, even [link test](https://google.com)</li></ul> |
-| <ul><li>Added `simpleparam.name.enabled` with default value: `true`</li><li>Description: Enables displying feature name</li></ul>                                                                                                     |
+| Typ: database parameter                                                                                                                                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <ul><li>Dodano `simpleparam.name.enabled` z domyślną wartością: `true`</li><li>Opis: Enables displying feature name</li><li>You can put more information here, any text f.e !1 #1, even [link test](https://google.com)</li></ul> |
+| <ul><li>Dodano `simpleparam.name.enabled` z domyślną wartością: `true`</li><li>Opis: Enables displying feature name</li></ul>                                                                                                     |
 
 

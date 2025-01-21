@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.logchange.core.domain.config.model.Config;
+import dev.logchange.core.domain.config.model.CustomChangelogEntryType;
 import dev.logchange.core.domain.config.model.Heading;
 import dev.logchange.core.domain.config.model.labels.Labels;
 import dev.logchange.core.domain.config.model.templates.Templates;
@@ -70,4 +71,11 @@ public class YMLChangelog {
         }
     }
 
+    public List<CustomChangelogEntryType> toEntryTypes() {
+        if (entryTypes == null || entryTypes.isEmpty()) {
+            return CustomChangelogEntryType.EMPTY;
+        } else {
+            return CustomChangelogEntryType.of(entryTypes);
+        }
+    }
 }

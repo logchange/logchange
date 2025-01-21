@@ -69,7 +69,7 @@ public class YMLChangelogEntry {
     @SneakyThrows
     public static YMLChangelogEntry of(InputStream input, String path) {
         ObjectMapper mapper = ObjectMapperProvider.get();
-        YMLChangelogEntry res = null;
+        YMLChangelogEntry res;
         try {
             res = mapper.readValue(input, YMLChangelogEntry.class);
         } catch (Exception e) {

@@ -1,5 +1,6 @@
 package dev.logchange.core.domain.changelog.model.entry;
 
+import dev.logchange.core.domain.config.model.CustomChangelogEntryType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,7 +21,10 @@ public class ChangelogEntryType {
     public final static String DEFAULT_ENTRY_TYPE_DEPENDENCY_UPDATE = "dependency_update";
     public final static String DEFAULT_ENTRY_TYPE_OTHER = "other";
 
+    @Getter
     private final static List<ChangelogEntryType> defaultEntryTypes = new ArrayList<>();
+
+    private static List<ChangelogEntryType> entryTypes = new ArrayList<>();
 
     static {
         defaultEntryTypes.add(new ChangelogEntryType(DEFAULT_ENTRY_TYPE_ADDED, 1));
@@ -59,7 +63,25 @@ public class ChangelogEntryType {
     }
 
     public static List<ChangelogEntryType> values() {
-        return defaultEntryTypes;
+        if (entryTypes == null || entryTypes.isEmpty()) {
+            return defaultEntryTypes;
+        } else {
+            return entryTypes;
+        }
+    }
+
+    public static void setEntryTypes(List<CustomChangelogEntryType> entryTypes) {
+        if (ChangelogEntryType.entryTypes == null || ChangelogEntryType.entryTypes.isEmpty()) {
+            if (entryTypes != null && !entryTypes.isEmpty()) {
+                if (ChangelogEntryType.entryTypes == null) {
+                    ChangelogEntryType.entryTypes = new ArrayList<>();
+                }
+
+                for (CustomChangelogEntryType type : entryTypes) {
+                    ChangelogEntryType.entryTypes.add(type.to());
+                }
+            }
+        }
     }
 
     @Override
