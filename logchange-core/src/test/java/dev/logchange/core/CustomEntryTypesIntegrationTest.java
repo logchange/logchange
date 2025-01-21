@@ -6,6 +6,7 @@ import dev.logchange.core.application.changelog.service.generate.GenerateChangel
 import dev.logchange.core.application.config.ConfigRepository;
 import dev.logchange.core.domain.changelog.command.GenerateChangelogUseCase;
 import dev.logchange.core.domain.changelog.command.GenerateChangelogUseCase.GenerateChangelogCommand;
+import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType;
 import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogRepository;
 import dev.logchange.core.infrastructure.persistance.changelog.FileVersionSummaryRepository;
@@ -60,5 +61,8 @@ public class CustomEntryTypesIntegrationTest {
         String expectedContent = FileUtils.fileRead(expectedChangelogOutputFile);
         String actualContent = FileUtils.fileRead(changelogOutputFile);
         assertThat(actualContent).isEqualToIgnoringNewLines(expectedContent);
+
+        // cleanup:
+        ChangelogEntryType.clear();
     }
 }

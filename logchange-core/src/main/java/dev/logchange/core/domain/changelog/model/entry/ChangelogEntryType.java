@@ -84,6 +84,10 @@ public class ChangelogEntryType {
         }
     }
 
+    public static void clear(){
+        entryTypes = new ArrayList<>();
+    }
+
     @Override
     public String toString() {
         return order + ". " + getKey().toLowerCase();
