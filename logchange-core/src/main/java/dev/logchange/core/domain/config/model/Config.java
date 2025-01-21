@@ -24,4 +24,5 @@ public class Config {
     private Labels labels;
     private Templates templates;
     private Aggregates aggregates;
+
 }

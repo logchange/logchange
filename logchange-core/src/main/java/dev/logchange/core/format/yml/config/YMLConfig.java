@@ -11,16 +11,12 @@ import dev.logchange.core.domain.config.model.labels.Labels;
 import dev.logchange.core.domain.config.model.templates.Templates;
 import dev.logchange.core.format.yml.ObjectMapperProvider;
 import dev.logchange.core.format.yml.config.aggregate.YMLAggregates;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.SneakyThrows;
-import lombok.extern.java.Log;
+import lombok.*;
 
 import java.io.InputStream;
 import java.io.StringWriter;
 
-@Log
+@CustomLog
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -64,7 +60,7 @@ public class YMLConfig {
 
     @JsonAnySetter
     public void anySetter(String key, Object value) {
-        log.warning("Unknown property: " + key + " with value " + value);
+        log.warn("Unknown property: " + key + " with value " + value);
     }
 
     public Config to() {

@@ -1,10 +1,9 @@
-package dev.logchange.core.format.yml.changelog.entry;
-
+package dev.logchange.core.format.yml.config;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryLink;
+import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType;
 import lombok.*;
 
 @Data
@@ -12,24 +11,24 @@ import lombok.*;
 @CustomLog
 @NoArgsConstructor
 @AllArgsConstructor
-public class YMLChangelogEntryLink {
+public class YMLCustomChangelogEntryType {
 
     @JsonProperty(index = 0)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    public String name;
+    public String key;
 
     @JsonProperty(index = 1)
-    public String url;
+    public Integer order;
 
-    static YMLChangelogEntryLink of(ChangelogEntryLink link) {
-        return YMLChangelogEntryLink.builder()
-                .name(link.getName())
-                .url(link.getUrl())
+    static YMLCustomChangelogEntryType of(ChangelogEntryType entryType) {
+        return YMLCustomChangelogEntryType.builder()
+                .key(entryType.getKey())
+                .order(entryType.getOrder())
                 .build();
     }
 
-    ChangelogEntryLink to() {
-        return ChangelogEntryLink.of(name, url);
+    ChangelogEntryType to() {
+        return ChangelogEntryType.of(key, order);
     }
 
     @JsonAnySetter

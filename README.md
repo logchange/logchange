@@ -191,6 +191,18 @@ Copy following section as default config.
 # More info about configuration you can find https://github.com/logchange/logchange#configuration 
 changelog:
   heading: Some information that will be display in the top of CHANGELOG.md
+#  You can define custom entry types, which overriders default ones
+#  [added/changed/deprecated/removed/fixed/security/dependency_update/other]
+#  Remember to adjust labels below, to match new entry types f.e. add: New features
+#  entryTypes: # you can define custom entry types
+#    - key: add
+#      order: 1
+#    - key: fix
+#      order: 2
+#    - key: change
+#      order: 3
+#    - key: other
+#      order: 4
   labels:
     unreleased: unreleased
     important_notes: Important notes

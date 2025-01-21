@@ -36,6 +36,9 @@ public class ChangelogEntryType {
     private final String key;
     private final Integer order;
 
+    public static ChangelogEntryType of(String key, Integer order) {
+        return new ChangelogEntryType(key, order);
+    }
 
     public static ChangelogEntryType from(String orderNumber) {
         for (ChangelogEntryType type : values()) {
