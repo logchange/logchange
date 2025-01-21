@@ -11,17 +11,26 @@ import java.util.List;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChangelogEntryType {
 
+    public final static String DEFAULT_ENTRY_TYPE_ADDED = "added";
+    public final static String DEFAULT_ENTRY_TYPE_CHANGED = "changed";
+    public final static String DEFAULT_ENTRY_TYPE_DEPRECATED = "deprecated";
+    public final static String DEFAULT_ENTRY_TYPE_REMOVED = "removed";
+    public final static String DEFAULT_ENTRY_TYPE_FIXED = "fixed";
+    public final static String DEFAULT_ENTRY_TYPE_SECURITY = "security";
+    public final static String DEFAULT_ENTRY_TYPE_DEPENDENCY_UPDATE = "dependency_update";
+    public final static String DEFAULT_ENTRY_TYPE_OTHER = "other";
+
     private final static List<ChangelogEntryType> defaultEntryTypes = new ArrayList<>();
 
     static {
-        defaultEntryTypes.add(new ChangelogEntryType("added", 1));
-        defaultEntryTypes.add(new ChangelogEntryType("changed", 2));
-        defaultEntryTypes.add(new ChangelogEntryType("deprecated", 3));
-        defaultEntryTypes.add(new ChangelogEntryType("removed", 4));
-        defaultEntryTypes.add(new ChangelogEntryType("fixed", 5));
-        defaultEntryTypes.add(new ChangelogEntryType("security", 6));
-        defaultEntryTypes.add(new ChangelogEntryType("dependency_update", 7));
-        defaultEntryTypes.add(new ChangelogEntryType("other", 8));
+        defaultEntryTypes.add(new ChangelogEntryType(DEFAULT_ENTRY_TYPE_ADDED, 1));
+        defaultEntryTypes.add(new ChangelogEntryType(DEFAULT_ENTRY_TYPE_CHANGED, 2));
+        defaultEntryTypes.add(new ChangelogEntryType(DEFAULT_ENTRY_TYPE_DEPRECATED, 3));
+        defaultEntryTypes.add(new ChangelogEntryType(DEFAULT_ENTRY_TYPE_REMOVED, 4));
+        defaultEntryTypes.add(new ChangelogEntryType(DEFAULT_ENTRY_TYPE_FIXED, 5));
+        defaultEntryTypes.add(new ChangelogEntryType(DEFAULT_ENTRY_TYPE_SECURITY, 6));
+        defaultEntryTypes.add(new ChangelogEntryType(DEFAULT_ENTRY_TYPE_DEPENDENCY_UPDATE, 7));
+        defaultEntryTypes.add(new ChangelogEntryType(DEFAULT_ENTRY_TYPE_OTHER, 8));
     }
 
     private final String key;

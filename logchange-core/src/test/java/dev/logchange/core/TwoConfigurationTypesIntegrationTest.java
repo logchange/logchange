@@ -20,7 +20,10 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
+import static dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TwoConfigurationTypesIntegrationTest {
@@ -83,20 +86,23 @@ public class TwoConfigurationTypesIntegrationTest {
     }
 
     private static Config prepareCustomConfig() {
+        Map<String, String> entryTypesLabels = new HashMap<>();
+
+        entryTypesLabels.put(DEFAULT_ENTRY_TYPE_ADDED, "A");
+        entryTypesLabels.put(DEFAULT_ENTRY_TYPE_CHANGED, "C");
+        entryTypesLabels.put(DEFAULT_ENTRY_TYPE_DEPRECATED, "D");
+        entryTypesLabels.put(DEFAULT_ENTRY_TYPE_REMOVED, "R");
+        entryTypesLabels.put(DEFAULT_ENTRY_TYPE_FIXED, "F");
+        entryTypesLabels.put(DEFAULT_ENTRY_TYPE_SECURITY, "S");
+        entryTypesLabels.put(DEFAULT_ENTRY_TYPE_DEPENDENCY_UPDATE, "DU");
+        entryTypesLabels.put(DEFAULT_ENTRY_TYPE_OTHER, "O");
+
         TypesLabels typesLabels = TypesLabels.builder()
                 .numberOfChanges(NumberOfChangesLabels.builder()
                         .singular("modification")
                         .plural("modifications")
                         .build())
-//                .
-//                .added("A")
-//                .changed("C")
-//                .deprecated("D")
-//                .removed("R")
-//                .fixed("F")
-//                .security("F")
-//                .dependencyUpdate("DU")
-//                .other("O")
+                .entryTypesLabels(entryTypesLabels)
                 .build();
 
         ConfigurationLabels configurations = ConfigurationLabels.builder()

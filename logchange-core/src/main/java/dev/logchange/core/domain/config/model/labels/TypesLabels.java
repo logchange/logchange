@@ -7,7 +7,10 @@ import lombok.Getter;
 import lombok.extern.java.Log;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.HashMap;
 import java.util.Map;
+
+import static dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType.*;
 
 @Log
 @Builder
@@ -24,9 +27,22 @@ public class TypesLabels {
     public static final String DEFAULT_DEPENDENCY_UPDATE_LABEL = "Dependency updates";
     public static final String DEFAULT_OTHER_LABEL = "Other";
 
+    private static final Map<String, String> defaultLabels = new HashMap<>();
     public static final TypesLabels EMPTY = TypesLabels.builder()
+            .entryTypesLabels(defaultLabels)
             .numberOfChanges(NumberOfChangesLabels.EMPTY)
             .build();
+
+    static {
+        defaultLabels.put(DEFAULT_ENTRY_TYPE_ADDED, DEFAULT_ADDED_LABEL);
+        defaultLabels.put(DEFAULT_ENTRY_TYPE_CHANGED, DEFAULT_CHANGED_LABEL);
+        defaultLabels.put(DEFAULT_ENTRY_TYPE_DEPRECATED, DEFAULT_DEPRECATED_LABEL);
+        defaultLabels.put(DEFAULT_ENTRY_TYPE_REMOVED, DEFAULT_REMOVED_LABEL);
+        defaultLabels.put(DEFAULT_ENTRY_TYPE_FIXED, DEFAULT_FIXED_LABEL);
+        defaultLabels.put(DEFAULT_ENTRY_TYPE_SECURITY, DEFAULT_SECURITY_LABEL);
+        defaultLabels.put(DEFAULT_ENTRY_TYPE_DEPENDENCY_UPDATE, DEFAULT_DEPENDENCY_UPDATE_LABEL);
+        defaultLabels.put(DEFAULT_ENTRY_TYPE_OTHER, DEFAULT_OTHER_LABEL);
+    }
 
     @Getter
     private Map<String, String> entryTypesLabels;
