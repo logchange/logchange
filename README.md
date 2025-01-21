@@ -26,7 +26,8 @@ encounter it when someone merged changes to `CHANGELOG.md` before you.
 🌲 When you create new merge/pull request and in the meantime you will release version, with old-fashioned `CHANGELOG.md`
 you have to remember, to move new changelog's entry up, to the new version section. With this tool you don't have to!
 
-🪓 If your PO is against you to use this tool in your projects, don't worry... just ask him to do `CHANGELOG.md` by himself, and he will be the first one, who will ask you to use this tool. 🔥
+🪓 If your PO is against you to use this tool in your projects, don't worry... just ask him to do `CHANGELOG.md` by
+himself, and he will be the first one, who will ask you to use this tool. 🔥
 
 **🪵 To solve these problems, this project was created. It allows to keep a changelog style and reduce merge request
 conflicts by keeping every change in a separate YAML file and generate `CHANGELOG.md` during release.**
@@ -45,10 +46,13 @@ GitLab. [LINK](https://about.gitlab.com/blog/2018/07/03/solving-gitlabs-changelo
 ## Usage and installation
 
 ### logchange is distributed as:
-- [**CLI** (binary)](https://github.com/logchange/logchange?tab=readme-ov-file#logchange-cli) - you can use it regardless of the technology used in the project. Also available as [logchange docker image][], suited for CI/CD
-- [**Maven Plugin**](https://github.com/logchange/logchange?tab=readme-ov-file#maven-plugin) - dedicated to projects based on the [Maven][] tool
-- [**Gradle Plugin**](https://github.com/logchange/logchange?tab=readme-ov-file#gradle-plugin) - dedicated to projects based on the [Gradle][] tool
 
+- [**CLI** (binary)](https://github.com/logchange/logchange?tab=readme-ov-file#logchange-cli) - you can use it
+  regardless of the technology used in the project. Also available as [logchange docker image][], suited for CI/CD
+- [**Maven Plugin**](https://github.com/logchange/logchange?tab=readme-ov-file#maven-plugin) - dedicated to projects
+  based on the [Maven][] tool
+- [**Gradle Plugin**](https://github.com/logchange/logchange?tab=readme-ov-file#gradle-plugin) - dedicated to projects
+  based on the [Gradle][] tool
 
 ### Maven Plugin
 
@@ -99,16 +103,16 @@ After using `init` command (or just creating `changelog/unreleased` directory) y
 adding new changelog entries by creating YAML files.
 
 **⚠️IMPORTANT:**
-If you’re developing multiple versions simultaneously (whether on the same branch or separate 
-branches that you merge, cherry-pick, etc.), consider creating dedicated `unreleased` directories 
-for each version (e.g., `unreleased-1.3.7`). When you release a new version (say, `1.3.7`), 
-**logchange** will look for `unreleased-1.3.7` first and release it as `v1.3.7`. 
-If this folder doesn’t exist, **logchange** will fall back to looking 
+If you’re developing multiple versions simultaneously (whether on the same branch or separate
+branches that you merge, cherry-pick, etc.), consider creating dedicated `unreleased` directories
+for each version (e.g., `unreleased-1.3.7`). When you release a new version (say, `1.3.7`),
+**logchange** will look for `unreleased-1.3.7` first and release it as `v1.3.7`.
+If this folder doesn’t exist, **logchange** will fall back to looking
 for default `unreleased` directory (ps. `unreleased` can be changed by setting property `unreleasedVersionDir`).
 
-Also, if you have two active main branches (e.g., `1.1.X` and `1.2.X`) but only a single 
-`unreleased` folder, do **not** merge branch `1.1.X` into `1.2.X` before releasing. 
-Otherwise, all YAML files from both versions will wind up in the same directory, resulting in a single, 
+Also, if you have two active main branches (e.g., `1.1.X` and `1.2.X`) but only a single
+`unreleased` folder, do **not** merge branch `1.1.X` into `1.2.X` before releasing.
+Otherwise, all YAML files from both versions will wind up in the same directory, resulting in a single,
 combined release. Use dedicated `unreleased` directories.
 
 ### Adding new change
@@ -144,7 +148,7 @@ issues:
 links: # links to different project's issue or external systems, like jira or redmine
   - name: TASK_NUMBER
     url: https://www.google.pl
-type: fixed # [added/changed/deprecated/removed/fixed/security/dependency_update/other]
+type: fixed # Default: [added/changed/deprecated/removed/fixed/security/dependency_update/other] It can be overridden in logchange-config.yml
 important_notes:
   - Update style.css on server during instalation 1
 configurations: # information about changes in available application configuration
@@ -156,26 +160,26 @@ configurations: # information about changes in available application configurati
     more_info: "You can put more information here, any text f.e !1 #1, even [link test](https://google.com)" #if you want to use # sign, yaml value must be a string inside ""
 ```
 
-|            Keyword             | Description                                                                                         |
-|:------------------------------:|-----------------------------------------------------------------------------------------------------|
-|            `title`             | Description of change that has been made.                                                           |
-|           `authors`            | List of change's authors.                                                                           |
-|        `merge_requests`        | The merge requests' numbers which are adding this change.                                           |
-|            `issues`            | List of issues associated with this change.                                                         |
-|             `type`             | Type of the change.                                                                                 |
-|            `links`             | Any link to other project or external tool witch contains information about this change.            |
-|       `important_notes`        | Important notes, that has to be included in release.                                                |
-|        `configurations`        | Configurations changes important during release.                                                    |
-|     `configurations.type`      | Type of configuration method, f.e via file application.properties or system environment's variables |
-|    `configurations.action`     | Define if configuration method was added (add) / updated (update) / deleted (delete)                |
-|      `configurations.key`      | A key for configuration property                                                                    |
-| `configurations.default_value` | Default value for configuration property                                                            |
-|  `configurations.description`  | Description of configuration property                                                               |
-|   `configurations.more_info`   | Here you can add anything even links (keep markdown format)                                         |
+|            Keyword             | Description                                                                                                                                         |
+|:------------------------------:|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+|            `title`             | Description of change that has been made.                                                                                                           |
+|           `authors`            | List of change's authors.                                                                                                                           |
+|        `merge_requests`        | The merge requests' numbers which are adding this change.                                                                                           |
+|            `issues`            | List of issues associated with this change.                                                                                                         |
+|             `type`             | Type of the change. Default: `added/changed/deprecated/removed/fixed/security/dependency_update/other` It can be overridden in logchange-config.yml |
+|            `links`             | Any link to other project or external tool witch contains information about this change.                                                            |
+|       `important_notes`        | Important notes, that has to be included in release.                                                                                                |
+|        `configurations`        | Configurations changes important during release.                                                                                                    |
+|     `configurations.type`      | Type of configuration method, f.e via file application.properties or system environment's variables                                                 |
+|    `configurations.action`     | Define if configuration method was added (add) / updated (update) / deleted (delete)                                                                |
+|      `configurations.key`      | A key for configuration property                                                                                                                    |
+| `configurations.default_value` | Default value for configuration property                                                                                                            |
+|  `configurations.description`  | Description of configuration property                                                                                                               |
+|   `configurations.more_info`   | Here you can add anything even links (keep markdown format)                                                                                         |
 
 ### Example usage
 
-- [this project](https://github.com/logchange/logchange/blob/main/CHANGELOG.md) 
+- [this project](https://github.com/logchange/logchange/blob/main/CHANGELOG.md)
 - [integration test](https://github.com/logchange/logchange/blob/main/logchange-core/src/test/resources/GenerateChangelogIntegrationTest/EXPECTED_CHANGELOG.md)
 - [hofund project](https://github.com/logchange/hofund/blob/master/CHANGELOG.md)
 
@@ -191,18 +195,18 @@ Copy following section as default config.
 # More info about configuration you can find https://github.com/logchange/logchange#configuration 
 changelog:
   heading: Some information that will be display in the top of CHANGELOG.md
-#  You can define custom entry types, which overriders default ones
-#  [added/changed/deprecated/removed/fixed/security/dependency_update/other]
-#  Remember to adjust labels below, to match new entry types f.e. add: New features
-#  entryTypes: # you can define custom entry types
-#    - key: add
-#      order: 1
-#    - key: fix
-#      order: 2
-#    - key: change
-#      order: 3
-#    - key: other
-#      order: 4
+  #  You can define custom entry types, which overriders default ones
+  #  [added/changed/deprecated/removed/fixed/security/dependency_update/other]
+  #  Remember to adjust labels below, to match new entry types f.e. add: New features
+  #  entryTypes: # you can define custom entry types
+  #    - key: add
+  #      order: 1
+  #    - key: fix
+  #      order: 2
+  #    - key: change
+  #      order: 3
+  #    - key: other
+  #      order: 4
   labels:
     unreleased: unreleased
     important_notes: Important notes
@@ -247,8 +251,11 @@ aggregates:
 
 ### Templates
 
-The `templates` section in the `logchange-config.yml` configuration file allows you to customize the format of entries in the `changelog.md` file. Individual elements of an entry can include:  
-- `${prefix}` => `**Project_name** -` (used only with the `aggregate` command and specifies the project name from which the entry was pulled)  
+The `templates` section in the `logchange-config.yml` configuration file allows you to customize the format of entries
+in the `changelog.md` file. Individual elements of an entry can include:
+
+- `${prefix}` => `**Project_name** -` (used only with the `aggregate` command and specifies the project name from which
+  the entry was pulled)
 - `${title}` => `Description of the change`
 - `${merge_requests}` => `!1000`
 - `${issues}` => `#1234`
@@ -281,15 +288,18 @@ mvn logchange:release
 
 ### Entries validation
 
-The lint command is used to verify the existence of the `changelog` directory and to check that all `.yml` files within are syntactically correct.
-This command is designed for the early detection of potential issues, particularly in a continuous integration environment, 
+The lint command is used to verify the existence of the `changelog` directory and to check that all `.yml` files within
+are syntactically correct.
+This command is designed for the early detection of potential issues, particularly in a continuous integration
+environment,
 allowing developers to address problems before attempting to generate a changelog.
 
 ```shell
 mvn logchange:lint
 ```
 
-### Generating `changes.xml` for [maven-changes-plugin](https://maven.apache.org/plugins/maven-changes-plugin/index.html)
+### Generating
+`changes.xml` for [maven-changes-plugin](https://maven.apache.org/plugins/maven-changes-plugin/index.html)
 
 Along with `CHANGELOG.md` there is also the option of generating Maven's `changes.xml`.
 To enable the option, add the parameter `ChangesXml`. To specify a different name, also add the
@@ -321,23 +331,27 @@ as release notes.
 ### Archives
 
 If your project already contains some `CHANGELOG.md` you don't have to rewrite it to `yml`. Only what have to do is to
-move it to `changelog` directory and rename it to `archive.md` or `archiveXXXX.md` where XXXX is anything you want f.e. `-2.0.0`.
+move it to `changelog` directory and rename it to `archive.md` or `archiveXXXX.md` where XXXX is anything you want f.e.
+`-2.0.0`.
 
-**⚠️⚠️ IMPORTANT ⚠️⚠️** `archive-XXX.md` **has to be** in `changelog` directory (`changelog/archive-1.3.6.md`) do not add any sub directories.
+**⚠️⚠️ IMPORTANT ⚠️⚠️** `archive-XXX.md` **has to be** in `changelog` directory (`changelog/archive-1.3.6.md`) do not
+add any sub directories.
 
 ### Quote or not to quote ?
 
 According to the official YAML specification one should:
 
 - Whenever applicable use the unquoted style since it is the most readable.
-- Use the single-quoted style (') if characters such as " and \ are being used inside the string to avoid escaping them and therefore improve readability.
-- Use the double-quoted style (") when the first two options aren't sufficient, i.e. in scenarios where more complex line breaks are required or non-printable characters are needed.
+- Use the single-quoted style (') if characters such as " and \ are being used inside the string to avoid escaping them
+  and therefore improve readability.
+- Use the double-quoted style (") when the first two options aren't sufficient, i.e. in scenarios where more complex
+  line breaks are required or non-printable characters are needed.
 
 ## Aggregating changelogs of the same version across different projects
 
-The `aggregate` goal allows you to compile changelogs from multiple projects into a single, 
-consolidated changelog for a specified version. 
-This can be particularly useful when working with a set of related projects or microservices, 
+The `aggregate` goal allows you to compile changelogs from multiple projects into a single,
+consolidated changelog for a specified version.
+This can be particularly useful when working with a set of related projects or microservices,
 providing a centralized view of changes across these projects for a single release version.
 
 ### Command
@@ -351,23 +365,31 @@ mvn logchange:aggregate -DaggregateVersion="X.X.X"
 As `aggregateVersion` you can also use `unreleased`.
 
 ### Parameters
-- **aggregateVersion** (required) – The version number to aggregate across all specified projects. This parameter identifies the changelog entries for the specific version you want to compile.
-- **inputDir** (optional) – The directory where the `logchange-config.yml` file is located, defaulting to the `changelog` directory.
+
+- **aggregateVersion** (required) – The version number to aggregate across all specified projects. This parameter
+  identifies the changelog entries for the specific version you want to compile.
+- **inputDir** (optional) – The directory where the `logchange-config.yml` file is located, defaulting to the
+  `changelog` directory.
 - **configFile** (optional) – The name of the configuration file, defaulting to `logchange-config.yml`.
 
 ### Configuration
 
-In the `logchange-config.yml` file, you define the projects to be aggregated in the aggregates section. 
+In the `logchange-config.yml` file, you define the projects to be aggregated in the aggregates section.
 Each project should be configured with its:
-- **name** - used as a prefix for changelog entries from each project, making it easy to identify the origin of each entry in the aggregated changelog
+
+- **name** - used as a prefix for changelog entries from each project, making it easy to identify the origin of each
+  entry in the aggregated changelog
 - **url** - the URL for downloading the project files as a `tar.gz` repository archive
 - **type** - specifies the type of archive to download; currently, only `tar.gz` format is supported.
-- **input_dir** - indicates the `changelog` directory for each project, where changelog entries for that project are stored.
+- **input_dir** - indicates the `changelog` directory for each project, where changelog entries for that project are
+  stored.
 
 ## Logchange CLI
 
-The logchange (CLI) is a standalone tool designed for managing CHANGELOGs, providing flexibility for projects that cannot or do not use Maven. 
-It allows you to create and maintain CHANGELOGs independently of your project’s technology stack while ensuring a consistent format and resolving merge conflicts with ease.
+The logchange (CLI) is a standalone tool designed for managing CHANGELOGs, providing flexibility for projects that
+cannot or do not use Maven.
+It allows you to create and maintain CHANGELOGs independently of your project’s technology stack while ensuring a
+consistent format and resolving merge conflicts with ease.
 
 CLI tool offers all the available features of those of maven plugin:
 
@@ -383,7 +405,6 @@ TODO
 | `--inputDir`             | `changelog`         | Specifies the input directory for the logchange data.                              |
 | `--unreleasedVersionDir` | `unreleased`        | Specifies the directory for unreleased changes where entries are stored.           |
 | `--outputFile`           | `CHANGELOG.md`      | Specifies the name of the output file where the generated changelog will be saved. |
-
 
 ### logchange add
 
@@ -401,7 +422,6 @@ TODO
 | `--link.name`            | N/A           | The name of the link to be included in the change description.                                                                                                                                                                         |
 | `--link.url`             | N/A           | The URL associated with the link, such as a bug report or issue.                                                                                                                                                                       |
 
-
 ### logchange generate
 
 | Option         | Default Value          | Description                                                                        |
@@ -410,7 +430,6 @@ TODO
 | `--outputFile` | `CHANGELOG.md`         | Specifies the name of the output file where the generated CHANGELOG will be saved. |
 | `--configFile` | `logchange-config.yml` | Specifies the name of configuration file.                                          |
 
-
 ### logchange lint
 
 | Option         | Default Value          | Description                                                                        |
@@ -418,7 +437,6 @@ TODO
 | `--inputDir`   | `changelog`            | Specifies the input directory for the logchange data.                              |
 | `--outputFile` | `CHANGELOG.md`         | Specifies the name of the output file where the generated changelog will be saved. |
 | `--configFile` | `logchange-config.yml` | Specifies the name of configuration file.                                          |
-
 
 ### logchange release
 
@@ -431,7 +449,6 @@ TODO
 | `--configFile`           | `logchange-config.yml` | Specifies the name of configuration file.                                          |
 | `--generateChangesXml`   | `false`                | Specifies whether to generate an XML file containing the changes.                  |
 | `--xmlOutputFile`        | `changes.xml`          | Specifies the name of the XML output file.                                         |
-
 
 ### logchange aggregate
 
@@ -446,24 +463,26 @@ TODO
 ### Starting
 
 Add plugin to `build.gradle`:
+
 ```groovy
 plugins {
-	....
-	id 'dev.logchange' version '1.16.6'
+    ....
+    id 'dev.logchange' version '1.16.6'
 }
 ```
 
 You can also configure basic properties in `build.gradle`:
 (these are defaults so you don't have to define anything)
+
 ```groovy
 logchange {
-   rootPath = "."
-   inputDir = "changelog"
-   unreleasedVersionDir = "unreleased"
-   outputFile = "CHANGELOG.md"
-   configFile = "logchange-config.yml"
-   generateChangesXml = false
-   xmlOutputFile = "changes.xml"
+    rootPath = "."
+    inputDir = "changelog"
+    unreleasedVersionDir = "unreleased"
+    outputFile = "CHANGELOG.md"
+    configFile = "logchange-config.yml"
+    generateChangesXml = false
+    xmlOutputFile = "changes.xml"
 }
 ```
 
