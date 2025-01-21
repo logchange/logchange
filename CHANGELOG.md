@@ -7,6 +7,14 @@
 <!-- !!! ⚠️ DO NOT MODIFY THIS FILE, YOUR CHANGES WILL BE LOST ⚠️ !!! -->
 
 
+[1.16.7] - 2025-01-21
+---------------------
+
+### Added (1 change)
+
+- Allowed to define custom entry types in `logchange-config.yml` !421 #399 ([Peter Zmilczak](https://github.com/marwin1991) @marwin1991)
+
+
 [1.16.6] - 2025-01-20
 ---------------------
 
