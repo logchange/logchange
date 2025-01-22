@@ -5,10 +5,17 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.plugins.annotations.ResolutionScope;
 
 import static dev.logchange.commands.Constants.*;
 
-@Mojo(name = LINT_COMMAND, defaultPhase = LifecyclePhase.NONE)
+@Mojo(name = LINT_COMMAND,
+        defaultPhase = LifecyclePhase.NONE,
+        requiresProject = false,
+        threadSafe = true,
+        requiresDependencyResolution = ResolutionScope.NONE,
+        aggregator = true
+)
 public class LintChangelogMojo extends AbstractMojo {
 
     @Parameter(defaultValue = DEFAULT_INPUT_DIR, property = INPUT_DIR_PROPERTY)

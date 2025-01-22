@@ -9,15 +9,21 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.codehaus.plexus.components.interactivity.Prompter;
 
 import javax.inject.Inject;
-
 import java.util.List;
 
 import static dev.logchange.commands.Constants.*;
 
-@Mojo(name = ADD_COMMAND, defaultPhase = LifecyclePhase.NONE)
+@Mojo(name = ADD_COMMAND,
+        defaultPhase = LifecyclePhase.NONE,
+        requiresProject = false,
+        threadSafe = true,
+        requiresDependencyResolution = ResolutionScope.NONE,
+        aggregator = true
+)
 public class AddChangelogEntryMojo extends AbstractMojo {
 
     @Parameter(defaultValue = DEFAULT_INPUT_DIR, property = INPUT_DIR_PROPERTY)

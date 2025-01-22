@@ -70,7 +70,6 @@ You can choose between two options:
             <groupId>dev.logchange</groupId>
             <artifactId>logchange-maven-plugin</artifactId>
             <version>1.16.5</version>
-            <inherited>false</inherited> <!-- For multi module project -->
         </plugin>
     </plugins>
 </build>
@@ -81,12 +80,6 @@ You can choose between two options:
 
 ```shell
 mvn dev.logchange:logchange-maven-plugin:init 
-```
-
-**⚠️⚠️ IMPORTANT ⚠️⚠️** For multi-module projects add `--non-recursive` to all executed commands! f.e.
-
-```shell
-mvn dev.logchange:logchange-maven-plugin:init --non-recursive
 ```
 
 After choosing one of the options, how you prefer run this plugin, you can start using plugin as follows. Use this

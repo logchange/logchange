@@ -1,19 +1,35 @@
 package dev.logchange.maven_plugin.mojo.release;
 
 import dev.logchange.commands.release.ReleaseVersionCommand;
+import lombok.CustomLog;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
 
-import static dev.logchange.commands.Constants.*;
+import java.util.Objects;
 
-@Mojo(name = RELEASE_COMMAND, defaultPhase = LifecyclePhase.NONE)
+import static dev.logchange.commands.Constants.*;
+import static org.apache.maven.project.MavenProject.EMPTY_PROJECT_VERSION;
+
+@CustomLog
+@Mojo(name = RELEASE_COMMAND,
+        defaultPhase = LifecyclePhase.NONE,
+        requiresProject = false,
+        threadSafe = true,
+        requiresDependencyResolution = ResolutionScope.NONE,
+        aggregator = true
+)
 public class ReleaseVersionMojo extends AbstractMojo {
 
-    @Parameter(defaultValue = "${project}", required = true, readonly = true)
+    @Parameter(defaultValue = "${project}", readonly = true)
     private MavenProject project;
+
+    @Parameter(defaultValue = "", property = VERSION_TO_RELEASE_PROPERTY)
+    private String versionToRelease;
 
     @Parameter(defaultValue = DEFAULT_UNRELEASED_VERSION_DIR, property = UNRELEASED_VERSION_DIR_PROPERTY)
     private String unreleasedVersionDir;
@@ -35,7 +51,7 @@ public class ReleaseVersionMojo extends AbstractMojo {
 
     @Override
     public void execute() {
-        String version = ReleaseVersionCommand.getVersion(project.getVersion());
+        String version = ReleaseVersionCommand.getVersion(getVersion());
         getLog().info(RELEASE_COMMAND_START_LOG + version);
         ReleaseVersionCommand.of(
                 DEFAULT_PATH,
@@ -47,5 +63,23 @@ public class ReleaseVersionMojo extends AbstractMojo {
                 isGenerateChangesXml,
                 xmlOutputFile).execute();
         getLog().info(RELEASE_COMMAND_END_LOG);
+    }
+
+    private static final String NO_POM_XML_VERSION = "1";
+
+
+    private String getVersion() {
+        if (StringUtils.isNotBlank(versionToRelease)) {
+            log.info("Version from versionToRelease is: " + versionToRelease);
+            return versionToRelease;
+        }
+
+        if (project != null && !Objects.equals(project.getVersion(), EMPTY_PROJECT_VERSION) && !Objects.equals(project.getVersion(), NO_POM_XML_VERSION)) {
+            String projectVersion = project.getVersion();
+            log.info("Version from project is: " + projectVersion);
+            return project.getVersion();
+        }
+
+        throw new IllegalStateException("No version is defined in the project, it is not a Maven project, and the --versionToRelease option was not used.");
     }
 }
