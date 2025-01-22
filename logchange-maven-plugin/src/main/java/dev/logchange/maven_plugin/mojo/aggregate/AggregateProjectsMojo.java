@@ -6,10 +6,17 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.plugins.annotations.ResolutionScope;
 
 import static dev.logchange.commands.Constants.*;
 
-@Mojo(name = AGGREGATE_COMMAND, defaultPhase = LifecyclePhase.NONE, requiresProject = false)
+@Mojo(name = AGGREGATE_COMMAND,
+        defaultPhase = LifecyclePhase.NONE,
+        requiresProject = false,
+        threadSafe = true,
+        requiresDependencyResolution = ResolutionScope.NONE,
+        aggregator = true
+)
 public class AggregateProjectsMojo extends AbstractMojo {
 
     @Parameter(property = AGGREGATE_VERSION_PROPERTY, required = true)
