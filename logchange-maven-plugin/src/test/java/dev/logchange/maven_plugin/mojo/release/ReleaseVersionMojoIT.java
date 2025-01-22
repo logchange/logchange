@@ -199,31 +199,21 @@ class ReleaseVersionMojoIT {
 
     @MavenGoal("${project.groupId}:${project.artifactId}:${project.version}:release")
     @MavenTest
-    @DisplayName("Project with pom.xml and already released version with task-old.yml after release content of unreleased directory is merged to released version")
+    @DisplayName("Project with pom.xml and already released version with task-old.yml after release should throw exception!")
     void releaseWithAlreadyReleasedVersion(MavenExecutionResult result) {
-        assertThat(result).isSuccessful()
+        assertThat(result).isFailure()
                 .project()
                 .has("changelog")
                 .has("changelog/unreleased")
                 .has("changelog/v1.10.0");
 
 
-        File changelog = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "CHANGELOG.md");
-
-        File gitKeep = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/unreleased/.gitkeep");
-        File unreleasedDateFile = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/unreleased/release-date.txt");
         File originalTask = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/unreleased/task-new.yml");
-
-        File taskMovedToRelease = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.10.0/task-new.yml");
         File taskAlreadyInRelease = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.10.0/task-old.yml");
         File releaseDateFile = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.10.0/release-date.txt");
         File versionSummary = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/v1.10.0/version-summary.md");
 
-        assertThat(changelog).exists();
-        assertThat(gitKeep).exists();
-        assertThat(unreleasedDateFile).doesNotExist();
-        assertThat(originalTask).doesNotExist();
-        assertThat(taskMovedToRelease).exists();
+        assertThat(originalTask).exists();
         assertThat(taskAlreadyInRelease).exists();
         assertThat(releaseDateFile).exists();
         assertThat(versionSummary).exists();
