@@ -37,27 +37,6 @@ public class ReleaseVersionCommand {
     private final boolean isGenerateChangesXml;
     private final String xmlOutputFile;
 
-    public void execute() {
-        log.info("Begin preparation from new changelog release: " + version);
-
-        Path unreleasedDir = findUnreleasedDir();
-        String newDirName = rootPath + "/" + inputDir + "/" + "v" + version;
-
-        LintProjectCommand.of(rootPath, inputDir, outputFile, configFile).validate();
-
-        ReleaseDate.addToDir(unreleasedDir);
-        removeGitKeep(unreleasedDir);
-        renameOrMergeDir(unreleasedDir, newDirName);
-
-        GenerateProjectCommand.of(rootPath, inputDir, outputFile, configFile)
-                .withXml(xmlOutputFile)
-                .execute(isGenerateChangesXml);
-
-        InitProjectCommand.createUnreleased(rootPath, inputDir, unreleasedVersionDir);
-        log.info("New changelog release successful");
-    }
-
-
     public static String getVersion(String version) {
         if (StringUtils.containsIgnoreCase(version, "-SNAPSHOT")) {
             return version.substring(0, StringUtils.indexOfIgnoreCase(version, "-SNAPSHOT"));
@@ -66,16 +45,45 @@ public class ReleaseVersionCommand {
         }
     }
 
-    private void renameOrMergeDir(Path unreleasedDirPath, String newDirName) {
+    public void execute() {
+        log.info("Begin preparation from new changelog release: " + version);
+
+        Path unreleasedDir = findUnreleasedDir();
+        String newDirName = rootPath + "/" + inputDir + "/" + "v" + version;
+
+        LintProjectCommand.of(rootPath, inputDir, outputFile, configFile).validate();
+
+        checkIfAlreadyExists(newDirName);
+
+        ReleaseDate.addToDir(unreleasedDir);
+        removeGitKeep(unreleasedDir);
+        renameOrMoveDir(unreleasedDir, newDirName);
+
+        GenerateProjectCommand.of(rootPath, inputDir, outputFile, configFile).withXml(xmlOutputFile).execute(isGenerateChangesXml);
+
+        InitProjectCommand.createUnreleased(rootPath, inputDir, unreleasedVersionDir);
+        log.info("New changelog release successful");
+    }
+
+    private void checkIfAlreadyExists(String newDirName) {
+        File newDir = new File(newDirName);
+        if (newDir.exists()) {
+            throw new RuntimeException("Target directory " + newDirName + " already exist! Are you trying to release it again? Check if its correct version numer you want to release or remove already existing directory!");
+        }
+    }
+
+    private void renameOrMoveDir(Path unreleasedDirPath, String newDirName) {
         File unreleasedDir = unreleasedDirPath.toFile();
         File newDir = new File(newDirName);
         if (unreleasedDir.renameTo(newDir)) {
             log.info("Renamed " + unreleasedDirPath + " to " + newDirName + " successfully");
         } else {
-            log.info("Rename unsuccessful. Merging contents of " + unreleasedDirPath + " into " + newDirName);
+            log.info("Rename unsuccessful. Moving contents of " + unreleasedDirPath + " into " + newDirName);
 
             if (!newDir.exists()) {
-                throw new RuntimeException("Target directory " + newDirName + " does not exist and renaming failed.");
+                if (newDir.mkdir()) {
+                    throw new RuntimeException("Target directory " + newDirName + " does not exist and cannot be created, renaming failed, so probably logchange lacks of permissions!");
+                }
             }
 
             moveDirectoryContents(unreleasedDir.toPath(), newDir.toPath());
@@ -120,9 +128,7 @@ public class ReleaseVersionCommand {
         }
 
         Path standardUnreleasedDir = Paths.get(rootPath, inputDir, unreleasedVersionDir);
-        log.info("Could not find " + dirWithVersion + " so checking if " + standardUnreleasedDir + " exists " +
-                "(ps. you can check out unreleased directories with specific version to allow simultaneous development " +
-                "of more than one version at same branch)");
+        log.info("Could not find " + dirWithVersion + " so checking if " + standardUnreleasedDir + " exists " + "(ps. you can check out unreleased directories with specific version to allow simultaneous development " + "of more than one version at same branch)");
 
         if (isDir(standardUnreleasedDir)) {
             return standardUnreleasedDir;
