@@ -1,0 +1,8 @@
+# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵 
+# Visit https://github.com/logchange/logchange and leave a star 🌟 
+# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
+title: Upgraded com.marcnuri.plugins:gradle-api-maven-plugin from 0.0.6 to 0.0.7
+authors:
+  - name: marwin1991
+type: dependency_update
+
