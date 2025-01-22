@@ -9,5 +9,5 @@ authors:
 issues:
   - 101
 merge_requests:
-  - 421
+  - 425
 type: fixed # [added/changed/deprecated/removed/fixed/security/dependency_update/other]
