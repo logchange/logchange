@@ -1,0 +1,9 @@
+title: Test title
+authors:
+  - nick: marwin1991
+merge_requests:
+  - 1
+issues:
+  - 1
+type: fixed
+

@@ -1,0 +1,12 @@
+title: Test title
+authors:
+  - name: Piotr
+merge_requests:
+  - 1
+issues:
+  - 1
+links: # links to external systems, like redmine something else
+  - name: TASK_NUMBER
+    url: https://www.google.pl
+type: added
+
