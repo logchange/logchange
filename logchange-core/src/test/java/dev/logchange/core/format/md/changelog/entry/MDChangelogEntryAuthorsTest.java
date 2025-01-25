@@ -1,6 +1,7 @@
 package dev.logchange.core.format.md.changelog.entry;
 
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryAuthor;
+import dev.logchange.core.domain.config.model.Config;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -19,7 +20,7 @@ class MDChangelogEntryAuthorsTest {
         List<ChangelogEntryAuthor> authors = Collections.singletonList(author);
 
         //when:
-        String result = new MDChangelogEntryAuthors(authors).toString();
+        String result = new MDChangelogEntryAuthors(authors, Config.EMPTY).toString();
 
         //then:
         assertEquals("([FirstName LastName](https://google.com) @NickName)", result);
@@ -34,7 +35,7 @@ class MDChangelogEntryAuthorsTest {
 
 
         //when:
-        String result = new MDChangelogEntryAuthors(authors).toString();
+        String result = new MDChangelogEntryAuthors(authors, Config.EMPTY).toString();
 
         //then:
         assertEquals("([FirstName1 LastName](https://google.com) @NickName) ([FirstName2 LastName](https://google.com) @NickName)", result);
@@ -48,8 +49,8 @@ class MDChangelogEntryAuthorsTest {
                 ChangelogEntryAuthor.of("FirstName2 LastName", "NickName", "https://google.com"));
 
         //when:
-        String result1 = new MDChangelogEntryAuthors(authors).toString();
-        String result2 = new MDChangelogEntryAuthors(authors).toMD();
+        String result1 = new MDChangelogEntryAuthors(authors, Config.EMPTY).toString();
+        String result2 = new MDChangelogEntryAuthors(authors, Config.EMPTY).toMD();
 
         //then:
         assertEquals(result2, result1);

@@ -17,9 +17,13 @@ public class YMLTemplates {
     @JsonProperty(index = 0)
     public String entry;
 
+    @JsonProperty(index = 1)
+    public String author;
+
     public static YMLTemplates of(Templates templates) {
         return YMLTemplates.builder()
                 .entry(templates.getEntryFormat())
+                .author(templates.getAuthorFormat())
                 .build();
     }
 
@@ -31,6 +35,7 @@ public class YMLTemplates {
     public Templates to() {
         return Templates.builder()
                 .entryFormat(entry)
+                .authorFormat(author)
                 .build();
     }
 }

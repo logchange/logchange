@@ -29,3 +29,4 @@ changelog:
       description: Description
   templates:
     entry: "${prefix}${title} ${merge_requests} ${issues} ${links} ${authors}"
+    author: "([${name}](${url}) @${nick})"
