@@ -35,19 +35,19 @@ class MDChangelogEntryAuthor extends Configurable implements MD {
     }
 
     private String format(String text) {
-        // This replaces any empty square brackets and empty parentheses with just the content inside the brackets (if any).
+        // 1. Remove empty square brackets with empty parentheses or unnecessary spaces.
         text = text.replaceAll("\\[([^]]*)]\\(\\s*\\)", "$1");
 
-        // Replace empty square brackets with the word "LINK" if there is a URL in parentheses
+        // 2. Replace empty square brackets with the word "LINK" if there is a URL in parentheses.
         text = text.replaceAll("\\[\\s*]\\(([^)]+)\\)", "[LINK]($1)");
 
-        // This removes the "@" when it appears alone just before a closing parenthesis.
+        // 3. Remove the lone "@" before a closing parenthesis.
         text = text.replaceAll("\\s*@\\)", ")");
 
-        // Remove leading and trailing spaces around parentheses
+        // 4. Remove leading and trailing spaces around parentheses (both opening and closing).
         text = text.replaceAll("\\(\\s*", "(").replaceAll("\\s*\\)", ")");
 
-        // This reduces any occurrence of multiple spaces to a single space.
+        // 5. Replace multiple spaces with a single space.
         return text.replaceAll("\\s{2,}", " ").trim();
     }
 }
