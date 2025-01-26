@@ -32,7 +32,7 @@
 
 ### Fixed (1 change)
 
-- **PROJECT_A** - Test title !1 #1 [TASK_NUMBER](https://www.google.pl) (@marwin1991 [LINK](https://github.com/marwin1991))
+- **PROJECT_A** - Test title !1 #1 [TASK_NUMBER](https://www.google.pl) ([LINK](https://github.com/marwin1991) @marwin1991)
 
 ### Configuration changes
 

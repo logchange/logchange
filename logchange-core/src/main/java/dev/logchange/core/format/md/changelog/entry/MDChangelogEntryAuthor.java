@@ -44,6 +44,9 @@ class MDChangelogEntryAuthor extends Configurable implements MD {
         // This removes the "@" when it appears alone just before a closing parenthesis.
         text = text.replaceAll("\\s*@\\)", ")");
 
+        // Remove leading and trailing spaces around parentheses
+        text = text.replaceAll("\\(\\s*", "(").replaceAll("\\s*\\)", ")");
+
         // This reduces any occurrence of multiple spaces to a single space.
         return text.replaceAll("\\s{2,}", " ").trim();
     }
