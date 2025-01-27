@@ -1,24 +1,21 @@
 package dev.logchange.core.format.md.changelog.entry;
 
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryAuthor;
+import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.format.md.MD;
+import dev.logchange.core.format.md.changelog.Configurable;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringSubstitutor;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static dev.logchange.md.MarkdownBasics.link;
-
-class MDChangelogEntryAuthor implements MD {
-
-    private static final String authorFormat = "(${author})";
-    private static final String AT = "@";
-    private static final String LINK = "LINK";
+class MDChangelogEntryAuthor extends Configurable implements MD {
 
     private final ChangelogEntryAuthor author;
 
-    MDChangelogEntryAuthor(ChangelogEntryAuthor author) {
+    MDChangelogEntryAuthor(ChangelogEntryAuthor author, Config config) {
+        super(config);
         this.author = author;
     }
 
@@ -29,36 +26,28 @@ class MDChangelogEntryAuthor implements MD {
 
     private String getAuthor() {
         Map<String, String> valuesMap = new HashMap<>();
-        valuesMap.put("author", (getAuthorName() + " " + getAuthorNick() + " " + getLinkWhenNameEmpty()).trim());
+        String authorFormat = getConfig().getTemplates().getAuthorFormat();
+        valuesMap.put("name", StringUtils.defaultString(author.getName()));
+        valuesMap.put("url", StringUtils.defaultString(author.getUrl()));
+        valuesMap.put("nick", StringUtils.defaultString(author.getNick()));
         StringSubstitutor sub = new StringSubstitutor(valuesMap);
-        return sub.replace(authorFormat);
+        return format(sub.replace(authorFormat).trim());
     }
 
-    private String getAuthorName() {
-        if (StringUtils.isNotBlank(author.getUrl()) && StringUtils.isNotBlank(author.getName())) {
-            return link(author.getName(), author.getUrl());
-        }
+    private String format(String text) {
+        // 1. Remove empty square brackets with empty parentheses or unnecessary spaces.
+        text = text.replaceAll("\\[([^]]*)]\\(\\s*\\)", "$1");
 
-        return StringUtils.defaultString(author.getName());
-    }
+        // 2. Replace empty square brackets with the word "LINK" if there is a URL in parentheses.
+        text = text.replaceAll("\\[\\s*]\\(([^)]+)\\)", "[LINK]($1)");
 
-    private String getAuthorNick() {
-        if (StringUtils.isBlank(author.getNick())) {
-            return StringUtils.EMPTY;
-        }
+        // 3. Remove the lone "@" before a closing parenthesis.
+        text = text.replaceAll("\\s*@\\)", ")");
 
-        return AT + author.getNick();
-    }
+        // 4. Remove leading and trailing spaces around parentheses (both opening and closing).
+        text = text.replaceAll("\\(\\s*", "(").replaceAll("\\s*\\)", ")");
 
-    private String getLinkWhenNameEmpty() {
-        if (StringUtils.isNotBlank(author.getName())) {
-            return StringUtils.EMPTY;
-        }
-
-        if (StringUtils.isNotBlank(author.getUrl())) {
-            return link(LINK, author.getUrl());
-        }
-
-        return StringUtils.EMPTY;
+        // 5. Replace multiple spaces with a single space.
+        return text.replaceAll("\\s{2,}", " ").trim();
     }
 }

@@ -27,7 +27,7 @@ public class MDChangelogEntry extends Configurable implements MD {
         this.mdMergeRequests = new MDChangelogEntryMergeRequests(entry.getMergeRequests());
         this.mdIssues = new MDChangelogEntryIssues(entry.getIssues());
         this.mdLinks = new MDChangelogEntryLinks(entry.getLinks());
-        this.mdAuthors = new MDChangelogEntryAuthors(entry.getAuthors());
+        this.mdAuthors = new MDChangelogEntryAuthors(entry.getAuthors(), config);
     }
 
     @Override
