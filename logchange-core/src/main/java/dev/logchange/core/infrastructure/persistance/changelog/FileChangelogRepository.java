@@ -27,6 +27,8 @@ import java.nio.file.Files;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static dev.logchange.core.Constants.TEMPLATES_DIR_NAME;
+
 @Log
 @RequiredArgsConstructor
 public class FileChangelogRepository implements ChangelogRepository {
@@ -84,7 +86,7 @@ public class FileChangelogRepository implements ChangelogRepository {
     }
 
     private boolean isVersionDirectory(File file) {
-        return file.isDirectory();
+        return file.isDirectory() && !file.getName().equals(TEMPLATES_DIR_NAME);
     }
 
     private boolean isArchive(File file) {
