@@ -227,6 +227,8 @@ changelog:
   templates:
     entry: "${prefix}${title} ${merge_requests} ${issues} ${links} ${authors}"
     author: "([${name}](${url}) @${nick})"
+    version_summary_templates:
+      - path: changelog/.templates/my-version-summary.html
 # this section only makes sense when project is root of aggration for other projects with changelogs 
 # f.e. if we has repostireis: mobile-app(root), mobile-app-android, mobile-app-ios 
 # and in mobile-app we want to generate changelog with entries from also from mobile-app-android, mobile-app-ios
