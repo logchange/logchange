@@ -1,5 +1,6 @@
 package dev.logchange.core.format.release_date;
 
+import dev.logchange.core.domain.changelog.model.version.ReleaseDateTime;
 import lombok.SneakyThrows;
 
 import java.io.File;
@@ -12,13 +13,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
-public class ReleaseDate {
+public class FileReleaseDateTime {
 
     public static final String RELEASE_DATE_FILENAME = "release-date.txt";
 
     public static final String RELEASE_DATE_FORMAT = "yyyy-MM-dd";
 
-    public static OffsetDateTime getFromDir(File versionDirectory) {
+    public static ReleaseDateTime getFromDir(File versionDirectory) {
         File[] files = versionDirectory.listFiles();
 
         if (files == null) {
@@ -26,8 +27,8 @@ public class ReleaseDate {
         }
 
         return Arrays.stream(files)
-                .filter(file -> file.getName().equals(ReleaseDate.RELEASE_DATE_FILENAME))
-                .map(ReleaseDate::getFromFile)
+                .filter(file -> file.getName().equals(FileReleaseDateTime.RELEASE_DATE_FILENAME))
+                .map(e -> ReleaseDateTime.of(getFromFile(e)))
                 .findFirst()
                 .orElse(null);
     }
@@ -45,7 +46,7 @@ public class ReleaseDate {
     private static OffsetDateTime getFromFile(File file) {
         List<String> lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
 
-        if (lines.size() == 0) {
+        if (lines.isEmpty()) {
             return null;
         }
 

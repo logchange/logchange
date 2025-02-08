@@ -7,6 +7,7 @@ import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryTitle;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType;
 import dev.logchange.core.domain.changelog.model.version.ChangelogVersion;
+import dev.logchange.core.domain.changelog.model.version.ReleaseDateTime;
 import dev.logchange.core.domain.changelog.model.version.Version;
 import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.format.md.changelog.MDChangelog;
@@ -85,7 +86,7 @@ class FileRepositoryTest {
 
         ChangelogVersion version = ChangelogVersion.builder()
                 .version(Version.of("1.0.0"))
-                .releaseDateTime(OffsetDateTime.of(2024, 10, 30, 0, 0, 0, 0, UTC))
+                .releaseDateTime(ReleaseDateTime.of(OffsetDateTime.of(2024, 10, 30, 0, 0, 0, 0, UTC)))
                 .entries(entries)
                 .build();
 
