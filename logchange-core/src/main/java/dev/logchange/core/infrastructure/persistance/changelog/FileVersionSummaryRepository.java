@@ -37,7 +37,7 @@ public class FileVersionSummaryRepository implements VersionSummaryRepository {
         List<VersionSummaryTemplate> templates = config.getTemplates().getVersionSummaryTemplates();
         for (VersionSummaryTemplate template : templates) {
             String rendered = new JinjaChangelogVersion(inputDirectory, template, version).render();
-            saveToFile(version, rendered, "version-summary.html"); //TODO name from template
+            saveToFile(version, rendered, template.getOutputFileName());
         }
     }
 

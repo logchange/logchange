@@ -4,12 +4,14 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.logchange.core.domain.config.model.templates.Templates;
+import dev.logchange.core.domain.config.model.templates.VersionSummaryTemplate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.Singular;
 import lombok.extern.java.Log;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,9 +51,17 @@ public class YMLTemplates {
         return Templates.builder()
                 .entryFormat(entry)
                 .authorFormat(author)
-                .versionSummaryTemplates(versionSummaryTemplates.stream()
-                        .map(YMLVersionSummaryTemplate::to)
-                        .collect(Collectors.toList()))
+                .versionSummaryTemplates(getVersionSummaryTemplates())
                 .build();
+    }
+
+    private List<VersionSummaryTemplate> getVersionSummaryTemplates() {
+        if (versionSummaryTemplates == null) {
+            return Collections.emptyList();
+        } else {
+            return versionSummaryTemplates.stream()
+                    .map(YMLVersionSummaryTemplate::to)
+                    .collect(Collectors.toList());
+        }
     }
 }

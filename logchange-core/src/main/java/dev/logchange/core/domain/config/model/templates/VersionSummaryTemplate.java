@@ -4,6 +4,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.io.File;
+
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class VersionSummaryTemplate {
@@ -11,5 +13,9 @@ public class VersionSummaryTemplate {
 
     public static VersionSummaryTemplate of(String path) {
         return new VersionSummaryTemplate(path);
+    }
+
+    public String getOutputFileName() {
+        return new File(path).getName();
     }
 }

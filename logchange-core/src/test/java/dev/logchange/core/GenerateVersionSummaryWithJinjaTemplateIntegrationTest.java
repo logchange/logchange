@@ -43,7 +43,7 @@ public class GenerateVersionSummaryWithJinjaTemplateIntegrationTest {
         File changelogOutputFile = new File(PATH + "CHANGELOG.md");
         String VERSION_DIR = PATH + "changelog/v1.0.0/";
         File configFile = new File(PATH + "changelog/logchange-config.yml");
-        File expectedChangelogOutputFile = new File(VERSION_DIR + "expected-version-summary.md");
+        File expectedOutputFile = new File(VERSION_DIR + "expected-my-version-summary.html");
 
         ConfigRepository configRepository = FileConfigRepository.of(configFile);
         Config config = configRepository.find();
@@ -56,11 +56,11 @@ public class GenerateVersionSummaryWithJinjaTemplateIntegrationTest {
 
         //when:
         generateChangelogUseCase.handle(command);
-        File versionSummaryFile = new File(VERSION_DIR + "version-summary.md");
+        File myVersionSummaryFile = new File(VERSION_DIR + "my-version-summary.html");
 
         //then:
-        String expectedContent = FileUtils.fileRead(expectedChangelogOutputFile);
-        String actualContent = FileUtils.fileRead(versionSummaryFile);
+        String expectedContent = FileUtils.fileRead(expectedOutputFile);
+        String actualContent = FileUtils.fileRead(myVersionSummaryFile);
         assertThat(actualContent).isEqualToIgnoringNewLines(expectedContent);
     }
 }
