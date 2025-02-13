@@ -48,7 +48,7 @@ GitLab. [LINK](https://about.gitlab.com/blog/2018/07/03/solving-gitlabs-changelo
 ### logchange is distributed as:
 
 - [**CLI** (binary)](https://github.com/logchange/logchange?tab=readme-ov-file#logchange-cli) - you can use it
-  regardless of the technology used in the project. Also available as [logchange docker image][], suited for CI/CD
+  regardless of the technology used in the project. Also, available as [logchange homebrew formula][] available on Linux and Mac OS and [logchange docker image][], suited for CI/CD
 - [**Maven Plugin**](https://github.com/logchange/logchange?tab=readme-ov-file#maven-plugin) - dedicated to projects
   based on the [Maven][] tool
 - [**Gradle Plugin**](https://github.com/logchange/logchange?tab=readme-ov-file#gradle-plugin) - dedicated to projects
@@ -510,4 +510,5 @@ logchangeRelease - Creates new changelog release by moving files from <unrelease
 
 [Maven]: https://maven.apache.org/
 [logchange docker image]: https://hub.docker.com/r/logchange/logchange
+[logchange homebrew formula]: https://github.com/logchange/homebrew-tap
 [Gradle]: https://gradle.org/
