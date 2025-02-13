@@ -12,7 +12,7 @@
 
 ### Added (1 change)
 
-- Readded generation of version-summary.md in every version's directory during CHANGELOG.md (@marwin1991 [LINK](https://github.com/marwin1991))
+- Readded generation of version-summary.md in every version's directory during CHANGELOG.md ([LINK](https://github.com/marwin1991) @marwin1991)
 
 ### Fixed (1 change)
 

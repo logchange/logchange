@@ -12,7 +12,7 @@
 
 ### Added (1 change)
 
-- Introduced functionality for generating an aggregated changelog version summary from multiple projects. !335 (@witx98 [LINK](https://github.com/witx98))
+- Introduced functionality for generating an aggregated changelog version summary from multiple projects. !335 ([LINK](https://github.com/witx98) @witx98)
 
 ### Dependency updates (8 changes)
 
