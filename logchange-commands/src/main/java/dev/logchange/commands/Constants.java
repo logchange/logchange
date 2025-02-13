@@ -71,7 +71,7 @@ public class Constants {
     public static final String PATH_OPTION = OPTION_PREFIX + PATH_PROPERTY;
     public static final String PATH_SHORT_PROPERTY = "p";
     public static final String PATH_SHORT_OPTION = OPTION_SHORT_PREFIX + PATH_SHORT_PROPERTY;
-    public static final String PATH_OPTION_DESCRIPTION = "Path to the root directory";
+    public static final String PATH_OPTION_DESCRIPTION = "Path indicating the directory in which the command is to be executed";
 
     public static final String AGGREGATE_VERSION_PROPERTY = "aggregateVersion";
     public static final String AGGREGATE_VERSION_OPTION = OPTION_PREFIX + AGGREGATE_VERSION_PROPERTY;

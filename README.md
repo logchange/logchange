@@ -404,31 +404,33 @@ TODO
 
 | Option                   | Default Value       | Description                                                                        |
 |--------------------------|---------------------|------------------------------------------------------------------------------------|
-| `--path, -p`             | `current directory` | Specifies the root path for the logchange initialization.                          |
+| `--path, -p`             | `current directory` | Path indicating the directory in which the command is to be executed.              |
 | `--inputDir`             | `changelog`         | Specifies the input directory for the logchange data.                              |
 | `--unreleasedVersionDir` | `unreleased`        | Specifies the directory for unreleased changes where entries are stored.           |
 | `--outputFile`           | `CHANGELOG.md`      | Specifies the name of the output file where the generated changelog will be saved. |
 
 ### logchange add
 
-| Option                   | Default Value | Description                                                                                                                                                                                                                            |
-|--------------------------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `--inputDir`             | `changelog`   | Specifies the input directory for the logchange data.                                                                                                                                                                                  |
-| `--unreleasedVersionDir` | `unreleased`  | Specifies the directory where created entries will be stored.                                                                                                                                                                          |
-| `--fileName`             | N/A           | The name of the entry file.                                                                                                                                                                                                            |
-| `--batchMode`            | `false`       | Determines if the command should run in batch mode.                                                                                                                                                                                    |
-| `--empty`                | `false`       | Allows adding an empty entry.                                                                                                                                                                                                          |
-| `--title`                | N/A           | The title of the CHANGELOG entry.                                                                                                                                                                                                      |
-| `--author`               | N/A           | The author of the change, assigned to the CHANGELOG entry. The value should follow the format: `"name; nick; url"`, with fields separated by the `;` character.                                                                        |
-| `--authors`              | N/A           | A list of authors, separated by commas. For each author, the same format as in the `--author` option applies, e.g., `"John Doe; jdoe; https://github.com/logchange/hofund, Richard Roe; rroe; https://github.com/logchange/valhalla"`. |
-| `--type`                 | N/A           | The type of change (e.g., "added", "changed", etc.).                                                                                                                                                                                   |
-| `--link.name`            | N/A           | The name of the link to be included in the change description.                                                                                                                                                                         |
-| `--link.url`             | N/A           | The URL associated with the link, such as a bug report or issue.                                                                                                                                                                       |
+| Option                   | Default Value       | Description                                                                                                                                                                                                                            |
+|--------------------------|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `--path, -p`             | `current directory` | Path indicating the directory in which the command is to be executed.                                                                                                                                                                  |
+| `--inputDir`             | `changelog`         | Specifies the input directory for the logchange data.                                                                                                                                                                                  |
+| `--unreleasedVersionDir` | `unreleased`        | Specifies the directory where created entries will be stored.                                                                                                                                                                          |
+| `--fileName`             | N/A                 | The name of the entry file.                                                                                                                                                                                                            |
+| `--batchMode`            | `false`             | Determines if the command should run in batch mode.                                                                                                                                                                                    |
+| `--empty`                | `false`             | Allows adding an empty entry.                                                                                                                                                                                                          |
+| `--title`                | N/A                 | The title of the CHANGELOG entry.                                                                                                                                                                                                      |
+| `--author`               | N/A                 | The author of the change, assigned to the CHANGELOG entry. The value should follow the format: `"name; nick; url"`, with fields separated by the `;` character.                                                                        |
+| `--authors`              | N/A                 | A list of authors, separated by commas. For each author, the same format as in the `--author` option applies, e.g., `"John Doe; jdoe; https://github.com/logchange/hofund, Richard Roe; rroe; https://github.com/logchange/valhalla"`. |
+| `--type`                 | N/A                 | The type of change (e.g., "added", "changed", etc.).                                                                                                                                                                                   |
+| `--link.name`            | N/A                 | The name of the link to be included in the change description.                                                                                                                                                                         |
+| `--link.url`             | N/A                 | The URL associated with the link, such as a bug report or issue.                                                                                                                                                                       |
 
 ### logchange generate
 
 | Option         | Default Value          | Description                                                                        |
 |----------------|------------------------|------------------------------------------------------------------------------------|
+| `--path, -p`   | `current directory`    | Path indicating the directory in which the command is to be executed.              |
 | `--inputDir`   | `changelog`            | Specifies the input directory for the logchange data.                              |
 | `--outputFile` | `CHANGELOG.md`         | Specifies the name of the output file where the generated CHANGELOG will be saved. |
 | `--configFile` | `logchange-config.yml` | Specifies the name of configuration file.                                          |
@@ -437,6 +439,7 @@ TODO
 
 | Option         | Default Value          | Description                                                                        |
 |----------------|------------------------|------------------------------------------------------------------------------------|
+| `--path, -p`   | `current directory`    | Path indicating the directory in which the command is to be executed.              |
 | `--inputDir`   | `changelog`            | Specifies the input directory for the logchange data.                              |
 | `--outputFile` | `CHANGELOG.md`         | Specifies the name of the output file where the generated changelog will be saved. |
 | `--configFile` | `logchange-config.yml` | Specifies the name of configuration file.                                          |
@@ -445,6 +448,7 @@ TODO
 
 | Option                   | Default Value          | Description                                                                        |
 |--------------------------|------------------------|------------------------------------------------------------------------------------|
+| `--path, -p`             | `current directory`    | Path indicating the directory in which the command is to be executed.              |
 | `--versionToRelease`     | N/A                    | Specifies the name of the version that we want to release (e.g., `2.1.1`).         |
 | `--unreleasedVersionDir` | `unreleased`           | Specifies the directory for unreleased changes where entries are stored.           |
 | `--inputDir`             | `changelog`            | Specifies the input directory for the logchange data.                              |
@@ -455,11 +459,12 @@ TODO
 
 ### logchange aggregate
 
-| Option               | Default Value          | Description                                                       |
-|----------------------|------------------------|-------------------------------------------------------------------|
-| `--aggregateVersion` | N/A                    | Specifies the version that the aggregation will be performed for. |
-| `--inputDir`         | `changelog`            | Specifies the input directory for the logchange data.             |
-| `--configFile`       | `logchange-config.yml` | Specifies the name of configuration file.                         |
+| Option               | Default Value          | Description                                                           |
+|----------------------|------------------------|-----------------------------------------------------------------------|
+| `--path, -p`         | `current directory`    | Path indicating the directory in which the command is to be executed. |
+| `--aggregateVersion` | N/A                    | Specifies the version that the aggregation will be performed for.     |
+| `--inputDir`         | `changelog`            | Specifies the input directory for the logchange data.                 |
+| `--configFile`       | `logchange-config.yml` | Specifies the name of configuration file.                             |
 
 ## Gradle Plugin
 
@@ -470,7 +475,7 @@ Add plugin to `build.gradle`:
 ```groovy
 plugins {
     ....
-    id 'dev.logchange' version '1.16.6'
+    id 'dev.logchange' version '1.16.10'
 }
 ```
 
