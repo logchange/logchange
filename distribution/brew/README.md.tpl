@@ -17,9 +17,10 @@ brew install {{distributionName}}
 
 ## Formulae update
 
-To update your {{distributionName}} formula invoke following command:
+To update your {{distributionName}} formula invoke following commands:
 
 ```sh
+brew update
 brew upgrade {{distributionName}}
 ```
 
