@@ -60,7 +60,7 @@ public class AddChangelogEntryCliCommand extends BaseCommand {
         log.info(ADD_COMMAND_START_LOG);
 
         CliAddEntryPrompter mavenPrompter = CliAddEntryPrompter.of();
-        AddEntryCommand addEntryCommand = AddEntryCommand.of(DEFAULT_PATH, inputDir, unreleasedVersionDir);
+        AddEntryCommand addEntryCommand = AddEntryCommand.of(path(), inputDir, unreleasedVersionDir);
         outputFileName = new OutputFileNameProvider(empty, mavenPrompter, outputFileName).get();
         ChangelogEntry entry = new ChangelogEntryProviderFactory(empty, batchMode, getParams(), mavenPrompter).create().get();
         addEntryCommand.execute(entry, outputFileName);

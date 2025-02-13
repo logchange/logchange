@@ -16,9 +16,6 @@ import static dev.logchange.commands.Constants.*;
         showDefaultValues = true)
 public class InitCliCommand extends BaseCommand {
 
-    @Option(defaultValue = DEFAULT_PATH, names = {PATH_SHORT_OPTION, PATH_OPTION}, description = PATH_OPTION_DESCRIPTION)
-    private String rootPath;
-
     @Option(defaultValue = DEFAULT_INPUT_DIR, names = INPUT_DIR_OPTION, description = INPUT_DIR_OPTION_DESCRIPTION)
     private String inputDir;
 
@@ -30,7 +27,7 @@ public class InitCliCommand extends BaseCommand {
 
     public void runCommand() {
         log.info(INIT_COMMAND_START_LOG);
-        InitProjectCommand.of(rootPath, inputDir, unreleasedVersionDir, outputFile).execute();
+        InitProjectCommand.of(path(), inputDir, unreleasedVersionDir, outputFile).execute();
         log.info(INIT_COMMAND_END_LOG);
     }
 
