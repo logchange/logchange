@@ -82,7 +82,7 @@ public class GenerateChangelogXMLService implements GenerateChangelogUseCase {
             return "unreleased";
         }
 
-        return version.getReleaseDateTime().toLocalDate().toString();
+        return version.getReleaseDateTime().toString();
     }
 
     private static String authorsToString(List<ChangelogEntryAuthor> authors) {
