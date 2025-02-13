@@ -204,24 +204,33 @@ changelog:
     unreleased: unreleased
     important_notes: Important notes
     types:
-      added: Added
-      changed: Changed
-      deprecated: Deprecated
-      removed: Removed
-      fixed: Fixed
-      security: Security
-      dependency_update: Dependency update
-      other: Other
+      entryTypesLabels:
+        security: Security
+        other: Other
+        removed: Removed
+        added: Added
+        deprecated: Deprecated
+        fixed: Fixed
+        dependency_update: Dependency updates
+        changed: Changed
       number_of_changes:
         singular: change
         plural: changes
+      security: Security
+      other: Other
+      removed: Removed
+      added: Added
+      deprecated: Deprecated
+      fixed: Fixed
+      dependency_update: Dependency updates
+      changed: Changed
     configuration:
       heading: Configuration changes
       type: Type
       actions:
         add: Added
-        delete: Deleted
         update: Updated
+        delete: Deleted
       with_default_value: with default value
       description: Description
   templates:

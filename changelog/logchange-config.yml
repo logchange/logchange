@@ -7,17 +7,26 @@ changelog:
     unreleased: unreleased
     important_notes: Important notes
     types:
-      added: Added
-      changed: Changed
-      deprecated: Deprecated
-      removed: Removed
-      fixed: Fixed
-      security: Security
-      dependency_update: Dependency updates
-      other: Security
+      entryTypesLabels:
+        security: Security
+        other: Other
+        removed: Removed
+        added: Added
+        deprecated: Deprecated
+        fixed: Fixed
+        dependency_update: Dependency updates
+        changed: Changed
       number_of_changes:
         singular: change
         plural: changes
+      security: Security
+      other: Other
+      removed: Removed
+      added: Added
+      deprecated: Deprecated
+      fixed: Fixed
+      dependency_update: Dependency updates
+      changed: Changed
     configuration:
       heading: Configuration changes
       type: Type
