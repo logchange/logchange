@@ -12,6 +12,6 @@
 
 ### Added (1 change)
 
-- Enabled the option to re-release already released version. !328 #316 (@witx98 [LINK](https://github.com/witx98))
+- Enabled the option to re-release already released version. !328 #316 ([LINK](https://github.com/witx98) @witx98)
 
 

@@ -16,7 +16,7 @@
 
 ### Fixed (1 change)
 
-- Replaced specific ValueInstantiationException handling with a generic Exception catch to streamline error management during YMLChangelogEntry parsing. !343 (@witx98 [LINK](https://github.com/witx98))
+- Replaced specific ValueInstantiationException handling with a generic Exception catch to streamline error management during YMLChangelogEntry parsing. !343 ([LINK](https://github.com/witx98) @witx98)
 
 ### Dependency updates (7 changes)
 
