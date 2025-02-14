@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,7 +17,7 @@ import java.util.stream.Collectors;
 public class ChangelogVersion implements Comparable<ChangelogVersion> {
 
     private final Version version;
-    private final OffsetDateTime releaseDateTime;
+    private final ReleaseDateTime releaseDateTime;
     private final List<ChangelogEntry> entries;
 
     @Override
