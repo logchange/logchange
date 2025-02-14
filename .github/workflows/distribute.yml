@@ -6,7 +6,7 @@ on:
 
 jobs:
   update-distributions:
-    name: Update distributions
+    name: Update homebrew tap formula
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')
     steps:

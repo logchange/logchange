@@ -27,7 +27,7 @@ public class GenerateChangelogCliCommand extends BaseCommand {
 
     public void runCommand() {
         log.info(GENERATE_COMMAND_START_LOG);
-        GenerateProjectCommand.of(DEFAULT_PATH, inputDir, outputFile, configFile).execute(false);
+        GenerateProjectCommand.of(path(), inputDir, outputFile, configFile).execute(false);
         log.info(GENERATE_COMMAND_END_LOG);
     }
 
