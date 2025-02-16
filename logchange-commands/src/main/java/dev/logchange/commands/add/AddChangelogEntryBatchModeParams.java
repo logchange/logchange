@@ -18,6 +18,10 @@ public class AddChangelogEntryBatchModeParams {
         return new AddChangelogEntryBatchModeParams(title, author, authors, type, linkName, linkUrl);
     }
 
+    public static AddChangelogEntryBatchModeParams empty() {
+        return new AddChangelogEntryBatchModeParams(null, null, null, null, null, null);
+    }
+
     private static void validateAuthors(String author, List<String> authors) {
         if (author != null && authors != null && !authors.isEmpty()) {
             throw new IllegalArgumentException("It is not allowed to simultaneously use of 'author' and 'authors' options!");
