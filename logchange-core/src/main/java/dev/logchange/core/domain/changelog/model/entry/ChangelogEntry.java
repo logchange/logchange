@@ -51,4 +51,9 @@ public class ChangelogEntry {
                 .configurations(prefixedConfigurations)
                 .build();
     }
+
+    @Override
+    public String toString() {
+        return type.getKey() + " - " + title.getValue();
+    }
 }

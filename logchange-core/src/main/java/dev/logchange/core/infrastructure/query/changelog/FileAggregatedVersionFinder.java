@@ -5,7 +5,7 @@ import dev.logchange.core.application.file.query.FileQuery;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.domain.changelog.model.version.ChangelogVersion;
 import dev.logchange.core.domain.changelog.model.version.Version;
-import dev.logchange.core.format.release_date.ReleaseDate;
+import dev.logchange.core.format.release_date.FileReleaseDateTime;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryConfigException;
 import dev.logchange.core.format.yml.config.YMLChangelogException;
@@ -44,7 +44,7 @@ public class FileAggregatedVersionFinder implements AggregatedVersionQuery {
         return ChangelogVersion.builder()
                 .version(version)
                 .entries(getEntries(versionDirectory, projectName))
-                .releaseDateTime(ReleaseDate.getFromDir(versionDirectory))
+                .releaseDateTime(FileReleaseDateTime.getFromDir(versionDirectory))
                 .build();
     }
 
