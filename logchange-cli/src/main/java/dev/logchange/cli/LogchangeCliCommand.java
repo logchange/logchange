@@ -1,6 +1,7 @@
 package dev.logchange.cli;
 
 import dev.logchange.cli.add.AddChangelogEntryCliCommand;
+import dev.logchange.cli.add.AddExampleChangelogEntryCliCommand;
 import dev.logchange.cli.aggregate.AggregateProjectsCliCommand;
 import dev.logchange.cli.generate.GenerateChangelogCliCommand;
 import dev.logchange.cli.init.InitCliCommand;
@@ -25,6 +26,7 @@ import static dev.logchange.commands.Constants.LOGCHANGE_DESCRIPTION;
                 GenerateChangelogCliCommand.class,
                 ReleaseVersionCliCommand.class,
                 AddChangelogEntryCliCommand.class,
+                AddExampleChangelogEntryCliCommand.class,
                 LintCliCommand.class,
                 AggregateProjectsCliCommand.class
         })
