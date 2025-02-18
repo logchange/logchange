@@ -31,6 +31,24 @@ public class AddExampleChangelogEntryMojoIT {
     }
 
 
+    @MavenGoal("${project.groupId}:${project.artifactId}:${project.version}:example")
+    @MavenTest
+    @MavenOption("-DfileName=example-entry.yml")
+    @DisplayName("Example entry with passed file name is generated")
+    void exampleEntryWithPassedFileNameIsGenerated(MavenExecutionResult result) throws IOException {
+        MavenITAssertions.assertThat(result).isSuccessful()
+                .project()
+                .has("changelog")
+                .has("changelog/unreleased");
+
+        File newEntry = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/unreleased/example-entry.yml");
+
+        assertThat(newEntry).exists();
+
+        assertThat(FileUtils.readFileToString(newEntry, StandardCharsets.UTF_8)).contains(expectedExampleEntryContent());
+    }
+
+
     private String expectedExampleEntryContent(){
         return "# This file is used by logchange tool to generate CHANGELOG.md \uD83C\uDF33 \uD83E\uDE93 => \uD83E\uDEB5 \n" +
                 "# Visit https://github.com/logchange/logchange and leave a star \uD83C\uDF1F \n" +

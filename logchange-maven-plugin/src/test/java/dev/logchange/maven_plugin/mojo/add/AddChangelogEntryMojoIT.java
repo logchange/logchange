@@ -1,5 +1,6 @@
 package dev.logchange.maven_plugin.mojo.add;
 
+import com.soebes.itf.extension.assertj.MavenITAssertions;
 import com.soebes.itf.jupiter.extension.*;
 import com.soebes.itf.jupiter.maven.MavenExecutionResult;
 import org.apache.commons.io.FileUtils;
@@ -28,6 +29,10 @@ class AddChangelogEntryMojoIT {
     @MavenTest
     @DisplayName("New entry is add")
     void newEntryIsAdded(MavenExecutionResult result) throws IOException {
+        MavenITAssertions.assertThat(result).isSuccessful()
+                .project()
+                .has("changelog")
+                .has("changelog/unreleased");
 
         File newEntry = new File(result.getMavenProjectResult().getTargetProjectDirectory().toString(), "changelog/unreleased/new-entry-1.yml");
 
