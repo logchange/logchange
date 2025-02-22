@@ -48,7 +48,9 @@ GitLab. [LINK](https://about.gitlab.com/blog/2018/07/03/solving-gitlabs-changelo
 ### logchange is distributed as:
 
 - [**CLI** (binary)](https://github.com/logchange/logchange?tab=readme-ov-file#logchange-cli) - you can use it
-  regardless of the technology used in the project. Also, available as [logchange homebrew formula][] available on Linux and Mac OS and [logchange docker image][], suited for CI/CD
+  regardless of the technology used in the project. Also, available as:
+  - [logchange homebrew formula][] available on Linux and macOS
+  - [logchange docker image][] suited for CI/CD
 - [**Maven Plugin**](https://github.com/logchange/logchange?tab=readme-ov-file#maven-plugin) - dedicated to projects
   based on the [Maven][] tool
 - [**Gradle Plugin**](https://github.com/logchange/logchange?tab=readme-ov-file#gradle-plugin) - dedicated to projects
@@ -117,11 +119,19 @@ presented below, or you can use command to generate this file, this one will gui
 mvn logchange:add
 ```
 
-In other hand, if you would like to just generate an empty file, with some default strings, you can use:
+On the other hand, if you would like to just generate an empty file with some default strings, you can use:
 
 ```shell
 mvn logchange:add -Dempty -DfileName=000001-some-name.yml
 ```
+
+You can also run the following command to generate an example entry with pre-filled properties, 
+which you can then modify as needed (don't forget to change the file name!):
+
+```shell
+mvn logchange:example
+```
+
 
 ### YAML format
 
@@ -426,6 +436,17 @@ TODO
 | `--link.name`            | N/A                 | The name of the link to be included in the change description.                                                                                                                                                                         |
 | `--link.url`             | N/A                 | The URL associated with the link, such as a bug report or issue.                                                                                                                                                                       |
 
+### logchange example
+
+| Option                   | Default Value       | Description                                                           |
+|--------------------------|---------------------|-----------------------------------------------------------------------|
+| `--path, -p`             | `current directory` | Path indicating the directory in which the command is to be executed. |
+| `--inputDir`             | `changelog`         | Specifies the input directory for the logchange data.                 |
+| `--unreleasedVersionDir` | `unreleased`        | Specifies the directory where created entries will be stored.         |
+| `--fileName`             | `00000-entry.yml`   | The name of the entry file.                                           |
+
+
+
 ### logchange generate
 
 | Option         | Default Value          | Description                                                                        |
@@ -500,6 +521,7 @@ logchange {
 Logchange tasks
 ---------------
 logchangeAdd - Creates new YML file with logchange structure in <unreleasedVersionDir> directory
+logchangeExample - Creates new YML file with pre-filled properties in <unreleasedVersionDir> directory
 logchangeAggregate - Aggregates projects changelogs to create one. Useful when we have many projects that make up one product.
 logchangeGenerate - Generates changelog file (<outputFile>) based on .yml entries and archives (does not moves any files)
 logchangeInit - Initialize directory (project) with basic logchange configuration and directory structure
