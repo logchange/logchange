@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Version Summary</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+            }
+            h1, h2 {
+                color: #333;
+            }
+            .version {
+                border-bottom: 1px solid #ccc;
+                padding: 10px 0;
+            }
+            .version h2 {
+                margin: 0;
+            }
+            .version p {
+                margin: 5px 0;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Version Summary</h1>
+        <div class="version">
+            <h2>{{ version.version }} - {{ version.releaseDateTime }}</h2>
+            {% for entry in version.entries %}
+            <p>{{ entry }}</p>
+            {% endfor %}
+        </div>
+    </body>
+</html>
