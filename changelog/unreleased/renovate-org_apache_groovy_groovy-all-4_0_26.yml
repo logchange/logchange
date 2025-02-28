@@ -1,0 +1,8 @@
+# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵 
+# Visit https://github.com/logchange/logchange and leave a star 🌟 
+# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
+title: Upgraded org.apache.groovy:groovy-all from 4.0.25 to 4.0.26
+authors:
+  - name: marwin1991
+type: dependency_update
+
