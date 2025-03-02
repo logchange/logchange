@@ -4,6 +4,7 @@ import dev.logchange.core.application.changelog.repository.AggregatedVersionQuer
 import dev.logchange.core.application.file.query.FileQuery;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.domain.changelog.model.version.ChangelogVersion;
+import dev.logchange.core.domain.changelog.model.version.ChangelogVersionEntriesGroup;
 import dev.logchange.core.domain.changelog.model.version.Version;
 import dev.logchange.core.format.release_date.FileReleaseDateTime;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
@@ -43,12 +44,12 @@ public class FileAggregatedVersionFinder implements AggregatedVersionQuery {
     private ChangelogVersion getChangelogVersion(File versionDirectory, String projectName) {
         return ChangelogVersion.builder()
                 .version(version)
-                .entries(getEntries(versionDirectory, projectName))
                 .releaseDateTime(FileReleaseDateTime.getFromDir(versionDirectory))
+                .entriesGroups(getEntries(versionDirectory, projectName))
                 .build();
     }
 
-    private List<ChangelogEntry> getEntries(File versionDirectory, String projectName) {
+    private List<ChangelogVersionEntriesGroup> getEntries(File versionDirectory, String projectName) {
         List<Exception> exceptions = new ArrayList<>();
 
         List<ChangelogEntry> entries = reader.readYmlFiles(versionDirectory)
@@ -69,6 +70,6 @@ public class FileAggregatedVersionFinder implements AggregatedVersionQuery {
             throw new YMLChangelogException(exceptions);
         }
 
-        return entries;
+        return ChangelogVersionEntriesGroup.ofEntriesKeepingOrder(entries);
     }
 }

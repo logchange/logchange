@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.hubspot.jinjava.Jinjava;
 import dev.logchange.core.application.config.TemplateFile;
 import dev.logchange.core.domain.changelog.model.version.ChangelogVersion;
+import dev.logchange.core.format.jinja.JinJavaProvider;
 import lombok.SneakyThrows;
 
 import java.util.Map;
@@ -20,7 +21,8 @@ public class JinjaChangelogVersion {
 
     @SneakyThrows
     public String render() {
-        Jinjava jinjava = new Jinjava();
+        Jinjava jinjava = JinJavaProvider.get();
+
         Map<String, Object> context = Maps.newHashMap();
         context.put("version", version);
 

@@ -6,6 +6,7 @@ import dev.logchange.core.application.file.query.TarGzQuery;
 import dev.logchange.core.domain.changelog.command.AggregateProjectsVersionUseCase;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.domain.changelog.model.version.ChangelogVersion;
+import dev.logchange.core.domain.changelog.model.version.ChangelogVersionEntriesGroup;
 import dev.logchange.core.domain.changelog.model.version.ReleaseDateTime;
 import dev.logchange.core.domain.changelog.model.version.Version;
 import lombok.RequiredArgsConstructor;
@@ -72,7 +73,7 @@ public class AggregateProjectsVersionService implements AggregateProjectsVersion
         return ChangelogVersion.builder()
                 .version(version)
                 .releaseDateTime(latestReleaseDateTime)
-                .entries(mergedEntries)
+                .entriesGroups(ChangelogVersionEntriesGroup.ofEntriesKeepingOrder(mergedEntries))
                 .build();
     }
 }

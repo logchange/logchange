@@ -1,7 +1,7 @@
 package dev.logchange.core.format.md.changelog.version;
 
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
-import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType;
+import dev.logchange.core.domain.changelog.model.version.ChangelogVersionEntriesGroup;
 import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.domain.config.model.labels.NumberOfChangesLabels;
 import dev.logchange.core.format.md.MD;
@@ -11,19 +11,14 @@ import dev.logchange.md.MarkdownBasics;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 class MDChangelogEntriesGroup extends Configurable implements MD {
 
-    private final ChangelogEntryType type;
-    private final List<ChangelogEntry> entries;
+    private final ChangelogVersionEntriesGroup group;
 
-    MDChangelogEntriesGroup(ChangelogEntryType type, List<ChangelogEntry> entries, Config config) {
+    MDChangelogEntriesGroup(ChangelogVersionEntriesGroup group, Config config) {
         super(config);
-        this.type = type;
-        this.entries = entries.stream()
-                .filter(changelogEntry -> type.equals(changelogEntry.getType()))
-                .collect(Collectors.toList());
+        this.group = group;
     }
 
     @Override
@@ -33,14 +28,14 @@ class MDChangelogEntriesGroup extends Configurable implements MD {
 
 
     private String getEntries() {
-        if (entries == null || entries.isEmpty()) {
+        if (group.isEmpty()) {
             return StringUtils.EMPTY;
         }
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(getTypeHeading()).append("\n").append("\n");
 
-        for (ChangelogEntry entry : entries) {
+        for (ChangelogEntry entry : group.getEntries()) {
             stringBuilder.append(new MDChangelogEntry(entry, getConfig())).append("\n");
         }
 
@@ -48,7 +43,7 @@ class MDChangelogEntriesGroup extends Configurable implements MD {
     }
 
     private String getTypeHeading() {
-        return MarkdownBasics.heading(getConfig().getLabels().getTypes().getType(type) + " " + getChangesNumber(entries), 3);
+        return MarkdownBasics.heading(getConfig().getLabels().getTypes().getType(group.getType()) + " " + getChangesNumber(group.getEntries()), 3);
     }
 
     private String getChangesNumber(List<ChangelogEntry> entriesByType) {

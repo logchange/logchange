@@ -36,6 +36,7 @@ public class CustomEntryTypesIntegrationTest {
     @AfterEach
     void cleanup() {
         new File(PATH + "CHANGELOG.md").delete();
+        ChangelogEntryType.clear();
     }
 
     @Test
@@ -61,8 +62,5 @@ public class CustomEntryTypesIntegrationTest {
         String expectedContent = FileUtils.fileRead(expectedChangelogOutputFile);
         String actualContent = FileUtils.fileRead(changelogOutputFile);
         assertThat(actualContent).isEqualToIgnoringNewLines(expectedContent);
-
-        // cleanup:
-        ChangelogEntryType.clear();
     }
 }

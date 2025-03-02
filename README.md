@@ -246,12 +246,21 @@ changelog:
   templates:
     entry: "${prefix}${title} ${merge_requests} ${issues} ${links} ${authors}"
     author: "([${name}](${url}) @${nick})"
+    # see examples of templates at examples/templates
+    # if you are missing some function, which will simplify your template (f.e getNumberOfEntries()) 
+    # feel free to create issue or pull request with change
     version_summary_templates:
-      - path: changelog/.templates/my-version-summary.html
-# this section only makes sense when project is root of aggration for other projects with changelogs 
-# f.e. if we has repostireis: mobile-app(root), mobile-app-android, mobile-app-ios 
+      # Relative path to the changelog/.templates directory.
+      # Following definition will require from you existence of template at 
+      # changelog/.templates/my-version-summary.html
+      # It will create my-version-summary.html in every version directory 
+      # changelog/vX.X.X/my-version-summary.html
+      - path: my-version-summary.html
+#=======================================================================================================================
+# this section only makes sense when project is root of aggregation for other projects with changelogs 
+# f.e. if we have repositories: mobile-app(root), mobile-app-android, mobile-app-ios 
 # and in mobile-app we want to generate changelog with entries from also from mobile-app-android, mobile-app-ios
-# but mobile-app-android, mobile-app-ios have to have already released versions that we want to aggragate
+# but mobile-app-android, mobile-app-ios have to have already released versions that we want to aggregate
 aggregates:
   projects:
     - name: hofund

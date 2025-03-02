@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,7 +19,7 @@ public class ChangelogVersion implements Comparable<ChangelogVersion> {
 
     private final Version version;
     private final ReleaseDateTime releaseDateTime;
-    private final List<ChangelogEntry> entries;
+    private final List<ChangelogVersionEntriesGroup> entriesGroups;
 
     @Override
     public int compareTo(ChangelogVersion o) {
@@ -26,7 +27,7 @@ public class ChangelogVersion implements Comparable<ChangelogVersion> {
     }
 
     public List<ChangelogEntryImportantNote> getImportantNotes() {
-        return entries.stream()
+        return getEntriesWithOrder().stream()
                 .map(ChangelogEntry::getImportantNotes)
                 .flatMap(List::stream)
                 .sorted()
@@ -34,10 +35,24 @@ public class ChangelogVersion implements Comparable<ChangelogVersion> {
     }
 
     public List<ChangelogEntryConfiguration> getConfigurations() {
-        return entries.stream()
+        return getEntriesWithOrder().stream()
                 .map(ChangelogEntry::getConfigurations)
                 .flatMap(List::stream)
                 .sorted()
                 .collect(Collectors.toList());
     }
-}
+
+    public List<ChangelogEntry> getEntries() {
+        return entriesGroups.stream()
+                .map(ChangelogVersionEntriesGroup::getEntries)
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
+    }
+
+    public List<ChangelogEntry> getEntriesWithOrder() {
+        return entriesGroups.stream()
+                .map(ChangelogVersionEntriesGroup::getEntries)
+                .flatMap(List::stream)
+                .sorted(Comparator.comparingInt(ChangelogEntry::getId))
+                .collect(Collectors.toList());
+    }}
