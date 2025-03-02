@@ -9,6 +9,7 @@ import java.io.File;
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class VersionSummaryTemplate {
+
     private final String path;
 
     public static VersionSummaryTemplate of(String path) {
@@ -17,5 +18,10 @@ public class VersionSummaryTemplate {
 
     public String getOutputFileName() {
         return new File(path).getName();
+    }
+
+    @Override
+    public String toString() {
+        return "version summary template[path=" + path + "]";
     }
 }

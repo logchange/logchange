@@ -1,12 +1,15 @@
 package dev.logchange.core.infrastructure.persistance.changelog;
 
 import dev.logchange.core.application.changelog.repository.VersionSummaryRepository;
+import dev.logchange.core.application.config.TemplateFile;
+import dev.logchange.core.application.config.TemplateRepository;
 import dev.logchange.core.domain.changelog.model.version.ChangelogVersion;
 import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.domain.config.model.templates.VersionSummaryTemplate;
 import dev.logchange.core.format.jinja.changelog.version.JinjaChangelogVersion;
 import dev.logchange.core.format.md.MDMeta;
 import dev.logchange.core.format.md.changelog.version.MDChangelogVersion;
+import dev.logchange.core.infrastructure.persistance.config.FileTemplateRepository;
 import dev.logchange.core.infrastructure.persistance.file.FileRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
@@ -36,7 +39,11 @@ public class FileVersionSummaryRepository implements VersionSummaryRepository {
     private void saveJinja(ChangelogVersion version) {
         List<VersionSummaryTemplate> templates = config.getTemplates().getVersionSummaryTemplates();
         for (VersionSummaryTemplate template : templates) {
-            String rendered = new JinjaChangelogVersion(inputDirectory, template, version).render();
+            log.info("Generating template: " + template);
+            File templatePath = TemplateFile.getTemplatePath(inputDirectory, template.getPath());
+            TemplateRepository templateRepository = new FileTemplateRepository(templatePath);
+            TemplateFile templateFile = templateRepository.find();
+            String rendered = new JinjaChangelogVersion(templateFile, version).render();
             saveToFile(version, rendered, template.getOutputFileName());
         }
     }
@@ -47,5 +54,6 @@ public class FileVersionSummaryRepository implements VersionSummaryRepository {
 
         FileRepository fileRepository = FileRepository.of(outputFile);
         fileRepository.write(content);
+        log.info("Saved version summary to file: " + outputFilePath);
     }
 }
