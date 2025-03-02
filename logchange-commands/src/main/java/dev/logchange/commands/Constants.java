@@ -27,6 +27,7 @@ public class Constants {
     public static final String DEFAULT_UNRELEASED_VERSION_DIR = "unreleased";
     public static final String DEFAULT_CONFIG_FILE = "logchange-config.yml";
     public static final String DEFAULT_XML_OUTPUT_FILE = "changes.xml";
+    public static final String DEFAULT_EXAMPLE_OUTPUT_FILENAME = "00000-entry.yml";
 
     public static final String UNRELEASED_VERSION_DIR_PROPERTY = "unreleasedVersionDir";
     public static final String UNRELEASED_VERSION_DIR_OPTION = OPTION_PREFIX + UNRELEASED_VERSION_DIR_PROPERTY;
@@ -56,6 +57,11 @@ public class Constants {
     public static final String ADD_COMMAND_START_LOG = "Running add command...";
     public static final String ADD_COMMAND_END_LOG = "Changelog entry successfully added";
 
+    public static final String ADD_EXAMPLE_COMMAND = "example";
+    public static final String ADD_EXAMPLE_COMMAND_DESCRIPTION = "Creates new example YML file with logchange structure in <" + UNRELEASED_VERSION_DIR_PROPERTY + "> directory";
+    public static final String ADD_EXAMPLE_COMMAND_START_LOG = "Running add example command...";
+    public static final String ADD_EXAMPLE_COMMAND_END_LOG = "Example changelog entry successfully added";
+
     public static final String RELEASE_COMMAND = "release";
     public static final String RELEASE_COMMAND_DESCRIPTION = "Creates new changelog release by moving files from <" + UNRELEASED_VERSION_DIR_PROPERTY + "> directory to vX.X.X directory";
     public static final String RELEASE_COMMAND_START_LOG = "Running release command for version: ";
@@ -71,7 +77,7 @@ public class Constants {
     public static final String PATH_OPTION = OPTION_PREFIX + PATH_PROPERTY;
     public static final String PATH_SHORT_PROPERTY = "p";
     public static final String PATH_SHORT_OPTION = OPTION_SHORT_PREFIX + PATH_SHORT_PROPERTY;
-    public static final String PATH_OPTION_DESCRIPTION = "Path to the root directory";
+    public static final String PATH_OPTION_DESCRIPTION = "Path indicating the directory in which the command is to be executed";
 
     public static final String AGGREGATE_VERSION_PROPERTY = "aggregateVersion";
     public static final String AGGREGATE_VERSION_OPTION = OPTION_PREFIX + AGGREGATE_VERSION_PROPERTY;

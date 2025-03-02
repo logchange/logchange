@@ -1,0 +1,54 @@
+project:
+  name: logchange
+  description: CLI tool for managing and generating CHANGELOG.md
+  longDescription: |
+    logchange (CLI) - logchange is a tool which helps creating CHANGELOG by keeping one format 
+    and solving merge request conflicts problem by extraction of new CHANGELOG entries to separate files.
+  license: Apache-2.0
+  links:
+    homepage: https://github.com/logchange/logchange
+  inceptionYear: 2021
+  stereotype: CLI
+  vendor: Logchange
+  authors:
+    - Peter Zmilczak
+    - Mateusz Witkowski
+
+release:
+  github:
+    skipTag: true
+    skipRelease: true
+
+distributions:
+  logchange:
+    type: BINARY
+    artifacts:
+      - path: "bins/{{distributionName}}-linuxx64.zip"
+        platform: linux-x86_64
+        extraProperties:
+          matrixName: linuxx64
+          graalVMNativeImage: true
+      - path: "bins/{{distributionName}}-darwinarm64.zip"
+        platform: osx-aarch_64
+        extraProperties:
+          matrixName: darwinarm64
+          graalVMNativeImage: true
+      - path: "bins/{{distributionName}}-darwinx64.zip"
+        platform: osx-x86_64
+        extraProperties:
+          matrixName: darwinx64
+          graalVMNativeImage: true
+
+packagers:
+  brew:
+    active: ALWAYS
+    formulaName: Logchange
+    templateDirectory: distribution/brew
+    multiPlatform: true
+    repository:
+      owner: logchange
+      name: homebrew-tap
+    commitAuthor:
+      name: logchange-bot
+      email: logchange-bot@logchange.dev
+    downloadUrl: "https://github.com/{{projectName}}/{{projectName}}/releases/download/#{version}/{{distributionName}}-{{matrixName}}.zip"

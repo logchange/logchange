@@ -7,6 +7,30 @@
 <!-- !!! ⚠️ DO NOT MODIFY THIS FILE, YOUR CHANGES WILL BE LOST ⚠️ !!! -->
 
 
+[1.16.10] - 2025-02-13
+----------------------
+
+
+[1.16.9] - 2025-02-13
+---------------------
+
+### Added (1 change)
+
+- Created workflow automation of logchange homebrew formula generation !443 #405 ([Mateusz Witkowski](https://github.com/witx98) @witx98)
+
+### Changed (1 change)
+
+- Added standalone CLI build workflow and simplified release process !442 ([Mateusz Witkowski](https://github.com/witx98) @witx98)
+
+### Dependency updates (5 changes)
+
+- Upgraded org.graalvm.buildtools:native-maven-plugin from 0.10.4 to 0.10.5 (marwin1991)
+- Upgraded org.pitest:pitest-maven from 1.17.4 to 1.18.0 (marwin1991)
+- Upgraded org.pitest:pitest-maven from 1.18.0 to 1.18.1 (marwin1991)
+- Upgraded renovatebot/github-action from v41.0.11 to v41.0.12 (marwin1991)
+- Upgraded renovatebot/github-action from v41.0.12 to v41.0.13 (marwin1991)
+
+
 [1.16.8] - 2025-01-27
 ---------------------
 
@@ -189,7 +213,7 @@
 
 ### Fixed (1 change)
 
-- Replaced specific ValueInstantiationException handling with a generic Exception catch to streamline error management during YMLChangelogEntry parsing. !343 (@witx98 [LINK](https://github.com/witx98))
+- Replaced specific ValueInstantiationException handling with a generic Exception catch to streamline error management during YMLChangelogEntry parsing. !343 ([LINK](https://github.com/witx98) @witx98)
 
 ### Dependency updates (7 changes)
 
@@ -207,7 +231,7 @@
 
 ### Added (1 change)
 
-- Introduced functionality for generating an aggregated changelog version summary from multiple projects. !335 (@witx98 [LINK](https://github.com/witx98))
+- Introduced functionality for generating an aggregated changelog version summary from multiple projects. !335 ([LINK](https://github.com/witx98) @witx98)
 
 ### Dependency updates (8 changes)
 
@@ -226,7 +250,7 @@
 
 ### Added (1 change)
 
-- Enabled the option to re-release already released version. !328 #316 (@witx98 [LINK](https://github.com/witx98))
+- Enabled the option to re-release already released version. !328 #316 ([LINK](https://github.com/witx98) @witx98)
 
 
 [1.9.0] - 2024-10-12
@@ -445,7 +469,7 @@
 ### Added (2 changes)
 
 - Added `dependency_update` changelog entry type. ([Peter](https://github.com/marwin1991) @marwin1991)
-- Added support for generating Maven's Changes.xml !126 #103 (@mzaninovic555 [LINK](https://github.com/mzaninovic555))
+- Added support for generating Maven's Changes.xml !126 #103 ([LINK](https://github.com/mzaninovic555) @mzaninovic555)
 
 
 [0.8.0] - 2022-11-12
@@ -506,7 +530,7 @@
 
 ### Added (1 change)
 
-- Readded generation of version-summary.md in every version's directory during CHANGELOG.md (@marwin1991 [LINK](https://github.com/marwin1991))
+- Readded generation of version-summary.md in every version's directory during CHANGELOG.md ([LINK](https://github.com/marwin1991) @marwin1991)
 
 ### Fixed (1 change)
 
@@ -534,7 +558,7 @@
 
 ### Added (1 change)
 
-- Added generation of version-summary.md in every version's directory during CHANGELOG.md (@marwin1991 [LINK](https://github.com/marwin1991))
+- Added generation of version-summary.md in every version's directory during CHANGELOG.md ([LINK](https://github.com/marwin1991) @marwin1991)
 
 
 [0.2.0] - 2021-04-01
@@ -543,7 +567,7 @@
 ### Added (3 changes)
 
 - Added example directory witch contains simple springboot project with `keep-changelog` plugin ([Peter](https://github.com/marwin1991) @marwin1991)
-- Added maven command to initialize project with changelog/unreleased directory and empty CHANGELOG.md !3 (@Glukasze [LINK](https://github.com/Glukasze))
+- Added maven command to initialize project with changelog/unreleased directory and empty CHANGELOG.md !3 ([LINK](https://github.com/Glukasze) @Glukasze)
 - Added maven command to tag unreleased version of CHANGELOG.md ([Peter](https://github.com/marwin1991) @marwin1991)
 
 
