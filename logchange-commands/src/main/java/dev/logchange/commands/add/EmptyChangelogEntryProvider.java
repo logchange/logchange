@@ -42,7 +42,7 @@ class EmptyChangelogEntryProvider implements ChangelogEntryProvider {
     }
 
     private List<ChangelogEntryAuthor> getAuthors() {
-        return Collections.singletonList(ChangelogEntryAuthor.of("Gal Anonim", "GaLaNo", ""));
+        return Collections.singletonList(ChangelogEntryAuthor.of("Gal Anonim", "GaLaNo", "https://github.com/anon"));
     }
 
     private List<ChangelogEntryImportantNote> getNotes() {
