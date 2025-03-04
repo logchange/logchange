@@ -1,7 +1,6 @@
 package dev.logchange.core.format.md.changelog.version;
 
-import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
-import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType;
+import dev.logchange.core.domain.changelog.model.version.ChangelogVersionEntriesGroup;
 import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.format.md.MD;
 import dev.logchange.core.format.md.changelog.Configurable;
@@ -10,11 +9,11 @@ import java.util.List;
 
 class MDChangelogEntriesGroups extends Configurable implements MD {
 
-    private final List<ChangelogEntry> entries;
+    private final List<ChangelogVersionEntriesGroup> entriesGroups;
 
-    public MDChangelogEntriesGroups(List<ChangelogEntry> entries, Config config) {
+    public MDChangelogEntriesGroups(List<ChangelogVersionEntriesGroup> entriesGroups, Config config) {
         super(config);
-        this.entries = entries;
+        this.entriesGroups = entriesGroups;
     }
 
     @Override
@@ -24,8 +23,8 @@ class MDChangelogEntriesGroups extends Configurable implements MD {
 
     private String getEntriesGroups() {
         StringBuilder entriesGroup = new StringBuilder();
-        for (ChangelogEntryType type : ChangelogEntryType.values()) {
-            entriesGroup.append(new MDChangelogEntriesGroup(type, entries, getConfig()));
+        for (ChangelogVersionEntriesGroup group : entriesGroups) {
+            entriesGroup.append(new MDChangelogEntriesGroup(group, getConfig()));
         }
         return entriesGroup.toString();
     }

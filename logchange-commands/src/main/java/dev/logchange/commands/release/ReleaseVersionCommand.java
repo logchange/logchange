@@ -3,7 +3,7 @@ package dev.logchange.commands.release;
 import dev.logchange.commands.generate.GenerateProjectCommand;
 import dev.logchange.commands.init.InitProjectCommand;
 import dev.logchange.commands.lint.LintProjectCommand;
-import dev.logchange.core.format.release_date.ReleaseDate;
+import dev.logchange.core.format.release_date.FileReleaseDateTime;
 import lombok.CustomLog;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -55,7 +55,7 @@ public class ReleaseVersionCommand {
 
         checkIfAlreadyExists(newDirName);
 
-        ReleaseDate.addToDir(unreleasedDir);
+        FileReleaseDateTime.addToDir(unreleasedDir);
         removeGitKeep(unreleasedDir);
         renameOrMoveDir(unreleasedDir, newDirName);
 

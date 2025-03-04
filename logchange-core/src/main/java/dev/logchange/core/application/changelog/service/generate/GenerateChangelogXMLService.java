@@ -63,7 +63,7 @@ public class GenerateChangelogXMLService implements GenerateChangelogUseCase {
             release.setDateRelease(getReleasedDate(version));
 
             List<Action> actions = new ArrayList<>();
-            version.getEntries().forEach(changelogEntry -> {
+            version.getEntriesWithOrder().forEach(changelogEntry -> {
                 Action action = new Action();
                 action.setDev(authorsToString(changelogEntry.getAuthors()));
                 String type = ChangesXMLEntryType.getXmlTypeFromMarkdownEntryType(changelogEntry.getType()).getType();
@@ -82,7 +82,7 @@ public class GenerateChangelogXMLService implements GenerateChangelogUseCase {
             return "unreleased";
         }
 
-        return version.getReleaseDateTime().toLocalDate().toString();
+        return version.getReleaseDateTime().toString();
     }
 
     private static String authorsToString(List<ChangelogEntryAuthor> authors) {
