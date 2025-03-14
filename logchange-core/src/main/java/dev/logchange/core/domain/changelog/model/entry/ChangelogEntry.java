@@ -7,9 +7,12 @@ import java.util.stream.Collectors;
 
 @Getter
 @Builder
-@ToString
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChangelogEntry {
+
+    // used to keep original order of entries
+    @Setter
+    private int id;
 
     private final String prefix;
     private final ChangelogEntryTitle title;
@@ -40,6 +43,7 @@ public class ChangelogEntry {
                 .collect(Collectors.toList());
 
         return ChangelogEntry.builder()
+                .id(id)
                 .prefix(prefix)
                 .title(title)
                 .type(type)
@@ -51,4 +55,10 @@ public class ChangelogEntry {
                 .configurations(prefixedConfigurations)
                 .build();
     }
+
+    @Override
+    public String toString() {
+        return type.getKey() + " - " + title.getValue();
+    }
+
 }
