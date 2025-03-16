@@ -43,6 +43,7 @@ public class FileChangelogRepository implements ChangelogRepository {
         List<ChangelogVersion> versions = new LinkedList<>();
         List<ChangelogArchive> archives = new LinkedList<>();
 
+        log.info("Querying changelog files...");
         this.reader.readFiles(inputDirectory).forEach(file -> {
             if (isVersionDirectory(file)) {
                 versions.add(getChangelogVersion(file));
@@ -108,7 +109,7 @@ public class FileChangelogRepository implements ChangelogRepository {
 
     private ChangelogArchive getChangelogArchive(File file) {
         try {
-            return ChangelogArchive.of(Files.readAllLines(file.toPath(), StandardCharsets.UTF_8));
+            return ChangelogArchive.of(file.getName(), Files.readAllLines(file.toPath(), StandardCharsets.UTF_8));
         } catch (IOException e) {
             log.severe("Error while getting changelog archive from file: " + e.getMessage());
             throw new IllegalStateException(e.getMessage());

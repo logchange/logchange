@@ -21,7 +21,7 @@ public class Constants {
     public static final String OUTPUT_FILE_OPTION = OPTION_PREFIX + OUTPUT_FILE_PROPERTY;
     public static final String OUTPUT_FILE_OPTION_DESCRIPTION = "Name of changelog file, it will be created if it's not present";
 
-
+    public static final String ARCHIVE_FILE = "archive.md";
     public static final String DEFAULT_OUTPUT_FILE = "CHANGELOG.md";
     public static final String DEFAULT_INPUT_DIR = "changelog";
     public static final String DEFAULT_UNRELEASED_VERSION_DIR = "unreleased";
