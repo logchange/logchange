@@ -22,6 +22,14 @@
 - Added generation of version-summary.md in every version's directory during CHANGELOG.md ([LINK](https://github.com/marwin1991) @marwin1991)
 
 
+[0.1.1] - 2021-01-01
+--------------------
+
+### Added (1 change)
+
+- Almost released ([LINK](https://github.com/marwin1991) @marwin1991)
+
+
 [0.1.0] - 2020-07-08
 --------------------
 
