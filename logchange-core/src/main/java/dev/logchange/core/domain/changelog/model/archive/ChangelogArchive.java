@@ -11,7 +11,7 @@ import java.util.List;
 @Log
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class ChangelogArchive {
+public class ChangelogArchive implements Comparable<ChangelogArchive> {
     private final String fileName;
     private final List<String> lines;
 
@@ -22,5 +22,10 @@ public class ChangelogArchive {
         }
 
         return new ChangelogArchive(fileName, Collections.unmodifiableList(archiveLines));
+    }
+
+    @Override
+    public int compareTo(ChangelogArchive o) {
+        return fileName.compareTo(o.fileName);
     }
 }

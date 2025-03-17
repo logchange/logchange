@@ -53,6 +53,7 @@ public class FileChangelogRepository implements ChangelogRepository {
             }
         });
         versions.sort(Collections.reverseOrder());
+        Collections.sort(archives);
         return Changelog.of(versions, archives);
     }
 
