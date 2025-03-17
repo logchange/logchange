@@ -39,7 +39,7 @@ class ArchiveVersionCommandTest {
         assertTrue(expectedArchive.exists());
 
         // when:
-        ArchiveVersionCommand.of(TEST_PATH, INPUT_DIR, "1.0.2", CONFIG_FILE).execute(false);
+        ArchiveVersionCommand.of(TEST_PATH, INPUT_DIR, "1.0.2", CONFIG_FILE).execute();
 
         // then:
         assertTrue(unreleasedDir.exists());
@@ -77,7 +77,7 @@ class ArchiveVersionCommandTest {
         assertTrue(expectedArchive.exists());
 
         // when:
-        ArchiveVersionCommand.of(TEST_PATH, INPUT_DIR, "1.0.2", CONFIG_FILE).execute(false);
+        ArchiveVersionCommand.of(TEST_PATH, INPUT_DIR, "1.0.2", CONFIG_FILE).execute();
 
         // then:
         assertTrue(unreleasedDir.exists());
