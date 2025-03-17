@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.java.Log;
 
+import java.text.Collator;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 @Log
 @Getter
@@ -26,6 +28,6 @@ public class ChangelogArchive implements Comparable<ChangelogArchive> {
 
     @Override
     public int compareTo(ChangelogArchive o) {
-        return fileName.compareTo(o.fileName);
+        return Collator.getInstance(Locale.ENGLISH).compare(this.fileName, o.fileName);
     }
 }
