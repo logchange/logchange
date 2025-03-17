@@ -25,11 +25,10 @@ public class ArchiveIntegrationTest {
 
     private static final String PATH = "src/test/resources/ArchiveIntegrationTest/";
 
-
     @Test
     void shouldReturnListOfArchivedFiles() throws IOException {
         // given:
-        List<String> expectedArchivedFiles = Arrays.asList("CHANGELOG.md", "1.0.1.md", "1.0.2.md");
+        List<String> expectedArchivedFiles = Arrays.asList("archive-1.0.0.md", "archive-0.1.1.md", "archive.md", "v1.0.2", "v1.0.1");
         File archive = new File(PATH + "changelog/archive.md");
         File expectedArchive = new File(PATH + "EXPECTED_ARCHIVE.md");
         File changelogDirectory = new File(PATH + "changelog");
@@ -51,5 +50,4 @@ public class ArchiveIntegrationTest {
         String actualContent = FileUtils.fileRead(archive);
         assertThat(actualContent).isEqualToIgnoringNewLines(expectedContent);
     }
-
 }
