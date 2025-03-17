@@ -89,8 +89,5 @@ class ArchiveVersionCommandTest {
         String expectedContent = FileUtils.fileRead(expectedArchive, "UTF-8");
         String actualContent = FileUtils.fileRead(archiveFile, "UTF-8");
         assertThat(actualContent).isEqualToIgnoringWhitespace(expectedContent);
-
-        // cleanup:
-//        new File(TEST_PATH + "/" + INPUT_DIR + "/" + ARCHIVE_FILE).delete();
     }
 }
