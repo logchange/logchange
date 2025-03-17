@@ -41,7 +41,7 @@ public class ArchiveVersionCommand {
             log.info("There is no config file:  " + configPath + " for this project, using defaults");
             return Config.EMPTY;
         });
-        File archive = createIfNotExists();
+        File archive = createIfNotExists(changelogDirectory);
         FileRepository fr = FileRepository.of(archive);
         ChangelogPersistence changelogPersistence = new FileArchiveRepository(fr, config);
         ChangelogQuery changelogQuery = new FileChangelogRepository(changelogDirectory, config, new FileReader(), fr, fr);
@@ -54,8 +54,8 @@ public class ArchiveVersionCommand {
         log.info("Archiving of version " + version + " successful!");
     }
 
-    private static File createIfNotExists() {
-        File archive = new File(ARCHIVE_FILE);
+    private static File createIfNotExists(File changelogDirectory) {
+        File archive = new File(changelogDirectory.getPath() + "/"  + ARCHIVE_FILE);
         if (!archive.exists()) {
             try {
                 archive.createNewFile();
