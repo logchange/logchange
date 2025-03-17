@@ -21,7 +21,7 @@ public class ArchiveVersionMojo extends AbstractMojo {
     @Parameter(defaultValue = DEFAULT_INPUT_DIR, property = INPUT_DIR_PROPERTY)
     private String inputDir;
 
-    @Parameter(defaultValue = DEFAULT_OUTPUT_FILE, property = OUTPUT_FILE_PROPERTY)
+    @Parameter(required = true, property = VERSION_PROPERTY)
     private String version;
 
     @Parameter(defaultValue = DEFAULT_CONFIG_FILE, property = CONFIG_FILE_PROPERTY)
