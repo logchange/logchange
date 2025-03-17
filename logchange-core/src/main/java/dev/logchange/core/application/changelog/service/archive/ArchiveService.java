@@ -2,7 +2,7 @@ package dev.logchange.core.application.changelog.service.archive;
 
 import dev.logchange.core.application.changelog.repository.ChangelogPersistence;
 import dev.logchange.core.application.changelog.repository.ChangelogQuery;
-import dev.logchange.core.domain.changelog.command.GenerateArchiveUseCase;
+import dev.logchange.core.domain.changelog.command.ArchiveUseCase;
 import dev.logchange.core.domain.changelog.model.Changelog;
 import dev.logchange.core.domain.changelog.model.archive.ChangelogArchive;
 import dev.logchange.core.domain.changelog.model.version.ChangelogVersion;
@@ -13,18 +13,18 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Log
-public class GenerateArchiveService implements GenerateArchiveUseCase {
+public class ArchiveService implements ArchiveUseCase {
 
     private final ChangelogPersistence changelogPersistence;
     private final ChangelogQuery changelogQuery;
 
-    public GenerateArchiveService(ChangelogPersistence changelogPersistence, ChangelogQuery changelogQuery) {
+    public ArchiveService(ChangelogPersistence changelogPersistence, ChangelogQuery changelogQuery) {
         this.changelogPersistence = changelogPersistence;
         this.changelogQuery = changelogQuery;
     }
 
     @Override
-    public List<String> handle(GenerateArchiveUseCase.GenerateArchiveCommand command) {
+    public List<String> handle(ArchiveCommand command) {
         log.info("Fetching changelog...");
         Changelog changelog = changelogQuery.findMarkdown();
 

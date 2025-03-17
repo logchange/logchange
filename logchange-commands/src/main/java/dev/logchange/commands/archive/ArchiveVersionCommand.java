@@ -2,9 +2,10 @@ package dev.logchange.commands.archive;
 
 import dev.logchange.core.application.changelog.repository.ChangelogPersistence;
 import dev.logchange.core.application.changelog.repository.ChangelogQuery;
-import dev.logchange.core.application.changelog.service.archive.GenerateArchiveService;
+import dev.logchange.core.application.changelog.service.archive.ArchiveService;
 import dev.logchange.core.application.config.ConfigFile;
 import dev.logchange.core.application.file.Dir;
+import dev.logchange.core.domain.changelog.command.ArchiveUseCase;
 import dev.logchange.core.domain.changelog.model.version.Version;
 import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.infrastructure.persistance.archive.FileArchiveRepository;
@@ -20,7 +21,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import static dev.logchange.commands.Constants.ARCHIVE_FILE;
-import static dev.logchange.core.domain.changelog.command.GenerateArchiveUseCase.GenerateArchiveCommand;
+import static dev.logchange.core.domain.changelog.command.ArchiveUseCase.ArchiveCommand;
 
 @CustomLog
 @RequiredArgsConstructor(staticName = "of")
@@ -46,8 +47,8 @@ public class ArchiveVersionCommand {
         ChangelogPersistence changelogPersistence = new FileArchiveRepository(fr, config);
         ChangelogQuery changelogQuery = new FileChangelogRepository(changelogDirectory, config, new FileReader(), fr, fr);
 
-        GenerateArchiveService archiveService = new GenerateArchiveService(changelogPersistence, changelogQuery);
-        GenerateArchiveCommand command = GenerateArchiveCommand.of(Version.of(version));
+        ArchiveUseCase archiveService = new ArchiveService(changelogPersistence, changelogQuery);
+        ArchiveCommand command = ArchiveCommand.of(Version.of(version));
 
         List<String> archivedFiles = archiveService.handle(command);
         deleteArchivedFiles(archivedFiles, changelogDirectory);
