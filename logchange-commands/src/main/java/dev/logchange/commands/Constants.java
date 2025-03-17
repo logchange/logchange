@@ -23,7 +23,7 @@ public class Constants {
 
     public static final String VERSION_PROPERTY = "version";
     public static final String VERSION_OPTION = OPTION_PREFIX + VERSION_PROPERTY;
-    public static final String VERSION_OPTION_DESCRIPTION = "Version number to which versions are to be archived";
+    public static final String VERSION_OPTION_DESCRIPTION = "Specifies the version up to which all released versions should be archived (inclusive).";
 
     public static final String ARCHIVE_FILE = "archive.md";
     public static final String DEFAULT_OUTPUT_FILE = "CHANGELOG.md";
@@ -77,7 +77,7 @@ public class Constants {
     public static final String AGGREGATE_COMMAND_END_LOG = "Aggregate successfully";
 
     public static final String ARCHIVE_COMMAND = "archive";
-    public static final String ARCHIVE_COMMAND_DESCRIPTION = "Archives the list of released versions up to (including) indicated version";
+    public static final String ARCHIVE_COMMAND_DESCRIPTION = "Archives the list of released versions up to (and including) the specified version by transferring their summaries to archive.md file, merging all existing archives, and deleting the corresponding version directories.";
     public static final String ARCHIVE_COMMAND_START_LOG = "Running archive command...";
     public static final String ARCHIVE_COMMAND_END_LOG = "Archive successfully";
 
