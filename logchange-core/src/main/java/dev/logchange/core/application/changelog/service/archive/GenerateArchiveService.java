@@ -24,7 +24,7 @@ public class GenerateArchiveService implements GenerateArchiveUseCase {
     }
 
     @Override
-    public List<String> handle(GenerateArchiveUseCase.GenerateArchiveCommand command) { // TODO: use single flag
+    public List<String> handle(GenerateArchiveUseCase.GenerateArchiveCommand command) {
         log.info("Fetching changelog...");
         Changelog changelog = changelogQuery.findMarkdown();
 

@@ -12,21 +12,19 @@ public interface GenerateArchiveUseCase {
     @Getter
     class GenerateArchiveCommand {
         private final Version version;
-        private final boolean single;
 
-        private GenerateArchiveCommand(Version version, boolean single) {
+        private GenerateArchiveCommand(Version version) {
             this.version = version;
-            this.single = single;
         }
 
-        public static GenerateArchiveCommand of(Version version, boolean single) {
+        public static GenerateArchiveCommand of(Version version) {
             if (version == null) {
                 throw new IllegalArgumentException("Version cannot be null!");
             }
             if (version.isUnreleased()) {
                 throw new IllegalArgumentException("Version to be archived cannot be unreleased!");
             }
-            return new GenerateArchiveCommand(version, single);
+            return new GenerateArchiveCommand(version);
         }
     }
 }

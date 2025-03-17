@@ -31,7 +31,7 @@ public class ArchiveVersionCommand {
     private final String version;
     private final String configFile;
 
-    public void execute(boolean single) {
+    public void execute() {
         log.info("Started archiving version " + version);
 
         File changelogDirectory = Dir.find(rootPath + "/" + inputDir);
@@ -47,7 +47,7 @@ public class ArchiveVersionCommand {
         ChangelogQuery changelogQuery = new FileChangelogRepository(changelogDirectory, config, new FileReader(), fr, fr);
 
         GenerateArchiveService archiveService = new GenerateArchiveService(changelogPersistence, changelogQuery);
-        GenerateArchiveCommand command = GenerateArchiveCommand.of(Version.of(version), single);
+        GenerateArchiveCommand command = GenerateArchiveCommand.of(Version.of(version));
 
         List<String> archivedFiles = archiveService.handle(command);
         deleteArchivedFiles(archivedFiles, changelogDirectory);

@@ -27,7 +27,7 @@ public class ArchiveVersionCliCommand extends BaseCommand {
 
     public void runCommand() {
         log.info(ARCHIVE_COMMAND_START_LOG);
-        ArchiveVersionCommand.of(path(), inputDir, version, configFile).execute(false);
+        ArchiveVersionCommand.of(path(), inputDir, version, configFile).execute();
         log.info(ARCHIVE_COMMAND_END_LOG);
     }
 }
