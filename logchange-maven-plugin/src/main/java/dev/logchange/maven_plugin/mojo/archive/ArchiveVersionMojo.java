@@ -30,7 +30,7 @@ public class ArchiveVersionMojo extends AbstractMojo {
     @Override
     public void execute() {
         getLog().info(ARCHIVE_COMMAND_START_LOG);
-        ArchiveVersionCommand.of(DEFAULT_PATH, inputDir, version, configFile).execute(false);
+        ArchiveVersionCommand.of(DEFAULT_PATH, inputDir, version, configFile).execute();
         getLog().info(ARCHIVE_COMMAND_END_LOG);
     }
 }
