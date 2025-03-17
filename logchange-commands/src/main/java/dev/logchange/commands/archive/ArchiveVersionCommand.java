@@ -15,9 +15,9 @@ import lombok.CustomLog;
 import lombok.RequiredArgsConstructor;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static dev.logchange.commands.Constants.ARCHIVE_FILE;
 import static dev.logchange.core.domain.changelog.command.GenerateArchiveUseCase.GenerateArchiveCommand;
@@ -41,8 +41,8 @@ public class ArchiveVersionCommand {
             log.info("There is no config file:  " + configPath + " for this project, using defaults");
             return Config.EMPTY;
         });
-
-        FileRepository fr = FileRepository.of(new File(ARCHIVE_FILE));
+        File archive = createIfNotExists();
+        FileRepository fr = FileRepository.of(archive);
         ChangelogPersistence changelogPersistence = new FileArchiveRepository(fr, config);
         ChangelogQuery changelogQuery = new FileChangelogRepository(changelogDirectory, config, new FileReader(), fr, fr);
 
@@ -54,20 +54,32 @@ public class ArchiveVersionCommand {
         log.info("Archiving of version " + version + " successful!");
     }
 
-    private static void deleteArchivedFiles(List<String> archivedFiles, File changelogDirectory) {
-        log.info("Deleting archived files..");
-        List<String> filesToBeRemoved = archivedFiles.stream()
-                .filter(fn -> !ARCHIVE_FILE.equals(fn))
-                .collect(Collectors.toList());
-
-        for (String fileName : filesToBeRemoved) {
-            File file = Paths.get(changelogDirectory.getPath(), fileName).toFile();
-            if (file.isDirectory()) {
-                Dir.delete(file.toPath());
-            }
-            if (file.isFile()) {
-                file.delete();
+    private static File createIfNotExists() {
+        File archive = new File(ARCHIVE_FILE);
+        if (!archive.exists()) {
+            try {
+                archive.createNewFile();
+            } catch (IOException e) {
+                String msg = String.format("An error occurred while creating empty archive file: %s", e.getMessage());
+                log.error(msg);
+                throw new RuntimeException(msg);
             }
         }
+        return archive;
+    }
+
+    private static void deleteArchivedFiles(List<String> archivedFiles, File changelogDirectory) {
+        log.info("Deleting archived files..");
+        archivedFiles.stream()
+                .filter(fn -> !ARCHIVE_FILE.equals(fn))
+                .forEach(fileName -> {
+                    File file = Paths.get(changelogDirectory.getPath(), fileName).toFile();
+                    if (file.isDirectory()) {
+                        Dir.delete(file.toPath());
+                    }
+                    if (file.isFile()) {
+                        file.delete();
+                    }
+                });
     }
 }
