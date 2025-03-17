@@ -20,7 +20,7 @@ class ArchiveVersionCommandTest {
     @Test
     void onlyUnreleasedDir() throws IOException {
         // given:
-        String TEST_PATH = PATH + "/success";
+        String TEST_PATH = PATH + "/whenArchiveDoseNotExists";
         File versionDir = new File(TEST_PATH + "/" + INPUT_DIR + "/v1.0.1");
         File secondVersionDir = new File(TEST_PATH + "/" + INPUT_DIR + "/v1.0.2");
         File archiveVersionFile = new File(TEST_PATH + "/" + INPUT_DIR + "/archive-1.0.0.md");
@@ -43,7 +43,6 @@ class ArchiveVersionCommandTest {
         assertThat(actualContent).isEqualToIgnoringWhitespace(expectedContent);
 
         // cleanup:
-//        new File(TEST_PATH + "/" + INPUT_DIR + "/" + UNRELEASED + "/" + "version-summary.md").delete();
-//        new File(TEST_PATH + "/" + OUTPUT_FILE).delete();
+        new File(TEST_PATH + "/" + INPUT_DIR + "/" + ARCHIVE_FILE).delete();
     }
 }
