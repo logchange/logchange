@@ -9,10 +9,11 @@ import dev.logchange.core.domain.changelog.model.archive.ChangelogArchive;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType;
 import dev.logchange.core.domain.changelog.model.version.ChangelogVersion;
+import dev.logchange.core.domain.changelog.model.version.ChangelogVersionEntriesGroup;
 import dev.logchange.core.domain.changelog.model.version.Version;
 import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.format.md.changelog.MDChangelog;
-import dev.logchange.core.format.release_date.ReleaseDate;
+import dev.logchange.core.format.release_date.FileReleaseDateTime;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryConfigException;
 import dev.logchange.core.format.yml.config.YMLChangelogException;
@@ -26,6 +27,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static dev.logchange.core.Constants.TEMPLATES_DIR_NAME;
 
 @Log
 @RequiredArgsConstructor
@@ -84,7 +87,7 @@ public class FileChangelogRepository implements ChangelogRepository {
     }
 
     private boolean isVersionDirectory(File file) {
-        return file.isDirectory();
+        return file.isDirectory() && !file.getName().equals(TEMPLATES_DIR_NAME);
     }
 
     private boolean isArchive(File file) {
@@ -101,8 +104,8 @@ public class FileChangelogRepository implements ChangelogRepository {
                 // used to skip "v" from directories names
                 // we can use "(?!\.)(\d+(\.\d+)+)([-.][A-Z]+)?(?![\d.])$" to get version and skipp all letters before version number
                 // but we have to make exception for "unreleased" string as it is not matching this regexp
-                .entries(getEntries(versionDirectory))
-                .releaseDateTime(ReleaseDate.getFromDir(versionDirectory))
+                .entriesGroups(getEntries(versionDirectory))
+                .releaseDateTime(FileReleaseDateTime.getFromDir(versionDirectory))
                 .build();
     }
 
@@ -119,7 +122,7 @@ public class FileChangelogRepository implements ChangelogRepository {
         return Version.of(versionDirectory.getName().replace("v", ""));
     }
 
-    private List<ChangelogEntry> getEntries(File versionDirectory) {
+    private List<ChangelogVersionEntriesGroup> getEntries(File versionDirectory) {
         ChangelogEntryType.setEntryTypes(config.getEntryTypes());
         List<Exception> exceptions = new ArrayList<>();
 
@@ -140,6 +143,6 @@ public class FileChangelogRepository implements ChangelogRepository {
             throw new YMLChangelogException(exceptions);
         }
 
-        return entries;
+        return ChangelogVersionEntriesGroup.ofEntriesKeepingOrder(entries);
     }
 }

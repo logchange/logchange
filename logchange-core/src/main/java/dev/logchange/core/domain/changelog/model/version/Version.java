@@ -60,4 +60,9 @@ public class Version implements Comparable<Version> {
     public boolean isUnreleased() {
         return UNRELEASED.equals(value);
     }
+
+    @Override
+    public String toString() {
+        return value;
+    }
 }

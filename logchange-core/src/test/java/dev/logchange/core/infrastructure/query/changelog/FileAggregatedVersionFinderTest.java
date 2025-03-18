@@ -32,7 +32,7 @@ class FileAggregatedVersionFinderTest {
         assertTrue(result.isPresent());
         ChangelogVersion changelogVersion = result.get();
         assertEquals(version, changelogVersion.getVersion());
-        assertEquals(expectedDateTime, changelogVersion.getReleaseDateTime());
+        assertEquals(expectedDateTime, changelogVersion.getReleaseDateTime().getValue());
         assertEquals(2, changelogVersion.getEntries().size());
     }
 
@@ -65,7 +65,7 @@ class FileAggregatedVersionFinderTest {
         assertTrue(result.isPresent());
         ChangelogVersion changelogVersion = result.get();
         assertEquals(version, changelogVersion.getVersion());
-        assertEquals(expectedDateTime, changelogVersion.getReleaseDateTime());
+        assertEquals(expectedDateTime, changelogVersion.getReleaseDateTime().getValue());
         assertEquals(0, changelogVersion.getEntries().size());
     }
 }

@@ -68,6 +68,12 @@
             <version>${commons-compress.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.hubspot.jinjava</groupId>
+            <artifactId>jinjava</artifactId>
+            <version>${jinjava.version}</version>
+        </dependency>
+
         <!-- TESTS -->
         <dependency>
             <groupId>org.mockito</groupId>

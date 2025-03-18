@@ -1,6 +1,7 @@
 package dev.logchange.core.format.md.changelog.version;
 
 import dev.logchange.core.domain.changelog.model.entry.*;
+import dev.logchange.core.domain.changelog.model.version.ChangelogVersionEntriesGroup;
 import dev.logchange.core.domain.config.model.Config;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -16,9 +17,10 @@ class MDChangelogEntriesGroupTest {
         //given:
         ChangelogEntryType type = ChangelogEntryType.fromNameIgnoreCase("added");
         List<ChangelogEntry> entries = Collections.singletonList(getSomeEntry(type));
+        ChangelogVersionEntriesGroup group = ChangelogVersionEntriesGroup.ofNotFiltered(type, entries);
 
         //when:
-        String result = new MDChangelogEntriesGroup(type, entries, Config.EMPTY).toString();
+        String result = new MDChangelogEntriesGroup(group, Config.EMPTY).toString();
 
         //then:
         Assertions.assertEquals("### Added (1 change)\n" +
@@ -32,9 +34,10 @@ class MDChangelogEntriesGroupTest {
         //given:
         ChangelogEntryType type = ChangelogEntryType.fromNameIgnoreCase("added");
         List<ChangelogEntry> entries = Arrays.asList(getSomeEntry(type), getSomeEntry(type));
+        ChangelogVersionEntriesGroup group = ChangelogVersionEntriesGroup.ofNotFiltered(type, entries);
 
         //when:
-        String result = new MDChangelogEntriesGroup(type, entries, Config.EMPTY).toString();
+        String result = new MDChangelogEntriesGroup(group, Config.EMPTY).toString();
 
         //then:
         Assertions.assertEquals("### Added (2 changes)\n" +
@@ -49,10 +52,12 @@ class MDChangelogEntriesGroupTest {
         //given:
         ChangelogEntryType type = ChangelogEntryType.fromNameIgnoreCase("added");
         List<ChangelogEntry> entries = Arrays.asList(getSomeEntry(type), getSomeEntry(type));
+        ChangelogVersionEntriesGroup group = ChangelogVersionEntriesGroup.ofNotFiltered(type, entries);
+
 
         //when:
-        String result1 = new MDChangelogEntriesGroup(type, entries, Config.EMPTY).toString();
-        String result2 = new MDChangelogEntriesGroup(type, entries, Config.EMPTY).toMD();
+        String result1 = new MDChangelogEntriesGroup(group, Config.EMPTY).toString();
+        String result2 = new MDChangelogEntriesGroup(group, Config.EMPTY).toMD();
 
         //then:
         Assertions.assertEquals(result1, result2);
