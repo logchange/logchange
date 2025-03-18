@@ -12,6 +12,9 @@ public class ReleaseDateTime implements Comparable<ReleaseDateTime> {
     private final OffsetDateTime value;
 
     public static ReleaseDateTime of(OffsetDateTime value) {
+        if (value == null) {
+            throw new IllegalArgumentException("Release date value cannot be null!");
+        }
         return new ReleaseDateTime(value);
     }
 
@@ -22,6 +25,9 @@ public class ReleaseDateTime implements Comparable<ReleaseDateTime> {
 
     @Override
     public int compareTo(ReleaseDateTime o) {
+        if (o == null) {
+            return 1;
+        }
         return value.compareTo(o.value);
     }
 }
