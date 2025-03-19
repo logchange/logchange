@@ -18,6 +18,7 @@ public class Templates {
     private String entryFormat;
     private String authorFormat;
     private List<VersionSummaryTemplate> versionSummaryTemplates;
+    private List<ChangelogTemplate> changelogTemplates;
 
     public String getEntryFormat() {
         return defaultIfBlank(entryFormat, DEFAULT_ENTRY_FORMAT);
@@ -29,5 +30,9 @@ public class Templates {
 
     public List<VersionSummaryTemplate> getVersionSummaryTemplates() {
         return versionSummaryTemplates == null ? Collections.emptyList() : versionSummaryTemplates;
+    }
+
+    public List<ChangelogTemplate> getChangelogTemplates() {
+        return changelogTemplates == null ? Collections.emptyList() : changelogTemplates;
     }
 }
