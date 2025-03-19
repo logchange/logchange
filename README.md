@@ -498,6 +498,16 @@ TODO
 | `--inputDir`         | `changelog`            | Specifies the input directory for the logchange data.                 |
 | `--configFile`       | `logchange-config.yml` | Specifies the name of configuration file.                             |
 
+### logchange archive
+
+| Option         | Default Value          | Description                                                                             |
+|----------------|------------------------|-----------------------------------------------------------------------------------------|
+| `--path, -p`   | `current directory`    | Path indicating the directory in which the command is to be executed.                   |
+| `--version`    | N/A                    | Specifies the version up to which all released versions should be archived (inclusive). |
+| `--inputDir`   | `changelog`            | Specifies the input directory for the logchange data.                                   |
+| `--configFile` | `logchange-config.yml` | Specifies the name of configuration file.                                               |
+
+
 ## Gradle Plugin
 
 ### Starting
@@ -533,6 +543,7 @@ Logchange tasks
 ---------------
 logchangeAdd - Creates new YML file with logchange structure in <unreleasedVersionDir> directory
 logchangeExample - Creates new YML file with pre-filled properties in <unreleasedVersionDir> directory
+logchangeArchive - Archives the list of released versions up to (and including) the specified version by transferring their summaries to archive.md file, merging all existing archives, and deleting the corresponding version directories.
 logchangeAggregate - Aggregates projects changelogs to create one. Useful when we have many projects that make up one product.
 logchangeGenerate - Generates changelog file (<outputFile>) based on .yml entries and archives (does not moves any files)
 logchangeInit - Initialize directory (project) with basic logchange configuration and directory structure

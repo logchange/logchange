@@ -2,6 +2,7 @@ package dev.logchange.gradle_plugin;
 
 import dev.logchange.gradle_plugin.add.AddChangelogEntryTask;
 import dev.logchange.gradle_plugin.add.AddExampleChangelogEntryTask;
+import dev.logchange.gradle_plugin.archive.ArchiveVersionTask;
 import dev.logchange.gradle_plugin.generate.GenerateChangelogTask;
 import dev.logchange.gradle_plugin.init.InitTask;
 import dev.logchange.gradle_plugin.lint.LintChangelogTask;
@@ -32,6 +33,12 @@ public class LogchangeGradlePlugin implements Plugin<Project> {
         project.getTasks().register(getTaskName(ADD_EXAMPLE_COMMAND), AddExampleChangelogEntryTask.class, task -> {
             task.setExtension(extension);
             task.setDescription(ADD_EXAMPLE_COMMAND_DESCRIPTION);
+            task.setGroup(TASK_GROUP);
+        });
+
+        project.getTasks().register(getTaskName(ARCHIVE_COMMAND), ArchiveVersionTask.class, task -> {
+            task.setExtension(extension);
+            task.setDescription(ARCHIVE_COMMAND_DESCRIPTION);
             task.setGroup(TASK_GROUP);
         });
 
