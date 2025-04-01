@@ -1,0 +1,8 @@
+# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵 
+# Visit https://github.com/logchange/logchange and leave a star 🌟 
+# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
+title: Upgraded org.projectlombok:lombok from 1.18.36 to 1.18.38
+authors:
+  - name: marwin1991
+type: dependency_update
+
