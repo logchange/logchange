@@ -66,12 +66,16 @@ public class YMLChangelogEntry {
     @JsonIgnore
     private Set<Pair<String, String>> invalidProperties = new HashSet<>();
 
+    @JsonIgnore
+    private String path;
+
     @SneakyThrows
     public static YMLChangelogEntry of(InputStream input, String path) {
         ObjectMapper mapper = ObjectMapperProvider.get();
         YMLChangelogEntry res;
         try {
             res = mapper.readValue(input, YMLChangelogEntry.class);
+            res.setPath(path);
         } catch (Exception e) {
             String msg = (e.getCause() != null) ? e.getCause().getMessage() : e.getMessage();
             throw new YMLChangelogInvalidConfigValuesException(path, Collections.singleton(msg));
@@ -109,9 +113,15 @@ public class YMLChangelogEntry {
     }
 
     public ChangelogEntry to() {
+        ChangelogEntryTitle changelogEntryTitle = title();
+        ChangelogEntryType changelogEntryType = type();
+        if (!invalidProperties.isEmpty()) {
+            List<String> errors = invalidProperties.stream().map(Pair::getRight).collect(Collectors.toList());
+            throw new YMLChangelogInvalidConfigValuesException(path, errors);
+        }
         return ChangelogEntry.builder()
-                .title(ChangelogEntryTitle.of(title))
-                .type(type.to())
+                .title(changelogEntryTitle)
+                .type(changelogEntryType)
                 .mergeRequests(mergeRequests())
                 .issues(issues())
                 .links(links())
@@ -119,6 +129,28 @@ public class YMLChangelogEntry {
                 .importantNotes(importantNotes())
                 .configurations(changelogEntryConfiguration())
                 .build();
+    }
+
+    private ChangelogEntryTitle title() {
+        try {
+            return ChangelogEntryTitle.of(title);
+        } catch (IllegalArgumentException e) {
+            invalidProperties.add(Pair.of("title", e.getMessage()));
+            return null;
+        }
+    }
+
+    private ChangelogEntryType type() {
+        if (type == null) {
+            invalidProperties.add(Pair.of("type", "Missing type property!"));
+            return null;
+        }
+        try {
+            return type.to();
+        } catch (IllegalArgumentException e) {
+            invalidProperties.add(Pair.of("type", e.getMessage()));
+            return null;
+        }
     }
 
     private List<ChangelogEntryMergeRequest> mergeRequests() {
