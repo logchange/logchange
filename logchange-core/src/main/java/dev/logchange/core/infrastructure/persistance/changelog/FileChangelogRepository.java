@@ -16,6 +16,7 @@ import dev.logchange.core.format.md.changelog.MDChangelog;
 import dev.logchange.core.format.release_date.FileReleaseDateTime;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryConfigException;
+import dev.logchange.core.format.yml.changelog.entry.YMLChangelogInvalidConfigValuesException;
 import dev.logchange.core.format.yml.config.YMLChangelogException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
@@ -138,7 +139,14 @@ public class FileChangelogRepository implements ChangelogRepository {
                     }
                 })
                 .filter(Objects::nonNull)
-                .map(YMLChangelogEntry::to)
+                .map(ymlChangelogEntry ->  {
+                    try {
+                        return ymlChangelogEntry.to();
+                    } catch (YMLChangelogInvalidConfigValuesException e) {
+                        exceptions.add(e);
+                        return null;
+                    }
+                })
                 .collect(Collectors.toList());
 
         if (!exceptions.isEmpty()) {

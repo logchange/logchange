@@ -1,0 +1,16 @@
+# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵 
+# Visit https://github.com/logchange/logchange and leave a star 🌟 
+# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
+title: "Fixed validating entries with missing title or type"
+authors:
+  - name: Mateusz Witkowski
+    nick: witx98
+    url: https://github.com/witx98
+merge_requests:
+  - 476
+issues:
+  - 473
+links:
+  - name: issue#473
+    url: https://github.com/logchange/logchange/issues/473
+

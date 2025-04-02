@@ -1,0 +1,24 @@
+# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵
+# Visit https://github.com/logchange/logchange and leave a star 🌟
+# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
+authors:
+  - name: NAME
+    nick: NICK
+    url: URL
+merge_requests:
+  - 1000
+issues:
+  - 100
+links:
+  - name: name
+    url: url
+important_notes:
+  - important note
+configurations:
+  - type: type
+    action: add
+    key: key
+    default_value: defaultValue
+    description: description
+    more_info: moreInfo
+

@@ -93,4 +93,29 @@ class LintProjectCommandTest {
         // then:
         assertThat(exception.getMessage()).isEqualToIgnoringWhitespace(expectedOutput);
     }
+
+    @Test
+    void shouldThrowExceptionWithMissingTitleAndTypeInYmlEntry() {
+        // given:
+        String expectedOutput = "Errors found:\n" +
+                "Errors in src/test/resources/LintProjectCommandTest/invalidMissingTitleAndType/changelog/unreleased/invalid-entry.yml:\n" +
+                "\tMissing type property!\n" +
+                "\tTitle cannot be blank!\n" +
+                "\n";
+        String INVALID_PATH = PATH + "invalidMissingTitleAndType";
+        File changelogDir = new File(INVALID_PATH + "/" + INPUT_DIR);
+        File unreleasedDir = new File(INVALID_PATH + "/" + INPUT_DIR + "/" + UNRELEASED);
+        File entry = new File(INVALID_PATH + "/" + INPUT_DIR + "/" + UNRELEASED + "/" + "invalid-entry.yml");
+        File config = new File(INVALID_PATH + "/" + INPUT_DIR + "/" + CONFIG_FILE);
+        assertTrue(changelogDir.exists());
+        assertTrue(unreleasedDir.exists());
+        assertFalse(config.exists());
+        assertTrue(entry.exists());
+
+        // when-then:
+        Exception exception = assertThrows(RuntimeException.class, () -> LintProjectCommand.of(INVALID_PATH, INPUT_DIR, INVALID_PATH + OUTPUT_FILE, CONFIG_FILE).validate());
+
+        // then:
+        assertThat(exception.getMessage()).isEqualToIgnoringWhitespace(expectedOutput);
+    }
 }
