@@ -19,6 +19,7 @@ public class FileRepository implements FileWriter, XmlFileWriter {
 
     @Override
     public void write(String content) {
+        log.info("Writing markdown content to file: " + outputFile.getName());
         try (OutputStream os = Files.newOutputStream(outputFile.toPath());
              PrintWriter out = new PrintWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8))) {
 

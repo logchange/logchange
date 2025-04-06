@@ -20,6 +20,7 @@ import dev.logchange.core.format.md.changelog.MDChangelog;
 import dev.logchange.core.format.release_date.FileReleaseDateTime;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryConfigException;
+import dev.logchange.core.format.yml.changelog.entry.YMLChangelogInvalidConfigValuesException;
 import dev.logchange.core.format.yml.config.YMLChangelogException;
 import dev.logchange.core.infrastructure.persistance.config.FileTemplateRepository;
 import dev.logchange.core.infrastructure.persistance.file.FileRepository;
@@ -53,6 +54,7 @@ public class FileChangelogRepository implements ChangelogRepository {
         List<ChangelogVersion> versions = new LinkedList<>();
         List<ChangelogArchive> archives = new LinkedList<>();
 
+        log.info("Querying changelog files...");
         this.reader.readFiles(inputDirectory).forEach(file -> {
             if (isVersionDirectory(file)) {
                 versions.add(getChangelogVersion(file));
@@ -62,6 +64,7 @@ public class FileChangelogRepository implements ChangelogRepository {
             }
         });
         versions.sort(Collections.reverseOrder());
+        archives.sort(Collections.reverseOrder());
         return Changelog.of(versions, archives);
     }
 
@@ -144,7 +147,7 @@ public class FileChangelogRepository implements ChangelogRepository {
 
     private ChangelogArchive getChangelogArchive(File file) {
         try {
-            return ChangelogArchive.of(Files.readAllLines(file.toPath(), StandardCharsets.UTF_8));
+            return ChangelogArchive.of(file.getName(), Files.readAllLines(file.toPath(), StandardCharsets.UTF_8));
         } catch (IOException e) {
             log.severe("Error while getting changelog archive from file: " + e.getMessage());
             throw new IllegalStateException(e.getMessage());
@@ -169,7 +172,14 @@ public class FileChangelogRepository implements ChangelogRepository {
                     }
                 })
                 .filter(Objects::nonNull)
-                .map(YMLChangelogEntry::to)
+                .map(ymlChangelogEntry ->  {
+                    try {
+                        return ymlChangelogEntry.to();
+                    } catch (YMLChangelogInvalidConfigValuesException e) {
+                        exceptions.add(e);
+                        return null;
+                    }
+                })
                 .collect(Collectors.toList());
 
         if (!exceptions.isEmpty()) {

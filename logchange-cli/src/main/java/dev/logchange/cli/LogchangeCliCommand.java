@@ -3,6 +3,7 @@ package dev.logchange.cli;
 import dev.logchange.cli.add.AddChangelogEntryCliCommand;
 import dev.logchange.cli.add.AddExampleChangelogEntryCliCommand;
 import dev.logchange.cli.aggregate.AggregateProjectsCliCommand;
+import dev.logchange.cli.archive.ArchiveVersionCliCommand;
 import dev.logchange.cli.generate.GenerateChangelogCliCommand;
 import dev.logchange.cli.init.InitCliCommand;
 import dev.logchange.cli.lint.LintCliCommand;
@@ -28,7 +29,8 @@ import static dev.logchange.commands.Constants.LOGCHANGE_DESCRIPTION;
                 AddChangelogEntryCliCommand.class,
                 AddExampleChangelogEntryCliCommand.class,
                 LintCliCommand.class,
-                AggregateProjectsCliCommand.class
+                AggregateProjectsCliCommand.class,
+                ArchiveVersionCliCommand.class
         })
 public class LogchangeCliCommand implements Runnable {
 
