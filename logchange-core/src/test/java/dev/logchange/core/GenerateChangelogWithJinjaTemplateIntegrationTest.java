@@ -21,9 +21,9 @@ import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class GenerateVersionSummaryWithJinjaTemplateIntegrationTest {
+public class GenerateChangelogWithJinjaTemplateIntegrationTest {
 
-    private static final String PATH = "src/test/resources/GenerateVersionSummaryWithJinjaTemplateIntegrationTest/";
+    private static final String PATH = "src/test/resources/GenerateChangelogWithJinjaTemplateIntegrationTest/";
 
     @BeforeEach
     void init() throws IOException {
@@ -41,9 +41,9 @@ public class GenerateVersionSummaryWithJinjaTemplateIntegrationTest {
         //given:
         File changelogInputDir = new File(PATH + "changelog");
         File changelogOutputFile = new File(PATH + "CHANGELOG.md");
-        String VERSION_DIR = PATH + "changelog/v1.0.0/";
+
         File configFile = new File(PATH + "changelog/logchange-config.yml");
-        File expectedOutputFile = new File(VERSION_DIR + "expected-my-version-summary.html");
+        File expectedOutputFile = new File(PATH + "expected-my-changelog.html");
 
         ConfigRepository configRepository = FileConfigRepository.of(configFile);
         Config config = configRepository.find();
@@ -56,11 +56,11 @@ public class GenerateVersionSummaryWithJinjaTemplateIntegrationTest {
 
         //when:
         generateChangelogUseCase.handle(command);
-        File myVersionSummaryFile = new File(VERSION_DIR + "my-version-summary.html");
+        File myChangelogFile = new File(PATH + "my-changelog.html");
 
         //then:
         String expectedContent = FileUtils.fileRead(expectedOutputFile);
-        String actualContent = FileUtils.fileRead(myVersionSummaryFile);
+        String actualContent = FileUtils.fileRead(myChangelogFile);
         assertThat(actualContent).isEqualToIgnoringNewLines(expectedContent);
     }
 }

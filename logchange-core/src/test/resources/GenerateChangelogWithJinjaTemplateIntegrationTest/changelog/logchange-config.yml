@@ -1,4 +1,4 @@
 changelog:
   templates:
     changelog_templates:
-      - path: my-version-summary.html # relative path to the changelog/.templates directory
+      - path: my-changelog.html # relative path to the changelog/.templates directory

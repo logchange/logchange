@@ -43,7 +43,7 @@ public class GenerateVersionSummaryIntegrationTest {
         File expectedChangelogOutputFile = new File(VERSION_DIR + "expected-version-summary.md");
 
         FileRepository fr = FileRepository.of(changelogOutputFile);
-        ChangelogRepository repository = new FileChangelogRepository(changelogInputDir, Config.EMPTY, new FileReader(), fr, fr);
+        ChangelogRepository repository = new FileChangelogRepository(PATH, changelogInputDir, Config.EMPTY, new FileReader(), fr, fr);
         VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogInputDir, Config.EMPTY);
         GenerateChangelogUseCase generateChangelogUseCase = new GenerateChangelogService(repository, versionSummaryRepository);
         GenerateChangelogUseCase.GenerateChangelogCommand command = GenerateChangelogUseCase.GenerateChangelogCommand.of();
