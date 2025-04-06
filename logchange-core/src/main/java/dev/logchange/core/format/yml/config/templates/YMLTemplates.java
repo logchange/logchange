@@ -3,6 +3,7 @@ package dev.logchange.core.format.yml.config.templates;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import dev.logchange.core.domain.config.model.templates.ChangelogTemplate;
 import dev.logchange.core.domain.config.model.templates.Templates;
 import dev.logchange.core.domain.config.model.templates.VersionSummaryTemplate;
 import lombok.AllArgsConstructor;
@@ -32,12 +33,20 @@ public class YMLTemplates {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<YMLVersionSummaryTemplate> versionSummaryTemplates;
 
+    @Singular
+    @JsonProperty(value = "changelog_templates", index = 3)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    public List<YMLChangelogTemplate> changelogTemplates;
+
     public static YMLTemplates of(Templates templates) {
         return YMLTemplates.builder()
                 .entry(templates.getEntryFormat())
                 .author(templates.getAuthorFormat())
                 .versionSummaryTemplates(templates.getVersionSummaryTemplates().stream()
                         .map(YMLVersionSummaryTemplate::of)
+                        .collect(Collectors.toList()))
+                .changelogTemplates(templates.getChangelogTemplates().stream()
+                        .map(YMLChangelogTemplate::of)
                         .collect(Collectors.toList()))
                 .build();
     }
@@ -52,6 +61,7 @@ public class YMLTemplates {
                 .entryFormat(entry)
                 .authorFormat(author)
                 .versionSummaryTemplates(getVersionSummaryTemplates())
+                .changelogTemplates(getChangelogTemplates())
                 .build();
     }
 
@@ -61,6 +71,16 @@ public class YMLTemplates {
         } else {
             return versionSummaryTemplates.stream()
                     .map(YMLVersionSummaryTemplate::to)
+                    .collect(Collectors.toList());
+        }
+    }
+
+    private List<ChangelogTemplate> getChangelogTemplates() {
+        if (changelogTemplates == null) {
+            return Collections.emptyList();
+        } else {
+            return changelogTemplates.stream()
+                    .map(YMLChangelogTemplate::to)
                     .collect(Collectors.toList());
         }
     }

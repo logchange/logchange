@@ -45,7 +45,7 @@ public class GenerateProjectCommand {
         });
 
         FileRepository fr = FileRepository.of(new File(outputFile));
-        ChangelogRepository repository = new FileChangelogRepository(changelogDirectory, config, new FileReader(), fr, fr);
+        ChangelogRepository repository = new FileChangelogRepository(rootPath, changelogDirectory, config, new FileReader(), fr, fr);
         VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogDirectory, config);
         GenerateChangelogUseCase generateChangelog = new GenerateChangelogService(repository, versionSummaryRepository);
         GenerateChangelogUseCase.GenerateChangelogCommand command = GenerateChangelogUseCase.GenerateChangelogCommand.of();
@@ -62,7 +62,7 @@ public class GenerateProjectCommand {
     private void generateChangesXml(String xmlOutputFile, File changelogDirectory, Config config, GenerateChangelogUseCase.GenerateChangelogCommand command) {
         log.info("Started generating XML changelog file");
         FileRepository fr = FileRepository.of(new File(xmlOutputFile));
-        ChangelogRepository repository = new FileChangelogRepository(changelogDirectory, config, new FileReader(), fr, fr);
+        ChangelogRepository repository = new FileChangelogRepository(rootPath, changelogDirectory, config, new FileReader(), fr, fr);
         GenerateChangelogUseCase generateChangelogXml = new GenerateChangelogXMLService(repository);
         generateChangelogXml.handle(command);
         log.info("Generating " + xmlOutputFile + " successful");

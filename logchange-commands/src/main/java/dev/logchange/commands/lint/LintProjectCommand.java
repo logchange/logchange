@@ -35,7 +35,7 @@ public class LintProjectCommand {
         });
 
         FileRepository fr = FileRepository.of(new File(outputFile));
-        ChangelogRepository repository = new FileChangelogRepository(changelogDirectory, config, new FileReader(), fr, fr);
+        ChangelogRepository repository = new FileChangelogRepository(rootPath, changelogDirectory, config, new FileReader(), fr, fr);
         VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogDirectory, config);
         ValidateChangelogUseCase validateChangelog = new GenerateChangelogService(repository, versionSummaryRepository);
         ValidateChangelogUseCase.ValidateChangelogCommand command = ValidateChangelogUseCase.ValidateChangelogCommand.of();

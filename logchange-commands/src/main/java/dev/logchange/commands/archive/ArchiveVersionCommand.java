@@ -45,7 +45,7 @@ public class ArchiveVersionCommand {
         File archive = createIfNotExists(changelogDirectory);
         FileRepository fr = FileRepository.of(archive);
         ChangelogPersistence changelogPersistence = new FileArchiveRepository(fr, config);
-        ChangelogQuery changelogQuery = new FileChangelogRepository(changelogDirectory, config, new FileReader(), fr, fr);
+        ChangelogQuery changelogQuery = new FileChangelogRepository(rootPath, changelogDirectory, config, new FileReader(), fr, fr);
 
         ArchiveUseCase archiveService = new ArchiveService(changelogPersistence, changelogQuery);
         ArchiveCommand command = ArchiveCommand.of(Version.of(version));

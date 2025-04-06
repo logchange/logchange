@@ -40,7 +40,7 @@ public class GenerateChangesXMLIntegrationTest {
         File expectedChangesXmlOutputFile = new File(PATH + "EXPECTED_Changes.xml");
 
         FileRepository fr = FileRepository.of(changesXmlOutputFile);
-        ChangelogRepository repository = new FileChangelogRepository(changelogInputDir, Config.EMPTY, new FileReader(), fr, fr);
+        ChangelogRepository repository = new FileChangelogRepository(PATH, changelogInputDir, Config.EMPTY, new FileReader(), fr, fr);
         GenerateChangelogUseCase generateChangelogUseCase = new GenerateChangelogXMLService(repository);
         GenerateChangelogUseCase.GenerateChangelogCommand command = GenerateChangelogUseCase.GenerateChangelogCommand.of();
 

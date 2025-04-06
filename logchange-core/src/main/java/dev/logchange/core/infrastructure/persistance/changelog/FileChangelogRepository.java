@@ -1,6 +1,8 @@
 package dev.logchange.core.infrastructure.persistance.changelog;
 
 import dev.logchange.core.application.changelog.repository.ChangelogRepository;
+import dev.logchange.core.application.config.TemplateFile;
+import dev.logchange.core.application.config.TemplateRepository;
 import dev.logchange.core.application.file.query.FileQuery;
 import dev.logchange.core.application.file.repository.FileWriter;
 import dev.logchange.core.application.file.repository.XmlFileWriter;
@@ -12,12 +14,16 @@ import dev.logchange.core.domain.changelog.model.version.ChangelogVersion;
 import dev.logchange.core.domain.changelog.model.version.ChangelogVersionEntriesGroup;
 import dev.logchange.core.domain.changelog.model.version.Version;
 import dev.logchange.core.domain.config.model.Config;
+import dev.logchange.core.domain.config.model.templates.ChangelogTemplate;
+import dev.logchange.core.format.jinja.changelog.JinjaChangelog;
 import dev.logchange.core.format.md.changelog.MDChangelog;
 import dev.logchange.core.format.release_date.FileReleaseDateTime;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryConfigException;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogInvalidConfigValuesException;
 import dev.logchange.core.format.yml.config.YMLChangelogException;
+import dev.logchange.core.infrastructure.persistance.config.FileTemplateRepository;
+import dev.logchange.core.infrastructure.persistance.file.FileRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.apache.maven.plugins.changes.model.ChangesDocument;
@@ -35,6 +41,7 @@ import static dev.logchange.core.Constants.TEMPLATES_DIR_NAME;
 @RequiredArgsConstructor
 public class FileChangelogRepository implements ChangelogRepository {
 
+    private final String rootPath;
     private final File inputDirectory;
     private final Config config;
 
@@ -80,8 +87,34 @@ public class FileChangelogRepository implements ChangelogRepository {
 
     @Override
     public void save(Changelog changelog) {
+        saveMD(changelog);
+        saveJinja(changelog);
+    }
+
+    private void saveMD(Changelog changelog) {
         String md = new MDChangelog(config, changelog).toMD();
         writer.write(md);
+    }
+
+    private void saveJinja(Changelog changelog) {
+        List<ChangelogTemplate> templates = config.getTemplates().getChangelogTemplates();
+        for (ChangelogTemplate template : templates) {
+            log.info("Generating from changelog template: " + template);
+            File templatePath = TemplateFile.getTemplatePath(inputDirectory, template.getPath());
+            TemplateRepository templateRepository = new FileTemplateRepository(templatePath);
+            TemplateFile templateFile = templateRepository.find();
+            String rendered = new JinjaChangelog(templateFile, changelog).render();
+            saveToFile(rendered, template.getOutputFileName());
+        }
+    }
+
+    private void saveToFile(String content, String fileName) {
+        String outputFilePath = rootPath + fileName;
+        File outputFile = new File(outputFilePath);
+
+        FileRepository fileRepository = FileRepository.of(outputFile);
+        fileRepository.write(content);
+        log.info("Saved changelog to file: " + outputFilePath);
     }
 
     @Override

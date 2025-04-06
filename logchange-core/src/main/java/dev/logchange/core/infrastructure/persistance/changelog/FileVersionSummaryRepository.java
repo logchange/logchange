@@ -39,7 +39,7 @@ public class FileVersionSummaryRepository implements VersionSummaryRepository {
     private void saveJinja(ChangelogVersion version) {
         List<VersionSummaryTemplate> templates = config.getTemplates().getVersionSummaryTemplates();
         for (VersionSummaryTemplate template : templates) {
-            log.info("Generating template: " + template);
+            log.info("Generating from version-summary template: " + template);
             File templatePath = TemplateFile.getTemplatePath(inputDirectory, template.getPath());
             TemplateRepository templateRepository = new FileTemplateRepository(templatePath);
             TemplateFile templateFile = templateRepository.find();

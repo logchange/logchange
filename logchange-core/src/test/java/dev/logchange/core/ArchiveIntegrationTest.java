@@ -36,7 +36,7 @@ public class ArchiveIntegrationTest {
         archive.createNewFile();
         FileRepository fr = FileRepository.of(archive);
         ChangelogPersistence changelogPersistence = new FileArchiveRepository(fr, Config.EMPTY);
-        ChangelogQuery changelogQuery = new FileChangelogRepository(changelogDirectory, Config.EMPTY, new FileReader(), fr, fr);
+        ChangelogQuery changelogQuery = new FileChangelogRepository(PATH, changelogDirectory, Config.EMPTY, new FileReader(), fr, fr);
 
         ArchiveService archiveService = new ArchiveService(changelogPersistence, changelogQuery);
         ArchiveUseCase.ArchiveCommand command = ArchiveUseCase.ArchiveCommand.of(Version.of(version));

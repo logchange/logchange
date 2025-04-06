@@ -255,7 +255,18 @@ changelog:
       # changelog/.templates/my-version-summary.html
       # It will create my-version-summary.html in every version directory 
       # changelog/vX.X.X/my-version-summary.html
+      # HOW TO CREATE VERSION SUMMARY TEMPLATE?
+      # Main object is version and its type of https://github.com/logchange/logchange/blob/main/logchange-core/src/main/java/dev/logchange/core/domain/changelog/model/version/ChangelogVersion.java
       - path: my-version-summary.html
+    changelog_templates:
+      # Relative path to the changelog/.templates directory.
+      # Following definition will require from you existence of template at 
+      # changelog/.templates/my-changelog.html
+      # It will create my-changelog.html in every version directory 
+      # changelog/vX.X.X/my-version-summary.html
+      # HOW TO CREATE CHANGELOG TEMPLATE?
+      # Main object is changelog and its type of https://github.com/logchange/logchange/blob/main/logchange-core/src/main/java/dev/logchange/core/domain/changelog/model/Changelog.java
+      - path: my-changelog.html
 #=======================================================================================================================
 # this section only makes sense when project is root of aggregation for other projects with changelogs 
 # f.e. if we have repositories: mobile-app(root), mobile-app-android, mobile-app-ios 
