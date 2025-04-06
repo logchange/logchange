@@ -10,6 +10,7 @@ merge_requests:
   - 476
 issues:
   - 473
+type: fixed
 links:
   - name: issue#473
     url: https://github.com/logchange/logchange/issues/473
