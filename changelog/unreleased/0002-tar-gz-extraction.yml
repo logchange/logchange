@@ -1,0 +1,11 @@
+# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵
+# Visit https://github.com/logchange/logchange and leave a star 🌟
+# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
+title: Fixed TAR GZ extraction for archives missing GZIP_MAGIC header (Gitlab)
+authors:
+  - name: Mateusz Witkowski
+    nick: witx98
+    url: https://github.com/witx98
+merge_requests:
+  - 483
+type: fixed # [added/changed/deprecated/removed/fixed/security/dependency_update/other]

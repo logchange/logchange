@@ -5,12 +5,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
+import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream;
 
 import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.zip.GZIPInputStream;
 
 @Log
 @RequiredArgsConstructor
@@ -51,7 +51,7 @@ public class TarGzExtractor implements TarGzQuery {
 
     private Path extractTarGz(File tarGzFile, String projectChangelogDir) throws IOException {
         try (FileInputStream fis = new FileInputStream(tarGzFile);
-             GZIPInputStream gis = new GZIPInputStream(fis);
+             GzipCompressorInputStream gis = new GzipCompressorInputStream(fis);
              TarArchiveInputStream tis = new TarArchiveInputStream(gis)) {
 
             String baseDir = extractBaseDirectory(tis);
