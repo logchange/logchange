@@ -215,6 +215,7 @@
                             <buildArgs>
                                 <arg>--initialize-at-build-time=org.xml.sax.helpers.LocatorImpl</arg>
                                 <arg>--initialize-at-build-time=org.xml.sax.helpers.AttributesImpl</arg>
+                                <arg>--enable-url-protocols=http,https</arg>
                             </buildArgs>
                             <imageName>logchange</imageName>
                         </configuration>
@@ -254,6 +255,7 @@
                                 <arg>--static</arg>
                                 <arg>--initialize-at-build-time=org.xml.sax.helpers.LocatorImpl</arg>
                                 <arg>--initialize-at-build-time=org.xml.sax.helpers.AttributesImpl</arg>
+                                <arg>--enable-url-protocols=http,https</arg>
                             </buildArgs>
                             <imageName>logchange</imageName>
                         </configuration>
