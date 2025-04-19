@@ -24,7 +24,7 @@
         <native-maven-plugin.version>0.10.6</native-maven-plugin.version>
         <maven-shade-plugin.version>3.6.0</maven-shade-plugin.version>
 
-        <picocli.version>4.7.6</picocli.version>
+        <picocli.version>4.7.7</picocli.version>
 
         <exec.mainClass>dev.logchange.cli.LogchangeCliCommand</exec.mainClass>
 
