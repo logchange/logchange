@@ -11,8 +11,11 @@ import lombok.extern.java.Log;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import static dev.logchange.commands.Constants.DEFAULT_CONFIG_FILE;
 import static dev.logchange.commands.Constants.GIT_KEEP;
@@ -28,14 +31,14 @@ public class InitProjectCommand {
 
     public void execute() {
         log.info("Initializing project");
-        checkIfRootExists(rootPath);
-        createEmptyChangelogFile(Paths.get(rootPath, outputFile));
+        checkIfRootExists();
         createUnreleased(rootPath, inputDir, unreleasedVersionDir);
-        createConfig(rootPath, inputDir);
+        createNewChangelogFile();
+        createConfig();
         log.info("Project initialized");
     }
 
-    private void checkIfRootExists(String rootPath) {
+    private void checkIfRootExists() {
         if (!new File(rootPath).exists()) {
             String msg = String.format("Root path: %s must exists! Check if you are in right directory!", rootPath);
             log.severe(msg);
@@ -43,7 +46,36 @@ public class InitProjectCommand {
         }
     }
 
-    private void createConfig(String rootPath, String inputDir) {
+    private void createNewChangelogFile() {
+        log.info("Creating new changelog file");
+        File changelog = Paths.get(rootPath, outputFile).toFile();
+        if (changelog.exists()) {
+            archiveOldChangelog(changelog);
+        }
+        createEmptyChangelogFile(changelog);
+    }
+
+    private void archiveOldChangelog(File changelog) {
+        log.info("Archiving old " + changelog.getName());
+        try {
+            String archiveFilename = "archive.md";
+            Path archivePath = Paths.get(rootPath, inputDir, archiveFilename);
+
+            if (archivePath.toFile().exists()) {
+                String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+                archiveFilename = String.format("archive-%s.md", timestamp);
+                archivePath = Paths.get(rootPath, inputDir, archiveFilename);
+            }
+            Files.move(changelog.toPath(), archivePath);
+            log.info("Moved existing changelog to: " + archivePath);
+        } catch (IOException e) {
+            String msg = String.format("An error occurred while moving changelog: %s", e.getMessage());
+            log.severe(msg);
+            throw new RuntimeException(msg);
+        }
+    }
+
+    private void createConfig() {
         log.info("Creating config file");
         File config = ConfigFile.of(Paths.get(rootPath, inputDir, DEFAULT_CONFIG_FILE)).create();
         ConfigRepository configRepository = FileConfigRepository.of(config);
@@ -60,9 +92,8 @@ public class InitProjectCommand {
         GitKeep.of(gitKeepPath).create();
     }
 
-    private static void createEmptyChangelogFile(Path path) {
+    private static void createEmptyChangelogFile(File changelog) {
         try {
-            File changelog = path.toFile();
             if (changelog.createNewFile()) {
                 log.info("Created: " + changelog.getName());
             } else {
