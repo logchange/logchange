@@ -29,6 +29,8 @@ public class ChangelogEntry {
     private final List<ChangelogEntryImportantNote> importantNotes;
     @Singular
     private final List<ChangelogEntryConfiguration> configurations;
+    @Singular
+    private final List<ChangelogModule> modules;
 
     public ChangelogEntry withPrefix(String prefix) {
         if (prefix == null) {
