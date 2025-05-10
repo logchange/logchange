@@ -15,7 +15,7 @@ public class MDChangelogVersion extends Configurable implements MD {
     public MDChangelogVersion(Config config, ChangelogVersion changelogVersion) {
         super(config);
         this.versionHeading = new MDChangelogVersionHeading(changelogVersion.getVersion(), changelogVersion.getReleaseDateTime(), config);
-        this.importantNotes = new MDChangelogVersionImportantNotes(changelogVersion.getImportantNotes(), config);
+        this.importantNotes = new MDChangelogVersionImportantNotes(changelogVersion.getDetachedImportantNotes(), config);
         this.entriesGroups = new MDChangelogEntriesGroups(changelogVersion.getEntriesGroups(), config);
         this.configuration = new MDChangelogVersionConfiguration(changelogVersion.getConfigurations(), config);
     }

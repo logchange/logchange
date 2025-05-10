@@ -1,14 +1,16 @@
 package dev.logchange.core.domain.changelog.model.entry;
 
+import dev.logchange.core.domain.changelog.model.DetachedImportantNote;
+import dev.logchange.core.domain.changelog.model.HasModules;
 import lombok.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class ChangelogEntry {
+public class ChangelogEntry implements HasModules {
 
     // used to keep original order of entries
     @Setter
@@ -32,6 +34,13 @@ public class ChangelogEntry {
     @Singular
     private final List<ChangelogModule> modules;
 
+    public List<DetachedImportantNote> getDetachedImportantNotes() {
+        System.out.println(importantNotes);
+        return importantNotes.stream().map(importantNote ->
+            new DetachedImportantNote(importantNote.getValue(), modules)
+        ).collect(Collectors.toList());
+    }
+
     public ChangelogEntry withPrefix(String prefix) {
         if (prefix == null) {
             return this;
@@ -44,15 +53,7 @@ public class ChangelogEntry {
                 .map(config -> config.withPrefix(prefix))
                 .collect(Collectors.toList());
 
-        return ChangelogEntry.builder()
-                .id(id)
-                .prefix(prefix)
-                .title(title)
-                .type(type)
-                .mergeRequests(mergeRequests)
-                .issues(issues)
-                .links(links)
-                .authors(authors)
+        return this.toBuilder()
                 .importantNotes(prefixedNotes)
                 .configurations(prefixedConfigurations)
                 .build();

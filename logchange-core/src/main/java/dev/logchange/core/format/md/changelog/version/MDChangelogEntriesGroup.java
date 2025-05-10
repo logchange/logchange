@@ -29,7 +29,6 @@ class MDChangelogEntriesGroup extends Configurable implements MD {
         return getEntries();
     }
 
-
     private String getEntries() {
         if (group.isEmpty()) {
             return StringUtils.EMPTY;
@@ -38,29 +37,18 @@ class MDChangelogEntriesGroup extends Configurable implements MD {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(getTypeHeading()).append("\n").append("\n");
 
-        Map<ChangelogModule, List<ChangelogEntry>> groups = new HashMap<>();
-        List<ChangelogEntry> noModules = new ArrayList<>();
-        for (ChangelogEntry entry : group.getEntries()) {
-            if(entry.getModules().isEmpty()) {
-                noModules.add(entry);
-            }
-            for (ChangelogModule module: entry.getModules()) {
-                groups.putIfAbsent(module, new ArrayList<>());
-                List<ChangelogEntry> entries = groups.get(module);
-                entries.add(entry);
-            }
-        }
+        Comparator<ChangelogEntry> comparator = Comparator.comparing(ChangelogEntry::getId);
+        MDModuleStructure<ChangelogEntry> structure = MDModuleStructure.build(group.getEntries(), comparator);
 
-        noModules.sort(Comparator.comparing(ChangelogEntry::getId));
-        for (ChangelogEntry entry : group.getEntries()) {
+        for (ChangelogEntry entry : structure.getNoModules()) {
             MDChangelogEntryPrefix prefix = MDChangelogEntryPrefix.of(entry.getPrefix());
             stringBuilder.append(new MDChangelogEntry(entry, getConfig(), prefix)).append("\n");
         }
 
-        groups.forEach((module, entries) -> {
+        structure.getGroups().forEach((module, entries) -> {
             entries.sort(Comparator.comparing(ChangelogEntry::getId));
             for (ChangelogEntry entry : entries) {
-                MDChangelogEntryPrefix prefix = MDChangelogEntryPrefix.of(entry.getPrefix());
+                MDChangelogEntryPrefix prefix = MDChangelogEntryPrefix.of(module.getName());
                 stringBuilder.append(new MDChangelogEntry(entry, getConfig(), prefix)).append("\n");
             }
         });
