@@ -1,11 +1,13 @@
 package dev.logchange.core.domain.changelog.model.entry;
 
+import dev.logchange.core.domain.changelog.model.DetachedConfiguration;
 import dev.logchange.core.domain.changelog.model.DetachedImportantNote;
 import dev.logchange.core.domain.changelog.model.HasModules;
 import lombok.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Getter
 @Builder(toBuilder = true)
@@ -34,11 +36,16 @@ public class ChangelogEntry implements HasModules {
     @Singular
     private final List<ChangelogModule> modules;
 
-    public List<DetachedImportantNote> getDetachedImportantNotes() {
-        System.out.println(importantNotes);
+    public Stream<DetachedImportantNote> getDetachedImportantNotes() {
         return importantNotes.stream().map(importantNote ->
             new DetachedImportantNote(importantNote.getValue(), modules)
-        ).collect(Collectors.toList());
+        );
+    }
+
+    public Stream<DetachedConfiguration> getDetachedConfigurations() {
+        return configurations.stream().map(configuration ->
+            new DetachedConfiguration(configuration, modules)
+        );
     }
 
     public ChangelogEntry withPrefix(String prefix) {
