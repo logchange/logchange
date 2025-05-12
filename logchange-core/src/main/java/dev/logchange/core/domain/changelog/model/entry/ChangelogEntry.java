@@ -3,6 +3,7 @@ package dev.logchange.core.domain.changelog.model.entry;
 import dev.logchange.core.domain.changelog.model.DetachedConfiguration;
 import dev.logchange.core.domain.changelog.model.DetachedImportantNote;
 import dev.logchange.core.domain.changelog.model.HasModules;
+import dev.logchange.core.format.md.changelog.version.MDModuleStructure;
 import lombok.*;
 
 import java.util.List;
@@ -71,4 +72,10 @@ public class ChangelogEntry implements HasModules {
         return type.getKey() + " - " + title.getValue();
     }
 
+    public ChangelogEntry addProjectModule(ChangelogModule module) {
+        if (!modules.isEmpty()){
+            throw new RuntimeException("Aggregation does not support project modules");
+        }
+        return toBuilder().module(module).build();
+    }
 }
