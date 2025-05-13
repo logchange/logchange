@@ -63,7 +63,7 @@
         <lombok.version>1.18.38</lombok.version>
         <lombok-maven.version>1.18.22.0</lombok-maven.version>
         <maven-changes.version>2.12.1</maven-changes.version>
-        <jinjava.version>2.7.4</jinjava.version>
+        <jinjava.version>2.8.0</jinjava.version>
 
         <maven-site-plugin.version>3.21.0</maven-site-plugin.version>
 
