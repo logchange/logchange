@@ -1,0 +1,8 @@
+# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵 
+# Visit https://github.com/logchange/logchange and leave a star 🌟 
+# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
+title: Upgraded com.hubspot.jinjava:jinjava from 2.7.4 to 2.8.0
+authors:
+  - name: marwin1991
+type: dependency_update
+
