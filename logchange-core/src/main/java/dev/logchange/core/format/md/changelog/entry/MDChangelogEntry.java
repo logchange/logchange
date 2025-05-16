@@ -20,10 +20,10 @@ public class MDChangelogEntry extends Configurable implements MD {
     private final MDChangelogEntryLinks mdLinks;
     private final MDChangelogEntryAuthors mdAuthors;
 
-    public MDChangelogEntry(ChangelogEntry entry, Config config) {
+    public MDChangelogEntry(ChangelogEntry entry, Config config, MDChangelogEntryPrefix prefix) {
         super(config);
         this.entry = entry;
-        this.prefix = MDChangelogEntryPrefix.of(entry.getPrefix());
+        this.prefix = prefix;
         this.mdMergeRequests = new MDChangelogEntryMergeRequests(entry.getMergeRequests());
         this.mdIssues = new MDChangelogEntryIssues(entry.getIssues());
         this.mdLinks = new MDChangelogEntryLinks(entry.getLinks());
