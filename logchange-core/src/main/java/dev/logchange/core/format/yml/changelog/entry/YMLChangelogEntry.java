@@ -36,30 +36,35 @@ public class YMLChangelogEntry {
     public List<YMLChangelogEntryAuthor> authors;
 
     @Singular
-    @JsonProperty(value = "merge_requests", index = 2)
+    @JsonProperty(index = 2)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    public List<YMLChangelogModule> modules;
+
+    @Singular
+    @JsonProperty(value = "merge_requests", index = 3)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<Long> mergeRequests;
 
     @Singular
-    @JsonProperty(index = 3)
+    @JsonProperty(index = 4)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<Long> issues;
 
     @Singular
-    @JsonProperty(index = 4)
+    @JsonProperty(index = 5)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<YMLChangelogEntryLink> links;
 
-    @JsonProperty(index = 5)
+    @JsonProperty(index = 6)
     public YMLChangelogEntryType type;
 
     @Singular
-    @JsonProperty(value = "important_notes", index = 6)
+    @JsonProperty(value = "important_notes", index = 7)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<String> importantNotes;
 
     @Singular
-    @JsonProperty(index = 7)
+    @JsonProperty(index = 8)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<YMLChangelogEntryConfiguration> configurations;
 
@@ -98,6 +103,7 @@ public class YMLChangelogEntry {
                 .type(YMLChangelogEntryType.of(entry.getType()))
                 .importantNotes(entry.getImportantNotes().stream().map(ChangelogEntryImportantNote::getValue).collect(Collectors.toList()))
                 .configurations(entry.getConfigurations().stream().map(YMLChangelogEntryConfiguration::of).collect(Collectors.toList()))
+                .modules(entry.getModules().stream().map(YMLChangelogModule::of).collect(Collectors.toList()))
                 .build();
     }
 
@@ -128,6 +134,7 @@ public class YMLChangelogEntry {
                 .authors(authors())
                 .importantNotes(importantNotes())
                 .configurations(changelogEntryConfiguration())
+                .modules(modules())
                 .build();
     }
 
@@ -151,6 +158,13 @@ public class YMLChangelogEntry {
             invalidProperties.add(Pair.of("type", e.getMessage()));
             return null;
         }
+    }
+
+    private List<ChangelogModule>  modules() {
+        if(modules == null) {
+            return Collections.emptyList();
+        }
+        return modules.stream().map(YMLChangelogModule::to).collect(Collectors.toList());
     }
 
     private List<ChangelogEntryMergeRequest> mergeRequests() {
