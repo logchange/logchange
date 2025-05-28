@@ -17,7 +17,7 @@ class MDChangelogEntryTest {
 
         //when:
 
-        String result = new MDChangelogEntry(entry, Config.EMPTY).toString();
+        String result = new MDChangelogEntry(entry, Config.EMPTY, MDChangelogEntryPrefix.EMPTY).toString();
 
         //then:
         assertEquals("- Some Title !567 #890 [Some link](https//google.com) ([Some Name](https://nick.name) @Nick)", result);
@@ -29,8 +29,8 @@ class MDChangelogEntryTest {
         ChangelogEntry entry = getSomeEntry(null);
 
         //when:
-        String result1 = new MDChangelogEntry(entry, Config.EMPTY).toString();
-        String result2 = new MDChangelogEntry(entry, Config.EMPTY).toMD();
+        String result1 = new MDChangelogEntry(entry, Config.EMPTY, MDChangelogEntryPrefix.EMPTY).toString();
+        String result2 = new MDChangelogEntry(entry, Config.EMPTY, MDChangelogEntryPrefix.EMPTY).toMD();
 
         //then:
         assertEquals(result1, result2);
@@ -40,9 +40,10 @@ class MDChangelogEntryTest {
     void givenBasicEntryWithPrefix_whenToString_thenResultMatchesFormat() {
         //given:
         ChangelogEntry entry = getSomeEntry("Some prefix");
+        MDChangelogEntryPrefix prefix = MDChangelogEntryPrefix.of("Some prefix");
 
         //when:
-        String result = new MDChangelogEntry(entry, Config.EMPTY).toString();
+        String result = new MDChangelogEntry(entry, Config.EMPTY, prefix).toString();
 
         //then:
         assertEquals("- **Some prefix** - Some Title !567 #890 [Some link](https//google.com) ([Some Name](https://nick.name) @Nick)", result);
@@ -52,10 +53,11 @@ class MDChangelogEntryTest {
     void givenSomeEntryWithPrefix_whenToString_thenResultMatchesToMD() {
         //given:
         ChangelogEntry entry = getSomeEntry("Some prefix");
+        MDChangelogEntryPrefix prefix = MDChangelogEntryPrefix.of("Some prefix");
 
         //when:
-        String result1 = new MDChangelogEntry(entry, Config.EMPTY).toString();
-        String result2 = new MDChangelogEntry(entry, Config.EMPTY).toMD();
+        String result1 = new MDChangelogEntry(entry, Config.EMPTY, prefix).toString();
+        String result2 = new MDChangelogEntry(entry, Config.EMPTY, prefix).toMD();
 
         //then:
         assertEquals(result1, result2);

@@ -11,6 +11,8 @@ import java.util.Map;
 
 @RequiredArgsConstructor(staticName = "of")
 public class MDChangelogEntryPrefix implements MD {
+
+    public static final MDChangelogEntryPrefix EMPTY = new MDChangelogEntryPrefix("");
     private static final String prefixFormat = "${prefix} - ";
     private final String prefix;
 
