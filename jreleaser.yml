@@ -50,5 +50,5 @@ packagers:
       name: homebrew-tap
     commitAuthor:
       name: logchange-bot
-      email: logchange-bot@logchange.dev
+      email: team@logchange.dev
     downloadUrl: "https://github.com/{{projectName}}/{{projectName}}/releases/download/#{version}/{{distributionName}}-{{matrixName}}.zip"

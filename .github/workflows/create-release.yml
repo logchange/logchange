@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    uses: ./.github/workflows/build-cli.yml
+    uses: ./.github/workflows/graalvm-build-cli.yml
 
   publish-docker:
     name: Publish Docker image to Docker Hub
