@@ -7,6 +7,14 @@
 <!-- !!! ⚠️ DO NOT MODIFY THIS FILE, YOUR CHANGES WILL BE LOST ⚠️ !!! -->
 
 
+[1.19.4] - 2025-06-15
+---------------------
+
+### Fixed (1 change)
+
+- Fixed publishing logchange to Maven Central - expired GPG keys ([Peter](https://github.com/marwin1991) @marwin1991)
+
+
 [1.19.3] - 2025-06-15
 ---------------------
 
