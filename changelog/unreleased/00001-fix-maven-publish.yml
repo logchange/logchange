@@ -1,0 +1,9 @@
+# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵 
+# Visit https://github.com/logchange/logchange and leave a star 🌟 
+# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
+title: "Fixed publishing logchange to Maven Central - expired GPG keys"
+authors:
+  - name: Peter
+    nick: marwin1991
+    url: https://github.com/marwin1991
+type: fixed
