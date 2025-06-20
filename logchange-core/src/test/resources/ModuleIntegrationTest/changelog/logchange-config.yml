@@ -1,0 +1,30 @@
+changelog:
+  entryTypes:
+    - key: add
+      order: 1
+    - key: fix
+      order: 2
+    - key: change
+      order: 3
+    - key: other
+      order: 4
+  labels:
+    unreleased: "niewydane"
+    important_notes: "Ważne"
+    types:
+      add: "Dodano"
+      fix: "Naprawiono"
+      change: "Zmieniono"
+      other: "Inne"
+      number_of_changes:
+        singular: "zmiana"
+        plural: "zmian/y"
+    configuration:
+      heading: "Zmiany konfiguracji"
+      type: "Typ"
+      actions:
+        add: "Dodano"
+        update: "Zaktualizowano"
+        delete: "Usunięto"
+      with_default_value: "z domyślną wartością"
+      description: "Opis"
