@@ -15,6 +15,13 @@ import java.util.Comparator;
 @EqualsAndHashCode
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Version implements Comparable<Version> {
+
+    /**
+     * Separates <unreleasedVersionDir> from a version, for example,
+     * if unreleasedVersionDir is "unreleased" and the version to release is 1.0.0,
+     * we have to check if dir unreleased-1.0.0 exists
+     */
+    public static final String UNRELEASED_DIR_SEPARATOR = "-";
     public static final String UNRELEASED = "unreleased";
 
     private final String value;
@@ -33,7 +40,14 @@ public class Version implements Comparable<Version> {
             if (UNRELEASED.equals(value)) {
               return 1;
             }
-            return this.value.compareTo(other.value);
+
+            if (UNRELEASED.equals(other.value)) {
+                return -1;
+            }
+
+            return Comparator
+                    .comparing(Version::getComparableVersion)
+                    .compare(this, other);
         }
 
         if (isUnreleased()) {
@@ -53,6 +67,9 @@ public class Version implements Comparable<Version> {
     }
 
     private ComparableVersion getComparableVersion() {
+        if (isUnreleased()) {
+            return new ComparableVersion(value.replace(UNRELEASED + UNRELEASED_DIR_SEPARATOR, ""));
+        }
         return new ComparableVersion(value);
     }
 

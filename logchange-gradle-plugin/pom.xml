@@ -29,11 +29,11 @@
             <version>${project.version}</version>
         </dependency>
 
-        <dependency>
+        <dependency> <!-- https://github.com/manusa/gradle-api-maven-plugin -->
             <groupId>org.gradle</groupId>
             <artifactId>gradle-all</artifactId>
             <version>${gradle-all.version}</version>
-            <scope>provided</scope> <!-- It's important to add this as test, because otherwise importing this plugin will require such a dependency -->
+            <scope>provided</scope> <!-- https://github.com/manusa/gradle-api-maven-plugin/issues/48#issuecomment-2599630622 -->
         </dependency>
 
         <dependency>
