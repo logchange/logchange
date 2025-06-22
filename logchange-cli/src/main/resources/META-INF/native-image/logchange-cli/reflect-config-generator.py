@@ -18,6 +18,8 @@ def find_java_classes(base_dir):
                     "allDeclaredMethods": True,
                     "allDeclaredConstructors": True,
                 })
+
+    entries.sort(key=lambda entry: entry["name"])
     return entries
 
 def main():
