@@ -13,6 +13,8 @@
         <img src="https://img.shields.io/docker/pulls/logchange/logchange" alt="DockerHub Pulls"/></a>
     <a href="https://central.sonatype.com/artifact/dev.logchange/logchange-maven-plugin">
         <img src="https://img.shields.io/maven-central/v/dev.logchange/logchange-maven-plugin.svg?label=Maven%20Central" alt="Maven Central"/></a>
+    <a href="https://codecov.io/gh/logchange/logchange">
+        <img src="https://codecov.io/gh/logchange/logchange/graph/badge.svg?token=SP3V6ZQ039" alt="codecov"/></a>
 </p>
 
 🌳 `CHANGELOG.md` is one of the most important files in a repository. It allows others to find out about
