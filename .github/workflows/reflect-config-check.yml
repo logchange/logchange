@@ -28,6 +28,7 @@ jobs:
         run: |
           git config --global user.email "team@logchange.dev"
           git config --global user.name "logchange-bot"
+          git diff || echo "No changes detected"
           git diff --quiet || echo "changed=true" >> $GITHUB_OUTPUT
 
       - name: Comment on PR if changes detected
