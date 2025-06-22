@@ -71,7 +71,7 @@ You can choose between two options:
         <plugin>
             <groupId>dev.logchange</groupId>
             <artifactId>logchange-maven-plugin</artifactId>
-            <version>1.16.5</version>
+            <version>1.19.5</version>
         </plugin>
     </plugins>
 </build>
@@ -567,10 +567,6 @@ logchangeRelease - Creates new changelog release by moving files from <unrelease
 ### GitHub Actions
 
 ### GitLab CI/CD
-
-## TODO:
-
-- add command to create archive-X.md from selected directory
 
 ## Development
 
