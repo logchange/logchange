@@ -29,11 +29,18 @@ public class Version implements Comparable<Version> {
 
     @Override
     public int compareTo(Version other) {
-        if (UNRELEASED.equals(value)) {
+        if (isUnreleased() && other.isUnreleased()) {
+            if (UNRELEASED.equals(value)) {
+              return 1;
+            }
+            return this.value.compareTo(other.value);
+        }
+
+        if (isUnreleased()) {
             return 1;
         }
 
-        if (UNRELEASED.equals(other.value)) {
+        if (other.isUnreleased()) {
             return -1;
         }
 
@@ -50,7 +57,7 @@ public class Version implements Comparable<Version> {
     }
 
     public String getDirName() {
-        if (UNRELEASED.equals(value)) {
+        if (isUnreleased()) {
             return value;
         } else {
             return "v" + value;
@@ -58,7 +65,7 @@ public class Version implements Comparable<Version> {
     }
 
     public boolean isUnreleased() {
-        return UNRELEASED.equals(value);
+        return value.startsWith(UNRELEASED);
     }
 
     @Override
