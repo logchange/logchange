@@ -43,7 +43,7 @@ jobs:
             })
 
       - name: Fail if changes detected
-        if: steps.check_changes.outputs.changed == 'true'
+        if: steps.git_diff.outputs.changed == 'true'
         run: |
           echo "You cannot merge if reflect-config-generator.py detects changes! Run this script locally and commit changes!"
           exit 1
