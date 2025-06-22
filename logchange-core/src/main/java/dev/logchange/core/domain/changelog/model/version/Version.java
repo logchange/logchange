@@ -17,7 +17,7 @@ import java.util.Comparator;
 public class Version implements Comparable<Version> {
 
     /**
-     * Separates <unreleasedVersionDir> from a version, for example,
+     * Separates {@literal <unreleasedVersionDir>} from a version, for example,
      * if unreleasedVersionDir is "unreleased" and the version to release is 1.0.0,
      * we have to check if dir unreleased-1.0.0 exists
      */
