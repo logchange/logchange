@@ -51,6 +51,10 @@
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
+        <repository>
+            <id>gradle-release</id>
+            <url>https://repo.gradle.org/gradle/libs-releases/</url>
+        </repository>
     </repositories>
 
     <properties>

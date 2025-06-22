@@ -37,3 +37,17 @@ jobs:
 
       - name: Test and Integration Test with Maven
         run: mvn --batch-mode verify
+
+  build-javadoc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Build JavaDoc with Maven to verify if its correct
+        run: mvn --batch-mode -DskipTests install && mvn --batch-mode javadoc:javadoc
