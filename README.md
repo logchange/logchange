@@ -528,7 +528,7 @@ Add plugin to `build.gradle`:
 ```groovy
 plugins {
     ....
-    id 'dev.logchange' version '1.16.10'
+    id 'dev.logchange' version '1.19.5'
 }
 ```
 
