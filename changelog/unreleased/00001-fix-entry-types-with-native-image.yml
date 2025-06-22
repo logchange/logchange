@@ -1,0 +1,13 @@
+# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵 
+# Visit https://github.com/logchange/logchange and leave a star 🌟 
+# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
+title: "Fix custom entry types when using CLI (missing reflect-config.json definitions)"
+authors:
+  - name: Peter
+    nick: marwin1991
+    url: https://github.com/marwin1991
+type: fixed
+merge_requests:
+  - 542
+issues:
+  - 540

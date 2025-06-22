@@ -102,6 +102,15 @@
                         <buildArg>--no-fallback</buildArg>
                     </buildArgs>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>test-native</id>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <phase>test</phase>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>

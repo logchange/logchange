@@ -6,31 +6,19 @@
     "allDeclaredConstructors": true
   },
   {
-    "name": "dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryTypeConverter",
+    "name": "dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry",
     "allDeclaredFields": true,
     "allDeclaredMethods": true,
     "allDeclaredConstructors": true
   },
   {
-    "name": "dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryConfigurationActionConverter",
-    "allDeclaredFields": true,
-    "allDeclaredMethods": true,
-    "allDeclaredConstructors": true
-  },
-  {
-    "name": "dev.logchange.core.format.yml.changelog.entry.YMLChangelogInvalidConfigValuesException",
+    "name": "dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryAuthor",
     "allDeclaredFields": true,
     "allDeclaredMethods": true,
     "allDeclaredConstructors": true
   },
   {
     "name": "dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryConfigException",
-    "allDeclaredFields": true,
-    "allDeclaredMethods": true,
-    "allDeclaredConstructors": true
-  },
-  {
-    "name": "dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryType",
     "allDeclaredFields": true,
     "allDeclaredMethods": true,
     "allDeclaredConstructors": true
@@ -48,7 +36,7 @@
     "allDeclaredConstructors": true
   },
   {
-    "name": "dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry",
+    "name": "dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryConfigurationActionConverter",
     "allDeclaredFields": true,
     "allDeclaredMethods": true,
     "allDeclaredConstructors": true
@@ -60,7 +48,19 @@
     "allDeclaredConstructors": true
   },
   {
-    "name": "dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryAuthor",
+    "name": "dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryType",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryTypeConverter",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.logchange.core.format.yml.changelog.entry.YMLChangelogInvalidConfigValuesException",
     "allDeclaredFields": true,
     "allDeclaredMethods": true,
     "allDeclaredConstructors": true
@@ -84,31 +84,13 @@
     "allDeclaredConstructors": true
   },
   {
-    "name": "dev.logchange.core.format.yml.config.labels.YMLLabels",
+    "name": "dev.logchange.core.format.yml.config.YMLCustomChangelogEntryType",
     "allDeclaredFields": true,
     "allDeclaredMethods": true,
     "allDeclaredConstructors": true
   },
   {
-    "name": "dev.logchange.core.format.yml.config.labels.YMLTypesLabels",
-    "allDeclaredFields": true,
-    "allDeclaredMethods": true,
-    "allDeclaredConstructors": true
-  },
-  {
-    "name": "dev.logchange.core.format.yml.config.labels.YMLNumberOfChangesLabels",
-    "allDeclaredFields": true,
-    "allDeclaredMethods": true,
-    "allDeclaredConstructors": true
-  },
-  {
-    "name": "dev.logchange.core.format.yml.config.labels.YMLConfigurationLabels",
-    "allDeclaredFields": true,
-    "allDeclaredMethods": true,
-    "allDeclaredConstructors": true
-  },
-  {
-    "name": "dev.logchange.core.format.yml.config.labels.YMLConfigurationActionLabels",
+    "name": "dev.logchange.core.format.yml.config.aggregate.YMLAggregatedProject",
     "allDeclaredFields": true,
     "allDeclaredMethods": true,
     "allDeclaredConstructors": true
@@ -126,13 +108,49 @@
     "allDeclaredConstructors": true
   },
   {
-    "name": "dev.logchange.core.format.yml.config.aggregate.YMLAggregatedProject",
+    "name": "dev.logchange.core.format.yml.config.labels.YMLConfigurationActionLabels",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.logchange.core.format.yml.config.labels.YMLConfigurationLabels",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.logchange.core.format.yml.config.labels.YMLLabels",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.logchange.core.format.yml.config.labels.YMLNumberOfChangesLabels",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.logchange.core.format.yml.config.labels.YMLTypesLabels",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.logchange.core.format.yml.config.templates.YMLChangelogTemplate",
     "allDeclaredFields": true,
     "allDeclaredMethods": true,
     "allDeclaredConstructors": true
   },
   {
     "name": "dev.logchange.core.format.yml.config.templates.YMLTemplates",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.logchange.core.format.yml.config.templates.YMLVersionSummaryTemplate",
     "allDeclaredFields": true,
     "allDeclaredMethods": true,
     "allDeclaredConstructors": true

@@ -1,0 +1,50 @@
+name: Check reflect-config changes
+
+on:
+  pull_request:
+    paths:
+      - 'logchange-cli/src/main/resources/META-INF/native-image/logchange-cli/**'
+      - '.github/workflows/reflect-config-check.yml'
+
+jobs:
+  reflect-config-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Run reflect-config-generator.py
+        working-directory: logchange-cli/src/main/resources/META-INF/native-image/logchange-cli
+        run: python3 reflect-config-generator.py
+
+      - name: Check for changes
+        id: git_diff
+        run: |
+          git config --global user.email "team@logchange.dev"
+          git config --global user.name "logchange-bot"
+          git diff || echo "No changes detected"
+          git diff --quiet || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Comment on PR if changes detected
+        if: steps.git_diff.outputs.changed == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.payload.pull_request.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: "⚠️ There are changes needing regeneration of `reflect-config.json`! Go to `logchange-cli/src/main/resources/META-INF/native-image/logchange-cli` and run `python3 reflect-config-generator.py` and commit this changes!"
+            })
+
+      - name: Fail if changes detected
+        if: steps.git_diff.outputs.changed == 'true'
+        run: |
+          echo "You cannot merge if reflect-config-generator.py detects changes! Run this script locally and commit changes!"
+          exit 1
