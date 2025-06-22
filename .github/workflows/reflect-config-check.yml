@@ -41,3 +41,9 @@ jobs:
               repo: context.repo.repo,
               body: "⚠️ There are changes needing regeneration of `reflect-config.json`! Go to `logchange-cli/src/main/resources/META-INF/native-image/logchange-cli` and run `python3 reflect-config-generator.py` and commit this changes!"
             })
+
+      - name: Fail if changes detected
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          echo "You cannot merge if reflect-config-generator.py detects changes! Run this script locally and commit changes!"
+          exit 1
