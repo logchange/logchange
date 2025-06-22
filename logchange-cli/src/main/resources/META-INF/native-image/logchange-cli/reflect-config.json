@@ -78,6 +78,12 @@
     "allDeclaredConstructors": true
   },
   {
+    "name": "dev.logchange.core.format.yml.config.YMLCustomChangelogEntryType",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true
+  },
+  {
     "name": "dev.logchange.core.format.yml.config.YMLConfig",
     "allDeclaredFields": true,
     "allDeclaredMethods": true,
@@ -133,6 +139,18 @@
   },
   {
     "name": "dev.logchange.core.format.yml.config.templates.YMLTemplates",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.logchange.core.format.yml.config.templates.YMLVersionSummaryTemplate",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.logchange.core.format.yml.config.templates.YMLChangelogTemplate",
     "allDeclaredFields": true,
     "allDeclaredMethods": true,
     "allDeclaredConstructors": true

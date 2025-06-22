@@ -19,4 +19,4 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           cache: 'maven'
       - name: Build project and test on graalvm
-        run: mvn -Pnative,native-test --batch-mode test
+        run: mvn -Pnative --batch-mode verify
