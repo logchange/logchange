@@ -1,4 +1,4 @@
-# This workflow will build and test Java project with Maven
+# This workflow will build and test a Java project with Maven
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
 name: Build and Test Java
@@ -36,7 +36,12 @@ jobs:
           cache: 'maven'
 
       - name: Test and Integration Test with Maven
-        run: mvn --batch-mode verify
+        run: mvn --batch-mode verify -P jacoco
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   build-javadoc:
     runs-on: ubuntu-latest

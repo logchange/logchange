@@ -223,12 +223,31 @@
             </build>
         </profile>
         <profile>
+            <id>jacoco</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <version>0.8.13</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>prepare-agent</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
             <id>ci-cd</id>
             <build>
                 <plugins>
                     <plugin>
                         <!-- We always publish all modules, we tried to publish only some, but we need all as dependencies, parent module and last module
-                        is also important, because if its not uploaded, nothing will upload because of bug :) -->
+                        is also important, because if it's not uploaded, nothing will upload because of bug :) -->
                         <!-- https://central.sonatype.org/publish/publish-maven/#nexus-staging-maven-plugin-for-deployment-and-release -->
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
