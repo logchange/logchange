@@ -37,7 +37,12 @@ class MDChangelogVersionHeading extends Configurable implements MD {
     private String getVersionHeading() {
         Map<String, String> valuesMap = new HashMap<>();
         if (version.isUnreleased()) {
-            valuesMap.put("version", getConfig().getLabels().getUnreleased());
+            String[] prefixAndVersion = version.getValue().split("-");
+            if (prefixAndVersion.length > 1) {
+                valuesMap.put("version", getConfig().getLabels().getUnreleased() + " " + prefixAndVersion[1]);
+            } else {
+                valuesMap.put("version", getConfig().getLabels().getUnreleased());
+            }
         } else {
             valuesMap.put("version", version.getValue());
         }
