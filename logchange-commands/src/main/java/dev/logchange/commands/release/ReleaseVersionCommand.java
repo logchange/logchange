@@ -16,17 +16,11 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 import static dev.logchange.commands.Constants.GIT_KEEP;
+import static dev.logchange.core.domain.changelog.model.version.Version.UNRELEASED_DIR_SEPARATOR;
 
 @CustomLog
 @RequiredArgsConstructor(staticName = "of")
 public class ReleaseVersionCommand {
-
-    /**
-     * Separates <unreleasedVersionDir> from version for example
-     * if unreleasedVersionDir is "unreleased" and version to release is 1.0.0
-     * we have to check if dir unreleased-1.0.0 exists
-     */
-    private static final String UNRELEASED_DIR_SEPARATOR = "-";
 
     private final String rootPath;
     private final String version;
