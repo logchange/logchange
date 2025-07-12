@@ -39,7 +39,9 @@ class MDChangelogVersionImportantNotes extends Configurable implements MD {
         Stream<String> withModule = structure.getGroups().entrySet().stream().flatMap(entry ->
                 renderListOfNotes(entry.getValue())
         );
-        List<String> notes = Stream.concat(nonModule, withModule).collect(Collectors.toList());
+        List<String> notes = Stream.concat(nonModule, withModule)
+                .distinct()
+                .collect(Collectors.toList());
 
         return MarkdownBasics.heading(getConfig().getLabels().getImportantNotes(), 3)
                 + "\n\n"
