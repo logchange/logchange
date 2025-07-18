@@ -9,6 +9,10 @@
     </parent>
 
     <artifactId>logchange-commands</artifactId>
+    <name>logchange commands</name>
+    <description>
+        logchange commands provides common part for all clients: maven, gradle, cli
+    </description>
     <packaging>jar</packaging>
 
 
