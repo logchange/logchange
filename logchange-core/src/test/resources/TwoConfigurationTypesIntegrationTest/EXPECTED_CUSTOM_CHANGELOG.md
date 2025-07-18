@@ -16,8 +16,8 @@ My heading
 ### Important remarks
 
 - Update style.css on server during instalation 1
-- configuration
-- configuration
+- configuration 1
+- configuration 2
 - Update style.css on server during instalation 2
 
 ### A (1 modification)

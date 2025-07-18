@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,12 +30,21 @@ public class ArchiveIntegrationTest {
     @Test
     void shouldReturnListOfArchivedFiles() throws IOException {
         // given:
-        List<String> expectedArchivedFiles = Arrays.asList("archive-1.0.0.md", "archive-0.1.1.md", "archive.md", "v1.0.2", "v1.0.1");
+        byte[] archiveContent = null;
+        List<String> expectedArchivedFiles = Arrays.asList(
+                "archive-1.0.0.md",
+                "archive-0.1.1.md",
+                "archive.md",
+                "v1.0.2",
+                "v1.0.1"
+        );
         File archive = new File(PATH + "changelog/archive.md");
         File expectedArchive = new File(PATH + "EXPECTED_ARCHIVE.md");
         File changelogDirectory = new File(PATH + "changelog");
         String version = "1.0.2";
-        archive.createNewFile();
+        if(!archive.createNewFile()){
+            archiveContent = Files.readAllBytes(archive.toPath());
+        }
         FileRepository fr = FileRepository.of(archive);
         ChangelogPersistence changelogPersistence = new FileArchiveRepository(fr, Config.EMPTY);
         ChangelogQuery changelogQuery = new FileChangelogRepository(PATH, changelogDirectory, Config.EMPTY, new FileReader(), fr, fr);
@@ -44,10 +55,19 @@ public class ArchiveIntegrationTest {
         // when:
         List<String> archivedFiles = archiveService.handle(command);
 
-        // when:
-        assertEquals(expectedArchivedFiles, archivedFiles);
-        String expectedContent = FileUtils.fileRead(expectedArchive);
-        String actualContent = FileUtils.fileRead(archive);
-        assertThat(actualContent).isEqualToIgnoringNewLines(expectedContent);
+        // then:
+        try {
+            assertEquals(expectedArchivedFiles, archivedFiles);
+            String expectedContent = FileUtils.fileRead(expectedArchive);
+            String actualContent = FileUtils.fileRead(archive);
+            assertThat(actualContent).isEqualToIgnoringNewLines(expectedContent);
+
+        } finally {
+            // cleanup:
+            if(archiveContent != null){
+                Files.write(archive.toPath(), archiveContent, StandardOpenOption.TRUNCATE_EXISTING);
+            }
+        }
+
     }
 }

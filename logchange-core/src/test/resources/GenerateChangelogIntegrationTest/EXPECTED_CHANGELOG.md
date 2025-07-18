@@ -16,7 +16,6 @@
 - configuration 2
 - configuration 3
 - Update style.css on server during instalation
-- Update style.css on server during instalation
 - some realy important recomendation
 
 ### Added (1 change)
@@ -87,7 +86,6 @@
 - configuration 2
 - configuration 3
 - Update style.css on server during instalation
-- Update style.css on server during instalation
 - some realy important recomendation
 
 ### Added (1 change)
@@ -128,7 +126,6 @@
 - Update style.css on server during instalation 1
 - configuration 2
 - configuration 3
-- Update style.css on server during instalation
 - Update style.css on server during instalation
 - some realy important recomendation
 
@@ -204,7 +201,6 @@
 - configuration 2
 - configuration 3
 - Update style.css on server during instalation
-- Update style.css on server during instalation
 - some realy important recomendation
 
 ### Added (1 change)
@@ -245,7 +241,6 @@
 - Update style.css on server during instalation 1
 - configuration 2
 - configuration 3
-- Update style.css on server during instalation
 - Update style.css on server during instalation
 - some realy important recomendation
 
@@ -288,7 +283,6 @@
 - configuration 2
 - configuration 3
 - Update style.css on server during instalation
-- Update style.css on server during instalation
 - some realy important recomendation
 
 ### Added (1 change)
@@ -329,7 +323,6 @@
 - Update style.css on server during instalation 1
 - configuration 2
 - configuration 3
-- Update style.css on server during instalation
 - Update style.css on server during instalation
 - some realy important recomendation
 

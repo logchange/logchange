@@ -14,7 +14,6 @@
 
 - Update style.css on server during instalation 1
 - configuration
-- configuration
 - Update style.css on server during instalation 2
 
 ### Added (1 change)

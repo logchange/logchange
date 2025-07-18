@@ -13,8 +13,8 @@ links: # links to external systems, like redmine something else
 type: fixed # [added/changed/deprecated/removed/fixed/security/dependency_update/other]
 important_notes:
   - Update style.css on server during instalation 1
-  - configuration
-  - configuration
+  - configuration 1
+  - configuration 2
 configurations: # information about changes in available application configurations
   - type: database parameter
     action: add # [add/update/delete]
