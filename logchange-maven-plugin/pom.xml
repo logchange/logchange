@@ -19,7 +19,7 @@
 
     <properties>
         <maven-core.version>3.9.11</maven-core.version>
-        <maven-plugin-api.version>3.9.10</maven-plugin-api.version>
+        <maven-plugin-api.version>3.9.11</maven-plugin-api.version>
         <maven-plugin-annotations.version>3.15.1</maven-plugin-annotations.version>
         <maven-plugin-plugin.version>3.15.1</maven-plugin-plugin.version>
         <plexus-interactivity-api.version>1.4</plexus-interactivity-api.version>
