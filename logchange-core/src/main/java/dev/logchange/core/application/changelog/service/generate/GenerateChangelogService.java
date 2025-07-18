@@ -21,7 +21,7 @@ public class GenerateChangelogService implements GenerateChangelogUseCase, Valid
     public void handle(GenerateChangelogCommand command) {
         Changelog changelog = changelogRepository.findMarkdown();
 
-        for (ChangelogVersion version : changelog.getVersions().getVersions()) {
+        for (ChangelogVersion version : changelog.getVersions()) {
             versionSummaryRepository.save(version);
         }
 

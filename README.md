@@ -51,8 +51,8 @@ GitLab. [LINK](https://about.gitlab.com/blog/2018/07/03/solving-gitlabs-changelo
 
 - [**CLI** (binary)](https://github.com/logchange/logchange?tab=readme-ov-file#logchange-cli) - you can use it
   regardless of the technology used in the project. Also, available as:
-  - [logchange homebrew formula][] available on Linux and macOS
-  - [logchange docker image][] suited for CI/CD
+    - [logchange homebrew formula][] available on Linux and macOS
+    - [logchange docker image][] suited for CI/CD
 - [**Maven Plugin**](https://github.com/logchange/logchange?tab=readme-ov-file#maven-plugin) - dedicated to projects
   based on the [Maven][] tool
 - [**Gradle Plugin**](https://github.com/logchange/logchange?tab=readme-ov-file#gradle-plugin) - dedicated to projects
@@ -127,13 +127,12 @@ On the other hand, if you would like to just generate an empty file with some de
 mvn logchange:add -Dempty -DfileName=000001-some-name.yml
 ```
 
-You can also run the following command to generate an example entry with pre-filled properties, 
+You can also run the following command to generate an example entry with pre-filled properties,
 which you can then modify as needed (don't forget to change the file name!):
 
 ```shell
 mvn logchange:example
 ```
-
 
 ### YAML format
 
@@ -169,7 +168,8 @@ configurations: # information about changes in available application configurati
 |:------------------------------:|-----------------------------------------------------------------------------------------------------------------------------------------------------|
 |            `title`             | Description of change that has been made.                                                                                                           |
 |           `authors`            | List of change's authors.                                                                                                                           |
-|        `merge_requests`        | The merge requests' numbers which are adding this change.                                                                                           |
+|           `modules`            | List of modules affected by change.                                                                                                                 | 
+|        `merge_requests`        | The merge requests' numbers which are adding this change.                                                                                           | 
 |            `issues`            | List of issues associated with this change.                                                                                                         |
 |             `type`             | Type of the change. Default: `added/changed/deprecated/removed/fixed/security/dependency_update/other` It can be overridden in logchange-config.yml |
 |            `links`             | Any link to other project or external tool witch contains information about this change.                                                            |
@@ -336,6 +336,7 @@ mvn logchange:lint
 ```
 
 ### Generating
+
 `changes.xml` for [maven-changes-plugin](https://maven.apache.org/plugins/maven-changes-plugin/index.html)
 
 Along with `CHANGELOG.md` there is also the option of generating Maven's `changes.xml`.
@@ -364,6 +365,16 @@ You can see example [**here**](https://github.com/logchange/logchange/blob/main/
 
 This feature is really useful during creating releases on GitHub or GitLab, you can just attach the content of this file
 as release notes.
+
+### Modules
+
+Some project are big enough that have separate subsystems. To mark change that affect particular subsystem you can use
+`module` property of changelog.
+
+During changelog generation, changes with same module would be aggregated to same area for better readability even 
+if they are created in separate entries.
+
+If entry is marked with more than one module, it would appear on list multiple times, with each module aggregation.
 
 ### Archives
 
@@ -469,8 +480,6 @@ TODO
 | `--unreleasedVersionDir` | `unreleased`        | Specifies the directory where created entries will be stored.         |
 | `--fileName`             | `00000-entry.yml`   | The name of the entry file.                                           |
 
-
-
 ### logchange generate
 
 | Option         | Default Value          | Description                                                                        |
@@ -519,7 +528,6 @@ TODO
 | `--version`    | N/A                    | Specifies the version up to which all released versions should be archived (inclusive). |
 | `--inputDir`   | `changelog`            | Specifies the input directory for the logchange data.                                   |
 | `--configFile` | `logchange-config.yml` | Specifies the name of configuration file.                                               |
-
 
 ## Gradle Plugin
 
@@ -576,6 +584,9 @@ logchangeRelease - Creates new changelog release by moving files from <unrelease
 2. `mvn` as a command in your terminal(needed for integration tests, IniteliJ does not support maven integration tests).
 
 [Maven]: https://maven.apache.org/
+
 [logchange docker image]: https://hub.docker.com/r/logchange/logchange
+
 [logchange homebrew formula]: https://github.com/logchange/homebrew-tap
+
 [Gradle]: https://gradle.org/

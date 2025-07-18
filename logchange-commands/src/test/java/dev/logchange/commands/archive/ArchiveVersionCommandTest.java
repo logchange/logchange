@@ -5,6 +5,10 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -38,22 +42,25 @@ class ArchiveVersionCommandTest {
         assertFalse(archiveFile.exists());
         assertTrue(expectedArchive.exists());
 
-        // when:
-        ArchiveVersionCommand.of(TEST_PATH, INPUT_DIR, "1.0.2", CONFIG_FILE).execute();
+        try {
+            // when:
+            ArchiveVersionCommand.of(TEST_PATH, INPUT_DIR, "1.0.2", CONFIG_FILE).execute();
 
-        // then:
-        assertTrue(unreleasedDir.exists());
-        assertFalse(archivedVersionFile.exists());
-        assertFalse(versionDir.exists());
-        assertFalse(secondVersionDir.exists());
-        assertTrue(thirdVersionDir.exists());
-        assertTrue(archiveFile.exists());
-        String expectedContent = FileUtils.fileRead(expectedArchive, "UTF-8");
-        String actualContent = FileUtils.fileRead(archiveFile, "UTF-8");
-        assertThat(actualContent).isEqualToIgnoringWhitespace(expectedContent);
+            // then:
+            assertTrue(unreleasedDir.exists(), "unreleased dir does not exist");
+            assertFalse(archivedVersionFile.exists(), "archivedVersionFile does not exist");
+            assertFalse(versionDir.exists(), "versionDir does not exist");
+            assertFalse(secondVersionDir.exists(), "secondVersionDir does not exist");
+            assertTrue(thirdVersionDir.exists(), "thirdVersionDir does not exist");
+            assertTrue(archiveFile.exists(), "archive file does not exist");
+            String expectedContent = FileUtils.fileRead(expectedArchive, "UTF-8");
+            String actualContent = FileUtils.fileRead(archiveFile, "UTF-8");
+            assertThat(actualContent).isEqualToIgnoringWhitespace(expectedContent);
+        } finally {
+            // cleanup:
+            Files.delete(archiveFile.toPath());
+        }
 
-        // cleanup:
-        new File(TEST_PATH + "/" + INPUT_DIR + "/" + ARCHIVE_FILE).delete();
     }
 
     @Test
@@ -76,18 +83,23 @@ class ArchiveVersionCommandTest {
         assertTrue(archiveFile.exists());
         assertTrue(expectedArchive.exists());
 
-        // when:
-        ArchiveVersionCommand.of(TEST_PATH, INPUT_DIR, "1.0.2", CONFIG_FILE).execute();
+        final byte[] content = Files.readAllBytes(expectedArchive.toPath());
+        try {
+            // when:
+            ArchiveVersionCommand.of(TEST_PATH, INPUT_DIR, "1.0.2", CONFIG_FILE).execute();
 
-        // then:
-        assertTrue(unreleasedDir.exists());
-        assertFalse(archivedVersionFile.exists());
-        assertFalse(versionDir.exists());
-        assertFalse(secondVersionDir.exists());
-        assertTrue(thirdVersionDir.exists());
-        assertTrue(archiveFile.exists());
-        String expectedContent = FileUtils.fileRead(expectedArchive, "UTF-8");
-        String actualContent = FileUtils.fileRead(archiveFile, "UTF-8");
-        assertThat(actualContent).isEqualToIgnoringWhitespace(expectedContent);
+            // then:
+            assertTrue(unreleasedDir.exists());
+            assertFalse(archivedVersionFile.exists());
+            assertFalse(versionDir.exists());
+            assertFalse(secondVersionDir.exists());
+            assertTrue(thirdVersionDir.exists());
+            assertTrue(archiveFile.exists());
+            String expectedContent = FileUtils.fileRead(expectedArchive, "UTF-8");
+            String actualContent = FileUtils.fileRead(archiveFile, "UTF-8");
+            assertThat(actualContent).isEqualToIgnoringWhitespace(expectedContent);
+        } finally {
+            Files.write(expectedArchive.toPath(), content);
+        }
     }
 }

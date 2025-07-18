@@ -1,4 +1,7 @@
 title: Test title 1
+modules:
+  - foo
+  - bar
 authors:
   - nick: marwin1991
     url: https://github.com/marwin1991
@@ -10,11 +13,11 @@ issues:
 links: # links to external systems, like redmine something else
   - name: TASK_NUMBER
     url: https://www.google.pl
-type: fixed # [added/changed/deprecated/removed/fixed/security/dependency_update/other]
+type: fix # [added/changed/deprecated/removed/fixed/security/dependency_update/other]
 important_notes:
   - Update style.css on server during instalation 1
-  - configuration 1
-  - configuration 2
+  - configuration
+  - configuration
 configurations: # information about changes in available application configurations
   - type: database parameter
     action: add # [add/update/delete]

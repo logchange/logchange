@@ -46,7 +46,7 @@ public class FileConfigRepository implements ConfigRepository {
         try {
             return new FileInputStream(entryFile);
         } catch (FileNotFoundException e) {
-            String message = "Cannot find entry file: " + entryFile.getName();
+            String message = "Cannot find entry file: " + entryFile.getAbsolutePath();
             log.error(message);
             throw new IllegalArgumentException(message);
         }

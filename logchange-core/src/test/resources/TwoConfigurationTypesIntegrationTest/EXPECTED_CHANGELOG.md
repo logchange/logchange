@@ -13,8 +13,8 @@
 ### Important notes
 
 - Update style.css on server during instalation 1
-- configuration
-- configuration
+- configuration 1
+- configuration 2
 - Update style.css on server during instalation 2
 
 ### Added (1 change)

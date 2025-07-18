@@ -1,14 +1,19 @@
 package dev.logchange.core.domain.changelog.model.entry;
 
+import dev.logchange.core.domain.changelog.model.DetachedConfiguration;
+import dev.logchange.core.domain.changelog.model.DetachedImportantNote;
+import dev.logchange.core.domain.changelog.model.HasModules;
+import dev.logchange.core.format.md.changelog.version.MDModuleStructure;
 import lombok.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Getter
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class ChangelogEntry {
+public class ChangelogEntry implements HasModules {
 
     // used to keep original order of entries
     @Setter
@@ -29,6 +34,20 @@ public class ChangelogEntry {
     private final List<ChangelogEntryImportantNote> importantNotes;
     @Singular
     private final List<ChangelogEntryConfiguration> configurations;
+    @Singular
+    private final List<ChangelogModule> modules;
+
+    public Stream<DetachedImportantNote> getDetachedImportantNotes() {
+        return importantNotes.stream().map(importantNote ->
+            new DetachedImportantNote(importantNote.getValue(), modules)
+        );
+    }
+
+    public Stream<DetachedConfiguration> getDetachedConfigurations() {
+        return configurations.stream().map(configuration ->
+            new DetachedConfiguration(configuration, modules)
+        );
+    }
 
     public ChangelogEntry withPrefix(String prefix) {
         if (prefix == null) {
@@ -42,15 +61,7 @@ public class ChangelogEntry {
                 .map(config -> config.withPrefix(prefix))
                 .collect(Collectors.toList());
 
-        return ChangelogEntry.builder()
-                .id(id)
-                .prefix(prefix)
-                .title(title)
-                .type(type)
-                .mergeRequests(mergeRequests)
-                .issues(issues)
-                .links(links)
-                .authors(authors)
+        return this.toBuilder()
                 .importantNotes(prefixedNotes)
                 .configurations(prefixedConfigurations)
                 .build();
@@ -61,4 +72,10 @@ public class ChangelogEntry {
         return type.getKey() + " - " + title.getValue();
     }
 
+    public ChangelogEntry addProjectModule(ChangelogModule module) {
+        if (!modules.isEmpty()){
+            throw new RuntimeException("Aggregation does not support project modules");
+        }
+        return toBuilder().module(module).build();
+    }
 }

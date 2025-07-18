@@ -13,7 +13,6 @@
 ### Important notes
 
 - **PROJECT_A** - Update style.css on server during instalation
-- **PROJECT_A** - Update style.css on server during instalation
 - **PROJECT_A** - Update style.css on server during instalation 1
 - **PROJECT_A** - configuration 2
 - **PROJECT_A** - configuration 3

@@ -7,12 +7,13 @@ import lombok.Getter;
 import lombok.extern.java.Log;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 @Log
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class ChangelogVersions {
+public class ChangelogVersions implements Iterable<ChangelogVersion> {
 
     private final List<ChangelogVersion> versions;
 
@@ -23,4 +24,10 @@ public class ChangelogVersions {
         }
         return new ChangelogVersions(Collections.unmodifiableList(versions));
     }
+
+    @Override
+    public Iterator<ChangelogVersion> iterator() {
+        return versions.iterator();
+    }
+
 }
