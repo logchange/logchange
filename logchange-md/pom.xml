@@ -8,8 +8,10 @@
     </parent>
 
     <artifactId>logchange-md</artifactId>
-
-    <description>A module that supports working with and formatting text in the Markdown format.</description>
+    <name>logchange markdown</name>
+    <description>
+        A module that supports working with and formatting text in the Markdown format.
+    </description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

@@ -9,6 +9,10 @@
     </parent>
 
     <artifactId>logchange-test-reports</artifactId>
+    <name>logchange rest reports</name>
+    <description>
+        logchange rest reports allow aggregating reports from submodules and join them.
+    </description>
     <packaging>pom</packaging>
 
     <dependencies>

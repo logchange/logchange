@@ -9,13 +9,13 @@
     </parent>
 
     <artifactId>logchange-maven-plugin</artifactId>
-    <packaging>maven-plugin</packaging>
-
+    <name>logchange Maven Plugin</name>
     <description>
         A Maven plugin that integrates logchange functionalities into Maven-based projects. It automates the
         generation, validation, and updating of changelogs, ensuring consistent and accurate tracking of project
         changes.
     </description>
+    <packaging>maven-plugin</packaging>
 
     <properties>
         <maven-core.version>3.9.11</maven-core.version>

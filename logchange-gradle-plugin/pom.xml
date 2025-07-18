@@ -9,12 +9,11 @@
     </parent>
 
     <artifactId>dev.logchange.gradle.plugin</artifactId>
-    <packaging>jar</packaging>
-
     <name>logchange Gradle Plugin</name>
     <description>
         Gradle plugin providing logchange functionalities (changelog generation, etc.).
     </description>
+    <packaging>jar</packaging>
 
     <properties>
         <gradle-all.version>8.10.2</gradle-all.version>

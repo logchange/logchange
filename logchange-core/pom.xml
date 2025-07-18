@@ -9,6 +9,7 @@
     </parent>
 
     <artifactId>logchange-core</artifactId>
+    <name>logchange core</name>
 
     <description>
         A core library responsible for processing changelogs. It enables reading, writing, and analyzing change data in

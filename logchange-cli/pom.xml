@@ -9,6 +9,10 @@
     </parent>
 
     <artifactId>logchange-cli</artifactId>
+    <name>logchange CLI</name>
+    <description>
+        logchange CLI allows using logchange from command line, compiled to executable using GraalVM, installed by brew.
+    </description>
 
     <properties>
         <packaging>jar</packaging>
