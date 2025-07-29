@@ -66,6 +66,12 @@
     "allDeclaredConstructors": true
   },
   {
+    "name": "dev.logchange.core.format.yml.changelog.entry.YMLChangelogModule",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true
+  },
+  {
     "name": "dev.logchange.core.format.yml.config.YMLChangelog",
     "allDeclaredFields": true,
     "allDeclaredMethods": true,
