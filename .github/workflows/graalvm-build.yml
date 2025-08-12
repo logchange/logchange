@@ -11,7 +11,7 @@ jobs:
     name: Build and Test Java on GraalVM
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: graalvm/setup-graalvm@v1
         with:
           java-version: '21'
