@@ -155,7 +155,8 @@ public class FileChangelogRepository implements ChangelogRepository {
     }
 
     private Version getVersion(File versionDirectory) {
-        return Version.of(versionDirectory.getName().replace("v", ""));
+        // Strip only a single leading 'v' or 'V' from the directory name to avoid altering internal letters (e.g., '-ver8')
+        return Version.of(versionDirectory.getName().replaceFirst("^[vV]", ""));
     }
 
     private List<ChangelogVersionEntriesGroup> getEntries(File versionDirectory) {
