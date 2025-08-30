@@ -1,0 +1,13 @@
+# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵 
+# Visit https://github.com/logchange/logchange and leave a star 🌟 
+# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
+title: "Fix: strip only a single leading 'v' or 'V' from version directory names when parsing"
+authors:
+  - name: Junie by JetBrains
+    nick: jetbrains-junie
+    url: https://github.com/jetbrains-junie
+type: fixed
+merge_requests:
+  - 588
+issues:
+  - 548
