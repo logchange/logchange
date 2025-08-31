@@ -1,0 +1,1 @@
+### Generating GIF demonstrating logchange usage

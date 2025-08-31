@@ -10,14 +10,14 @@ import java.io.Console;
 public class GradleAddEntryPrompter implements AddEntryPrompter {
 
     @Override
-    public String prompt(String message) {
+    public String prompt(PromptMessage message) {
         Console console = System.console();
         if (console != null) {
-            return console.readLine(message);
+            return console.readLine(message.getMessage());
         } else {
             String inputRequired = JOptionPane.showInputDialog(
                     null,
-                    message + " [press cancel to terminate task]",
+                    message.getMessage() + " [press cancel to terminate task]",
                     "Input required",
                     JOptionPane.QUESTION_MESSAGE
             );

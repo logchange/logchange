@@ -11,9 +11,9 @@ public class MavenAddEntryPrompter implements AddEntryPrompter {
     private final Prompter prompter;
 
     @Override
-    public String prompt(String message) {
+    public String prompt(PromptMessage message) {
         try {
-            return prompter.prompt(message);
+            return prompter.prompt(message.getMessage());
         } catch (PrompterException e) {
             throw new RuntimeException(e);
         }
