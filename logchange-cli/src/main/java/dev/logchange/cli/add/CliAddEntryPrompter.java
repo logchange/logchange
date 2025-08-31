@@ -13,7 +13,7 @@ public class CliAddEntryPrompter implements AddEntryPrompter {
     private final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     @Override
-    public String prompt(String message) {
+    public String prompt(PromptMessage message) {
         System.out.print(message);
         try {
             return reader.readLine();

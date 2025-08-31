@@ -87,7 +87,7 @@ class PromptMessageTest {
         AddEntryPrompter.PromptMessage promptMessage = new AddEntryPrompter.PromptMessage(input);
 
         // then:
-        assertThat(promptMessage.getMessage()).isEqualTo("null: ");
+        assertThat(promptMessage.getMessage()).isEqualTo(": ");
     }
 
     @Test

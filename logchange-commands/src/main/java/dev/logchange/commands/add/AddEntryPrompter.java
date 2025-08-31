@@ -14,6 +14,10 @@ public interface AddEntryPrompter {
         }
 
         private String adjustMessage(String message) {
+            if (message == null) {
+                return ": ";
+            }
+
             if (message.endsWith(": ")) {
                 return message;
             }
