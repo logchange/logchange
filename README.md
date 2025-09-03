@@ -48,7 +48,7 @@ GitLab. [LINK](https://about.gitlab.com/blog/2018/07/03/solving-gitlabs-changelo
 ## Usage and installation
 
 <div align="center">
-  <img src="https://github.com/logchange/hofund/raw/main/logchange.gif" />
+  <img src="https://github.com/logchange/logchange/raw/main/logchange.gif" />
 </div>
 
 ### logchange is distributed as:
