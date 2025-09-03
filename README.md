@@ -47,6 +47,10 @@ GitLab. [LINK](https://about.gitlab.com/blog/2018/07/03/solving-gitlabs-changelo
 
 ## Usage and installation
 
+<div align="center">
+  <img src="https://github.com/logchange/hofund/raw/main/logchange.gif" />
+</div>
+
 ### logchange is distributed as:
 
 - [**CLI** (binary)](https://github.com/logchange/logchange?tab=readme-ov-file#logchange-cli) - you can use it
@@ -73,7 +77,7 @@ You can choose between two options:
         <plugin>
             <groupId>dev.logchange</groupId>
             <artifactId>logchange-maven-plugin</artifactId>
-            <version>1.19.5</version>
+            <version>1.19.9</version>
         </plugin>
     </plugins>
 </build>
@@ -538,7 +542,7 @@ Add plugin to `build.gradle`:
 ```groovy
 plugins {
     ....
-    id 'dev.logchange' version '1.19.5'
+    id 'dev.logchange' version '1.19.9'
 }
 ```
 

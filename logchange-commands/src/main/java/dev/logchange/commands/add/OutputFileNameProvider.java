@@ -1,5 +1,6 @@
 package dev.logchange.commands.add;
 
+import dev.logchange.commands.add.AddEntryPrompter.PromptMessage;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 
@@ -41,7 +42,7 @@ public class OutputFileNameProvider {
 
     private String getOutputFileName() {
         while (true) {
-            String name = prompter.prompt("What is the filename(e.g. 000231-adding-new-product)");
+            String name = prompter.prompt(new PromptMessage("What is the filename(e.g. 000231-adding-new-product)"));
             if (StringUtils.isBlank(name)) {
                 prompter.showMessage("Filename cannot be empty nor blank!!!");
                 continue;

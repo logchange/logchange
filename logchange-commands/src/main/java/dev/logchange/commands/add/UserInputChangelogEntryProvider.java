@@ -1,5 +1,6 @@
 package dev.logchange.commands.add;
 
+import dev.logchange.commands.add.AddEntryPrompter.PromptMessage;
 import dev.logchange.core.domain.changelog.model.entry.*;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -41,7 +42,7 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
 
         while (true) {
             try {
-                return ChangelogEntryTitle.of(prompter.prompt("What is changelog's entry title(e.g. Adding new awesome product to order list)"));
+                return ChangelogEntryTitle.of(prompter.prompt(new PromptMessage("What is changelog's entry title(e.g. Adding new awesome product to order list)")));
             } catch (IllegalArgumentException e) {
                 prompter.showMessage(e.getMessage());
             }
@@ -58,11 +59,11 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
                 .map(ChangelogEntryType::toString)
                 .collect(Collectors.joining(System.lineSeparator())) +
                 System.lineSeparator() +
-                "What is changelog's entry type (choose number from above) ?";
+                "What is changelog's entry type (choose number from above)";
 
         while (true) {
             try {
-                return ChangelogEntryType.from(prompter.prompt(prompt));
+                return ChangelogEntryType.from(prompter.prompt(new PromptMessage(prompt)));
             } catch (IllegalArgumentException e) {
                 prompter.showMessage(e.getMessage());
             }
@@ -74,7 +75,7 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
 
         while (true) {
             try {
-                String response = prompter.prompt(prompt);
+                String response = prompter.prompt(new PromptMessage(prompt));
                 return Arrays.stream(response.replaceAll("\\s+", "").split(","))
                         .filter(StringUtils::isNotBlank)
                         .map(Long::valueOf)
@@ -91,7 +92,7 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
 
         while (true) {
             try {
-                String response = prompter.prompt(prompt);
+                String response = prompter.prompt(new PromptMessage(prompt));
                 return Arrays.stream(response.replaceAll("\\s+", "").split(","))
                         .filter(StringUtils::isNotBlank)
                         .map(Long::valueOf)
@@ -113,7 +114,7 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
 
         while (true) {
             try {
-                String response = prompter.prompt(prompt);
+                String response = prompter.prompt(new PromptMessage(prompt));
                 if (response.trim().equalsIgnoreCase("Y")) {
                     return getLinksRecur(links);
                 } else {
@@ -126,11 +127,11 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
     }
 
     private List<ChangelogEntryLink> getLinksRecur(List<ChangelogEntryLink> links) {
-        String name = prompter.prompt("Give a link caption [press ENTER to skip] ");
-        String link = prompter.prompt("Give a link ");
+        String name = prompter.prompt(new PromptMessage("Give a link caption [press ENTER to skip] "));
+        String link = prompter.prompt(new PromptMessage("Give a link "));
         links.add(ChangelogEntryLink.of(name, link));
 
-        if (prompter.prompt("Is there any other links you want to include? [Y/y - YES] [N/n - NO]").trim().equalsIgnoreCase("Y")) {
+        if (prompter.prompt(new PromptMessage("Is there any other links you want to include? [Y/y - YES] [N/n - NO]")).trim().equalsIgnoreCase("Y")) {
             return getLinksRecur(links);
         } else {
             return links;
@@ -155,7 +156,7 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
 
         while (true) {
             try {
-                String response = prompter.prompt(prompt);
+                String response = prompter.prompt(new PromptMessage(prompt));
                 if (response.trim().equalsIgnoreCase("Y")) {
                     return getAuthorsRecur(authors);
                 } else {
@@ -169,16 +170,16 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
 
     private List<ChangelogEntryAuthor> getAuthorsRecur(List<ChangelogEntryAuthor> authors) {
         try {
-            String name = prompter.prompt("Give a name of author [press ENTER to skip] ");
-            String nick = prompter.prompt("Give a nickname of author [press ENTER to skip] ");
-            String url = prompter.prompt("Give a url of author profile [press ENTER to skip] ");
+            String name = prompter.prompt(new PromptMessage("Give a name of author [press ENTER to skip] "));
+            String nick = prompter.prompt(new PromptMessage("Give a nickname of author [press ENTER to skip] "));
+            String url = prompter.prompt(new PromptMessage("Give a url of author profile [press ENTER to skip] "));
             authors.add(ChangelogEntryAuthor.of(name, nick, url));
         } catch (IllegalArgumentException e) {
             prompter.showMessage(e.getMessage());
             return getAuthorsRecur(authors);
         }
 
-        if (prompter.prompt("Is there any other links you want to include? [Y/y - YES] [N/n - NO]").trim().equalsIgnoreCase("Y")) {
+        if (prompter.prompt(new PromptMessage("Is there any other author you want to include? [Y/y - YES] [N/n - NO] [press ENTER to skip]")).trim().equalsIgnoreCase("Y")) {
             return getAuthorsRecur(authors);
         } else {
             return authors;
@@ -191,7 +192,7 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
 
         while (true) {
             try {
-                String response = prompter.prompt(prompt);
+                String response = prompter.prompt(new PromptMessage(prompt));
                 if (response.trim().trim().equalsIgnoreCase("Y")) {
                     return getNotesRecur(notes).stream()
                             .map(ChangelogEntryImportantNote::of)
@@ -206,10 +207,10 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
     }
 
     private List<String> getNotesRecur(List<String> notes) {
-        String note = prompter.prompt("Give a note ");
+        String note = prompter.prompt(new PromptMessage("Give a note "));
         notes.add(note.trim());
 
-        if (prompter.prompt("Is there any other note you want to include? [Y/y - YES] [N/n - NO]").trim().equalsIgnoreCase("Y")) {
+        if (prompter.prompt(new PromptMessage("Is there any other note you want to include? [Y/y - YES] [N/n - NO]")).trim().equalsIgnoreCase("Y")) {
             return getNotesRecur(notes);
         } else {
             return notes;
@@ -222,7 +223,7 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
 
         while (true) {
             try {
-                String response = prompter.prompt(prompt);
+                String response = prompter.prompt(new PromptMessage(prompt));
                 if (response.trim().trim().equalsIgnoreCase("Y")) {
                     return getConfigurationsRecur(configurations);
                 } else {
@@ -236,19 +237,19 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
 
     private List<ChangelogEntryConfiguration> getConfigurationsRecur(List<ChangelogEntryConfiguration> configurations) {
         try {
-            String type = prompter.prompt("Give a type of a configuration property (f.e. database, or system env, or application.properties) ");
+            String type = prompter.prompt(new PromptMessage("Give a type of a configuration property (f.e. database, or system env, or application.properties) "));
             ChangelogEntryConfigurationAction action = getConfigurationAction();
-            String key = prompter.prompt("Give a key of configuration property (f.e. server.port) ");
-            String defaultValue = prompter.prompt("Give a default value of configuration property (f.e. 8443) [press ENTER to skip] ");
-            String description = prompter.prompt("Give a description of configuration property (f.e. Port to handle incoming https traffic ) [press ENTER to skip] ");
-            String moreInfo = prompter.prompt("Here you can specify more information about configuration property (f.e. Remember to disable port 8080 to disable standard http traffic ) [press ENTER to skip] ");
+            String key = prompter.prompt(new PromptMessage("Give a key of configuration property (f.e. server.port) "));
+            String defaultValue = prompter.prompt(new PromptMessage("Give a default value of configuration property (f.e. 8443) [press ENTER to skip] "));
+            String description = prompter.prompt(new PromptMessage("Give a description of configuration property (f.e. Port to handle incoming https traffic ) [press ENTER to skip] "));
+            String moreInfo = prompter.prompt(new PromptMessage("Here you can specify more information about configuration property (f.e. Remember to disable port 8080 to disable standard http traffic ) [press ENTER to skip] "));
             configurations.add(ChangelogEntryConfiguration.of(type, action, key, defaultValue, description, moreInfo));
         } catch (IllegalArgumentException e) {
             prompter.showMessage(e.getMessage());
             return getConfigurationsRecur(configurations);
         }
 
-        if (prompter.prompt("Is there any other configuration change you want to include? [Y/y - YES] [N/n - NO]").trim().equalsIgnoreCase("Y")) {
+        if (prompter.prompt(new PromptMessage("Is there any other configuration change you want to include? [Y/y - YES] [N/n - NO]")).trim().equalsIgnoreCase("Y")) {
             return getConfigurationsRecur(configurations);
         } else {
             return configurations;
@@ -264,7 +265,7 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
 
         while (true) {
             try {
-                return ChangelogEntryConfigurationAction.from(prompter.prompt(prompt));
+                return ChangelogEntryConfigurationAction.from(prompter.prompt(new PromptMessage(prompt)));
             } catch (IllegalArgumentException e) {
                 prompter.showMessage(e.getMessage());
             }
