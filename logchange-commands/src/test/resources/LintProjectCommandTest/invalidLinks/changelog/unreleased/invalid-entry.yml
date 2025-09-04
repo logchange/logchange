@@ -1,0 +1,13 @@
+# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵
+# Visit https://github.com/logchange/logchange and leave a star 🌟
+# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
+
+title: "test"
+authors:
+  - nick: test
+merge_requests:
+  - 1658
+links:
+  - name: TEST#1111
+  - url: https://logchange.dev
+type: added
