@@ -28,7 +28,7 @@
 
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
         <native-maven-plugin.version>0.11.0</native-maven-plugin.version>
-        <maven-shade-plugin.version>3.6.0</maven-shade-plugin.version>
+        <maven-shade-plugin.version>3.6.1</maven-shade-plugin.version>
 
         <picocli.version>4.7.7</picocli.version>
 
