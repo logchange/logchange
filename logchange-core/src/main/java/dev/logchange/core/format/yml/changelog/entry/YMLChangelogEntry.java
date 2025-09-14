@@ -189,9 +189,19 @@ public class YMLChangelogEntry {
         if (links == null) {
             return Collections.emptyList();
         } else {
-            return links.stream()
-                    .map(YMLChangelogEntryLink::to)
-                    .collect(Collectors.toList());
+            List<String> errors = new java.util.ArrayList<>();
+            List<ChangelogEntryLink> result = new java.util.ArrayList<>();
+            for (YMLChangelogEntryLink link : links) {
+                try {
+                    result.add(link.to());
+                } catch (IllegalArgumentException e) {
+                    errors.add(e.getMessage());
+                }
+            }
+            if (!errors.isEmpty()) {
+                throw new YMLChangelogInvalidConfigValuesException(path, errors);
+            }
+            return result;
         }
     }
 
