@@ -27,7 +27,11 @@ class MDChangelogEntryLinks implements MD {
 
         StringBuilder mdLinks = new StringBuilder(StringUtils.EMPTY);
         for (ChangelogEntryLink link : links) {
-            mdLinks.append(MarkdownBasics.link(link.getName(), link.getUrl())).append(" ");
+            if (link.getName().isEmpty()) {
+                mdLinks.append(MarkdownBasics.link(link.getUrl(), link.getUrl())).append(" ");
+            } else {
+                mdLinks.append(MarkdownBasics.link(link.getName(), link.getUrl())).append(" ");
+            }
         }
         return mdLinks.toString().trim();
     }

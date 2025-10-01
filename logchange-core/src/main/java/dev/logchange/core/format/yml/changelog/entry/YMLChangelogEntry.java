@@ -11,10 +11,7 @@ import lombok.*;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.InputStream;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Data
@@ -189,9 +186,19 @@ public class YMLChangelogEntry {
         if (links == null) {
             return Collections.emptyList();
         } else {
-            return links.stream()
-                    .map(YMLChangelogEntryLink::to)
-                    .collect(Collectors.toList());
+            List<String> errors = new ArrayList<>();
+            List<ChangelogEntryLink> result = new ArrayList<>();
+            for (YMLChangelogEntryLink link : links) {
+                try {
+                    result.add(link.to());
+                } catch (IllegalArgumentException e) {
+                    errors.add(e.getMessage());
+                }
+            }
+            if (!errors.isEmpty()) {
+                throw new YMLChangelogInvalidConfigValuesException(path, errors);
+            }
+            return result;
         }
     }
 
