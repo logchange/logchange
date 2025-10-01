@@ -5,7 +5,7 @@
     <parent>
         <groupId>dev.logchange</groupId>
         <artifactId>logchange</artifactId>
-        <version>1.19.10-SNAPSHOT</version>
+        <version>1.19.10</version>
     </parent>
 
     <artifactId>logchange-core</artifactId>
