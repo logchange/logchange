@@ -74,9 +74,11 @@
         <!-- TESTS -->
         <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
         <junit-jupiter.version>5.13.4</junit-jupiter.version>
+
         <mockito-core.version>5.20.0</mockito-core.version>
-        <assertj.version>3.27.4</assertj.version>
+        <assertj.version>3.27.6</assertj.version>
         <pitest-maven.version>1.20.3</pitest-maven.version>
+
         <pitest-junit5-plugin.version>1.2.3</pitest-junit5-plugin.version>
     </properties>
 
