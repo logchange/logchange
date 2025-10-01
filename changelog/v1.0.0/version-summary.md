@@ -7,7 +7,7 @@
 <!-- !!! ⚠️ DO NOT MODIFY THIS FILE, YOUR CHANGES WILL BE LOST ⚠️ !!! -->
 
 
-[1.0.0] - 2023-05-24
+[1.0.0] - 2025-08-30
 --------------------
 
 ### Added (2 changes)
