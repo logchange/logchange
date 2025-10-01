@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryLink;
 import lombok.*;
-import org.apache.commons.lang3.StringUtils;
 
 @Data
 @Builder
@@ -30,12 +29,6 @@ public class YMLChangelogEntryLink {
     }
 
     ChangelogEntryLink to() {
-        if (StringUtils.isBlank(name)) {
-            throw new IllegalArgumentException("Link name cannot be blank!");
-        }
-        if (StringUtils.isBlank(url)) {
-            throw new IllegalArgumentException("Link url cannot be blank!");
-        }
         return ChangelogEntryLink.of(name, url);
     }
 

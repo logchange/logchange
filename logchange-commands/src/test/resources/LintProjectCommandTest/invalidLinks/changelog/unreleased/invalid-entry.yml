@@ -10,4 +10,5 @@ merge_requests:
 links:
   - name: TEST#1111
   - url: https://logchange.dev
+  - name: TEST#1112
 type: added

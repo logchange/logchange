@@ -124,8 +124,8 @@ class LintProjectCommandTest {
         // given:
         String expectedOutput = "Errors found:\n" +
                 "Errors in src/test/resources/LintProjectCommandTest/invalidLinks/changelog/unreleased/invalid-entry.yml:\n" +
-                "\tLink url cannot be blank!\n" +
-                "\tLink name cannot be blank!\n" +
+                "\tLink url cannot be blank! Current value name: TEST#1111 url: null\n" +
+                "\tLink url cannot be blank! Current value name: TEST#1112 url: null\n" +
                 "\n";
         String INVALID_PATH = PATH + "invalidLinks";
         File changelogDir = new File(INVALID_PATH + "/" + INPUT_DIR);
