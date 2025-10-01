@@ -17,7 +17,7 @@
     <properties>
         <packaging>jar</packaging>
 
-        <graal.version>24.2.2</graal.version>
+        <graal.version>25.0.0</graal.version>
         <svm.version>25.0.0</svm.version>
 
         <jdk.version>21</jdk.version>
@@ -26,7 +26,7 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
 
-        <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
         <native-maven-plugin.version>0.11.0</native-maven-plugin.version>
         <maven-shade-plugin.version>3.6.1</maven-shade-plugin.version>
 
