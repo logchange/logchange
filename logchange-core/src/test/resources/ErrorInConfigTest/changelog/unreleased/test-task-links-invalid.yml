@@ -1,0 +1,11 @@
+# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵
+# Visit https://github.com/logchange/logchange and leave a star 🌟
+# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
+title: Added event with code 114
+authors:
+  - nick: xx9
+type: added
+merge_requests:
+  - 297
+links:
+    url: https://github.com/logchange/logchange/issues

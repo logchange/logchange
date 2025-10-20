@@ -170,6 +170,10 @@ public class FileChangelogRepository implements ChangelogRepository {
                     } catch (YMLChangelogEntryConfigException e) {
                         exceptions.add(e);
                         return null;
+                    } catch (YMLChangelogInvalidConfigValuesException e) {
+                        // Capture invalid value errors occurring during initial deserialization (e.g., wrong type like 'links' as map)
+                        exceptions.add(e);
+                        return null;
                     }
                 })
                 .filter(Objects::nonNull)
