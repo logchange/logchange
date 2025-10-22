@@ -1,0 +1,33 @@
+<!-- @formatter:off -->
+<!-- noinspection -->
+
+### {{ version.version }}{% if version.releaseDateTime %} - {{ version.releaseDateTime }}{% endif %}
+
+{% for group in version.entriesGroups %}
+  {% if group.notEmpty %}
+### {{ group.type }} ({{ group.entries | length }} change{% if (group.entries | length) != 1 %}s{% endif %})
+{% for entry in group.entries %}
+- {{ entry }}
+{% endfor %}
+
+  {% endif %}
+{% endfor %}
+
+{% set notes = version.detachedImportantNotes %}
+{% if notes %}
+### Important notes
+{% for note in notes %}
+- {{ note.message }}
+{% endfor %}
+{% endif %}
+
+{% set configs = version.configurations %}
+{% if configs and (configs | length) > 0 %}
+### Configuration changes
+
+| Type: {{ configs[0].type }} |
+| --- |
+{% for cfg in configs %}
+| <ul><li>{{ cfg.action }} `{{ cfg.property }}`{% if cfg.defaultValue %} with default value: `{{ cfg.defaultValue }}`{% endif %}</li><li>Description: {{ cfg.description }}</li></ul> |
+{% endfor %}
+{% endif %}

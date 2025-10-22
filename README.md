@@ -257,22 +257,25 @@ changelog:
     # feel free to create issue or pull request with change
     version_summary_templates:
       # Relative path to the changelog/.templates directory.
-      # Following definition will require from you existence of template at 
-      # changelog/.templates/my-version-summary.html
-      # It will create my-version-summary.html in every version directory 
-      # changelog/vX.X.X/my-version-summary.html
+      # Following definition will require you to create a file at:
+      # changelog/.templates/my-version-summary.md.j2
+      # It will generate my-version-summary.md.j2 for every version in:
+      # changelog/vX.X.X/my-version-summary.md.j2
       # HOW TO CREATE VERSION SUMMARY TEMPLATE?
-      # Main object is version and its type of https://github.com/logchange/logchange/blob/main/logchange-core/src/main/java/dev/logchange/core/domain/changelog/model/version/ChangelogVersion.java
-      - path: my-version-summary.html
+      # Main object is 'version' of type:
+      # https://github.com/logchange/logchange/blob/main/logchange-core/src/main/java/dev/logchange/core/domain/changelog/model/version/ChangelogVersion.java
+      - path: my-version-summary.md.j2
     changelog_templates:
       # Relative path to the changelog/.templates directory.
-      # Following definition will require from you existence of template at 
-      # changelog/.templates/my-changelog.html
-      # It will create my-changelog.html in every version directory 
-      # changelog/vX.X.X/my-version-summary.html
+      # Following definition will require you to create a file at:
+      # changelog/.templates/my-changelog.md.j2
+      # It will generate a single file at the repository root (next to CHANGELOG.md):
+      # ./my-changelog.md.j2
       # HOW TO CREATE CHANGELOG TEMPLATE?
-      # Main object is changelog and its type of https://github.com/logchange/logchange/blob/main/logchange-core/src/main/java/dev/logchange/core/domain/changelog/model/Changelog.java
-      - path: my-changelog.html
+      # Main object is 'changelog' of type:
+      # https://github.com/logchange/logchange/blob/main/logchange-core/src/main/java/dev/logchange/core/domain/changelog/model/Changelog.java
+      - path: my-changelog.md.j2
+      # See docs/jinja-templates.md and examples/templates for full examples.
 #=======================================================================================================================
 # this section only makes sense when project is root of aggregation for other projects with changelogs 
 # f.e. if we have repositories: mobile-app(root), mobile-app-android, mobile-app-ios 
@@ -291,6 +294,8 @@ aggregates:
 ```
 
 ### Templates
+
+For a comprehensive guide and full examples of Jinja templating, see docs/jinja-templates.md and examples/templates.
 
 The `templates` section in the `logchange-config.yml` configuration file allows you to customize the format of entries
 in the `changelog.md` file. Individual elements of an entry can include:
