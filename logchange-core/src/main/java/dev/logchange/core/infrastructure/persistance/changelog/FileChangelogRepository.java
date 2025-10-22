@@ -32,6 +32,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -109,7 +110,7 @@ public class FileChangelogRepository implements ChangelogRepository {
     }
 
     private void saveToFile(String content, String fileName) {
-        String outputFilePath = rootPath + fileName;
+        String outputFilePath = Paths.get(rootPath, fileName).toString();
         File outputFile = new File(outputFilePath);
 
         FileRepository fileRepository = FileRepository.of(outputFile);
