@@ -17,7 +17,7 @@
     <properties>
         <packaging>jar</packaging>
 
-        <graal.version>25.0.0</graal.version>
+        <graal.version>25.0.1</graal.version>
         <svm.version>25.0.1</svm.version>
 
         <jdk.version>21</jdk.version>
