@@ -252,6 +252,7 @@ changelog:
   templates:
     entry: "${prefix}${title} ${merge_requests} ${issues} ${links} ${authors}"
     author: "([${name}](${url}) @${nick})"
+    # Check out documentation for templates: https://logchange.dev/tools/logchange/templates/
     # see examples of templates at examples/templates
     # if you are missing some function, which will simplify your template (f.e getNumberOfEntries()) 
     # feel free to create issue or pull request with change
@@ -268,8 +269,8 @@ changelog:
       # Relative path to the changelog/.templates directory.
       # Following definition will require from you existence of template at 
       # changelog/.templates/my-changelog.html
-      # It will create my-changelog.html in every version directory 
-      # changelog/vX.X.X/my-version-summary.html
+      # It will generate a single file at the repository root (next to CHANGELOG.md):
+      # ./my-changelog.html
       # HOW TO CREATE CHANGELOG TEMPLATE?
       # Main object is changelog and its type of https://github.com/logchange/logchange/blob/main/logchange-core/src/main/java/dev/logchange/core/domain/changelog/model/Changelog.java
       - path: my-changelog.html
