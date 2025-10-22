@@ -12,55 +12,50 @@ import dev.logchange.core.infrastructure.persistance.config.FileConfigRepository
 import dev.logchange.core.infrastructure.persistance.file.FileRepository;
 import dev.logchange.core.infrastructure.query.file.FileReader;
 import org.codehaus.plexus.util.FileUtils;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GenerateChangelogWithJinjaTemplateIntegrationTest {
 
-    private static final String PATH = "src/test/resources/GenerateChangelogWithJinjaTemplateIntegrationTest/";
-
-    @BeforeEach
-    void init() throws IOException {
-        new File(PATH + "CHANGELOG.md").createNewFile();
-    }
-
-
-    @AfterEach
-    void cleanup() {
-        new File(PATH + "CHANGELOG.md").delete();
-    }
+    private static final Path PATH = Paths.get(GenerateChangelogWithJinjaTemplateIntegrationTest.class.getClassLoader().getResource("GenerateChangelogWithJinjaTemplateIntegrationTest").getPath());
 
     @Test
     void shouldMatchExpectedChangelog() throws IOException {
-        //given:
-        File changelogInputDir = new File(PATH + "changelog");
-        File changelogOutputFile = new File(PATH + "CHANGELOG.md");
+        // given:
+        File changelogInputDir = PATH.resolve("changelog").toFile();
+        File changelogOutputFile = PATH.resolve("CHANGELOG.md").toFile();
 
-        File configFile = new File(PATH + "changelog/logchange-config.yml");
-        File expectedOutputFile = new File(PATH + "expected-my-changelog.html");
+        File configFile = PATH.resolve("changelog/logchange-config.yml").toFile();
+        File expectedOutputFile = PATH.resolve("expected-my-changelog.html").toFile();
+        File expectedChangelogMdOutputFile = PATH.resolve("expected-CHANGELOG.md").toFile();
 
         ConfigRepository configRepository = FileConfigRepository.of(configFile);
         Config config = configRepository.find();
 
         FileRepository fr = FileRepository.of(changelogOutputFile);
-        ChangelogRepository repository = new FileChangelogRepository(PATH, changelogInputDir, config, new FileReader(), fr, fr);
+        ChangelogRepository repository = new FileChangelogRepository(PATH.toString(), changelogInputDir, config, new FileReader(), fr, fr);
         VersionSummaryRepository versionSummaryRepository = new FileVersionSummaryRepository(changelogInputDir, config);
         GenerateChangelogUseCase generateChangelogUseCase = new GenerateChangelogService(repository, versionSummaryRepository);
         GenerateChangelogUseCase.GenerateChangelogCommand command = GenerateChangelogUseCase.GenerateChangelogCommand.of();
 
-        //when:
+        // when:
         generateChangelogUseCase.handle(command);
-        File myChangelogFile = new File(PATH + "my-changelog.html");
+        File myChangelogFile = PATH.resolve("my-changelog.html").toFile();
+        File changelogMdFile = PATH.resolve("CHANGELOG.md").toFile();
 
-        //then:
+        // then:
         String expectedContent = FileUtils.fileRead(expectedOutputFile);
         String actualContent = FileUtils.fileRead(myChangelogFile);
-        assertThat(actualContent).isEqualToIgnoringNewLines(expectedContent);
+        assertThat(actualContent).isEqualTo(expectedContent);
+
+        String expectedContentMd = FileUtils.fileRead(expectedChangelogMdOutputFile);
+        String actualContentMd = FileUtils.fileRead(changelogMdFile);
+        assertThat(actualContentMd).isEqualTo(expectedContentMd);
     }
 }
