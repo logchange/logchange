@@ -1,4 +1,5 @@
 changelog:
   templates:
     changelog_templates:
+      - path: CHANGELOG.md
       - path: my-changelog.html # relative path to the changelog/.templates directory
