@@ -77,4 +77,20 @@ public class ErrorInConfigTest {
         assertThat(actualError.path).isEqualTo(expectedError.path);
         assertThat(actualError.getMessage()).isEqualTo(expectedError.getMessage());
     }
+    
+    @Test
+    void shouldFailWhenLinksIsNotList() throws IOException {
+        // given:
+        File changelogTestConfigFile = new File(PATH + "changelog/unreleased/test-task-links-invalid.yml");
+
+        // then: deserialization should report invalid structure (e.g., links expects a list)
+        YMLChangelogInvalidConfigValuesException actualError =
+                Assertions.assertThrows(YMLChangelogInvalidConfigValuesException.class,
+                        () -> YMLChangelogEntry.of(
+                                Files.newInputStream(changelogTestConfigFile.toPath()),
+                                changelogTestConfigFile.getPath()));
+
+        assertThat(actualError.path).isEqualTo(changelogTestConfigFile.getPath());
+        assertThat(actualError.getMessage()).contains("Errors in ");
+    }
 }

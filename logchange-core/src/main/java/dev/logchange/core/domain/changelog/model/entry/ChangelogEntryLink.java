@@ -16,7 +16,8 @@ public class ChangelogEntryLink {
         if (StringUtils.isBlank(url)) {
             throw new IllegalArgumentException("Link url cannot be blank! Current value name: " + name + " url: " + url);
         }
-        return new ChangelogEntryLink(name, url);
+        String safeName = (name == null) ? "" : name;
+        return new ChangelogEntryLink(safeName, url);
     }
 
 }
