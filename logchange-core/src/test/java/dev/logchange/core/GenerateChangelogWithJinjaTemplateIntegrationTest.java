@@ -11,6 +11,7 @@ import dev.logchange.core.infrastructure.persistance.changelog.FileVersionSummar
 import dev.logchange.core.infrastructure.persistance.config.FileConfigRepository;
 import dev.logchange.core.infrastructure.persistance.file.FileRepository;
 import dev.logchange.core.infrastructure.query.file.FileReader;
+import dev.logchange.utils.TestResourcePath;
 import org.codehaus.plexus.util.FileUtils;
 import org.junit.jupiter.api.Test;
 

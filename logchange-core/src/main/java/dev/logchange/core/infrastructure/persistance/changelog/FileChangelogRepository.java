@@ -19,8 +19,7 @@ import dev.logchange.core.format.jinja.changelog.JinjaChangelog;
 import dev.logchange.core.format.md.changelog.MDChangelog;
 import dev.logchange.core.format.release_date.FileReleaseDateTime;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
-import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryException;
-import dev.logchange.core.format.yml.changelog.entry.YMLChangelogInvalidConfigValuesException;
+import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryParseException;
 import dev.logchange.core.format.yml.config.YMLChangelogException;
 import dev.logchange.core.infrastructure.persistance.config.FileTemplateRepository;
 import dev.logchange.core.infrastructure.persistance.file.FileRepository;
@@ -168,11 +167,7 @@ public class FileChangelogRepository implements ChangelogRepository {
                 .map((file) -> {
                     try {
                         return YMLChangelogEntry.of(reader.readFileContent(file), file.getPath());
-                    } catch (YMLChangelogEntryException e) {
-                        exceptions.add(e);
-                        return null;
-                    } catch (YMLChangelogInvalidConfigValuesException e) {
-                        // Capture invalid value errors occurring during initial deserialization (e.g., wrong type like 'links' as map)
+                    } catch (YMLChangelogEntryParseException e) {
                         exceptions.add(e);
                         return null;
                     }
@@ -181,7 +176,7 @@ public class FileChangelogRepository implements ChangelogRepository {
                 .map(ymlChangelogEntry ->  {
                     try {
                         return ymlChangelogEntry.to();
-                    } catch (YMLChangelogInvalidConfigValuesException e) {
+                    } catch (YMLChangelogEntryParseException e) {
                         exceptions.add(e);
                         return null;
                     }

@@ -1,5 +1,6 @@
 package dev.logchange.commands.archive;
 
+import dev.logchange.utils.TestResourcePath;
 import org.codehaus.plexus.util.FileUtils;
 import org.junit.jupiter.api.Test;
 
@@ -7,8 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -16,8 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ArchiveVersionCommandTest {
 
+    private static final Path PATH = TestResourcePath.getPath(ArchiveVersionCommandTest.class);
+
     private static final String EXPECTED_ARCHIVE_MD = "EXPECTED_ARCHIVE.md";
-    private static final String PATH = "src/test/resources/ArchiveVersionCommandTest";
     private static final String INPUT_DIR = "changelog";
     private static final String CONFIG_FILE = "logchange-config.yml";
     private static final String ARCHIVE_FILE = "archive.md";
@@ -25,7 +25,7 @@ class ArchiveVersionCommandTest {
     @Test
     void whenArchiveNotExists() throws IOException {
         // given:
-        String TEST_PATH = PATH + "/whenArchiveNotExists";
+        Path TEST_PATH = PATH.resolve("whenArchiveNotExists");
         File unreleasedDir = new File(TEST_PATH + "/" + INPUT_DIR + "/unreleased");
         File versionDir = new File(TEST_PATH + "/" + INPUT_DIR + "/v1.0.1");
         File secondVersionDir = new File(TEST_PATH + "/" + INPUT_DIR + "/v1.0.2");
@@ -44,7 +44,7 @@ class ArchiveVersionCommandTest {
 
         try {
             // when:
-            ArchiveVersionCommand.of(TEST_PATH, INPUT_DIR, "1.0.2", CONFIG_FILE).execute();
+            ArchiveVersionCommand.of(TEST_PATH.toString(), INPUT_DIR, "1.0.2", CONFIG_FILE).execute();
 
             // then:
             assertTrue(unreleasedDir.exists(), "unreleased dir does not exist");
@@ -66,7 +66,7 @@ class ArchiveVersionCommandTest {
     @Test
     void whenArchiveExists() throws IOException {
         // given:
-        String TEST_PATH = PATH + "/whenArchiveExists";
+        Path TEST_PATH = PATH.resolve("whenArchiveExists");
         File unreleasedDir = new File(TEST_PATH + "/" + INPUT_DIR + "/unreleased");
         File versionDir = new File(TEST_PATH + "/" + INPUT_DIR + "/v1.0.1");
         File secondVersionDir = new File(TEST_PATH + "/" + INPUT_DIR + "/v1.0.2");
@@ -86,7 +86,7 @@ class ArchiveVersionCommandTest {
         final byte[] content = Files.readAllBytes(expectedArchive.toPath());
         try {
             // when:
-            ArchiveVersionCommand.of(TEST_PATH, INPUT_DIR, "1.0.2", CONFIG_FILE).execute();
+            ArchiveVersionCommand.of(TEST_PATH.toString(), INPUT_DIR, "1.0.2", CONFIG_FILE).execute();
 
             // then:
             assertTrue(unreleasedDir.exists());

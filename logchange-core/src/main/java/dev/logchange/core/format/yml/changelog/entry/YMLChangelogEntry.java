@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.logchange.core.domain.changelog.model.entry.*;
 import dev.logchange.core.format.yml.ObjectMapperProvider;
 import lombok.*;
-import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.InputStream;
 import java.util.*;
@@ -66,28 +65,27 @@ public class YMLChangelogEntry {
     public List<YMLChangelogEntryConfiguration> configurations;
 
     @JsonIgnore
-    private Set<Pair<String, String>> invalidProperties = new HashSet<>();
+    private Set<YmlInvalidProperty> invalidProperties = new LinkedHashSet<>();
 
     @JsonIgnore
     private String path;
 
-    @SneakyThrows
-    public static YMLChangelogEntry of(InputStream input, String path) {
+    public static YMLChangelogEntry of(InputStream input, String path) throws YMLChangelogEntryParseException {
         ObjectMapper mapper = ObjectMapperProvider.get();
-        YMLChangelogEntry res;
+        YMLChangelogEntry parsedEntry;
         try {
-            res = mapper.readValue(input, YMLChangelogEntry.class);
-            res.setPath(path);
+            parsedEntry = mapper.readValue(input, YMLChangelogEntry.class);
+            parsedEntry.setPath(path);
         } catch (Exception e) {
             String msg = (e.getCause() != null) ? e.getCause().getMessage() : e.getMessage();
-            throw new YMLChangelogInvalidConfigValuesException(path, Collections.singleton(msg));
+            throw new YMLChangelogEntryParseException(path, Collections.singleton(YmlInvalidProperty.unknownError("?", msg)));
         }
 
-        if (!res.invalidProperties.isEmpty()) {
-            throw new YMLChangelogEntryException(path, res.invalidProperties);
+        if (!parsedEntry.invalidProperties.isEmpty()) {
+            throw new YMLChangelogEntryParseException(path, parsedEntry.invalidProperties);
         }
 
-        return res;
+        return parsedEntry;
     }
 
     public static YMLChangelogEntry of(ChangelogEntry entry) {
@@ -112,22 +110,24 @@ public class YMLChangelogEntry {
 
     @JsonAnySetter
     public void anySetter(String key, Object value) {
-        invalidProperties.add(Pair.of(key, value.toString()));
+        invalidProperties.add(YmlInvalidProperty.invalidProperty(key, value.toString()));
     }
 
     public ChangelogEntry to() {
         ChangelogEntryTitle changelogEntryTitle = title();
         ChangelogEntryType changelogEntryType = type();
+        List<ChangelogEntryLink> links = links();
+
         if (!invalidProperties.isEmpty()) {
-            List<String> errors = invalidProperties.stream().map(Pair::getRight).collect(Collectors.toList());
-            throw new YMLChangelogInvalidConfigValuesException(path, errors);
+            throw new YMLChangelogEntryParseException(path, invalidProperties);
         }
+
         return ChangelogEntry.builder()
                 .title(changelogEntryTitle)
                 .type(changelogEntryType)
                 .mergeRequests(mergeRequests())
                 .issues(issues())
-                .links(links())
+                .links(links)
                 .authors(authors())
                 .importantNotes(importantNotes())
                 .configurations(changelogEntryConfiguration())
@@ -139,26 +139,26 @@ public class YMLChangelogEntry {
         try {
             return ChangelogEntryTitle.of(title);
         } catch (IllegalArgumentException e) {
-            invalidProperties.add(Pair.of("title", e.getMessage()));
+            invalidProperties.add(YmlInvalidProperty.unknownError("title", e.getMessage()));
             return null;
         }
     }
 
     private ChangelogEntryType type() {
         if (type == null) {
-            invalidProperties.add(Pair.of("type", "Missing type property!"));
+            invalidProperties.add(YmlInvalidProperty.missing("type"));
             return null;
         }
         try {
             return type.to();
         } catch (IllegalArgumentException e) {
-            invalidProperties.add(Pair.of("type", e.getMessage()));
+            invalidProperties.add(YmlInvalidProperty.unknownError("type", e.getMessage()));
             return null;
         }
     }
 
-    private List<ChangelogModule>  modules() {
-        if(modules == null) {
+    private List<ChangelogModule> modules() {
+        if (modules == null) {
             return Collections.emptyList();
         }
         return modules.stream().map(YMLChangelogModule::to).collect(Collectors.toList());
@@ -186,17 +186,13 @@ public class YMLChangelogEntry {
         if (links == null) {
             return Collections.emptyList();
         } else {
-            List<String> errors = new ArrayList<>();
             List<ChangelogEntryLink> result = new ArrayList<>();
             for (YMLChangelogEntryLink link : links) {
                 try {
                     result.add(link.to());
                 } catch (IllegalArgumentException e) {
-                    errors.add(e.getMessage());
+                    invalidProperties.add(YmlInvalidProperty.unknownError("links", e.getMessage()));
                 }
-            }
-            if (!errors.isEmpty()) {
-                throw new YMLChangelogInvalidConfigValuesException(path, errors);
             }
             return result;
         }

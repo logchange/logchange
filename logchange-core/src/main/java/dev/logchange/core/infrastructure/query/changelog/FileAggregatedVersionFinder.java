@@ -9,7 +9,7 @@ import dev.logchange.core.domain.changelog.model.version.ChangelogVersionEntries
 import dev.logchange.core.domain.changelog.model.version.Version;
 import dev.logchange.core.format.release_date.FileReleaseDateTime;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
-import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryException;
+import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryParseException;
 import dev.logchange.core.format.yml.config.YMLChangelogException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
@@ -57,7 +57,7 @@ public class FileAggregatedVersionFinder implements AggregatedVersionQuery {
                 .map((file) -> {
                     try {
                         return YMLChangelogEntry.of(reader.readFileContent(file), file.getPath());
-                    } catch (YMLChangelogEntryException e) {
+                    } catch (YMLChangelogEntryParseException e) {
                         exceptions.add(e);
                         return null;
                     }

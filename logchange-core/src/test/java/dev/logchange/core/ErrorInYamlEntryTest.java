@@ -1,9 +1,9 @@
 package dev.logchange.core;
 
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
-import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryException;
-import dev.logchange.core.format.yml.changelog.entry.YMLChangelogInvalidConfigValuesException;
-import org.apache.commons.lang3.tuple.Pair;
+import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryParseException;
+import dev.logchange.core.format.yml.changelog.entry.YmlInvalidProperty;
+import dev.logchange.utils.TestResourcePath;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +11,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -23,22 +24,22 @@ public class ErrorInYamlEntryTest {
         // given:
         File changelogTestConfigFile = PATH.resolve("changelog/unreleased/test-task.yml").toFile();
 
-        ArrayList<Pair<String, String>> invalidParams = new ArrayList<>();
+        ArrayList<YmlInvalidProperty> invalidParams = new ArrayList<>();
         invalidParams
-                .add(Pair.of("authorss", "[{nick=marwin1991, url=https://github.com/marwin1991}]"));
-        invalidParams.add(Pair.of("merge_requestss", "[1, 2]"));
+                .add(YmlInvalidProperty.invalidProperty("authorss", "[{nick=marwin1991, url=https://github.com/marwin1991}]"));
+        invalidParams.add(YmlInvalidProperty.invalidProperty("merge_requestss", "[1, 2]"));
 
-        YMLChangelogEntryException expectedError = new YMLChangelogEntryException(
+        YMLChangelogEntryParseException expectedError = new YMLChangelogEntryParseException(
                 changelogTestConfigFile.getPath(), invalidParams);
 
         // when-then:
-        YMLChangelogEntryException actualError =
-                Assertions.assertThrows(YMLChangelogEntryException.class,
+        YMLChangelogEntryParseException actualError =
+                Assertions.assertThrows(YMLChangelogEntryParseException.class,
                         () -> YMLChangelogEntry.of(
                                 Files.newInputStream(changelogTestConfigFile.toPath()),
                                 changelogTestConfigFile.getPath()));
 
-        assertThat(actualError.path).isEqualTo(expectedError.path);
+        assertThat(actualError.getYmlEntryPath()).isEqualTo(expectedError.getYmlEntryPath());
         assertThat(actualError.getMessage()).isEqualTo(expectedError.getMessage());
     }
 
@@ -47,22 +48,18 @@ public class ErrorInYamlEntryTest {
         // given:
         File changelogTestConfigFile = PATH.resolve("changelog/unreleased/test-task2.yml").toFile();
 
-        YMLChangelogInvalidConfigValuesException expectedError =
-                new YMLChangelogInvalidConfigValuesException(changelogTestConfigFile.getPath(),
-                        new ArrayList<String>() {
-                            {
-                                add("Cannot match YMLChangelogEntryType for string: fix - Available types: [added, changed, deprecated, removed, fixed, security, dependency_update, other].");
-                            }
-                        });
+        YMLChangelogEntryParseException expectedError =
+                new YMLChangelogEntryParseException(changelogTestConfigFile.getPath(),
+                        Collections.singleton(YmlInvalidProperty.unknownError("?", "Cannot match YMLChangelogEntryType for string: fix - Available types: [added, changed, deprecated, removed, fixed, security, dependency_update, other].")));
 
         // when-then:
-        YMLChangelogInvalidConfigValuesException actualError =
-                Assertions.assertThrows(YMLChangelogInvalidConfigValuesException.class,
+        YMLChangelogEntryParseException actualError =
+                Assertions.assertThrows(YMLChangelogEntryParseException.class,
                         () -> YMLChangelogEntry.of(
                                 Files.newInputStream(changelogTestConfigFile.toPath()),
                                 changelogTestConfigFile.getPath()));
 
-        assertThat(actualError.path).isEqualTo(expectedError.path);
+        assertThat(actualError.getYmlEntryPath()).isEqualTo(expectedError.getYmlEntryPath());
         assertThat(actualError.getMessage()).isEqualTo(expectedError.getMessage());
     }
 }
