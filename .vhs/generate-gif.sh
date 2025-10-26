@@ -15,3 +15,5 @@ docker run --rm \
 # Cleanup
 sudo rm -fr demo-project/changelog # files created by docker are as root, but chromium inside docker need root
 sudo rm -fr demo-project/CHANGELOG.md
+
+mv demo-project/logchange.gif ../logchange.gif
