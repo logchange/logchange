@@ -125,4 +125,16 @@ class PromptMessageTest {
         // then:
         assertThat(promptMessage.getMessage()).isEqualTo("Enter your name:: ");
     }
+
+    @Test
+    void shouldReturnInputWhenToString() {
+        // given:
+        String input = "Enter your name:  ";
+
+        // when:
+        AddEntryPrompter.PromptMessage promptMessage = new AddEntryPrompter.PromptMessage(input);
+
+        // then:
+        assertThat(promptMessage.toString()).isEqualTo("Enter your name:: ");
+    }
 }
