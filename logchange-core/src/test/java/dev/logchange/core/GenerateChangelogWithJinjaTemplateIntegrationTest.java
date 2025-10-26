@@ -11,19 +11,19 @@ import dev.logchange.core.infrastructure.persistance.changelog.FileVersionSummar
 import dev.logchange.core.infrastructure.persistance.config.FileConfigRepository;
 import dev.logchange.core.infrastructure.persistance.file.FileRepository;
 import dev.logchange.core.infrastructure.query.file.FileReader;
+import dev.logchange.utils.TestResourcePath;
 import org.codehaus.plexus.util.FileUtils;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GenerateChangelogWithJinjaTemplateIntegrationTest {
 
-    private static final Path PATH = Paths.get(GenerateChangelogWithJinjaTemplateIntegrationTest.class.getClassLoader().getResource("GenerateChangelogWithJinjaTemplateIntegrationTest").getPath());
+    private static final Path PATH = TestResourcePath.getPath(GenerateChangelogWithJinjaTemplateIntegrationTest.class);
 
     @Test
     void shouldMatchExpectedChangelog() throws IOException {
