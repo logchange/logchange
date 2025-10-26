@@ -65,6 +65,7 @@ public class YMLChangelogEntry {
     public List<YMLChangelogEntryConfiguration> configurations;
 
     @JsonIgnore
+    @Builder.Default
     private Set<YmlInvalidProperty> invalidProperties = new LinkedHashSet<>();
 
     @JsonIgnore
