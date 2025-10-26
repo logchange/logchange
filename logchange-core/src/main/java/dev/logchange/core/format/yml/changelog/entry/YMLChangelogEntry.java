@@ -150,12 +150,8 @@ public class YMLChangelogEntry {
             invalidProperties.add(YmlInvalidProperty.missing("type"));
             return null;
         }
-        try {
-            return type.to();
-        } catch (IllegalArgumentException e) {
-            invalidProperties.add(YmlInvalidProperty.unknownError("type", e.getMessage()));
-            return null;
-        }
+
+        return type.to();
     }
 
     private List<ChangelogModule> modules() {
