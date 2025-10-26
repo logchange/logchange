@@ -3,6 +3,7 @@ package dev.logchange.core.format.yml.changelog.entry;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class YMLChangelogEntryTest {
 
@@ -60,6 +61,39 @@ class YMLChangelogEntryTest {
                 "links:\n" +
                 "  - url: https://github.com/users/marwin1991\n" +
                 "type: added\n", result);
+    }
+
+    @Test
+    void whenInvalidTypeStringThrowExceptionInBuilder() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                YMLChangelogEntry.builder()
+                        .title("Some title")
+                        .type(YMLChangelogEntryType.of("some_type"))
+                        .build()
+        );
+        assertEquals("Cannot match YMLChangelogEntryType for string: some_type - Available types: [added, changed, deprecated, removed, fixed, security, dependency_update, other].", exception.getMessage());
+    }
+
+    @Test
+    void whenEmptyTypeStringThrowExceptionInBuilder() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                YMLChangelogEntry.builder()
+                        .title("Some title")
+                        .type(YMLChangelogEntryType.of(""))
+                        .build()
+        );
+        assertEquals("Cannot match YMLChangelogEntryType for string:  - Available types: [added, changed, deprecated, removed, fixed, security, dependency_update, other].", exception.getMessage());
+    }
+
+    @Test
+    void whenNullTypeThrowExceptionInBuilder() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                YMLChangelogEntry.builder()
+                        .title("Some title")
+                        .type(YMLChangelogEntryType.of((String) null))
+                        .build()
+        );
+        assertEquals("Cannot match YMLChangelogEntryType for string: null - Available types: [added, changed, deprecated, removed, fixed, security, dependency_update, other].", exception.getMessage());
     }
 
     private YMLChangelogEntry getSimple() {
