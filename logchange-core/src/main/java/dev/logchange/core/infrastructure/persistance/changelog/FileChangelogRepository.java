@@ -19,7 +19,7 @@ import dev.logchange.core.format.jinja.changelog.JinjaChangelog;
 import dev.logchange.core.format.md.changelog.MDChangelog;
 import dev.logchange.core.format.release_date.FileReleaseDateTime;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
-import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryConfigException;
+import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryException;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogInvalidConfigValuesException;
 import dev.logchange.core.format.yml.config.YMLChangelogException;
 import dev.logchange.core.infrastructure.persistance.config.FileTemplateRepository;
@@ -168,7 +168,7 @@ public class FileChangelogRepository implements ChangelogRepository {
                 .map((file) -> {
                     try {
                         return YMLChangelogEntry.of(reader.readFileContent(file), file.getPath());
-                    } catch (YMLChangelogEntryConfigException e) {
+                    } catch (YMLChangelogEntryException e) {
                         exceptions.add(e);
                         return null;
                     } catch (YMLChangelogInvalidConfigValuesException e) {

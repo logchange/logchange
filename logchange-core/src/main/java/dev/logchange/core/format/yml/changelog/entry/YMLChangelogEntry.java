@@ -84,7 +84,7 @@ public class YMLChangelogEntry {
         }
 
         if (!res.invalidProperties.isEmpty()) {
-            throw new YMLChangelogEntryConfigException(path, res.invalidProperties);
+            throw new YMLChangelogEntryException(path, res.invalidProperties);
         }
 
         return res;
