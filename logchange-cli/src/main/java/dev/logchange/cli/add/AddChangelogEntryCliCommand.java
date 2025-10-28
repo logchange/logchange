@@ -55,7 +55,7 @@ public class AddChangelogEntryCliCommand extends BaseCommand {
     @Option(names = OPTION_PREFIX + "link.url")
     private String linkUrl;
 
-
+    @Override
     public void runCommand() {
         log.info(ADD_COMMAND_START_LOG);
 

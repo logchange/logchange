@@ -25,6 +25,7 @@ public class ArchiveVersionCliCommand extends BaseCommand {
     @Option(defaultValue = DEFAULT_CONFIG_FILE, names = CONFIG_FILE_OPTION, description = CONFIG_FILE_OPTION_DESCRIPTION)
     private String configFile;
 
+    @Override
     public void runCommand() {
         log.info(ARCHIVE_COMMAND_START_LOG);
         ArchiveVersionCommand.of(path(), inputDir, version, configFile).execute();

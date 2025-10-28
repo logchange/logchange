@@ -3,7 +3,6 @@ package dev.logchange.core.domain.changelog.model.entry;
 import dev.logchange.core.domain.changelog.model.DetachedConfiguration;
 import dev.logchange.core.domain.changelog.model.DetachedImportantNote;
 import dev.logchange.core.domain.changelog.model.HasModules;
-import dev.logchange.core.format.md.changelog.version.MDModuleStructure;
 import lombok.*;
 
 import java.util.List;
@@ -15,7 +14,7 @@ import java.util.stream.Stream;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChangelogEntry implements HasModules {
 
-    // used to keep original order of entries
+    // used to keep the original order of entries
     @Setter
     private int id;
 
