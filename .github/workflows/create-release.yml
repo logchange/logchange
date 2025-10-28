@@ -1,4 +1,6 @@
 name: Create release and Publish to DockerHub
+permissions:
+  contents: read
 
 on:
   push:
@@ -69,6 +71,8 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v5
