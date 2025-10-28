@@ -54,14 +54,17 @@ class TarGzExtractorTest {
             Path path = tarGzQuery.get(url, "changelog");
 
             // then:
+            assertEquals(1, Objects.requireNonNull(tempDir.listFiles()).length);
             assertNotNull(path);
             assertTrue(path.toString().contains("changelog"));
             assertEquals(expectedPath, path);
             File changelogDir = path.toFile();
             assertTrue(changelogDir.isDirectory());
+            assertEquals(3, Objects.requireNonNull(changelogDir.listFiles()).length);
             for (File file : Objects.requireNonNull(changelogDir.listFiles())) {
                 if (file.isDirectory()) {
                     assertTrue(file.getName().equals("unreleased") || VERSION_PATTERN.matcher(file.getName()).matches(), "Unexpected dir: " + file.getName());
+                    assertEquals(1, Objects.requireNonNull(file.listFiles()).length);
                 } else {
                     assertEquals("logchange-config.yml", file.getName(), "Unexpected file: " + file.getName());
                 }
@@ -127,10 +130,10 @@ class TarGzExtractorTest {
             writeDirectoryEntry(taos, "logchange-main/changelog/unreleased/");
             writeDirectoryEntry(taos, "logchange-main/changelog/v1.0.0/");
 
-            // Config file
-            byte[] config = "title: test".getBytes(StandardCharsets.UTF_8);
-            writeFileEntry(taos, "logchange-main/changelog/logchange-config.yml", config);
-
+            byte[] file = "title: test".getBytes(StandardCharsets.UTF_8);
+            writeFileEntry(taos, "logchange-main/changelog/logchange-config.yml", file);
+            writeFileEntry(taos, "logchange-main/changelog/unreleased/new-entry.yml", file);
+            writeFileEntry(taos, "logchange-main/changelog/v1.0.0/old-entry.yml", file);
             taos.finish();
         }
         return baos.toByteArray();
