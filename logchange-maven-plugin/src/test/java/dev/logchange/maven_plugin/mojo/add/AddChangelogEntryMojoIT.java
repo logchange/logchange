@@ -13,6 +13,7 @@ import java.nio.charset.StandardCharsets;
 import static com.soebes.itf.extension.assertj.MavenITAssertions.assertThat;
 
 @MavenJupiterExtension
+@MavenRepository
 class AddChangelogEntryMojoIT {
 
 

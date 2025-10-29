@@ -2,6 +2,7 @@ package dev.logchange.maven_plugin.mojo.init;
 
 import com.soebes.itf.jupiter.extension.MavenGoal;
 import com.soebes.itf.jupiter.extension.MavenJupiterExtension;
+import com.soebes.itf.jupiter.extension.MavenRepository;
 import com.soebes.itf.jupiter.extension.MavenTest;
 import com.soebes.itf.jupiter.maven.MavenExecutionResult;
 import org.junit.jupiter.api.DisplayName;
@@ -11,6 +12,7 @@ import java.io.File;
 import static com.soebes.itf.extension.assertj.MavenITAssertions.assertThat;
 
 @MavenJupiterExtension
+@MavenRepository
 class InitProjectMojoIT {
 
     @MavenGoal("${project.groupId}:${project.artifactId}:${project.version}:init")

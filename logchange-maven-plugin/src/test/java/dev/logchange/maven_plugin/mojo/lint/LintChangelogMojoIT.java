@@ -2,6 +2,7 @@ package dev.logchange.maven_plugin.mojo.lint;
 
 import com.soebes.itf.jupiter.extension.MavenGoal;
 import com.soebes.itf.jupiter.extension.MavenJupiterExtension;
+import com.soebes.itf.jupiter.extension.MavenRepository;
 import com.soebes.itf.jupiter.extension.MavenTest;
 import com.soebes.itf.jupiter.maven.MavenExecutionResult;
 import org.assertj.core.api.Assertions;
@@ -12,6 +13,7 @@ import java.io.File;
 import static com.soebes.itf.extension.assertj.MavenITAssertions.assertThat;
 
 @MavenJupiterExtension
+@MavenRepository
 public class LintChangelogMojoIT {
 
     @MavenGoal("${project.groupId}:${project.artifactId}:${project.version}:lint")
