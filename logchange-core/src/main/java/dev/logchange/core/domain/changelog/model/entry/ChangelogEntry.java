@@ -4,10 +4,8 @@ import dev.logchange.core.domain.changelog.model.DetachedConfiguration;
 import dev.logchange.core.domain.changelog.model.DetachedImportantNote;
 import dev.logchange.core.domain.changelog.model.HasModules;
 import lombok.*;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Getter
@@ -48,25 +46,6 @@ public class ChangelogEntry implements HasModules {
         );
     }
 
-    public ChangelogEntry withPrefix(String prefix) {
-        if (StringUtils.isBlank(prefix)) {
-            return this;
-        }
-
-        List<ChangelogEntryImportantNote> prefixedNotes = importantNotes.stream()
-                .map(note -> note.withPrefix(prefix))
-                .collect(Collectors.toList());
-
-        List<ChangelogEntryConfiguration> prefixedConfigurations = configurations.stream()
-                .map(config -> config.withPrefix(prefix))
-                .collect(Collectors.toList());
-
-        return this.toBuilder()
-                .importantNotes(prefixedNotes)
-                .configurations(prefixedConfigurations)
-                .build();
-    }
-
     @Override
     public String toString() {
         return type.getKey() + " - " + title.getValue();
@@ -75,5 +54,17 @@ public class ChangelogEntry implements HasModules {
     @Override
     public List<ChangelogModule> getModules() {
         return modules;
+    }
+
+    /**
+     * Method used during aggregation of projects as one CHANGELOG
+     * Single project becomes one module
+     */
+    public ChangelogEntry addProjectAsModule(ChangelogModule module) {
+        if (!modules.isEmpty()) {
+            throw new RuntimeException("Aggregation does not support projects using modules! Please consider using a single module for the project or create and issue at https://github.com/logchange/logchange");
+        }
+
+        return toBuilder().module(module).build();
     }
 }
