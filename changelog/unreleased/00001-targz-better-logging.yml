@@ -1,0 +1,10 @@
+# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵 
+# Visit https://github.com/logchange/logchange and leave a star 🌟 
+# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
+title: "Refactored TarGzExtractorTest to use mockwebserver and fixed downloading bytes logging"
+authors:
+  - nick: witx98
+    url: https://github.com/witx98
+type: changed
+merge_requests:
+  - 652
