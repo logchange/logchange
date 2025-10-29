@@ -25,6 +25,7 @@ public class InitCliCommand extends BaseCommand {
     @Option(defaultValue = DEFAULT_OUTPUT_FILE, names = OUTPUT_FILE_OPTION, description = OUTPUT_FILE_OPTION_DESCRIPTION)
     private String outputFile;
 
+    @Override
     public void runCommand() {
         log.info(INIT_COMMAND_START_LOG);
         InitProjectCommand.of(path(), inputDir, unreleasedVersionDir, outputFile).execute();

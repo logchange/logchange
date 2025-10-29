@@ -3,7 +3,6 @@ package dev.logchange.core.infrastructure.query.changelog;
 import dev.logchange.core.application.changelog.repository.AggregatedVersionQuery;
 import dev.logchange.core.application.file.query.FileQuery;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
-import dev.logchange.core.domain.changelog.model.entry.ChangelogModule;
 import dev.logchange.core.domain.changelog.model.version.ChangelogVersion;
 import dev.logchange.core.domain.changelog.model.version.ChangelogVersionEntriesGroup;
 import dev.logchange.core.domain.changelog.model.version.Version;
@@ -52,7 +51,6 @@ public class FileAggregatedVersionFinder implements AggregatedVersionQuery {
 
     private List<ChangelogVersionEntriesGroup> getEntries(File versionDirectory, String projectName) {
         List<Exception> exceptions = new ArrayList<>();
-        ChangelogModule module = new ChangelogModule(projectName);
         List<ChangelogEntry> entries = reader.readYmlFiles(versionDirectory)
                 .map((file) -> {
                     try {
@@ -64,7 +62,7 @@ public class FileAggregatedVersionFinder implements AggregatedVersionQuery {
                 })
                 .filter(Objects::nonNull)
                 .map(YMLChangelogEntry::to)
-                .map(entry -> entry.addProjectModule(module))
+                .map(entry -> entry.withPrefix(projectName))
                 .collect(Collectors.toList());
 
         if (!exceptions.isEmpty()) {
