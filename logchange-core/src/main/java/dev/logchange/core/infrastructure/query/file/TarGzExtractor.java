@@ -41,11 +41,18 @@ public class TarGzExtractor implements TarGzQuery {
         byte[] buffer = new byte[10 * 1024];
         int bytesRead;
         int totalBytesRead = 0;
+        int MB_LOG_STEP = 1024 * 1024;
 
         while ((bytesRead = in.read(buffer)) != -1) {
             out.write(buffer, 0, bytesRead);
             totalBytesRead += bytesRead;
-            log.info("Downloaded " + totalBytesRead + " bytes...");
+
+            int currentChunk = totalBytesRead / MB_LOG_STEP;
+            int previousChunk = (totalBytesRead - bytesRead) / MB_LOG_STEP;
+
+            if (currentChunk > previousChunk) {
+                log.info("Downloaded " + totalBytesRead + " bytes...");
+            }
         }
     }
 
