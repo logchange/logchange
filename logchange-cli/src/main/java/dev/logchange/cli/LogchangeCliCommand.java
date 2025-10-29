@@ -47,6 +47,7 @@ public class LogchangeCliCommand implements Runnable {
         System.exit(exitCode);
     }
 
+    @Override
     public void run() {
         commandLine.usage(System.out);
     }

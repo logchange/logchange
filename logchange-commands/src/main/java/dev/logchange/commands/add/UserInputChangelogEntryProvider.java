@@ -17,6 +17,7 @@ class UserInputChangelogEntryProvider implements ChangelogEntryProvider {
     private final AddEntryPrompter prompter;
     private final AddChangelogEntryBatchModeParams batchModeParams;
 
+    @Override
     public ChangelogEntry get() {
         try {
             return ChangelogEntry.builder()
