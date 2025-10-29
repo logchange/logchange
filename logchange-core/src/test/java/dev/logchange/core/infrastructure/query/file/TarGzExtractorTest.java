@@ -141,8 +141,6 @@ class TarGzExtractorTest {
 
     private void writeDirectoryEntry(TarArchiveOutputStream taos, String name) throws IOException {
         TarArchiveEntry entry = new TarArchiveEntry(name);
-        entry.setModTime(0);
-        entry.setMode(0755);
         taos.putArchiveEntry(entry);
         taos.closeArchiveEntry();
     }
@@ -150,8 +148,6 @@ class TarGzExtractorTest {
     private void writeFileEntry(TarArchiveOutputStream taos, String name, byte[] content) throws IOException {
         TarArchiveEntry entry = new TarArchiveEntry(name);
         entry.setSize(content.length);
-        entry.setModTime(0);
-        entry.setMode(0644);
         taos.putArchiveEntry(entry);
         taos.write(content);
         taos.closeArchiveEntry();
