@@ -1,9 +1,6 @@
 package dev.logchange.maven_plugin.mojo.aggregate;
 
-import com.soebes.itf.jupiter.extension.MavenGoal;
-import com.soebes.itf.jupiter.extension.MavenJupiterExtension;
-import com.soebes.itf.jupiter.extension.MavenOption;
-import com.soebes.itf.jupiter.extension.MavenTest;
+import com.soebes.itf.jupiter.extension.*;
 import com.soebes.itf.jupiter.maven.MavenExecutionResult;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -13,6 +10,7 @@ import java.io.File;
 import static com.soebes.itf.extension.assertj.MavenITAssertions.assertThat;
 
 @MavenJupiterExtension
+@MavenRepository
 class AggregateProjectsMojoIT {
 
     @MavenGoal("${project.groupId}:${project.artifactId}:${project.version}:aggregate")
