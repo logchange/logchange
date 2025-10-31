@@ -18,6 +18,7 @@ public class TarGzExtractor implements TarGzQuery {
 
     private final Path extractionPath;
 
+    @Override
     public Path get(String projectUrl, String projectInputDir) throws IOException {
         log.info("Starting download from URL: " + projectUrl);
         File tarGzFile = downloadFile(projectUrl);

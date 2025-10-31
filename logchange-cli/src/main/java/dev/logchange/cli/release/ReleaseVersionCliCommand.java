@@ -38,6 +38,7 @@ public class ReleaseVersionCliCommand extends BaseCommand {
     @Option(defaultValue = DEFAULT_XML_OUTPUT_FILE, names = XML_OUTPUT_FILE_OPTION, description = XML_OUTPUT_FILE_OPTION_DESCRIPTION)
     private String xmlOutputFile;
 
+    @Override
     public void runCommand() {
         log.info(RELEASE_COMMAND_START_LOG + versionToRelease);
         ReleaseVersionCommand.of(

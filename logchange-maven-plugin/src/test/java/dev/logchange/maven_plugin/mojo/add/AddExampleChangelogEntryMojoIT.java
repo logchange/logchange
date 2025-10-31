@@ -13,7 +13,9 @@ import java.nio.charset.StandardCharsets;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @MavenJupiterExtension
+@MavenRepository
 public class AddExampleChangelogEntryMojoIT {
+
     @MavenGoal("${project.groupId}:${project.artifactId}:${project.version}:example")
     @MavenTest
     @DisplayName("Example entry is generated")

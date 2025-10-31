@@ -64,7 +64,7 @@ public class FileAggregatedVersionFinder implements AggregatedVersionQuery {
                 })
                 .filter(Objects::nonNull)
                 .map(YMLChangelogEntry::to)
-                .map(entry -> entry.addProjectModule(module))
+                .map(entry -> entry.addProjectAsModule(module))
                 .collect(Collectors.toList());
 
         if (!exceptions.isEmpty()) {

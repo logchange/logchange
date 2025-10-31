@@ -1,9 +1,6 @@
 package dev.logchange.maven_plugin.mojo.release;
 
-import com.soebes.itf.jupiter.extension.MavenGoal;
-import com.soebes.itf.jupiter.extension.MavenJupiterExtension;
-import com.soebes.itf.jupiter.extension.MavenOption;
-import com.soebes.itf.jupiter.extension.MavenTest;
+import com.soebes.itf.jupiter.extension.*;
 import com.soebes.itf.jupiter.maven.MavenExecutionResult;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.DisplayName;
@@ -15,6 +12,7 @@ import java.nio.charset.StandardCharsets;
 import static com.soebes.itf.extension.assertj.MavenITAssertions.assertThat;
 
 @MavenJupiterExtension
+@MavenRepository
 class ReleaseVersionMojoIT {
 
 

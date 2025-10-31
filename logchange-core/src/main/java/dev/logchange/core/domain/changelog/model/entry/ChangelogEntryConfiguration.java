@@ -12,7 +12,6 @@ import java.util.Comparator;
 @Builder(access = AccessLevel.PRIVATE)
 public class ChangelogEntryConfiguration implements Comparable<ChangelogEntryConfiguration> {
 
-    private final String prefix;
     private final String type;
     private final ChangelogEntryConfigurationAction action;
     private final String key;
@@ -37,22 +36,9 @@ public class ChangelogEntryConfiguration implements Comparable<ChangelogEntryCon
                 .build();
     }
 
-    public ChangelogEntryConfiguration withPrefix(String prefix) {
-        return ChangelogEntryConfiguration.builder()
-                .prefix(prefix)
-                .type(type)
-                .action(action)
-                .key(key)
-                .defaultValue(defaultValue)
-                .description(description)
-                .moreInfo(moreInfo)
-                .build();
-    }
-
     @Override
     public int compareTo(ChangelogEntryConfiguration o) {
         return Comparator.comparing(ChangelogEntryConfiguration::getType)
-                .thenComparing(ChangelogEntryConfiguration::getPrefix, Comparator.nullsLast(String::compareTo))
                 .thenComparing(ChangelogEntryConfiguration::getAction)
                 .thenComparing(ChangelogEntryConfiguration::getKey)
                 .compare(this, o);
