@@ -37,7 +37,7 @@ public class FileReleaseDateTime {
 
     public static void addToDir(Path unreleasedDir, ReleaseDateOption releaseDateOption) {
         if (releaseDateOption.isNone()) {
-            // Skip writing release-date.txt entirely
+            log.info("Skipping creating " + RELEASE_DATE_FILENAME + " because none option selected during release");
             return;
         }
 

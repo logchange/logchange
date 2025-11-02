@@ -1,0 +1,14 @@
+# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵 
+# Visit https://github.com/logchange/logchange and leave a star 🌟 
+# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
+title: "Allow to define release date (`--releaseDate`) for selected date (f.e (`--releaseDate=2025-11-02`) 
+ or setting `none` (`--releaseDate=none`) to not set release date. If option is not set, current date will be used (as used to)."
+authors:
+  - name: Peter Zmilczak
+    nick: marwin1991
+    url: https://github.com/marwin1991
+type: added
+merge_requests:
+  - 663
+issues:
+  - 662
