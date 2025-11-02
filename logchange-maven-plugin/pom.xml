@@ -28,6 +28,8 @@
         <maven-verifier.version>1.7.2</maven-verifier.version>
         <itf.version>0.13.1</itf.version>
         <commons-io.version>2.20.0</commons-io.version>
+
+        <it.coverage.file>${project.build.directory}/jacoco-it.exec</it.coverage.file>
     </properties>
 
     <dependencies>
@@ -133,6 +135,9 @@
                         <maven.version>${maven.version}</maven.version>
                         <maven.home>${maven.home}</maven.home>
                     </systemPropertyVariables>
+                    <environmentVariables>
+                        <MAVEN_OPTS>-javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar=destfile=${it.coverage.file},append=true</MAVEN_OPTS>
+                    </environmentVariables>
                 </configuration>
                 <executions>
                     <execution>
