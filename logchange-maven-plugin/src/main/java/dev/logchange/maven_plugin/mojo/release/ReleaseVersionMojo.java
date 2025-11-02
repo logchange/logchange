@@ -1,6 +1,7 @@
 package dev.logchange.maven_plugin.mojo.release;
 
 import dev.logchange.commands.release.ReleaseVersionCommand;
+import dev.logchange.core.format.release_date.ReleaseDateOption;
 import lombok.CustomLog;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.AbstractMojo;
@@ -25,29 +26,25 @@ import static org.apache.maven.project.MavenProject.EMPTY_PROJECT_VERSION;
 )
 public class ReleaseVersionMojo extends AbstractMojo {
 
+    private static final String NO_POM_XML_VERSION = "1";
     @Parameter(defaultValue = "${project}", readonly = true)
     private MavenProject project;
-
     @Parameter(defaultValue = "", property = VERSION_TO_RELEASE_PROPERTY)
     private String versionToRelease;
-
     @Parameter(defaultValue = DEFAULT_UNRELEASED_VERSION_DIR, property = UNRELEASED_VERSION_DIR_PROPERTY)
     private String unreleasedVersionDir;
-
     @Parameter(defaultValue = DEFAULT_INPUT_DIR, property = INPUT_DIR_PROPERTY)
     private String inputDir;
-
     @Parameter(defaultValue = DEFAULT_OUTPUT_FILE, property = OUTPUT_FILE_PROPERTY)
     private String outputFile;
-
     @Parameter(defaultValue = DEFAULT_CONFIG_FILE, property = CONFIG_FILE_PROPERTY)
     private String configFile;
-
     @Parameter(defaultValue = "false", property = GENERATE_CHANGES_XML_PROPERTY)
     private boolean isGenerateChangesXml;
-
     @Parameter(defaultValue = DEFAULT_XML_OUTPUT_FILE, property = XML_OUTPUT_FILE_PROPERTY)
     private String xmlOutputFile;
+    @Parameter(defaultValue = "", property = RELEASE_DATE_PROPERTY)
+    private String releaseDate;
 
     @Override
     public void execute() {
@@ -61,12 +58,11 @@ public class ReleaseVersionMojo extends AbstractMojo {
                 outputFile,
                 configFile,
                 isGenerateChangesXml,
-                xmlOutputFile).execute();
+                xmlOutputFile,
+                ReleaseDateOption.of(releaseDate)
+        ).execute();
         getLog().info(RELEASE_COMMAND_END_LOG);
     }
-
-    private static final String NO_POM_XML_VERSION = "1";
-
 
     private String getVersion() {
         if (StringUtils.isNotBlank(versionToRelease)) {

@@ -2,6 +2,7 @@ package dev.logchange.cli.release;
 
 import dev.logchange.cli.BaseCommand;
 import dev.logchange.commands.release.ReleaseVersionCommand;
+import dev.logchange.core.format.release_date.ReleaseDateOption;
 import lombok.CustomLog;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -53,7 +54,8 @@ public class ReleaseVersionCliCommand extends BaseCommand {
                 configFile,
                 isGenerateChangesXml,
                 xmlOutputFile,
-                releaseDate).execute();
+                ReleaseDateOption.of(releaseDate)
+        ).execute();
         log.info(RELEASE_COMMAND_END_LOG);
     }
 

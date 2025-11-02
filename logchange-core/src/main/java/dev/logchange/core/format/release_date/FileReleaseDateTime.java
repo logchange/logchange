@@ -1,6 +1,7 @@
 package dev.logchange.core.format.release_date;
 
 import dev.logchange.core.domain.changelog.model.version.ReleaseDateTime;
+import lombok.CustomLog;
 import lombok.SneakyThrows;
 
 import java.io.File;
@@ -13,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
+@CustomLog
 public class FileReleaseDateTime {
 
     public static final String RELEASE_DATE_FILENAME = "release-date.txt";
@@ -33,32 +35,20 @@ public class FileReleaseDateTime {
                 .orElse(null);
     }
 
-    @SneakyThrows
-    public static void addToDir(Path unreleasedDir) {
-        addToDir(unreleasedDir, null);
-    }
-
-    @SneakyThrows
-    public static void addToDir(Path unreleasedDir, String releaseDateOption) {
-        if (releaseDateOption != null && releaseDateOption.trim().equalsIgnoreCase("none")) {
+    public static void addToDir(Path unreleasedDir, ReleaseDateOption releaseDateOption) {
+        if (releaseDateOption.isNone()) {
             // Skip writing release-date.txt entirely
             return;
         }
 
-        final String dateToWrite;
-        if (releaseDateOption == null || releaseDateOption.trim().isEmpty()) {
-            dateToWrite = LocalDate.now().toString();
-        } else {
-            // Validate and use explicit date
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(RELEASE_DATE_FORMAT);
-            LocalDate parsed = LocalDate.parse(releaseDateOption.trim(), formatter);
-            dateToWrite = parsed.toString();
+        File releaseDateFile = unreleasedDir.resolve(RELEASE_DATE_FILENAME).toFile();
+        try (FileWriter fileWriter = new FileWriter(releaseDateFile)) {
+            fileWriter.write(releaseDateOption.getValue());
+        } catch (Exception e) {
+            String msg = "Could not create and write to " + RELEASE_DATE_FILENAME + " because: " + e.getMessage();
+            log.error(msg);
+            throw new IllegalStateException(msg);
         }
-
-        File releaseDateFile = new File(unreleasedDir + "/" + RELEASE_DATE_FILENAME);
-        FileWriter fileWriter = new FileWriter(releaseDateFile);
-        fileWriter.write(dateToWrite);
-        fileWriter.close();
     }
 
     @SneakyThrows

@@ -2,6 +2,8 @@ package dev.logchange.commands;
 
 public class Constants {
 
+    public static final String RELEASE_DATE_FORMAT = "yyyy-MM-dd";
+
     public static final String LOGCHANGE_DESCRIPTION = "\nlogchange (CLI) - logchange is a tool which helps creating CHANGELOG by keeping one format and solving merge request conflicts problem by extraction of new CHANGELOG entries to separate files. \n\n Visit https://logchange.dev/ for more information\n";
     public static final String BASIC_FOOTER = "\n\nFeel free to contact us via email team@logchange.dev \nor visit https://github.com/logchange/logchange";
 
@@ -123,8 +125,6 @@ public class Constants {
     public static final String XML_OUTPUT_FILE_PROPERTY = "outputFileXml";
     public static final String XML_OUTPUT_FILE_OPTION = OPTION_PREFIX + XML_OUTPUT_FILE_PROPERTY;
     public static final String XML_OUTPUT_FILE_OPTION_DESCRIPTION = "";
-
-    public static final String RELEASE_DATE_FORMAT = "yyyy-MM-dd";
 
     public static final String VERSION_TO_RELEASE_PROPERTY = "versionToRelease";
     public static final String VERSION_TO_RELEASE_OPTION = OPTION_PREFIX + VERSION_TO_RELEASE_PROPERTY;
