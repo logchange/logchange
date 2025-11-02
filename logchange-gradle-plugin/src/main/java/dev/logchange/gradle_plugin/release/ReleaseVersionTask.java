@@ -49,9 +49,17 @@ public abstract class ReleaseVersionTask extends DefaultTask {
                 extension.getConfigFile(),
                 extension.isGenerateChangesXml(),
                 extension.getXmlOutputFile(),
-                ReleaseDateOption.of(releaseDate)
+                getReleaseDateOption()
         ).execute();
         log.info(RELEASE_COMMAND_END_LOG);
+    }
+
+    private ReleaseDateOption getReleaseDateOption() {
+        if (StringUtils.isNotBlank(releaseDate)) {
+            return ReleaseDateOption.of(releaseDate);
+        }
+
+        return ReleaseDateOption.of(extension.getReleaseDate());
     }
 
     @Internal

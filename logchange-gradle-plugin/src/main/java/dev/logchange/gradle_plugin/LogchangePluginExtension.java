@@ -18,5 +18,6 @@ public class LogchangePluginExtension {
     private String configFile = DEFAULT_CONFIG_FILE;
     private boolean generateChangesXml = false;
     private String xmlOutputFile = DEFAULT_XML_OUTPUT_FILE;
+    private String releaseDate = RELEASE_DATE_DEFAULT;
 
 }

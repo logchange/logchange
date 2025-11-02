@@ -1,5 +1,7 @@
 package dev.logchange.commands;
 
+import static dev.logchange.core.format.release_date.ReleaseDateOption.TODAY_OPTION;
+
 public class Constants {
 
     public static final String RELEASE_DATE_FORMAT = "yyyy-MM-dd";
@@ -75,6 +77,7 @@ public class Constants {
 
     public static final String RELEASE_DATE_PROPERTY = "releaseDate";
     public static final String RELEASE_DATE_OPTION = OPTION_PREFIX + RELEASE_DATE_PROPERTY;
+    public static final String RELEASE_DATE_DEFAULT = TODAY_OPTION;
     public static final String RELEASE_DATE_OPTION_DESCRIPTION = "Release date for the new version: 'none' to skip writing release-date.txt, or in format " + RELEASE_DATE_FORMAT + " to set an explicit date. Default: today.";
 
     public static final String AGGREGATE_COMMAND = "aggregate";

@@ -12,7 +12,7 @@ import static dev.logchange.core.format.release_date.FileReleaseDateTime.RELEASE
 @CustomLog
 public class ReleaseDateOption {
 
-    private static final String TODAY_OPTION = "today";
+    public static final String TODAY_OPTION = "today";
     private static final String NONE_VALUE = "none";
 
     private static final ReleaseDateOption NONE = new ReleaseDateOption(NONE_VALUE);
