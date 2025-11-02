@@ -35,10 +35,29 @@ public class FileReleaseDateTime {
 
     @SneakyThrows
     public static void addToDir(Path unreleasedDir) {
-        File releaseDateFile = new File(unreleasedDir + "/" + RELEASE_DATE_FILENAME);
+        addToDir(unreleasedDir, null);
+    }
 
+    @SneakyThrows
+    public static void addToDir(Path unreleasedDir, String releaseDateOption) {
+        if (releaseDateOption != null && releaseDateOption.trim().equalsIgnoreCase("none")) {
+            // Skip writing release-date.txt entirely
+            return;
+        }
+
+        final String dateToWrite;
+        if (releaseDateOption == null || releaseDateOption.trim().isEmpty()) {
+            dateToWrite = LocalDate.now().toString();
+        } else {
+            // Validate and use explicit date
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(RELEASE_DATE_FORMAT);
+            LocalDate parsed = LocalDate.parse(releaseDateOption.trim(), formatter);
+            dateToWrite = parsed.toString();
+        }
+
+        File releaseDateFile = new File(unreleasedDir + "/" + RELEASE_DATE_FILENAME);
         FileWriter fileWriter = new FileWriter(releaseDateFile);
-        fileWriter.write(LocalDate.now().toString());
+        fileWriter.write(dateToWrite);
         fileWriter.close();
     }
 

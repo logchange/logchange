@@ -71,6 +71,10 @@ public class Constants {
     public static final String RELEASE_COMMAND_START_LOG = "Running release command for version: ";
     public static final String RELEASE_COMMAND_END_LOG = "Changelog entry successfully added";
 
+    public static final String RELEASE_DATE_PROPERTY = "releaseDate";
+    public static final String RELEASE_DATE_OPTION = OPTION_PREFIX + RELEASE_DATE_PROPERTY;
+    public static final String RELEASE_DATE_OPTION_DESCRIPTION = "Release date for the new version: 'none' to skip writing release-date.txt, or in format " + RELEASE_DATE_FORMAT + " to set an explicit date. Default: today.";
+
     public static final String AGGREGATE_COMMAND = "aggregate";
     public static final String AGGREGATE_COMMAND_DESCRIPTION = "Aggregates projects changelogs to create one. Useful when we have many projects that make up one product.";
     public static final String AGGREGATE_COMMAND_START_LOG = "Running aggregate command...";

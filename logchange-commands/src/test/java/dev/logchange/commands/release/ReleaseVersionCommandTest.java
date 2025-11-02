@@ -319,4 +319,81 @@ class ReleaseVersionCommandTest {
         assertFalse(releaseDateFile.exists());
         assertFalse(versionSummaryFile.exists());
     }
+
+    @Test
+    void shouldReleaseVersionWithoutReleaseDateFile_when_OptionNone() throws IOException {
+        // given:
+        String VALID_PATH = PATH + "/valid/";
+        String VALID_INPUT_DIR = VALID_PATH + INPUT_DIR + "/";
+        File unreleasedDir = new File(VALID_INPUT_DIR + UNRELEASED);
+        File entry = new File(VALID_INPUT_DIR + UNRELEASED + "/" + TEST_FILE);
+        File versionDirectory = new File(VALID_INPUT_DIR + VERSION_DIR);
+        File movedEntry = new File(VALID_INPUT_DIR + VERSION_DIR + "/" + TEST_FILE);
+        File releaseDateFile = new File(VALID_INPUT_DIR + VERSION_DIR + "/" + RELEASE_DATE_FILE);
+
+        assertTrue(unreleasedDir.exists());
+        assertTrue(entry.exists());
+        assertFalse(versionDirectory.exists());
+
+        // when:
+        ReleaseVersionCommand.of(
+                VALID_PATH,
+                VERSION_TO_RELEASE,
+                UNRELEASED,
+                INPUT_DIR,
+                VALID_PATH + OUTPUT_FILE,
+                CONFIG_FILE,
+                false,
+                XML_OUTPUT_FILE,
+                "none").execute();
+
+        // then:
+        assertTrue(versionDirectory.exists());
+        assertTrue(movedEntry.exists());
+        assertFalse(releaseDateFile.exists());
+
+        // cleanup:
+        Files.move(movedEntry.toPath(), entry.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        versionDirectory.delete();
+    }
+
+    @Test
+    void shouldReleaseVersionWithSpecificReleaseDate_when_OptionProvided() throws IOException {
+        // given:
+        String VALID_PATH = PATH + "/valid/";
+        String VALID_INPUT_DIR = VALID_PATH + INPUT_DIR + "/";
+        File unreleasedDir = new File(VALID_INPUT_DIR + UNRELEASED);
+        File entry = new File(VALID_INPUT_DIR + UNRELEASED + "/" + TEST_FILE);
+        File versionDirectory = new File(VALID_INPUT_DIR + VERSION_DIR);
+        File movedEntry = new File(VALID_INPUT_DIR + VERSION_DIR + "/" + TEST_FILE);
+        File releaseDateFile = new File(VALID_INPUT_DIR + VERSION_DIR + "/" + RELEASE_DATE_FILE);
+
+        assertTrue(unreleasedDir.exists());
+        assertTrue(entry.exists());
+        assertFalse(versionDirectory.exists());
+
+        // when:
+        String date = "2025-11-30";
+        ReleaseVersionCommand.of(
+                VALID_PATH,
+                VERSION_TO_RELEASE,
+                UNRELEASED,
+                INPUT_DIR,
+                VALID_PATH + OUTPUT_FILE,
+                CONFIG_FILE,
+                false,
+                XML_OUTPUT_FILE,
+                date).execute();
+
+        // then:
+        assertTrue(versionDirectory.exists());
+        assertTrue(movedEntry.exists());
+        assertTrue(releaseDateFile.exists());
+        assertThat(Files.readString(releaseDateFile.toPath())).isEqualTo(date);
+
+        // cleanup:
+        Files.move(movedEntry.toPath(), entry.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        releaseDateFile.delete();
+        versionDirectory.delete();
+    }
 }

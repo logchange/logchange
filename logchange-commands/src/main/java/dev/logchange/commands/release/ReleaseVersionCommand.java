@@ -19,8 +19,31 @@ import static dev.logchange.commands.Constants.GIT_KEEP;
 import static dev.logchange.core.domain.changelog.model.version.Version.UNRELEASED_DIR_SEPARATOR;
 
 @CustomLog
-@RequiredArgsConstructor(staticName = "of")
+@RequiredArgsConstructor
 public class ReleaseVersionCommand {
+
+    public static ReleaseVersionCommand of(String rootPath,
+                                            String version,
+                                            String unreleasedVersionDir,
+                                            String inputDir,
+                                            String outputFile,
+                                            String configFile,
+                                            boolean isGenerateChangesXml,
+                                            String xmlOutputFile) {
+        return new ReleaseVersionCommand(rootPath, version, unreleasedVersionDir, inputDir, outputFile, configFile, isGenerateChangesXml, xmlOutputFile, null);
+    }
+
+    public static ReleaseVersionCommand of(String rootPath,
+                                            String version,
+                                            String unreleasedVersionDir,
+                                            String inputDir,
+                                            String outputFile,
+                                            String configFile,
+                                            boolean isGenerateChangesXml,
+                                            String xmlOutputFile,
+                                            String releaseDateOption) {
+        return new ReleaseVersionCommand(rootPath, version, unreleasedVersionDir, inputDir, outputFile, configFile, isGenerateChangesXml, xmlOutputFile, releaseDateOption);
+    }
 
     private final String rootPath;
     private final String version;
@@ -30,6 +53,7 @@ public class ReleaseVersionCommand {
     private final String configFile;
     private final boolean isGenerateChangesXml;
     private final String xmlOutputFile;
+    private final String releaseDateOption;
 
     public static String getVersion(String version) {
         if (StringUtils.containsIgnoreCase(version, "-SNAPSHOT")) {
@@ -49,7 +73,7 @@ public class ReleaseVersionCommand {
 
         checkIfAlreadyExists(newDirName);
 
-        FileReleaseDateTime.addToDir(unreleasedDir);
+        FileReleaseDateTime.addToDir(unreleasedDir, releaseDateOption);
         removeGitKeep(unreleasedDir);
         renameOrMoveDir(unreleasedDir, newDirName);
 
