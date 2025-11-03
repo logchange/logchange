@@ -1,6 +1,7 @@
 package dev.logchange.core.format.release_date;
 
 import dev.logchange.core.domain.changelog.model.version.ReleaseDateTime;
+import lombok.CustomLog;
 import lombok.SneakyThrows;
 
 import java.io.File;
@@ -13,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
+@CustomLog
 public class FileReleaseDateTime {
 
     public static final String RELEASE_DATE_FILENAME = "release-date.txt";
@@ -33,13 +35,20 @@ public class FileReleaseDateTime {
                 .orElse(null);
     }
 
-    @SneakyThrows
-    public static void addToDir(Path unreleasedDir) {
-        File releaseDateFile = new File(unreleasedDir + "/" + RELEASE_DATE_FILENAME);
+    public static void addToDir(Path unreleasedDir, ReleaseDateOption releaseDateOption) {
+        if (releaseDateOption.isNone()) {
+            log.info("Skipping creating " + RELEASE_DATE_FILENAME + " because none option selected during release");
+            return;
+        }
 
-        FileWriter fileWriter = new FileWriter(releaseDateFile);
-        fileWriter.write(LocalDate.now().toString());
-        fileWriter.close();
+        File releaseDateFile = unreleasedDir.resolve(RELEASE_DATE_FILENAME).toFile();
+        try (FileWriter fileWriter = new FileWriter(releaseDateFile)) {
+            fileWriter.write(releaseDateOption.getValue());
+        } catch (Exception e) {
+            String msg = "Could not create and write to " + RELEASE_DATE_FILENAME + " because: " + e.getMessage();
+            log.error(msg);
+            throw new IllegalStateException(msg);
+        }
     }
 
     @SneakyThrows

@@ -84,7 +84,7 @@
                     <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
-                        <version>0.8.14</version>
+                        <version>${jacoco.version}</version>
                         <executions>
                             <execution>
                                 <phase>verify</phase>
@@ -94,6 +94,7 @@
                                 <configuration>
                                     <dataFileIncludes>
                                         <dataFileInclude>**/jacoco.exec</dataFileInclude>
+                                        <dataFileInclude>**/jacoco-it.exec</dataFileInclude>
                                     </dataFileIncludes>
                                     <outputDirectory>${project.reporting.outputDirectory}/jacoco-aggregate</outputDirectory>
                                 </configuration>

@@ -1,6 +1,7 @@
 package dev.logchange.gradle_plugin.release;
 
 import dev.logchange.commands.release.ReleaseVersionCommand;
+import dev.logchange.core.format.release_date.ReleaseDateOption;
 import dev.logchange.gradle_plugin.LogchangePluginExtension;
 import lombok.CustomLog;
 import lombok.Setter;
@@ -23,9 +24,16 @@ public abstract class ReleaseVersionTask extends DefaultTask {
 
     private String versionToRelease;
 
+    private String releaseDate;
+
     @Option(option = VERSION_TO_RELEASE_PROPERTY, description = VERSION_TO_RELEASE_OPTION_DESCRIPTION_EMPTY)
     public void setVersionToRelease(String versionToRelease) {
         this.versionToRelease = versionToRelease;
+    }
+
+    @Option(option = RELEASE_DATE_PROPERTY, description = RELEASE_DATE_OPTION_DESCRIPTION)
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
     @TaskAction
@@ -40,9 +48,18 @@ public abstract class ReleaseVersionTask extends DefaultTask {
                 extension.getOutputFile(),
                 extension.getConfigFile(),
                 extension.isGenerateChangesXml(),
-                extension.getXmlOutputFile()
+                extension.getXmlOutputFile(),
+                getReleaseDateOption()
         ).execute();
         log.info(RELEASE_COMMAND_END_LOG);
+    }
+
+    private ReleaseDateOption getReleaseDateOption() {
+        if (StringUtils.isNotBlank(releaseDate)) {
+            return ReleaseDateOption.of(releaseDate);
+        }
+
+        return ReleaseDateOption.of(extension.getReleaseDate());
     }
 
     @Internal

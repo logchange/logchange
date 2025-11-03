@@ -1,6 +1,10 @@
 package dev.logchange.commands;
 
+import static dev.logchange.core.format.release_date.ReleaseDateOption.TODAY_OPTION;
+
 public class Constants {
+
+    public static final String RELEASE_DATE_FORMAT = "yyyy-MM-dd";
 
     public static final String LOGCHANGE_DESCRIPTION = "\nlogchange (CLI) - logchange is a tool which helps creating CHANGELOG by keeping one format and solving merge request conflicts problem by extraction of new CHANGELOG entries to separate files. \n\n Visit https://logchange.dev/ for more information\n";
     public static final String BASIC_FOOTER = "\n\nFeel free to contact us via email team@logchange.dev \nor visit https://github.com/logchange/logchange";
@@ -71,6 +75,11 @@ public class Constants {
     public static final String RELEASE_COMMAND_START_LOG = "Running release command for version: ";
     public static final String RELEASE_COMMAND_END_LOG = "Changelog entry successfully added";
 
+    public static final String RELEASE_DATE_PROPERTY = "releaseDate";
+    public static final String RELEASE_DATE_OPTION = OPTION_PREFIX + RELEASE_DATE_PROPERTY;
+    public static final String RELEASE_DATE_DEFAULT = TODAY_OPTION;
+    public static final String RELEASE_DATE_OPTION_DESCRIPTION = "Release date for the new version: 'none' to skip writing release-date.txt, or in format " + RELEASE_DATE_FORMAT + " to set an explicit date. Default: today.";
+
     public static final String AGGREGATE_COMMAND = "aggregate";
     public static final String AGGREGATE_COMMAND_DESCRIPTION = "Aggregates projects changelogs to create one. Useful when we have many projects that make up one product.";
     public static final String AGGREGATE_COMMAND_START_LOG = "Running aggregate command...";
@@ -119,8 +128,6 @@ public class Constants {
     public static final String XML_OUTPUT_FILE_PROPERTY = "outputFileXml";
     public static final String XML_OUTPUT_FILE_OPTION = OPTION_PREFIX + XML_OUTPUT_FILE_PROPERTY;
     public static final String XML_OUTPUT_FILE_OPTION_DESCRIPTION = "";
-
-    public static final String RELEASE_DATE_FORMAT = "yyyy-MM-dd";
 
     public static final String VERSION_TO_RELEASE_PROPERTY = "versionToRelease";
     public static final String VERSION_TO_RELEASE_OPTION = OPTION_PREFIX + VERSION_TO_RELEASE_PROPERTY;

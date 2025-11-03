@@ -4,9 +4,11 @@ import dev.logchange.commands.generate.GenerateProjectCommand;
 import dev.logchange.commands.init.InitProjectCommand;
 import dev.logchange.commands.lint.LintProjectCommand;
 import dev.logchange.core.format.release_date.FileReleaseDateTime;
+import dev.logchange.core.format.release_date.ReleaseDateOption;
+import lombok.AccessLevel;
 import lombok.CustomLog;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +21,7 @@ import static dev.logchange.commands.Constants.GIT_KEEP;
 import static dev.logchange.core.domain.changelog.model.version.Version.UNRELEASED_DIR_SEPARATOR;
 
 @CustomLog
-@RequiredArgsConstructor(staticName = "of")
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class ReleaseVersionCommand {
 
     private final String rootPath;
@@ -30,10 +32,23 @@ public class ReleaseVersionCommand {
     private final String configFile;
     private final boolean isGenerateChangesXml;
     private final String xmlOutputFile;
+    private final ReleaseDateOption releaseDateOption;
+
+    public static ReleaseVersionCommand of(String rootPath,
+                                           String version,
+                                           String unreleasedVersionDir,
+                                           String inputDir,
+                                           String outputFile,
+                                           String configFile,
+                                           boolean isGenerateChangesXml,
+                                           String xmlOutputFile,
+                                           ReleaseDateOption releaseDateOption) {
+        return new ReleaseVersionCommand(rootPath, version, unreleasedVersionDir, inputDir, outputFile, configFile, isGenerateChangesXml, xmlOutputFile, releaseDateOption);
+    }
 
     public static String getVersion(String version) {
-        if (StringUtils.containsIgnoreCase(version, "-SNAPSHOT")) {
-            return version.substring(0, StringUtils.indexOfIgnoreCase(version, "-SNAPSHOT"));
+        if (Strings.CI.contains(version, "-SNAPSHOT")) {
+            return version.substring(0, Strings.CI.indexOf(version, "-SNAPSHOT"));
         } else {
             return version;
         }
@@ -49,7 +64,7 @@ public class ReleaseVersionCommand {
 
         checkIfAlreadyExists(newDirName);
 
-        FileReleaseDateTime.addToDir(unreleasedDir);
+        FileReleaseDateTime.addToDir(unreleasedDir, releaseDateOption);
         removeGitKeep(unreleasedDir);
         renameOrMoveDir(unreleasedDir, newDirName);
 
