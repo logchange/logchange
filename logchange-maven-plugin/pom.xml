@@ -27,7 +27,7 @@
         <!-- TESTS -->
         <maven-verifier.version>1.7.2</maven-verifier.version>
         <itf.version>0.13.1</itf.version>
-        <commons-io.version>2.20.0</commons-io.version>
+        <commons-io.version>2.21.0</commons-io.version>
 
         <it.coverage.file>${project.build.directory}/jacoco-it.exec</it.coverage.file>
         <jacoco.maven.opts />
