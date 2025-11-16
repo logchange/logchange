@@ -7,9 +7,6 @@ on:
 
   workflow_dispatch: {}
 
-env:
-  VALHALLA_RELEASE_CMD: ${{ secrets.VALHALLA_RELEASE_CMD }}
-
 jobs:
   valhalla_release:
     if: |
@@ -23,8 +20,12 @@ jobs:
     container:
       image: logchange/valhalla:1.9.2
 
+    permissions:
+      contents: write
+      pull-requests: write
+
     env:
-      VALHALLA_TOKEN: ${{ secrets.LOGCHANGE_PAT_TOKEN }}
+      VALHALLA_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - name: Checkout
