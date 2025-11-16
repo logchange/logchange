@@ -38,7 +38,7 @@
     <repositories>
         <repository>
             <id>central</id>
-            <url>https://repo1.maven.org/maven2/</url>
+            <url>https://repo.maven.apache.org/maven2</url>
         </repository>
     </repositories>
 
@@ -125,6 +125,15 @@
 
     <profiles>
         <profile>
+            <id>jdk-9-or-later</id>
+            <activation>
+                <jdk>[9,)</jdk>
+            </activation>
+            <properties>
+                <maven.compiler.release>${release.version}</maven.compiler.release>
+            </properties>
+        </profile>
+        <profile>
             <id>graalvm</id>
             <activation>
                 <file>
@@ -182,6 +191,7 @@
                             </execution>
                         </executions>
                         <configuration>
+                            <mainClass>${exec.mainClass}</mainClass>
                             <buildArgs>
                                 <arg>--initialize-at-build-time=org.xml.sax.helpers.LocatorImpl</arg>
                                 <arg>--initialize-at-build-time=org.xml.sax.helpers.AttributesImpl</arg>
@@ -220,6 +230,7 @@
                             </execution>
                         </executions>
                         <configuration>
+                            <mainClass>${exec.mainClass}</mainClass>
                             <buildArgs>
                                 <arg>--libc=musl</arg>
                                 <arg>--static</arg>
