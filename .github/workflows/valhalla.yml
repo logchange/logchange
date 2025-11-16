@@ -1,0 +1,36 @@
+name: Valhalla Release
+
+on:
+  push:
+    branches:
+      - 'release-*'
+
+  workflow_dispatch: {}
+
+env:
+  VALHALLA_RELEASE_CMD: ${{ secrets.VALHALLA_RELEASE_CMD }}
+
+jobs:
+  valhalla_release:
+    if: |
+      (
+        startsWith(github.ref_name, 'release-') ||
+        (env.VALHALLA_RELEASE_CMD != '' && startsWith(env.VALHALLA_RELEASE_CMD, 'release-'))
+      ) && !contains(github.event.head_commit.message, 'VALHALLA SKIP')
+
+    runs-on: ubuntu-latest
+
+    container:
+      image: logchange/valhalla:1.9.2
+
+    env:
+      VALHALLA_TOKEN: ${{ secrets.LOGCHANGE_PAT_TOKEN }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Run Valhalla Release
+        run: |
+          echo "Running Valhalla..."

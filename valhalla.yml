@@ -1,0 +1,40 @@
+# This file is used by valhalla tool to create release 🌌
+# Visit https://github.com/logchange/valhalla and leave a star 🌟
+# More info about configuration you can find https://github.com/logchange/valhalla#%EF%B8%8F-configuration ⬅️
+
+git_host: github
+
+commit_before_release:
+  enabled: True
+  username: "logchange-bot"
+  email: "team@logchange.dev"
+  msg: "Preparation for releasing version {VERSION}"
+  before:
+    - mvn versions:set -DnewVersion={VERSION}
+    - mvn versions:commit
+    - logchange release
+
+release:
+  name: "{VERSION}"
+  description:
+    from_command: "cat changelog/v{VERSION}/version-summary.md"
+
+tag:
+  name: "{VERSION}"
+
+commit_after_release:
+  enabled: True
+  username: "logchange-bot"
+  email: "team@logchange.dev"
+  msg: "[CI SKIP] Preparation for next release iteration"
+  before:
+    - mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion}-SNAPSHOT versions:commit
+
+
+merge_request:
+  enabled: True
+  title: "Releasing version {VERSION} and preparation for next iteration"
+  reviewers:
+    - marwin1991
+    - witx98
+
