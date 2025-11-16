@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: logchange/valhalla:1.9.2
+      image: logchange/valhalla:1.9.3
 
     permissions:
       contents: write
@@ -28,5 +28,4 @@ jobs:
         with:
           fetch-depth: 0
       - name: Run Valhalla Release
-        # Change to call just valhalla after release Valhalla 1.9.3
-        run: python3 -u /opt/valhalla
+        run: valhalla
