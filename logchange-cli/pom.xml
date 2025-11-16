@@ -33,10 +33,6 @@
         <picocli.version>4.7.7</picocli.version>
 
         <exec.mainClass>dev.logchange.cli.LogchangeCliCommand</exec.mainClass>
-
-        <jib-maven-plugin.version>3.5.0</jib-maven-plugin.version>
-        <jib.docker.image>${project.artifactId}</jib.docker.image>
-        <jib.docker.tag>${project.version}</jib.docker.tag>
     </properties>
 
     <repositories>
