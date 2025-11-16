@@ -29,6 +29,4 @@ jobs:
           fetch-depth: 0
       - name: Run Valhalla Release
         # Change to call just valhalla after release Valhalla 1.9.3
-        run: |
-          echo "Running Valhalla!"\
-          python3 -u /opt/valhalla
+        run: python3 -u /opt/valhalla
