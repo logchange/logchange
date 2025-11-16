@@ -12,7 +12,7 @@ commit_before_release:
   before:
     - mvn versions:set -DnewVersion={VERSION}
     - mvn versions:commit
-    - logchange release
+    - logchange release --versionToRelease {VERSION}
 
 release:
   name: "{VERSION}"
