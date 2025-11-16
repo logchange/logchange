@@ -33,16 +33,12 @@
         <picocli.version>4.7.7</picocli.version>
 
         <exec.mainClass>dev.logchange.cli.LogchangeCliCommand</exec.mainClass>
-
-        <jib-maven-plugin.version>3.5.0</jib-maven-plugin.version>
-        <jib.docker.image>${project.artifactId}</jib.docker.image>
-        <jib.docker.tag>${project.version}</jib.docker.tag>
     </properties>
 
     <repositories>
         <repository>
             <id>central</id>
-            <url>https://repo.maven.apache.org/maven2</url>
+            <url>https://repo1.maven.org/maven2/</url>
         </repository>
     </repositories>
 
@@ -97,41 +93,9 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.graalvm.buildtools</groupId>
-                <artifactId>native-maven-plugin</artifactId>
-                <version>${native-maven-plugin.version}</version>
-                <extensions>true</extensions>
-                <configuration combine.self="override">
-                    <imageName>${project.artifactId}</imageName>
-                    <mainClass>${exec.mainClass}</mainClass>
-                    <buildArgs>
-                        <buildArg>--no-fallback</buildArg>
-                    </buildArgs>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>test-native</id>
-                        <goals>
-                            <goal>test</goal>
-                        </goals>
-                        <phase>test</phase>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>com.google.cloud.tools</groupId>
-                <artifactId>jib-maven-plugin</artifactId>
-                <version>${jib-maven-plugin.version}</version>
-                <configuration>
-                    <to>
-                        <image>${jib.docker.image}:${jib.docker.tag}</image>
-                    </to>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.3.1</version>
+                <version>${maven-resource-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>write-version</id>
@@ -160,15 +124,6 @@
 
 
     <profiles>
-        <profile>
-            <id>jdk-9-or-later</id>
-            <activation>
-                <jdk>[9,)</jdk>
-            </activation>
-            <properties>
-                <maven.compiler.release>${release.version}</maven.compiler.release>
-            </properties>
-        </profile>
         <profile>
             <id>graalvm</id>
             <activation>
