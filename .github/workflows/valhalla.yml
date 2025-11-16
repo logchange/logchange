@@ -9,12 +9,7 @@ on:
 
 jobs:
   valhalla_release:
-    if: |
-      (
-        startsWith(github.ref_name, 'release-') ||
-        (env.VALHALLA_RELEASE_CMD != '' && startsWith(env.VALHALLA_RELEASE_CMD, 'release-'))
-      ) && !contains(github.event.head_commit.message, 'VALHALLA SKIP')
-
+    if: (startsWith(github.ref_name, 'release-')) && !contains(github.event.head_commit.message, 'VALHALLA SKIP')
     runs-on: ubuntu-latest
 
     container:
