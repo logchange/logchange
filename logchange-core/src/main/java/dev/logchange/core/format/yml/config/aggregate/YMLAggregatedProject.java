@@ -5,11 +5,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.logchange.core.domain.config.model.aggregate.AggregatedProject;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.CustomLog;
 import lombok.NoArgsConstructor;
-import lombok.extern.java.Log;
 
 
-@Log
+@CustomLog
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,7 +29,7 @@ public class YMLAggregatedProject {
 
     @JsonAnySetter
     public void anySetter(String key, Object value) {
-        log.warning("Unknown property: " + key + " with value " + value);
+        log.warn("Unknown property: " + key + " with value " + value);
     }
 
     public AggregatedProject to() {

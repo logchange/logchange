@@ -6,13 +6,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.logchange.core.domain.config.model.labels.TypesLabels;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.CustomLog;
 import lombok.NoArgsConstructor;
-import lombok.extern.java.Log;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Log
+@CustomLog
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,7 +28,7 @@ public class YMLTypesLabels {
         if (value instanceof String) {
             entryTypesLabels.put(key, (String) value);
         } else {
-            log.warning("Unknown property: " + key + " with value " + value);
+            log.warn("Unknown property: " + key + " with value " + value);
         }
     }
 

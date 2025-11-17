@@ -3,15 +3,11 @@ package dev.logchange.core.format.yml.changelog.entry;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryConfiguration;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.extern.java.Log;
+import lombok.*;
 
 import java.util.Comparator;
 
-@Log
+@CustomLog
 @Data
 @Builder
 @NoArgsConstructor
@@ -38,7 +34,7 @@ public class YMLChangelogEntryConfiguration implements Comparable<YMLChangelogEn
 
     @JsonAnySetter
     public void anySetter(String key, Object value) {
-        log.warning("Unknown property: " + key + " with value " + value);
+        log.warn("Unknown property: " + key + " with value " + value);
     }
 
     @Override

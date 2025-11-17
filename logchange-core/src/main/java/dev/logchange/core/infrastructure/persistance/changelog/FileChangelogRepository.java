@@ -23,8 +23,8 @@ import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryParseExcep
 import dev.logchange.core.format.yml.config.YMLChangelogException;
 import dev.logchange.core.infrastructure.persistance.config.FileTemplateRepository;
 import dev.logchange.core.infrastructure.persistance.file.FileRepository;
+import lombok.CustomLog;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import org.apache.maven.plugins.changes.model.ChangesDocument;
 
 import java.io.File;
@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
 
 import static dev.logchange.core.Constants.TEMPLATES_DIR_NAME;
 
-@Log
+@CustomLog
 @RequiredArgsConstructor
 public class FileChangelogRepository implements ChangelogRepository {
 
@@ -54,7 +54,7 @@ public class FileChangelogRepository implements ChangelogRepository {
         List<ChangelogVersion> versions = new LinkedList<>();
         List<ChangelogArchive> archives = new LinkedList<>();
 
-        log.info("Querying changelog files...");
+        log.info("Querying changelog files");
         this.reader.readFiles(inputDirectory).forEach(file -> {
             if (isVersionDirectory(file)) {
                 versions.add(getChangelogVersion(file));
@@ -149,7 +149,7 @@ public class FileChangelogRepository implements ChangelogRepository {
         try {
             return ChangelogArchive.of(file.getName(), Files.readAllLines(file.toPath(), StandardCharsets.UTF_8));
         } catch (IOException e) {
-            log.severe("Error while getting changelog archive from file: " + e.getMessage());
+            log.error("Error while getting changelog archive from file: " + e.getMessage());
             throw new IllegalStateException(e.getMessage());
         }
     }

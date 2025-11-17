@@ -3,13 +3,9 @@ package dev.logchange.core.format.yml.config.templates;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.logchange.core.domain.config.model.templates.ChangelogTemplate;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.extern.java.Log;
+import lombok.*;
 
-@Log
+@CustomLog
 @Data
 @Builder
 @NoArgsConstructor
@@ -21,7 +17,7 @@ public class YMLChangelogTemplate {
 
     @JsonAnySetter
     public void anySetter(String key, Object value) {
-        log.warning("Unknown property: " + key + " with value " + value);
+        log.warn("Unknown property: " + key + " with value " + value);
     }
 
     static YMLChangelogTemplate of(ChangelogTemplate changelogTemplate) {

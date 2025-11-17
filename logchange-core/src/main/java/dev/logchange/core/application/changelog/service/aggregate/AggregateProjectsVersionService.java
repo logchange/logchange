@@ -9,8 +9,8 @@ import dev.logchange.core.domain.changelog.model.version.ChangelogVersion;
 import dev.logchange.core.domain.changelog.model.version.ChangelogVersionEntriesGroup;
 import dev.logchange.core.domain.changelog.model.version.ReleaseDateTime;
 import dev.logchange.core.domain.changelog.model.version.Version;
+import lombok.CustomLog;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -18,7 +18,7 @@ import java.time.OffsetDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Log
+@CustomLog
 @RequiredArgsConstructor
 public class AggregateProjectsVersionService implements AggregateProjectsVersionUseCase {
 
@@ -41,7 +41,7 @@ public class AggregateProjectsVersionService implements AggregateProjectsVersion
                 if (result.isPresent()) {
                     changelogVersions.add(result.get());
                 } else {
-                    log.warning("Version " + command.getVersion().getValue() + " in project " + project.getName() + " not found!");
+                    log.warn("Version " + command.getVersion().getValue() + " in project " + project.getName() + " not found!");
                 }
             } catch (IOException e) {
                 exceptions.add(e);

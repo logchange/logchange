@@ -6,17 +6,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.logchange.core.domain.config.model.templates.ChangelogTemplate;
 import dev.logchange.core.domain.config.model.templates.Templates;
 import dev.logchange.core.domain.config.model.templates.VersionSummaryTemplate;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.Singular;
-import lombok.extern.java.Log;
+import lombok.*;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Log
+@CustomLog
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -53,7 +49,7 @@ public class YMLTemplates {
 
     @JsonAnySetter
     public void anySetter(String key, Object value) {
-        log.warning("Unknown property: " + key + " with value " + value);
+        log.warn("Unknown property: " + key + " with value " + value);
     }
 
     public Templates to() {

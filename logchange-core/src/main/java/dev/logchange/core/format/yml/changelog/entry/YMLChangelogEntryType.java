@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType;
 import lombok.AllArgsConstructor;
-import lombok.extern.java.Log;
+import lombok.CustomLog;
 
 import java.util.stream.Collectors;
 
-@Log
+@CustomLog
 @AllArgsConstructor
 public class YMLChangelogEntryType {
 
@@ -31,7 +31,7 @@ public class YMLChangelogEntryType {
                 .orElseThrow(() -> {
                     String availableType = ChangelogEntryType.values().stream().map(ChangelogEntryType::getKey).collect(Collectors.joining(", "));
                     String message = "Cannot match YMLChangelogEntryType for string: " + name + " - Available types: [" + availableType + "].";
-                    log.severe(message);
+                    log.error(message);
                     return new IllegalArgumentException(message);
                 });
     }

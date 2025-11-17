@@ -6,8 +6,8 @@ import dev.logchange.core.application.file.Dir;
 import dev.logchange.core.application.file.GitKeep;
 import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.infrastructure.persistance.config.FileConfigRepository;
+import lombok.CustomLog;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,7 +20,7 @@ import java.time.format.DateTimeFormatter;
 import static dev.logchange.commands.Constants.DEFAULT_CONFIG_FILE;
 import static dev.logchange.commands.Constants.GIT_KEEP;
 
-@Log
+@CustomLog
 @RequiredArgsConstructor(staticName = "of")
 public class InitProjectCommand {
 
@@ -41,7 +41,7 @@ public class InitProjectCommand {
     private void checkIfRootExists() {
         if (!new File(rootPath).exists()) {
             String msg = String.format("Root path: %s must exists! Check if you are in right directory!", rootPath);
-            log.severe(msg);
+            log.error(msg);
             throw new RuntimeException(msg);
         }
     }
@@ -70,7 +70,7 @@ public class InitProjectCommand {
             log.info("Moved existing changelog to: " + archivePath);
         } catch (IOException e) {
             String msg = String.format("An error occurred while moving changelog: %s", e.getMessage());
-            log.severe(msg);
+            log.error(msg);
             throw new RuntimeException(msg);
         }
     }
@@ -97,11 +97,11 @@ public class InitProjectCommand {
             if (changelog.createNewFile()) {
                 log.info("Created: " + changelog.getName());
             } else {
-                log.warning(changelog.getName() + " already exists.");
+                log.warn(changelog.getName() + " already exists.");
             }
         } catch (IOException e) {
             String msg = String.format("An error occurred while creating empty changelog: %s", e.getMessage());
-            log.severe(msg);
+            log.error(msg);
             throw new RuntimeException(msg);
         }
     }

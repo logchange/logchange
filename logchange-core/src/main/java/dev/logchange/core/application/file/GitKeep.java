@@ -1,12 +1,12 @@
 package dev.logchange.core.application.file;
 
-import lombok.extern.java.Log;
+import lombok.CustomLog;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 
-@Log
+@CustomLog
 public class GitKeep {
     private final Path path;
 
@@ -24,11 +24,11 @@ public class GitKeep {
             if (gitKeep.createNewFile()) {
                 log.info("Created: " + gitKeep.getName());
             } else {
-                log.warning(gitKeep.getName() + " already exists.");
+                log.warn(gitKeep.getName() + " already exists.");
             }
         } catch (IOException e) {
             String msg = String.format("An error occurred while creating file: %s msg: %s", path, e.getMessage());
-            log.severe(msg);
+            log.error(msg);
         }
     }
 }

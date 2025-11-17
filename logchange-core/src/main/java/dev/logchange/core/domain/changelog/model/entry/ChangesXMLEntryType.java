@@ -1,13 +1,13 @@
 package dev.logchange.core.domain.changelog.model.entry;
 
 import lombok.AllArgsConstructor;
+import lombok.CustomLog;
 import lombok.Getter;
-import lombok.extern.java.Log;
 
 /**
  * Enum for types supported by Changes.xml.
  */
-@Log
+@CustomLog
 @Getter
 @AllArgsConstructor
 public enum ChangesXMLEntryType {

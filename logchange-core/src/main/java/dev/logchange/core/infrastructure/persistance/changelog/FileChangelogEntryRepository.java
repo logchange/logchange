@@ -4,10 +4,10 @@ import dev.logchange.core.application.changelog.repository.ChangelogEntryReposit
 import dev.logchange.core.application.file.repository.FileWriter;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
+import lombok.CustomLog;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 
-@Log
+@CustomLog
 @RequiredArgsConstructor
 public class FileChangelogEntryRepository implements ChangelogEntryRepository {
 
