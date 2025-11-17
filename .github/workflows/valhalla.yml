@@ -25,6 +25,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
-
+        with:
+          fetch-depth: 0 # to fetch all history for all branches and tags
       - name: Run Valhalla Release
-        run: valhalla
+        #  git config fix problem with: detected dubious ownership in repository
+        #  https://medium.com/@janloo/github-actions-detected-dubious-ownership-in-repository-at-github-workspace-how-to-fix-b9cc127d4c04
+        run: |
+          git config --global --add safe.directory $PWD 
+          valhalla
