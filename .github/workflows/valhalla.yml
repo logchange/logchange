@@ -20,7 +20,9 @@ jobs:
       pull-requests: write
 
     env:
-      VALHALLA_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/trigger-a-workflow#triggering-a-workflow-from-a-workflow
+      # If you do want to trigger a workflow from within a workflow run, you can use a GitHub App installation access token or a personal access token instead of GITHUB_TOKEN to trigger events that require a token.
+      VALHALLA_TOKEN: ${{ secrets.LOGCHANGE_PAT_TOKEN }}
 
     steps:
       - name: Checkout
