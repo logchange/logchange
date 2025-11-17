@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 class NoLombokLogAnnotationTest {
 
     private static final Pattern FORBIDDEN_ANNOTATION = Pattern.compile("(?m)@Log\\b");
+    private static final Pattern FORBIDDEN_IMPORT = Pattern.compile("(?m)^\\s*import\\s+lombok\\.extern\\.java\\.Log\\s*;\\s*$");
 
     private static List<Path> findFilesWithLogAnnotation(Path projectRoot) throws IOException {
         List<Path> offenders = new ArrayList<>();
@@ -45,7 +46,7 @@ class NoLombokLogAnnotationTest {
                 }
 
                 String content = new String(Files.readAllBytes(file), StandardCharsets.UTF_8);
-                if (containsForbiddenLogAnnotation(content)) {
+                if (containsForbiddenLogAnnotation(content) || containsForbiddenLogImport(content)) {
                     offenders.add(file);
                 }
                 return FileVisitResult.CONTINUE;
@@ -75,6 +76,10 @@ class NoLombokLogAnnotationTest {
         return FORBIDDEN_ANNOTATION.matcher(content).find();
     }
 
+    private static boolean containsForbiddenLogImport(String content) {
+        return FORBIDDEN_IMPORT.matcher(content).find();
+    }
+
     private static Path locateProjectRoot(Path start) throws IOException {
         Path current = start;
         while (current != null) {
@@ -98,7 +103,7 @@ class NoLombokLogAnnotationTest {
 
         if (!offenders.isEmpty()) {
             StringBuilder message = new StringBuilder();
-            message.append("Detected use of the @Log annotation. Use @CustomLog instead.\n")
+            message.append("Detected use of Lombok @Log (annotation or import). Use @CustomLog instead.\n")
                     .append("Files violating the rules (paths relative to the project root):\n");
             offenders.stream()
                     .sorted()
