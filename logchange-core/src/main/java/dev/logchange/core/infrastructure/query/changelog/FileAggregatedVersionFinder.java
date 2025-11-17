@@ -11,8 +11,8 @@ import dev.logchange.core.format.release_date.FileReleaseDateTime;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntry;
 import dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryParseException;
 import dev.logchange.core.format.yml.config.YMLChangelogException;
+import lombok.CustomLog;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -22,7 +22,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Log
+@CustomLog
 @RequiredArgsConstructor
 public class FileAggregatedVersionFinder implements AggregatedVersionQuery {
 

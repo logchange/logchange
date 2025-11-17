@@ -1,8 +1,8 @@
 package dev.logchange.core.infrastructure.query.file;
 
 import dev.logchange.core.application.file.query.TarGzQuery;
+import lombok.CustomLog;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
 
@@ -12,7 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.zip.GZIPInputStream;
 
-@Log
+@CustomLog
 @RequiredArgsConstructor
 public class TarGzExtractor implements TarGzQuery {
 
@@ -69,7 +69,7 @@ public class TarGzExtractor implements TarGzQuery {
             log.info("Deleting downloaded archive file");
             boolean deleted = tarGzFile.delete();
             if (!deleted) {
-                log.warning("Cannot delete downloaded archive file: " + tarGzFile.getAbsolutePath());
+                log.warn("Cannot delete downloaded archive file: " + tarGzFile.getAbsolutePath());
             }
         }
     }

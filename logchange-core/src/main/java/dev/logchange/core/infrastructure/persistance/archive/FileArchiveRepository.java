@@ -5,10 +5,10 @@ import dev.logchange.core.application.file.repository.FileWriter;
 import dev.logchange.core.domain.changelog.model.Changelog;
 import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.format.md.archive.MDArchive;
-import lombok.extern.java.Log;
+import lombok.CustomLog;
 import org.apache.maven.plugins.changes.model.ChangesDocument;
 
-@Log
+@CustomLog
 public class FileArchiveRepository implements ChangelogPersistence {
 
     private final FileWriter writer;

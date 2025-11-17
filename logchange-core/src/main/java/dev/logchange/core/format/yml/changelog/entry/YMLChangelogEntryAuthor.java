@@ -4,15 +4,12 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryAuthor;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.extern.java.Log;
+import lombok.*;
 
-@Log
+
 @Data
 @Builder
+@CustomLog
 @NoArgsConstructor
 @AllArgsConstructor
 public class YMLChangelogEntryAuthor {
@@ -43,7 +40,7 @@ public class YMLChangelogEntryAuthor {
 
     @JsonAnySetter
     public void anySetter(String key, Object value) {
-        log.warning("Unknown property: " + key + " with value " + value);
+        log.warn("Unknown property: " + key + " with value " + value);
     }
 
 }

@@ -2,15 +2,15 @@ package dev.logchange.core.domain.changelog.model.archive;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.CustomLog;
 import lombok.Getter;
-import lombok.extern.java.Log;
 
 import java.text.Collator;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-@Log
+@CustomLog
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChangelogArchive implements Comparable<ChangelogArchive> {
@@ -19,7 +19,7 @@ public class ChangelogArchive implements Comparable<ChangelogArchive> {
 
     public static ChangelogArchive of(String fileName, List<String> archiveLines) {
         if (archiveLines == null) {
-            log.severe("Archive cannot be null!");
+            log.error("Archive cannot be null!");
             throw new IllegalArgumentException("Archive cannot be null");
         }
 

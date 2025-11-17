@@ -6,13 +6,14 @@ public class LogchangeLogger {
 
     private static final LogchangeLogger instance = new LogchangeLogger();
 
+    @SuppressWarnings("unused") // used by lombok @CustomLog
     public static LogchangeLogger getLogger(Class<?> type) {
         return instance;
     }
 
     public void error(String msg) {
         if (level.isEnabled(LoggerLevel.ERROR)) {
-            System.out.println("[ERROR] " + msg);
+            System.err.println("[ERROR] " + msg);
         }
     }
 

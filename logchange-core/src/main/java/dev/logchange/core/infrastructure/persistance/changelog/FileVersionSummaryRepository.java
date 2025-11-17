@@ -12,12 +12,12 @@ import dev.logchange.core.format.md.changelog.version.MDChangelogVersion;
 import dev.logchange.core.infrastructure.persistance.config.FileTemplateRepository;
 import dev.logchange.core.infrastructure.persistance.file.FileRepository;
 import lombok.AllArgsConstructor;
-import lombok.extern.java.Log;
+import lombok.CustomLog;
 
 import java.io.File;
 import java.util.List;
 
-@Log
+@CustomLog
 @AllArgsConstructor
 public class FileVersionSummaryRepository implements VersionSummaryRepository {
 

@@ -1,13 +1,13 @@
 package dev.logchange.md.table;
 
-import lombok.extern.java.Log;
+import lombok.CustomLog;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-@Log
+@CustomLog
 public class MarkdownTableBuilder {
     private MarkdownTable table;
 
@@ -39,7 +39,7 @@ public class MarkdownTableBuilder {
         try {
             this.table = MarkdownTable.of(MarkdownTableRow.of(Arrays.asList(objects)));
         } catch (MarkdownTableValidationException exception) {
-            log.warning("Creation of MarkdownTable caused exception with following message: " + exception.getMessage());
+            log.warn("Creation of MarkdownTable caused exception with following message: " + exception.getMessage());
         }
     }
 

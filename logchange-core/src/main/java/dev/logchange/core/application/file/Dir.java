@@ -1,6 +1,6 @@
 package dev.logchange.core.application.file;
 
-import lombok.extern.java.Log;
+import lombok.CustomLog;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.stream.Stream;
 
-@Log
+@CustomLog
 public class Dir {
     private final Path path;
 
@@ -27,10 +27,10 @@ public class Dir {
             if (newDir.mkdir()) {
                 log.info("Created: " + newDir.getName());
             } else {
-                log.warning(newDir.getName() + " cannot be created.");
+                log.warn(newDir.getName() + " cannot be created.");
             }
         } else {
-            log.warning(newDir.getName() + " already exists.");
+            log.warn(newDir.getName() + " already exists.");
         }
     }
 
@@ -39,7 +39,7 @@ public class Dir {
             return Files.createTempDirectory("tmp");
         } catch (IOException e) {
             String msg = "Cannot proceed without temporary directory!";
-            log.severe(msg);
+            log.error(msg);
             throw new IllegalStateException(msg, e);
         }
     }
@@ -50,12 +50,12 @@ public class Dir {
                 try {
                     Files.delete(path);
                 } catch (IOException e) {
-                    log.warning("Failed to delete " + path + ": " + e.getMessage());
+                    log.error("Failed to delete " + path + ": " + e.getMessage());
                 }
             });
             log.info("Directory " + directory + " deleted.");
         } catch (IOException e) {
-            log.severe("Error walking file tree to delete directory: " + e.getMessage());
+            log.error("Error walking file tree to delete directory: " + e.getMessage());
         }
     }
 
@@ -63,13 +63,13 @@ public class Dir {
         File dir = new File(directoryPath);
         if (!dir.exists()) {
             String msg =  String.format("There is no %s directory in this project !!!", directoryPath);
-            log.severe(msg);
+            log.error(msg);
             throw new RuntimeException(msg);
         }
 
         if (!dir.isDirectory()) {
             String msg = String.format("File %s is not a directory !!!", directoryPath);
-            log.severe(msg);
+            log.error(msg);
             throw new RuntimeException(msg);
         }
 

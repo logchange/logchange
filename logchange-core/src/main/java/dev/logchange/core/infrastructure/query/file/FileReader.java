@@ -1,7 +1,7 @@
 package dev.logchange.core.infrastructure.query.file;
 
 import dev.logchange.core.application.file.query.FileQuery;
-import lombok.extern.java.Log;
+import lombok.CustomLog;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.stream.Stream;
 
-@Log
+@CustomLog
 public class FileReader implements FileQuery {
 
     /**
@@ -49,7 +49,7 @@ public class FileReader implements FileQuery {
             return new FileInputStream(entry);
         } catch (FileNotFoundException e) {
             String message = "Cannot find entry file: " + entry.getName();
-            log.severe(message);
+            log.error(message);
             throw new IllegalArgumentException(message);
         }
     }

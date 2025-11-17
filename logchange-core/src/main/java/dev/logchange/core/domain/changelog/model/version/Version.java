@@ -1,16 +1,12 @@
 package dev.logchange.core.domain.changelog.model.version;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.extern.java.Log;
+import lombok.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.artifact.versioning.ComparableVersion;
 
 import java.util.Comparator;
 
-@Log
+@CustomLog
 @Getter
 @EqualsAndHashCode
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -28,7 +24,7 @@ public class Version implements Comparable<Version> {
 
     public static Version of(String version) {
         if (StringUtils.isBlank(version)) {
-            log.severe("Version cannot be blank!");
+            log.error("Version cannot be blank!");
             throw new IllegalArgumentException("Version cannot be blank!");
         }
         return new Version(version);

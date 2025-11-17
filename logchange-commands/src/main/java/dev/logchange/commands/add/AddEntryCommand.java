@@ -7,13 +7,13 @@ import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
 import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogEntryRepository;
 import dev.logchange.core.infrastructure.persistance.file.FileRepository;
 import lombok.AccessLevel;
+import lombok.CustomLog;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 
 import java.io.File;
 import java.io.IOException;
 
-@Log
+@CustomLog
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class AddEntryCommand {
 
@@ -31,7 +31,7 @@ public class AddEntryCommand {
         String path = rootPath + "/" + inputDir + "/" + unreleasedVersionDir + "/" + outputFile;
         File entryFile = createFile(path);
 
-        log.finer(entry.toString());
+        log.debug(entry.toString());
 
         ChangelogEntryRepository repository = new FileChangelogEntryRepository(FileRepository.of(entryFile));
         AddChangelogEntryUseCase addChangelogEntry = new AddChangelogEntryService(repository);
@@ -49,12 +49,12 @@ public class AddEntryCommand {
                 return changelog;
             } else {
                 String msg = "Entry with name: " + changelog.getName() + "  already exists!";
-                log.warning(msg);
+                log.warn(msg);
                 throw new RuntimeException(msg);
             }
         } catch (IOException e) {
             String msg = String.format("An error occurred while creating empty changelog entry file with path: %s - %s", path, e.getMessage());
-            log.severe(msg);
+            log.error(msg);
             throw new RuntimeException(msg);
         }
     }
@@ -65,7 +65,7 @@ public class AddEntryCommand {
 
         if (!unreleasedDir.exists() || !unreleasedDir.isDirectory()) {
             String msg = "Cannot add new entry if " + path + " not exists nor is directory";
-            log.severe(msg);
+            log.error(msg);
             throw new RuntimeException(msg);
         }
     }

@@ -4,12 +4,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import dev.logchange.core.domain.config.model.aggregate.AggregatedProjectType;
 import lombok.AllArgsConstructor;
-import lombok.extern.java.Log;
+import lombok.CustomLog;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-@Log
+@CustomLog
 @AllArgsConstructor
 public enum YMLAggregatedProjectType {
 
@@ -27,7 +27,7 @@ public enum YMLAggregatedProjectType {
                 .orElseThrow(() -> {
                     String availableType = Arrays.stream(YMLAggregatedProjectType.values()).map(YMLAggregatedProjectType::getType).collect(Collectors.joining(", "));
                     String message = "Cannot match YMLAggregatedProjectType for string: " + name + " - Available types: [" + availableType + "].";
-                    log.severe(message);
+                    log.error(message);
                     return new IllegalArgumentException(message);
                 });
 

@@ -14,12 +14,12 @@ import dev.logchange.core.infrastructure.persistance.file.FileRepository;
 import dev.logchange.core.infrastructure.query.file.FileReader;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.CustomLog;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 
 import java.io.File;
 
-@Log
+@CustomLog
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @RequiredArgsConstructor(staticName = "of")
 public class GenerateProjectCommand {

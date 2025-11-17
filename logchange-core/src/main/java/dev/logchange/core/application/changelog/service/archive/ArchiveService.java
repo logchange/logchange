@@ -6,13 +6,13 @@ import dev.logchange.core.domain.changelog.command.ArchiveUseCase;
 import dev.logchange.core.domain.changelog.model.Changelog;
 import dev.logchange.core.domain.changelog.model.archive.ChangelogArchive;
 import dev.logchange.core.domain.changelog.model.version.ChangelogVersion;
-import lombok.extern.java.Log;
+import lombok.CustomLog;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@Log
+@CustomLog
 public class ArchiveService implements ArchiveUseCase {
 
     private final ChangelogPersistence changelogPersistence;

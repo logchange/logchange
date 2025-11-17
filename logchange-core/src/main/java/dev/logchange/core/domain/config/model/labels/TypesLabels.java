@@ -3,8 +3,8 @@ package dev.logchange.core.domain.config.model.labels;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.CustomLog;
 import lombok.Getter;
-import lombok.extern.java.Log;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
@@ -12,8 +12,8 @@ import java.util.Map;
 
 import static dev.logchange.core.domain.changelog.model.entry.ChangelogEntryType.*;
 
-@Log
 @Builder
+@CustomLog
 @AllArgsConstructor
 public class TypesLabels {
 

@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntryConfigurationAction;
 import lombok.AllArgsConstructor;
-import lombok.extern.java.Log;
+import lombok.CustomLog;
 
 import java.util.Arrays;
 
-@Log
+@CustomLog
 @AllArgsConstructor
 public enum YMLChangelogEntryConfigurationAction {
 
@@ -28,7 +28,7 @@ public enum YMLChangelogEntryConfigurationAction {
                 return ChangelogEntryConfigurationAction.DELETE;
             default:
                 String message = "Converting ChangelogEntryConfigurationAction failed";
-                log.severe(message);
+                log.error(message);
                 throw new IllegalArgumentException(message);
         }
     }
@@ -43,7 +43,7 @@ public enum YMLChangelogEntryConfigurationAction {
                 return YMLChangelogEntryConfigurationAction.DELETE;
             default:
                 String message = "Converting YMLChangelogEntryConfigurationAction failed";
-                log.severe(message);
+                log.error(message);
                 throw new IllegalArgumentException(message);
         }
     }
@@ -55,7 +55,7 @@ public enum YMLChangelogEntryConfigurationAction {
                 .findFirst()
                 .orElseThrow(() -> {
                     String message = "Cannot match YMLChangelogEntryConfigurationAction for string: " + name;
-                    log.severe(message);
+                    log.error(message);
                     return new IllegalArgumentException(message);
                 });
     }
