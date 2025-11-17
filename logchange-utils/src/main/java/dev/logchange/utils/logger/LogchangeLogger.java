@@ -12,25 +12,25 @@ public class LogchangeLogger {
 
     public void error(String msg) {
         if (level.isEnabled(LoggerLevel.ERROR)) {
-            System.out.println("[ERROR] " + msg);
+            System.err.println("[ERROR] " + msg);
         }
     }
 
     public void warn(String msg) {
         if (level.isEnabled(LoggerLevel.WARN)) {
-            System.out.println("[WARN] " + msg);
+            System.err.println("[WARN] " + msg);
         }
     }
 
     public void info(String msg) {
         if (level.isEnabled(LoggerLevel.INFO)) {
-            System.out.println(msg);
+            System.err.println(msg);
         }
     }
 
     public void debug(String msg) {
         if (level.isEnabled(LoggerLevel.DEBUG)) {
-            System.out.println("[DEBUG] " + msg);
+            System.err.println("[DEBUG] " + msg);
         }
     }
 
@@ -41,8 +41,8 @@ public class LogchangeLogger {
 
     public void debug(Exception e) {
         if (level.isEnabled(LoggerLevel.DEBUG)) {
-            System.out.println("[DEBUG] " + e.getMessage());
-            e.printStackTrace(System.out);
+            System.err.println("[DEBUG] " + e.getMessage());
+            e.printStackTrace(System.err);
         }
     }
 }

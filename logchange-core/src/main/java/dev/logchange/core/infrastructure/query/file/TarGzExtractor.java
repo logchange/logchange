@@ -87,7 +87,7 @@ public class TarGzExtractor implements TarGzQuery {
     }
 
     private void extractEntries(TarArchiveInputStream tis, String changelogDirPath) throws IOException {
-        System.out.println("Started extracting from " + changelogDirPath);
+        log.info("Started extracting from " + changelogDirPath);
         TarArchiveEntry entry;
 
         while ((entry = tis.getNextEntry()) != null) {
