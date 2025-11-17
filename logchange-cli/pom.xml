@@ -33,6 +33,10 @@
         <picocli.version>4.7.7</picocli.version>
 
         <exec.mainClass>dev.logchange.cli.LogchangeCliCommand</exec.mainClass>
+
+        <jib-maven-plugin.version>3.5.0</jib-maven-plugin.version>
+        <jib.docker.image>${project.artifactId}</jib.docker.image>
+        <jib.docker.tag>${project.version}</jib.docker.tag>
     </properties>
 
     <repositories>
@@ -91,6 +95,16 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>${jib-maven-plugin.version}</version>
+                <configuration>
+                    <to>
+                        <image>${jib.docker.image}:${jib.docker.tag}</image>
+                    </to>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -193,6 +207,7 @@
                         <configuration>
                             <mainClass>${exec.mainClass}</mainClass>
                             <buildArgs>
+                                <buildArg>--no-fallback</buildArg>
                                 <arg>--initialize-at-build-time=org.xml.sax.helpers.LocatorImpl</arg>
                                 <arg>--initialize-at-build-time=org.xml.sax.helpers.AttributesImpl</arg>
                                 <arg>--enable-url-protocols=http,https</arg>
@@ -232,6 +247,7 @@
                         <configuration>
                             <mainClass>${exec.mainClass}</mainClass>
                             <buildArgs>
+                                <buildArg>--no-fallback</buildArg>
                                 <arg>--libc=musl</arg>
                                 <arg>--static</arg>
                                 <arg>--initialize-at-build-time=org.xml.sax.helpers.LocatorImpl</arg>
