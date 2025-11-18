@@ -1,10 +1,10 @@
 name: Check reflect-config changes
 
 on:
+  push:
+    branches: [ main ]
   pull_request:
-    paths:
-      - 'logchange-cli/src/main/resources/META-INF/native-image/logchange-cli/**'
-      - '.github/workflows/reflect-config-check.yml'
+    branches: [ main ]
 
 jobs:
   reflect-config-check:

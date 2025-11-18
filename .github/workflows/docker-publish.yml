@@ -1,4 +1,4 @@
-name: Publish to DockerHub
+name: Logchange Docker Image and CLI binaries
 permissions:
   contents: read
 
