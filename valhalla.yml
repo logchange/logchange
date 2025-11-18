@@ -18,9 +18,6 @@ release:
   name: "{VERSION}"
   description:
     from_command: "cat changelog/v{VERSION}/version-summary.md"
-  assets:
-    files:
-      - "./bins/*.zip"
 
 tag:
   name: "{VERSION}"
@@ -40,4 +37,3 @@ merge_request:
   reviewers:
     - marwin1991
     - witx98
-

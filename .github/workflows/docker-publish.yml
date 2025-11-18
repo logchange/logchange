@@ -65,3 +65,34 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: logchange/logchange
+
+  update-release:
+    name: Update Release With logchange-cli binaries
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Download logchange binaries artifact
+        uses: actions/download-artifact@v6
+        with:
+          path: ./bins
+
+      - name: Package artifacts
+        run: for d in ./bins/*/; do zip -r "./bins/$(basename "$d").zip" "$d"; done
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: github.ref_type == 'tag'
+        with:
+          # https://github.com/softprops/action-gh-release/issues/342
+          files: |
+            ./bins/*.zip
+        env:
+          # Cannot use GITHUB_TOKEN because of:
+          # https://github.com/orgs/community/discussions/27028
+          GITHUB_TOKEN: ${{ secrets.LOGCHANGE_PAT_TOKEN }}
