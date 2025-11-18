@@ -21,20 +21,19 @@ jobs:
             runs-on: ubuntu-24.04
             platform: linuxx64
 
-          # GH does not provide arm64 linux
-          #          - name: "Linux ARM64"
-          #            base: linux
-          #            runs-on: self-hosted
-          #            platform: linuxarm64
+          - name: "Linux ARM64"
+            base: linux
+            runs-on: ubuntu-24.04-ar
+            platform: linuxarm64
 
           - name: "macOS x86_64"
             base: macos
-            runs-on: macos-13
+            runs-on: macos-15-intel
             platform: darwinx64
 
           - name: "macOS ARM64"
             base: macos
-            runs-on: macos-14
+            runs-on: macos-latest
             platform: darwinarm64
 
           - name: "Windows x86_64"
