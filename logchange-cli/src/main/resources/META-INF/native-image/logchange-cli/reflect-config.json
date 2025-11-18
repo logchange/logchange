@@ -18,12 +18,6 @@
     "allDeclaredConstructors": true
   },
   {
-    "name": "dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryConfigException",
-    "allDeclaredFields": true,
-    "allDeclaredMethods": true,
-    "allDeclaredConstructors": true
-  },
-  {
     "name": "dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryConfiguration",
     "allDeclaredFields": true,
     "allDeclaredMethods": true,
@@ -36,13 +30,13 @@
     "allDeclaredConstructors": true
   },
   {
-    "name": "dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryConfigurationActionConverter",
+    "name": "dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryLink",
     "allDeclaredFields": true,
     "allDeclaredMethods": true,
     "allDeclaredConstructors": true
   },
   {
-    "name": "dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryLink",
+    "name": "dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryParseException",
     "allDeclaredFields": true,
     "allDeclaredMethods": true,
     "allDeclaredConstructors": true
@@ -54,19 +48,13 @@
     "allDeclaredConstructors": true
   },
   {
-    "name": "dev.logchange.core.format.yml.changelog.entry.YMLChangelogEntryTypeConverter",
-    "allDeclaredFields": true,
-    "allDeclaredMethods": true,
-    "allDeclaredConstructors": true
-  },
-  {
-    "name": "dev.logchange.core.format.yml.changelog.entry.YMLChangelogInvalidConfigValuesException",
-    "allDeclaredFields": true,
-    "allDeclaredMethods": true,
-    "allDeclaredConstructors": true
-  },
-  {
     "name": "dev.logchange.core.format.yml.changelog.entry.YMLChangelogModule",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.logchange.core.format.yml.changelog.entry.YmlInvalidProperty",
     "allDeclaredFields": true,
     "allDeclaredMethods": true,
     "allDeclaredConstructors": true
