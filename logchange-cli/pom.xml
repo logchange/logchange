@@ -42,7 +42,12 @@
     <repositories>
         <repository>
             <id>central</id>
-            <url>https://repo.maven.apache.org/maven2</url>
+            <!--
+            I have tried to swap to https://repo.maven.apache.org/maven2 but i got error
+            Error:  Failed to execute goal on project logchange-maven-plugin: Could not collect dependencies for project dev.logchange:logchange-maven-plugin:maven-plugin:1.19.13
+            Error:  Failed to read artifact descriptor for org.apache.maven:maven-settings:jar:3.9.11
+            Error:  Caused by: The following artifacts could not be resolved: org.apache.maven:maven-settings:pom:3.9.11 (absent): Could not transfer artifact org.apache.maven:maven-settings:pom:3.9.11 from/to central (https://repo.maven.apache.org/maven2): status code: 502, reason phrase: Bad Gateway (502)-->
+            <url>https://repo1.maven.org/maven2/</url>
         </repository>
     </repositories>
 

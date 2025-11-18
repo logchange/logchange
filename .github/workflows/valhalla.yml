@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: logchange/valhalla:1.9.3
+      image: logchange/valhalla:1.9.4
 
     permissions:
       contents: write
@@ -29,6 +29,23 @@ jobs:
         uses: actions/checkout@v5
         with:
           fetch-depth: 0 # to fetch all history for all branches and tags
+
+     ### Logchange binary artifact
+
+      - name: Download logchange binaries artifact - linuxx64
+        uses: actions/download-artifact@v6
+        with:
+          path: ./bins
+
+      - name: Package artifacts
+        run: for d in ./bins/*/; do zip -r "./bins/$(basename "$d").zip" "$d"; done
+
+      - name: List artifacts
+        run: |
+          tree ./bins     
+
+      ### Logchange binary artifact
+
       - name: Run Valhalla Release
         #  git config fix problem with: detected dubious ownership in repository
         #  https://medium.com/@janloo/github-actions-detected-dubious-ownership-in-repository-at-github-workspace-how-to-fix-b9cc127d4c04

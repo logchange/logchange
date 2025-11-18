@@ -18,6 +18,9 @@ release:
   name: "{VERSION}"
   description:
     from_command: "cat changelog/v{VERSION}/version-summary.md"
+  assets:
+    files:
+      - "./bins/*.zip"
 
 tag:
   name: "{VERSION}"
