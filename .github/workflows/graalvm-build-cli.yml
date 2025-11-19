@@ -21,10 +21,16 @@ jobs:
             runs-on: ubuntu-24.04
             platform: linuxx64
 
-          - name: "Linux ARM64"
-            base: linux
-            runs-on: ubuntu-24.04-arm
-            platform: linuxarm64
+          # Error: Unable to detect supported LINUX native software development toolchain.
+          # Querying with command '/opt/hostedtoolcache/musl-toolchain/1.2.5-oracle-00001/arm64/bin/x86_64-linux-musl-gcc -v' prints:
+          # [1/8] Initializing...                                                                                    (0.0s @ 0.11GB)
+          #  /opt/hostedtoolcache/musl-toolchain/1.2.5-oracle-00001/arm64/bin/x86_64-linux-musl-gcc: 1: Syntax error: ")" unexpected
+          # Error: To prevent native-toolchain checking provide command-line option -H:-CheckToolchain
+          # https://github.com/logchange/logchange/actions/runs/19491520332/job/55784477671
+          #- name: "Linux ARM64"
+          #  base: linux
+          #  runs-on: ubuntu-24.04-arm
+          #  platform: linuxarm64
 
           - name: "macOS x86_64"
             base: macos
