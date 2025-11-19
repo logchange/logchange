@@ -23,7 +23,7 @@ jobs:
 
           - name: "Linux ARM64"
             base: linux
-            runs-on: ubuntu-24.04-ar
+            runs-on: ubuntu-24.04-arm
             platform: linuxarm64
 
           - name: "macOS x86_64"
