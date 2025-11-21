@@ -20,7 +20,7 @@ jobs:
     if: github.event_name != 'pull_request'
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Download Linux x86_64 Artifact
         uses: actions/download-artifact@v6
@@ -75,7 +75,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Download logchange binaries artifact
         uses: actions/download-artifact@v6
@@ -104,7 +104,7 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/')
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Download .zip assets from latest release
         run: |
