@@ -20,20 +20,13 @@
       "datasourceTemplate": "github-releases"
     }
   ],
-  "packageRules": [
-    {
-      "matchDatasources": ["github-releases"],
-      "matchDepNames": [
-        "gradle/gradle"
-      ],
-      "allowedVersions": "^8\\.\\d+\\.\\d+$"
-    },
-    {
-      "matchDatasources": ["maven"],
-      "matchDepNames": [
-        "gradle/gradle"
-      ],
-      "ignoreDeps": ["gradle/gradle"]
-    }
-  ]
+//  "packageRules": [
+//    {
+//      "matchDatasources": ["github-releases"],
+//      "matchDepNames": [
+//        "gradle/gradle"
+//      ],
+//      "allowedVersions": "^8\\.\\d+\\.\\d+$"
+//    }
+//  ]
 }
