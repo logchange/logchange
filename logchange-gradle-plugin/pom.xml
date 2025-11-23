@@ -35,7 +35,7 @@
             <scope>provided</scope> <!-- https://github.com/manusa/gradle-api-maven-plugin/issues/48#issuecomment-2599630622 -->
         </dependency>
 
-        <dependency>
+        <dependency> <!-- https://github.com/manusa/gradle-api-maven-plugin?tab=readme-ov-file#usage -->
             <groupId>org.apache.groovy</groupId>
             <artifactId>groovy-all</artifactId>
             <version>${groovy-all.version}</version>
