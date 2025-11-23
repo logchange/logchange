@@ -1,26 +1,19 @@
 {
-  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
-  extends: [
-    'config:recommended',
-  ],
-  assignees: [
-    'marwin1991',
-    'witx98',
-  ],
-  regexManagers: [
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "assignees": ["marwin1991", "witx98"],
+  "customManagers": [
     {
-      fileMatch: ['pom\\.xml$'],
-      matchStrings: [
-        '<gradle-all.version>(?<currentValue>.*)</gradle-all.version>',
+      "customType": "regex",
+      "managerFilePatterns": ["**/pom.xml"],
+      "matchStrings": [
+        "<gradle-all.version>(?<currentValue>.*)</gradle-all.version>"
       ],
-      depNameTemplate: 'gradle/gradle',
-      datasourceTemplate: 'github-releases',
-    },
+      "depNameTemplate": "gradle/gradle",
+      "datasourceTemplate": "github-releases"
+    }
   ],
-  packageRules: [
-    {
-      matchDepNames: ['gradle/gradle'],
-      allowedVersions: '^8\\.\\d+\\.\\d+$', // https://github.com/manusa/gradle-api-maven-plugin/issues/61
-    },
-  ],
+  "packageRules": [
+    {"matchDepNames": ["gradle/gradle"], "allowedVersions": "^8\\.\\d+\\.\\d+$"}
+  ]
 }
