@@ -77,7 +77,7 @@ You can choose between two options:
         <plugin>
             <groupId>dev.logchange</groupId>
             <artifactId>logchange-maven-plugin</artifactId>
-            <version>1.19.11</version>
+            <version>X.X.X</version> <!-- https://central.sonatype.com/artifact/dev.logchange/logchange-maven-plugin/versions -->
         </plugin>
     </plugins>
 </build>
