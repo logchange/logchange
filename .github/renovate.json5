@@ -1,11 +1,18 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended"],
-  "assignees": ["marwin1991", "witx98"],
+  "extends": [
+    "config:recommended"
+  ],
+  "assignees": [
+    "marwin1991",
+    "witx98"
+  ],
   "customManagers": [
     {
       "customType": "regex",
-      "managerFilePatterns": ["**/pom.xml"],
+      "managerFilePatterns": [
+        "**/pom.xml"
+      ],
       "matchStrings": [
         "<gradle-all.version>(?<currentValue>.*)</gradle-all.version>"
       ],
@@ -14,6 +21,19 @@
     }
   ],
   "packageRules": [
-    {"matchDepNames": ["gradle/gradle"], "allowedVersions": "^8\\.\\d+\\.\\d+$"}
+    {
+      "matchDatasources": ["github-releases"],
+      "matchDepNames": [
+        "gradle/gradle"
+      ],
+      "allowedVersions": "^8\\.\\d+\\.\\d+$"
+    },
+    {
+      "matchDatasources": ["maven"],
+      "matchDepNames": [
+        "gradle/gradle"
+      ],
+      "ignoreDeps": ["gradle/gradle"]
+    }
   ]
 }
