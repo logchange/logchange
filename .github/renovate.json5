@@ -22,8 +22,8 @@
   ],
   "packageRules": [
     {
-      "managers": ["maven"],
-      "excludePackageNames": ["org.gradle:gradle-all"]
+      "ignoreDeps": ["org.gradle:gradle-all"], // ignore gradle-all because it is handled by regex
+      "matchDatasources": ["maven"],
     }
   ]
 }
