@@ -20,7 +20,7 @@
     <properties>
         <jackson.version>2.20.1</jackson.version>
         <commons-text.version>1.14.0</commons-text.version>
-        <maven-artifact.version>3.9.11</maven-artifact.version>
+        <maven-artifact.version>3.9.12</maven-artifact.version>
         <commons-compress.version>1.28.0</commons-compress.version>
     </properties>
 
