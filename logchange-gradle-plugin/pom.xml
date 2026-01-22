@@ -17,7 +17,7 @@
 
     <properties>
         <gradle-all.version>8.14.3</gradle-all.version>
-        <groovy-all.version>5.0.3</groovy-all.version>
+        <groovy-all.version>5.0.4</groovy-all.version>
         <gradle-api-maven-plugin.version>0.0.7</gradle-api-maven-plugin.version>
     </properties>
 
