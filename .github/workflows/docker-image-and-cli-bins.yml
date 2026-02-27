@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Download Linux x86_64 Artifact
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: logchange-linuxx64
           path: .
@@ -78,7 +78,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Download logchange binaries artifact
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           path: ./bins
 
