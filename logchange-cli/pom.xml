@@ -25,7 +25,7 @@
         <release.version>21</release.version>
         <maven.compiler.release>21</maven.compiler.release>
 
-        <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
         <native-maven-plugin.version>0.11.4</native-maven-plugin.version>
         <maven-shade-plugin.version>3.6.2</maven-shade-plugin.version>
 
