@@ -18,7 +18,7 @@ jobs:
           configurationFile: .github/renovate-config.js
           renovate-version: full
         env:
-          RENOVATE_ALLOWED_POST_UPGRADE_COMMANDS: ".*"
+          RENOVATE_ALLOWED_COMMANDS: ".*"
           LOG_LEVEL: debug
 
 
