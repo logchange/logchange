@@ -1,5 +1,8 @@
 package dev.logchange.core.format.yml.config.labels;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,9 +12,6 @@ import lombok.Builder;
 import lombok.CustomLog;
 import lombok.NoArgsConstructor;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @CustomLog
 @Builder
 @NoArgsConstructor
@@ -20,6 +20,7 @@ public class YMLTypesLabels {
 
     public static final YMLTypesLabels EMPTY = YMLTypesLabels.builder().build();
 
+    @Builder.Default
     @JsonProperty(index = 1)
     public Map<String, String> entryTypesLabels = new HashMap<>();
 
