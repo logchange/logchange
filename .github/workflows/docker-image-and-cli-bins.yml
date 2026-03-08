@@ -9,10 +9,6 @@ on:
     tags:
       - '*'
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   build:
     uses: ./.github/workflows/graalvm-build-cli.yml
