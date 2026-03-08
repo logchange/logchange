@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -30,7 +31,7 @@
         <commons-io.version>2.21.0</commons-io.version>
 
         <it.coverage.file>${project.build.directory}/jacoco-it.exec</it.coverage.file>
-        <jacoco.maven.opts />
+        <jacoco.maven.opts/>
     </properties>
 
     <dependencies>
@@ -44,12 +45,21 @@
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-core</artifactId>
             <version>${maven-core.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
             <version>${maven-plugin-api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-artifact</artifactId>
+            <version>${maven-core.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -63,6 +73,11 @@
             <groupId>org.codehaus.plexus</groupId>
             <artifactId>plexus-interactivity-api</artifactId>
             <version>${plexus-interactivity-api.version}</version>
+            <!--
+            <scope>provided</scope>
+            We cannot use the provided scope because we need to run tests with it
+             Failed to execute goal dev.logchange:logchange-maven-plugin:1.19.14-SNAPSHOT:example (default-cli) on project AddExampleChangelogEntryMojoIT: Execution default-cli of goal dev.logchange:logchange-maven-plugin:1.19.14-SNAPSHOT:example failed: A required class was missing while executing dev.logchange:logchange-maven-plugin:1.19.14-SNAPSHOT:example: org/codehaus/plexus/components/interactivity/Prompter
+            -->
         </dependency>
 
         <!-- TESTS -->
@@ -167,7 +182,9 @@
         <profile>
             <id>jacoco</id>
             <properties>
-                <jacoco.maven.opts>-javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar=destfile=${it.coverage.file},append=true</jacoco.maven.opts>
+                <jacoco.maven.opts>
+                    -javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar=destfile=${it.coverage.file},append=true
+                </jacoco.maven.opts>
             </properties>
         </profile>
     </profiles>

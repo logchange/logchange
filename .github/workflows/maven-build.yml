@@ -22,7 +22,7 @@ jobs:
           cache: 'maven'
 
       - name: Build with Maven
-        run: mvn --batch-mode package -DskipTests
+        run: mvn --batch-mode --errors --fail-at-end --show-version --no-transfer-progress package -DskipTests
 
   test:
     runs-on: ubuntu-latest
@@ -36,7 +36,7 @@ jobs:
           cache: 'maven'
 
       - name: Test and Integration Test with Maven
-        run: mvn --batch-mode verify -P jacoco
+        run: mvn --batch-mode --errors --fail-at-end --show-version --no-transfer-progress verify -P jacoco
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
@@ -55,4 +55,4 @@ jobs:
           cache: 'maven'
 
       - name: Build JavaDoc with Maven to verify if its correct
-        run: mvn --batch-mode -DskipTests install && mvn --batch-mode javadoc:javadoc
+        run: mvn --batch-mode --errors --fail-at-end --show-version --no-transfer-progress -DskipTests install && mvn --batch-mode --errors --fail-at-end --show-version --no-transfer-progress javadoc:javadoc
