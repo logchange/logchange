@@ -78,11 +78,11 @@ jobs:
       # musl is only available on linux
       - if: ${{ matrix.base == 'linux' }}
         name: Build CLI executable (static)
-        run: mvn -Pnative-static package -DskipTests
+        run: mvn --batch-mode --errors --fail-at-end --show-version --no-transfer-progress -Pnative-static package -DskipTests
 
       - if: ${{ matrix.base != 'linux' }}
         name: Build CLI executable (non-static)
-        run: mvn -Pnative package -DskipTests
+        run: mvn --batch-mode --errors --fail-at-end --show-version --no-transfer-progress -Pnative package -DskipTests
 
       - name: Upload binaries
         uses: actions/upload-artifact@v6

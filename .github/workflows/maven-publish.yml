@@ -32,7 +32,7 @@ jobs:
           # Verify gpg secret key
           gpg --list-secret-keys --keyid-format LONG
       - name: Deploy with Maven
-        run: mvn -B clean deploy -Pci-cd
+        run: mvn --batch-mode --errors --show-version --no-transfer-progress clean deploy -Pci-cd
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_CENTRAL_TOKEN }}
