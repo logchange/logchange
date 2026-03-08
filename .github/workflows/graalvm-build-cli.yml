@@ -85,7 +85,7 @@ jobs:
         run: mvn --batch-mode --errors --fail-at-end --show-version --no-transfer-progress -Pnative package -DskipTests
 
       - name: Upload binaries
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: logchange-${{ matrix.platform }}
           path: |
