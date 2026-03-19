@@ -82,7 +82,7 @@
 
         <mockito-core.version>5.23.0</mockito-core.version>
         <assertj.version>3.27.7</assertj.version>
-        <pitest-maven.version>1.22.1</pitest-maven.version>
+        <pitest-maven.version>1.23.0</pitest-maven.version>
 
         <pitest-junit5-plugin.version>1.2.3</pitest-junit5-plugin.version>
     </properties>
