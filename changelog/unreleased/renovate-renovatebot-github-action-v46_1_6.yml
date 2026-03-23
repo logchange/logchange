@@ -1,0 +1,10 @@
+# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵 
+# Visit https://github.com/logchange/logchange and leave a star 🌟 
+# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
+title: Upgraded renovatebot/github-action from v46.1.5 to v46.1.6
+authors:
+  - name: logchange-bot
+    nick: logchange-bot
+    url: team@logchange.dev
+type: dependency_update
+
