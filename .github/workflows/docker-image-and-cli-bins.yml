@@ -86,7 +86,7 @@ jobs:
         run: for d in ./bins/*/; do zip -r "./bins/$(basename "$d").zip" "$d"; done
 
       - name: Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         if: github.ref_type == 'tag'
         with:
           # https://github.com/softprops/action-gh-release/issues/342
