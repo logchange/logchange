@@ -202,6 +202,9 @@ Copy following section as default config.
 # This file configures logchange tool 🌳 🪓 => 🪵 
 # Visit https://github.com/logchange/logchange and leave a star 🌟 
 # More info about configuration you can find https://github.com/logchange/logchange#configuration 
+# Set to false if you don't want the 3 line comment (banner) at the top of every new entry
+# created by add/example command. Default: true
+# entry_heading: false
 changelog:
   heading: Some information that will be display in the top of CHANGELOG.md
   #  You can define custom entry types, which overriders default ones

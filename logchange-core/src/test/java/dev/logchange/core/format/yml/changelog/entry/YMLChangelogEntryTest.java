@@ -80,7 +80,7 @@ class YMLChangelogEntryTest {
         YMLChangelogEntry entry = get();
 
         // when:
-        String result = entry.toYMLString();
+        String result = entry.toYMLString(true);
 
         // then:
         assertEquals("# This file is used by logchange tool to generate CHANGELOG.md \uD83C\uDF33 \uD83E\uDE93 => \uD83E\uDEB5 \n" +
@@ -116,7 +116,7 @@ class YMLChangelogEntryTest {
         YMLChangelogEntry entry = getSimple();
 
         // when:
-        String result = entry.toYMLString();
+        String result = entry.toYMLString(true);
 
         // then:
         assertEquals("# This file is used by logchange tool to generate CHANGELOG.md \uD83C\uDF33 \uD83E\uDE93 => \uD83E\uDEB5 \n" +

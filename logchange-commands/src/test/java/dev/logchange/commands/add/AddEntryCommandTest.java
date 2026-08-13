@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class AddEntryCommandTest {
 
     private static final String PATH = "src/test/resources/AddEntryCommandTest";
+    private static final String NO_HEADING_PATH = "src/test/resources/AddEntryCommandNoHeadingTest";
     private static final String INPUT_DIR = "changelog";
     private static final String UNRELEASED = "unreleased";
     private static final String OUTPUT_FILE = "00001-new-entry.yml";
@@ -23,6 +24,7 @@ class AddEntryCommandTest {
     @AfterEach
     void cleanup() {
         new File(PATH + "/" + INPUT_DIR + "/" + UNRELEASED + "/" + OUTPUT_FILE).delete();
+        new File(NO_HEADING_PATH + "/" + INPUT_DIR + "/" + UNRELEASED + "/" + OUTPUT_FILE).delete();
     }
 
     @Test
@@ -55,6 +57,27 @@ class AddEntryCommandTest {
         // then:
         assertTrue(outputFile.exists());
         String expectedContent = FileUtils.fileRead(PATH + "/" + INPUT_DIR + "/" + UNRELEASED + "/" + TEST_FILE, "UTF-8");
+        String actualContent = FileUtils.fileRead(outputFile, "UTF-8");
+        assertThat(actualContent).isEqualToIgnoringWhitespace(expectedContent);
+    }
+
+    @Test
+    void shouldAddEntryWithoutHeadingWhenDisabledInConfig() throws IOException {
+        // given:
+        File outputFile = new File(NO_HEADING_PATH + "/" + INPUT_DIR + "/" + UNRELEASED + "/" + OUTPUT_FILE);
+        assertFalse(outputFile.exists());
+
+        ChangelogEntry entry = ChangelogEntry.builder()
+                .title(ChangelogEntryTitle.of("title"))
+                .type(ChangelogEntryType.fromNameIgnoreCase("added"))
+                .build();
+
+        // when:
+        AddEntryCommand.of(NO_HEADING_PATH, INPUT_DIR, UNRELEASED).execute(entry, OUTPUT_FILE);
+
+        // then:
+        assertTrue(outputFile.exists());
+        String expectedContent = FileUtils.fileRead(NO_HEADING_PATH + "/" + INPUT_DIR + "/" + UNRELEASED + "/" + TEST_FILE, "UTF-8");
         String actualContent = FileUtils.fileRead(outputFile, "UTF-8");
         assertThat(actualContent).isEqualToIgnoringWhitespace(expectedContent);
     }

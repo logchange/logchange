@@ -104,9 +104,11 @@ public class YMLChangelogEntry {
     }
 
     @SneakyThrows
-    public String toYMLString() {
-        return YML_HEADING + ObjectMapperProvider.get()
+    public String toYMLString(boolean withHeading) {
+        String yml = ObjectMapperProvider.get()
                 .writeValueAsString(this);
+
+        return withHeading ? YML_HEADING + yml : yml;
     }
 
     @JsonAnySetter

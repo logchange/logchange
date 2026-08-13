@@ -35,6 +35,10 @@ public class YMLConfig {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public YMLAggregates aggregates;
 
+    @JsonProperty(value = "entry_heading", index = 2)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Boolean entryHeading;
+
     @SneakyThrows
     public static YMLConfig of(InputStream input) {
         ObjectMapper mapper = ObjectMapperProvider.get();
@@ -70,6 +74,7 @@ public class YMLConfig {
                 .labels(toLabels())
                 .templates(toTemplates())
                 .aggregates(toAggregates())
+                .entryHeading(entryHeading == null || entryHeading)
                 .build();
     }
 
