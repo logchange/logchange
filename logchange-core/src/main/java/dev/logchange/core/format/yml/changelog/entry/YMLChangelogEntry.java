@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class YMLChangelogEntry {
 
-    private static final String YML_HEADING = "# This file is used by logchange tool to generate CHANGELOG.md \uD83C\uDF33 \uD83E\uDE93 => \uD83E\uDEB5 \n" +
+    private static final String YML_BANNER = "# This file is used by logchange tool to generate CHANGELOG.md \uD83C\uDF33 \uD83E\uDE93 => \uD83E\uDEB5 \n" +
             "# Visit https://github.com/logchange/logchange and leave a star \uD83C\uDF1F \n" +
             "# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️\n";
 
@@ -104,11 +104,11 @@ public class YMLChangelogEntry {
     }
 
     @SneakyThrows
-    public String toYMLString(boolean withHeading) {
+    public String toYMLString(boolean withBanner) {
         String yml = ObjectMapperProvider.get()
                 .writeValueAsString(this);
 
-        return withHeading ? YML_HEADING + yml : yml;
+        return withBanner ? YML_BANNER + yml : yml;
     }
 
     @JsonAnySetter

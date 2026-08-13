@@ -17,7 +17,7 @@ public class FileChangelogEntryRepository implements ChangelogEntryRepository {
 
     @Override
     public void save(ChangelogEntry entry) {
-        String content = YMLChangelogEntry.of(entry).toYMLString(config.isEntryHeading());
+        String content = YMLChangelogEntry.of(entry).toYMLString(config.isEntryBanner());
         this.fileWriter.write(content);
     }
 }

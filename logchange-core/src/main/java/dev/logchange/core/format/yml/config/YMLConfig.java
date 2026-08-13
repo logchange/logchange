@@ -35,9 +35,9 @@ public class YMLConfig {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public YMLAggregates aggregates;
 
-    @JsonProperty(value = "entry_heading", index = 2)
+    @JsonProperty(index = 2)
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public Boolean entryHeading;
+    public YMLEntry entry;
 
     @SneakyThrows
     public static YMLConfig of(InputStream input) {
@@ -74,7 +74,7 @@ public class YMLConfig {
                 .labels(toLabels())
                 .templates(toTemplates())
                 .aggregates(toAggregates())
-                .entryHeading(entryHeading == null || entryHeading)
+                .entryBanner(entry == null || entry.toBanner())
                 .build();
     }
 

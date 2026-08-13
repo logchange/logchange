@@ -131,6 +131,23 @@ class YMLChangelogEntryTest {
     }
 
     @Test
+    void canConvertToYAMLStringWithoutBanner() {
+        // given:
+        YMLChangelogEntry entry = getSimple();
+
+        // when:
+        String result = entry.toYMLString(false);
+
+        // then:
+        assertEquals("title: Some title\n" +
+                "authors:\n" +
+                "  - nick: marwin1991\n" +
+                "links:\n" +
+                "  - url: https://github.com/users/marwin1991\n" +
+                "type: added\n", result);
+    }
+
+    @Test
     void whenInvalidTypeStringThrowExceptionInBuilder() {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 YMLChangelogEntry.builder()

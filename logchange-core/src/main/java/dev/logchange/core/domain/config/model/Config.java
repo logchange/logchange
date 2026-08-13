@@ -30,6 +30,6 @@ public class Config {
     private Aggregates aggregates;
 
     @Builder.Default
-    private boolean entryHeading = true;
+    private boolean entryBanner = true;
 
 }
