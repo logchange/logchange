@@ -63,6 +63,12 @@
         </dependency>
 
         <!-- TESTS -->
+        <dependency>
+            <groupId>org.graalvm.buildtools</groupId>
+            <artifactId>junit-platform-native</artifactId>
+            <version>${native-maven-plugin.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
