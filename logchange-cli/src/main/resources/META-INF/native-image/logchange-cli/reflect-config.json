@@ -84,6 +84,12 @@
     "allDeclaredConstructors": true
   },
   {
+    "name": "dev.logchange.core.format.yml.config.YMLEntry",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true
+  },
+  {
     "name": "dev.logchange.core.format.yml.config.aggregate.YMLAggregatedProject",
     "allDeclaredFields": true,
     "allDeclaredMethods": true,
