@@ -17,15 +17,12 @@
     <properties>
         <packaging>jar</packaging>
 
-        <graal.version>25.0.3</graal.version>
-        <svm.version>25.0.3</svm.version>
-
         <jdk.version>21</jdk.version>
         <!-- If you are building with JDK 9 or higher, you can uncomment the lines below to set the release version -->
         <release.version>21</release.version>
         <maven.compiler.release>21</maven.compiler.release>
 
-        <native-maven-plugin.version>0.11.5</native-maven-plugin.version>
+        <native-maven-plugin.version>1.1.9</native-maven-plugin.version>
         <maven-shade-plugin.version>3.6.2</maven-shade-plugin.version>
 
         <picocli.version>4.7.7</picocli.version>
@@ -63,9 +60,31 @@
         </dependency>
 
         <!-- TESTS -->
+        <dependency>
+            <groupId>org.graalvm.buildtools</groupId>
+            <artifactId>junit-platform-native</artifactId>
+            <version>${native-maven-plugin.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>version.txt</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <excludes>
+                    <exclude>version.txt</exclude>
+                </excludes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -109,33 +128,6 @@
                     </to>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>${maven-resource-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>write-version</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>src/main/resources</directory>
-                                    <includes>
-                                        <include>version.txt</include>
-                                    </includes>
-                                    <!-- This enables the replacement of ${project.version} -->
-                                    <filtering>true</filtering>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 
@@ -150,38 +142,6 @@
                 <maven.compiler.release>${release.version}</maven.compiler.release>
             </properties>
         </profile>
-        <profile>
-            <id>graalvm</id>
-            <activation>
-                <file>
-                    <exists>${env.JAVA_HOME}/bin/native-image</exists>
-                </file>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>org.graalvm.sdk</groupId>
-                    <artifactId>graal-sdk</artifactId>
-                    <version>${graal.version}</version>
-                    <scope>provided</scope>
-                </dependency>
-                <dependency>
-                    <groupId>org.graalvm.nativeimage</groupId>
-                    <artifactId>svm</artifactId>
-                    <version>${svm.version}</version>
-                    <scope>provided</scope>
-                </dependency>
-            </dependencies>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                        <version>${maven-compiler-plugin.version}</version>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
         <profile>
             <id>native</id>
             <build>

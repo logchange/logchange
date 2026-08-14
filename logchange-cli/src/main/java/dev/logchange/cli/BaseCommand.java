@@ -28,6 +28,7 @@ public abstract class BaseCommand implements Runnable {
             if (verbose) {
                 LogchangeLogger.setLevel(LoggerLevel.DEBUG);
             }
+            log.info(LogchangeVersionProvider.getVersionInfo());
             runCommand();
         } catch (Exception e) {
             log.debug(e);
