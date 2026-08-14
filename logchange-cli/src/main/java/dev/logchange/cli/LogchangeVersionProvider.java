@@ -15,8 +15,10 @@ public class LogchangeVersionProvider implements CommandLine.IVersionProvider {
     }
 
     public static String getVersionInfo() {
-        InputStream resources = LogchangeVersionProvider.class.getResourceAsStream("/version.txt");
+        return readVersion(LogchangeVersionProvider.class.getResourceAsStream("/version.txt"));
+    }
 
+    static String readVersion(InputStream resources) {
         if (resources == null) {
             return "Cloud not read version from version.txt!";
         }
