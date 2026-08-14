@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: logchange/valhalla:1.13.6
+      image: logchange/valhalla:1.13.8
 
     permissions:
       contents: write
