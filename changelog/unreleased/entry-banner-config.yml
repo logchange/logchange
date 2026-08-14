@@ -1,0 +1,11 @@
+# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵
+# Visit https://github.com/logchange/logchange and leave a star 🌟
+# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
+title: Added entry.banner option in logchange-config.yml, which allows to disable comment (banner) added at the top of every new entry created by add and example command
+type: added
+configurations:
+  - type: logchange-config.yml
+    action: add
+    key: entry.banner
+    default_value: true
+    description: Set to false to create entries without the 3 line comment at the top of file

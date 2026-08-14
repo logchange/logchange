@@ -2,8 +2,10 @@ package dev.logchange.commands.add;
 
 import dev.logchange.core.application.changelog.repository.ChangelogEntryRepository;
 import dev.logchange.core.application.changelog.service.add.AddChangelogEntryService;
+import dev.logchange.core.application.config.ConfigFile;
 import dev.logchange.core.domain.changelog.command.AddChangelogEntryUseCase;
 import dev.logchange.core.domain.changelog.model.entry.ChangelogEntry;
+import dev.logchange.core.domain.config.model.Config;
 import dev.logchange.core.infrastructure.persistance.changelog.FileChangelogEntryRepository;
 import dev.logchange.core.infrastructure.persistance.file.FileRepository;
 import lombok.AccessLevel;
@@ -12,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 
 import java.io.File;
 import java.io.IOException;
+
+import static dev.logchange.commands.Constants.DEFAULT_CONFIG_FILE;
 
 @CustomLog
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
@@ -33,12 +37,20 @@ public class AddEntryCommand {
 
         log.debug(entry.toString());
 
-        ChangelogEntryRepository repository = new FileChangelogEntryRepository(FileRepository.of(entryFile));
+        ChangelogEntryRepository repository = new FileChangelogEntryRepository(FileRepository.of(entryFile), findConfig());
         AddChangelogEntryUseCase addChangelogEntry = new AddChangelogEntryService(repository);
         AddChangelogEntryUseCase.AddChangelogEntryCommand command = AddChangelogEntryUseCase.AddChangelogEntryCommand.of(entry);
 
         addChangelogEntry.handle(command);
         log.info("Entry saved");
+    }
+
+    private Config findConfig() {
+        String configPath = rootPath + "/" + inputDir + "/" + DEFAULT_CONFIG_FILE;
+        return ConfigFile.find(configPath).orElseGet(() -> {
+            log.debug("There is no config file: " + configPath + " for this project, using defaults");
+            return Config.EMPTY;
+        });
     }
 
     private File createFile(String path) {

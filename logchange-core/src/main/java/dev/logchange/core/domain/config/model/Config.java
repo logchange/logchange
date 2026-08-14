@@ -29,4 +29,7 @@ public class Config {
     private Templates templates;
     private Aggregates aggregates;
 
+    @Builder.Default
+    private boolean entryBanner = true;
+
 }
