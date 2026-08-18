@@ -47,7 +47,7 @@ jobs:
             runs-on: windows-2022
             platform: windowsx64
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       # musl is only available on linux
       - if: ${{ matrix.base == 'linux' }}
