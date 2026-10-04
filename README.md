@@ -131,6 +131,13 @@ On the other hand, if you would like to just generate an empty file with some de
 mvn logchange:add -Dempty -DfileName=000001-some-name.yml
 ```
 
+If an entry file with given name may already exist (f.e. when generating entries from scripts or bots like Renovate),
+add `-DskipIfFileAlreadyExists` to skip adding the entry instead of failing:
+
+```shell
+mvn logchange:add -DbatchMode -DskipIfFileAlreadyExists -DfileName=000001-some-name.yml -Dtitle="Some title" -Dtype=added
+```
+
 You can also run the following command to generate an example entry with pre-filled properties,
 which you can then modify as needed (don't forget to change the file name!):
 

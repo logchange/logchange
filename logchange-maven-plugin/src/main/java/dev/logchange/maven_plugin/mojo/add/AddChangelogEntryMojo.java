@@ -41,6 +41,9 @@ public class AddChangelogEntryMojo extends AbstractMojo {
     @Parameter(defaultValue = "false", property = EMPTY_PROPERTY)
     private boolean empty;
 
+    @Parameter(defaultValue = "false", property = SKIP_IF_FILE_ALREADY_EXISTS_PROPERTY)
+    private boolean skipIfFileAlreadyExists;
+
     @Parameter(property = "title")
     private String title;
 
@@ -70,7 +73,7 @@ public class AddChangelogEntryMojo extends AbstractMojo {
         AddEntryCommand addEntryCommand = AddEntryCommand.of(DEFAULT_PATH, inputDir, unreleasedVersionDir);
         fileName = new OutputFileNameProvider(empty, mavenPrompter, fileName).get();
         ChangelogEntry entry = new ChangelogEntryProviderFactory(empty, batchMode, getParams(), mavenPrompter).create().get();
-        addEntryCommand.execute(entry, fileName);
+        addEntryCommand.execute(entry, fileName, skipIfFileAlreadyExists);
 
         getLog().info(ADD_COMMAND_END_LOG);
     }

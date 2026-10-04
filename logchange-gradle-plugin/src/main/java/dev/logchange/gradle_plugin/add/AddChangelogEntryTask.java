@@ -20,6 +20,7 @@ public abstract class AddChangelogEntryTask extends DefaultTask {
     private String fileName;
     private boolean empty;
     private boolean batchMode;
+    private boolean skipIfFileAlreadyExists;
     private String title;
     private String author;
     private List<String> authors;
@@ -43,6 +44,11 @@ public abstract class AddChangelogEntryTask extends DefaultTask {
     @Option(option = BATCH_MODE_PROPERTY, description = BATCH_MODE_OPTION_DESCRIPTION)
     public void setBatchMode(boolean batchMode) {
         this.batchMode = batchMode;
+    }
+
+    @Option(option = SKIP_IF_FILE_ALREADY_EXISTS_PROPERTY, description = SKIP_IF_FILE_ALREADY_EXISTS_OPTION_DESCRIPTION)
+    public void setSkipIfFileAlreadyExists(boolean skipIfFileAlreadyExists) {
+        this.skipIfFileAlreadyExists = skipIfFileAlreadyExists;
     }
 
     @Option(option = "title", description = "")
@@ -83,7 +89,7 @@ public abstract class AddChangelogEntryTask extends DefaultTask {
         AddEntryCommand addEntryCommand = AddEntryCommand.of(DEFAULT_PATH, extension.getInputDir(), extension.getUnreleasedVersionDir());
         fileName = new OutputFileNameProvider(empty, mavenPrompter, fileName).get();
         ChangelogEntry entry = new ChangelogEntryProviderFactory(empty, batchMode, getParams(), mavenPrompter).create().get();
-        addEntryCommand.execute(entry, fileName);
+        addEntryCommand.execute(entry, fileName, skipIfFileAlreadyExists);
 
         log.info(ADD_COMMAND_END_LOG);
     }

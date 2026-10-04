@@ -31,8 +31,16 @@ public class AddEntryCommand {
     }
 
     public void execute(ChangelogEntry entry, String outputFile) {
+        execute(entry, outputFile, false);
+    }
+
+    public void execute(ChangelogEntry entry, String outputFile, boolean skipIfFileAlreadyExists) {
         log.info("Adding new entry");
         String path = rootPath + "/" + inputDir + "/" + unreleasedVersionDir + "/" + outputFile;
+        if (skipIfFileAlreadyExists && new File(path).exists()) {
+            log.info("Entry with name: " + outputFile + " already exists, skipping");
+            return;
+        }
         File entryFile = createFile(path);
 
         log.debug(entry.toString());
