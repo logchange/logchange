@@ -1,0 +1,9 @@
+# This file is used by logchange tool to generate CHANGELOG.md 🌳 🪓 => 🪵
+# Visit https://github.com/logchange/logchange and leave a star 🌟
+# More info about configuration you can find https://github.com/logchange/logchange#yaml-format ⬅️⬅ ️
+title: Added skipIfFileAlreadyExists option to add command, which skips adding entry instead of failing when entry file already exists (f.e. when Renovate updates the same dependency in a few places)
+type: added
+authors:
+  - name: Peter Zmilczak
+    nick: marwin1991
+    url: https://github.com/marwin1991

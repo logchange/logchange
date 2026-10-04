@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -80,5 +81,59 @@ class AddEntryCommandTest {
         String expectedContent = FileUtils.fileRead(NO_BANNER_PATH + "/" + INPUT_DIR + "/" + UNRELEASED + "/" + TEST_FILE, "UTF-8");
         String actualContent = FileUtils.fileRead(outputFile, "UTF-8");
         assertThat(actualContent).isEqualToIgnoringWhitespace(expectedContent);
+    }
+
+    @Test
+    void shouldFailWhenEntryAlreadyExists() {
+        // given:
+        ChangelogEntry entry = ChangelogEntry.builder()
+                .title(ChangelogEntryTitle.of("title"))
+                .type(ChangelogEntryType.fromNameIgnoreCase("added"))
+                .build();
+        AddEntryCommand.of(PATH, INPUT_DIR, UNRELEASED).execute(entry, OUTPUT_FILE);
+
+        // when-then:
+        assertThatThrownBy(() -> AddEntryCommand.of(PATH, INPUT_DIR, UNRELEASED).execute(entry, OUTPUT_FILE))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("already exists");
+    }
+
+    @Test
+    void shouldAddEntryWhenEntryNotExistsAndSkipIfFileAlreadyExists() {
+        // given:
+        File outputFile = new File(PATH + "/" + INPUT_DIR + "/" + UNRELEASED + "/" + OUTPUT_FILE);
+        assertFalse(outputFile.exists());
+        ChangelogEntry entry = ChangelogEntry.builder()
+                .title(ChangelogEntryTitle.of("title"))
+                .type(ChangelogEntryType.fromNameIgnoreCase("added"))
+                .build();
+
+        // when:
+        AddEntryCommand.of(PATH, INPUT_DIR, UNRELEASED).execute(entry, OUTPUT_FILE, true);
+
+        // then:
+        assertTrue(outputFile.exists());
+    }
+
+    @Test
+    void shouldSkipWhenEntryAlreadyExistsAndSkipIfFileAlreadyExists() throws IOException {
+        // given:
+        File outputFile = new File(PATH + "/" + INPUT_DIR + "/" + UNRELEASED + "/" + OUTPUT_FILE);
+        ChangelogEntry first = ChangelogEntry.builder()
+                .title(ChangelogEntryTitle.of("first"))
+                .type(ChangelogEntryType.fromNameIgnoreCase("added"))
+                .build();
+        ChangelogEntry second = ChangelogEntry.builder()
+                .title(ChangelogEntryTitle.of("second"))
+                .type(ChangelogEntryType.fromNameIgnoreCase("added"))
+                .build();
+        AddEntryCommand.of(PATH, INPUT_DIR, UNRELEASED).execute(first, OUTPUT_FILE);
+
+        // when:
+        AddEntryCommand.of(PATH, INPUT_DIR, UNRELEASED).execute(second, OUTPUT_FILE, true);
+
+        // then:
+        String actualContent = FileUtils.fileRead(outputFile, "UTF-8");
+        assertThat(actualContent).contains("title: first").doesNotContain("second");
     }
 }

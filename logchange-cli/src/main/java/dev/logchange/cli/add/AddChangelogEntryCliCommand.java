@@ -37,6 +37,9 @@ public class AddChangelogEntryCliCommand extends BaseCommand {
     @Option(defaultValue = "false", names = EMPTY_OPTION, description = EMPTY_OPTION_DESCRIPTION)
     private boolean empty;
 
+    @Option(defaultValue = "false", names = SKIP_IF_FILE_ALREADY_EXISTS_OPTION, description = SKIP_IF_FILE_ALREADY_EXISTS_OPTION_DESCRIPTION)
+    private boolean skipIfFileAlreadyExists;
+
     @Option(names = OPTION_PREFIX + "title")
     private String title;
 
@@ -63,7 +66,7 @@ public class AddChangelogEntryCliCommand extends BaseCommand {
         AddEntryCommand addEntryCommand = AddEntryCommand.of(path(), inputDir, unreleasedVersionDir);
         outputFileName = new OutputFileNameProvider(empty, cliPrompter, outputFileName).get();
         ChangelogEntry entry = new ChangelogEntryProviderFactory(empty, batchMode, getParams(), cliPrompter).create().get();
-        addEntryCommand.execute(entry, outputFileName);
+        addEntryCommand.execute(entry, outputFileName, skipIfFileAlreadyExists);
 
         log.info(ADD_COMMAND_END_LOG);
     }
