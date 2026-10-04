@@ -121,6 +121,10 @@ public class Constants {
     public static final String BATCH_MODE_OPTION = OPTION_PREFIX + BATCH_MODE_PROPERTY;
     public static final String BATCH_MODE_OPTION_DESCRIPTION = "Batch mode for generating new changelog entry, no user interaction";
 
+    public static final String SKIP_IF_FILE_ALREADY_EXISTS_PROPERTY = "skipIfFileAlreadyExists";
+    public static final String SKIP_IF_FILE_ALREADY_EXISTS_OPTION = OPTION_PREFIX + SKIP_IF_FILE_ALREADY_EXISTS_PROPERTY;
+    public static final String SKIP_IF_FILE_ALREADY_EXISTS_OPTION_DESCRIPTION = "true/false; default false; if set to true and entry file already exists, skips adding entry instead of failing";
+
     public static final String GENERATE_CHANGES_XML_PROPERTY = "changesXml";
     public static final String GENERATE_CHANGES_XML_OPTION = OPTION_PREFIX + GENERATE_CHANGES_XML_PROPERTY;
     public static final String GENERATE_CHANGES_XML_OPTION_DESCRIPTION = "[true/false] Should generate also XML file?";
