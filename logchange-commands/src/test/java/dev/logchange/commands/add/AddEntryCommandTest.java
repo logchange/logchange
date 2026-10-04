@@ -99,6 +99,23 @@ class AddEntryCommandTest {
     }
 
     @Test
+    void shouldAddEntryWhenEntryNotExistsAndSkipIfFileAlreadyExists() {
+        // given:
+        File outputFile = new File(PATH + "/" + INPUT_DIR + "/" + UNRELEASED + "/" + OUTPUT_FILE);
+        assertFalse(outputFile.exists());
+        ChangelogEntry entry = ChangelogEntry.builder()
+                .title(ChangelogEntryTitle.of("title"))
+                .type(ChangelogEntryType.fromNameIgnoreCase("added"))
+                .build();
+
+        // when:
+        AddEntryCommand.of(PATH, INPUT_DIR, UNRELEASED).execute(entry, OUTPUT_FILE, true);
+
+        // then:
+        assertTrue(outputFile.exists());
+    }
+
+    @Test
     void shouldSkipWhenEntryAlreadyExistsAndSkipIfFileAlreadyExists() throws IOException {
         // given:
         File outputFile = new File(PATH + "/" + INPUT_DIR + "/" + UNRELEASED + "/" + OUTPUT_FILE);
