@@ -526,3 +526,4 @@ logchangeRelease - Creates new changelog release by moving files from <unrelease
 [logchange homebrew formula]: https://github.com/logchange/homebrew-tap
 
 [Gradle]: https://gradle.org/
+
